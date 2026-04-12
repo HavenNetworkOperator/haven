@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Haven — A mobile network built for families.</title>
+<meta name="description" content="The UK's first mobile network designed for families. AI that understands what your kids see, so you don't have to police every screen." />
+
+<!-- OPEN GRAPH / SOCIAL PREVIEW — update url + image once you have them -->
+<meta property="og:title" content="Haven — A mobile network built for families." />
+<meta property="og:description" content="Join the waitlist. The first 1,000 families become founding members." />
+<meta property="og:type" content="website" />
+<!-- <meta property="og:image" content="https://yourdomain.com/og-image.png" /> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #f4efe6;
+  --bg-deep: #ebe4d4;
+  --ink: #0f1b2d;
+  --ink-soft: #2a3a52;
+  --muted: #6a6253;
+  --accent: #c14a1f;
+  --accent-soft: #e88a5e;
+  --line: #d8cfbc;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding-top: 48px; /* account for fixed KS banner */
+}
+
+/* subtle paper grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.07 0 0 0 0 0.1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ───── KICKSTARTER BANNER ───── */
+.ks-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--accent);
+  color: var(--bg);
+  text-align: center;
+  padding: 0 24px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ks-banner a {
+  color: var(--bg);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: opacity 0.2s;
+}
+.ks-banner a:hover { opacity: 0.85; }
+.ks-banner-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(244, 239, 230, 0.2);
+  border: 1px solid rgba(244, 239, 230, 0.4);
+  border-radius: 100px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+.ks-banner-arrow {
+  opacity: 0.75;
+  font-size: 14px;
+}
+
+/* ───── NAV ───── */
+nav {
+  padding: 28px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: relative;
+}
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav-meta {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.nav-ks-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--sans);
+  color: var(--accent);
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  border-radius: 100px;
+  padding: 8px 16px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.nav-ks-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+.nav-ks-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.nav-ks-btn:hover .nav-ks-dot {
+  background: var(--bg);
+}
+
+/* ───── HERO ───── */
+.hero {
+  padding: 60px 0 100px;
+  position: relative;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 32px;
+  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  animation: fadeUp 0.8s ease-out;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(44px, 7vw, 92px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin-bottom: 36px;
+  max-width: 14ch;
+  animation: fadeUp 0.9s ease-out 0.1s backwards;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent);
+}
+.hero-sub {
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin-bottom: 48px;
+  animation: fadeUp 1s ease-out 0.25s backwards;
+}
+
+/* ───── FORM ───── */
+.signup {
+  max-width: 520px;
+  animation: fadeUp 1s ease-out 0.4s backwards;
+}
+.signup-form {
+  display: flex;
+  gap: 8px;
+  background: var(--bg);
+  border: 1.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 6px 6px 6px 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.signup-form:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(193, 74, 31, 0.12);
+}
+.signup-form input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+  min-width: 0;
+}
+.signup-form input::placeholder { color: var(--muted); }
+.signup-form button {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  padding: 14px 28px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s;
+}
+.signup-form button:hover { background: var(--accent); }
+.signup-form button:active { transform: scale(0.97); }
+
+.signup-meta {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.signup-meta::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+.signup-success {
+  display: none;
+  padding: 24px;
+  border: 1.5px solid var(--accent);
+  border-radius: 16px;
+  background: rgba(193, 74, 31, 0.06);
+}
+.signup-success.active { display: block; }
+.signup-success h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* hero kickstarter CTA link */
+.hero-ks-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 3px;
+  transition: color 0.2s, border-color 0.2s;
+  animation: fadeUp 1s ease-out 0.55s backwards;
+}
+.hero-ks-link:hover { color: var(--accent); border-color: var(--accent); }
+.hero-ks-link span { color: var(--accent); font-weight: 600; }
+
+/* decorative side mark */
+.hero-mark {
+  position: absolute;
+  right: -40px;
+  top: 80px;
+  width: 320px;
+  height: 320px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ───── SECTION BASE ───── */
+.section {
+  padding: 120px 0;
+  border-top: 1px solid var(--line);
+}
+.section-bg-deep { background: var(--bg-deep); }
+
+.section-label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--muted);
+}
+.section h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 64px;
+  max-width: 18ch;
+}
+.section h2 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+/* ───── STATS ───── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 48px 64px;
+  margin-top: 40px;
+}
+.stat {
+  border-top: 1px solid var(--ink);
+  padding-top: 24px;
+}
+.stat-num {
+  font-family: var(--serif);
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.stat-num em { font-style: italic; color: var(--accent); }
+.stat-text {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: 32ch;
+}
+.stat-source {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ───── HOW IT WORKS ───── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 48px;
+  margin-top: 40px;
+}
+.step { position: relative; }
+.step-num {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  display: block;
+}
+.step h3 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.step p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ───── KICKSTARTER CAMPAIGN SECTION ───── */
+.ks-campaign {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 100px 0;
+  border-top: none;
+  position: relative;
+  overflow: hidden;
+}
+.ks-campaign::before {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(193, 74, 31, 0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.ks-campaign-inner {
+  position: relative;
+  z-index: 2;
+}
+.ks-section-label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ks-section-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent-soft);
+}
+.ks-campaign h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
+  max-width: 20ch;
+  color: var(--bg);
+}
+.ks-campaign h2 em {
+  font-style: italic;
+  color: var(--accent-soft);
+  font-weight: 300;
+}
+.ks-campaign-sub {
+  font-size: 18px;
+  color: rgba(244, 239, 230, 0.7);
+  max-width: 52ch;
+  line-height: 1.6;
+  margin-bottom: 64px;
+}
+.ks-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 56px;
+}
+.ks-tier {
+  border: 1px solid rgba(244, 239, 230, 0.15);
+  border-radius: 16px;
+  padding: 28px;
+  transition: border-color 0.25s, background 0.25s;
+}
+.ks-tier:hover {
+  border-color: rgba(232, 138, 94, 0.5);
+  background: rgba(244, 239, 230, 0.04);
+}
+.ks-tier-price {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--bg);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.ks-tier-price em {
+  font-style: normal;
+  color: var(--accent-soft);
+  font-size: 0.5em;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+.ks-tier-name {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.ks-tier-desc {
+  font-size: 15px;
+  color: rgba(244, 239, 230, 0.7);
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+.ks-tier-locked {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ks-tier-locked::before {
+  content: '✦';
+  font-size: 10px;
+}
+.ks-tier-limit {
+  font-size: 12px;
+  color: rgba(244, 239, 230, 0.35);
+  margin-top: 8px;
+  letter-spacing: 0.04em;
+}
+
+.ks-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.ks-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+.ks-cta-btn:hover { background: #a83d18; }
+.ks-cta-btn:active { transform: scale(0.97); }
+.ks-cta-note {
+  font-size: 13px;
+  color: rgba(244, 239, 230, 0.45);
+  letter-spacing: 0.02em;
+}
+
+/* ───── FOUNDING MEMBER ───── */
+.founding {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.founding::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(193, 74, 31, 0.25) 0%, transparent 60%);
+  pointer-events: none;
+}
+.founding-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.founding h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+}
+.founding h2 em { font-style: italic; color: var(--accent-soft); }
+.founding p {
+  color: rgba(244, 239, 230, 0.75);
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 50ch;
+}
+.founding-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+}
+.founding-btn:hover { background: #a83d18; }
+.founding-btn:active { transform: scale(0.97); }
+.benefits-list {
+  list-style: none;
+  padding: 32px;
+  border: 1px solid rgba(244, 239, 230, 0.2);
+  border-radius: 16px;
+}
+.benefits-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(244, 239, 230, 0.1);
+  font-size: 15px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.benefits-list li:last-child { border-bottom: none; }
+.benefits-list li::before {
+  content: '✦';
+  color: var(--accent-soft);
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+/* ───── FOUNDER NOTE ───── */
+.founder-note {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.founder-note .quote {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 32px;
+}
+.founder-note .signoff {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* ───── FAQ ───── */
+.faq { max-width: 760px; }
+.faq-item {
+  border-top: 1px solid var(--line);
+  padding: 28px 0;
+}
+.faq-item:last-child { border-bottom: 1px solid var(--line); }
+.faq-q {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after {
+  content: '+';
+  font-family: var(--sans);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--accent);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+details[open] .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  margin-top: 16px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+.faq-a a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(193, 74, 31, 0.3);
+  transition: border-color 0.2s;
+}
+.faq-a a:hover { border-color: var(--accent); }
+
+/* ───── FOOTER ───── */
+footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--line);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--muted);
+}
+footer a { color: var(--muted); text-decoration: none; margin-left: 24px; }
+footer a:hover { color: var(--accent); }
+.footer-ks {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent) !important;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(193, 74, 31, 0.3);
+  padding-bottom: 2px;
+  margin-left: 0 !important;
+  transition: border-color 0.2s;
+}
+.footer-ks:hover { border-color: var(--accent) !important; }
+
+/* ───── ANIMATIONS ───── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+@keyframes drift {
+  0%, 100% { transform: rotate(0deg); }
+  50%       { transform: rotate(8deg); }
+}
+.hero-mark { animation: drift 12s ease-in-out infinite; }
+
+/* scroll reveal */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ───── RESPONSIVE ───── */
+@media (max-width: 768px) {
+  body { padding-top: 52px; }
+  .ks-banner { height: 52px; }
+  .ks-banner a { font-size: 12px; gap: 8px; }
+  .ks-banner-label { display: none; }
+  .container { padding: 0 24px; }
+  .hero { padding: 40px 0 80px; }
+  .section { padding: 80px 0; }
+  .hero-mark { display: none; }
+  .founding-inner { grid-template-columns: 1fr; gap: 48px; }
+  .signup-form { flex-direction: column; border-radius: 20px; padding: 16px; }
+  .signup-form input { padding: 12px 8px; }
+  .signup-form button { width: 100%; padding: 16px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  footer a { margin: 0 12px; }
+  .nav-meta { display: none; }
+  .ks-campaign { padding: 80px 0; }
+  .ks-cta-group { flex-direction: column; align-items: flex-start; }
+  .ks-cta-btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ KICKSTARTER BANNER ═══════ -->
+<div class="ks-banner">
+  <a href="https://kickstarter.com/PLACEHOLDER" target="_blank" rel="noopener">
+    <span class="ks-banner-label">Now live</span>
+    Haven is on Kickstarter — founding SIMs from £25, locked at £8/month for life
+    <span class="ks-banner-arrow">→</span>
+  </a>
+</div>
+
+<div class="container">
+
+  <!-- ═══════ NAV ═══════ -->
+  <nav>
+    <div class="logo">
+      <span class="logo-mark"></span>
+      <span>Haven</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-meta">EST. 2026 · UK</div>
+      <a href="https://kickstarter.com/PLACEHOLDER" class="nav-ks-btn" target="_blank" rel="noopener">
+        <span class="nav-ks-dot"></span>
+        Back on Kickstarter
+      </a>
+    </div>
+  </nav>
+
+  <!-- ═══════ HERO ═══════ -->
+  <section class="hero">
+    <span class="hero-eyebrow">⬤ Now on Kickstarter · launching 2026</span>
+    <h1>A mobile network built for <em>families.</em></h1>
+    <p class="hero-sub">
+      Britain's first mobile network designed around the people who actually use it — children, teenagers, and the parents trying to keep up. Powered by AI that understands what your kids see, so you don't have to police every screen.
+    </p>
+
+    <div class="signup">
+      <form class="signup-form" id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
+        <input type="hidden" name="_subject" value="New Haven waitlist signup" />
+        <button type="submit">Join the waitlist →</button>
+      </form>
+      <div class="signup-success" id="signupSuccess">
+        <h3>You're in.</h3>
+        <p>Check your inbox — we'll be in touch as we get closer to launch. Welcome to Haven.</p>
+      </div>
+      <p class="signup-meta">First 1,000 families become founding members</p>
+    </div>
+
+    <a href="https://kickstarter.com/PLACEHOLDER" class="hero-ks-link" target="_blank" rel="noopener">
+      Or back us on Kickstarter and claim a founding SIM from <span>£25</span> →
+    </a>
+
+    <!-- decorative svg mark -->
+    <svg class="hero-mark" viewBox="0 0 320 320" fill="none">
+      <circle cx="160" cy="160" r="140" stroke="#c14a1f" stroke-width="1.5" stroke-dasharray="2 6"/>
+      <circle cx="160" cy="160" r="100" stroke="#c14a1f" stroke-width="1" opacity="0.6"/>
+      <circle cx="160" cy="160" r="60" stroke="#0f1b2d" stroke-width="1" opacity="0.4"/>
+      <circle cx="160" cy="160" r="8" fill="#c14a1f"/>
+    </svg>
+  </section>
+
+</div>
+
+<!-- ═══════ PROBLEM ═══════ -->
+<section class="section section-bg-deep">
+  <div class="container">
+    <div class="section-label">The problem</div>
+    <h2>The phone in your child's hand was never <em>designed for them.</em></h2>
+
+    <div class="stats">
+      <div class="stat fade-in">
+        <div class="stat-num"><em>97%</em></div>
+        <div class="stat-text">
+          of UK children own a smartphone by age 12, with most receiving their first phone between 9 and 11.
+          <span class="stat-source">[STAT — verify against Ofcom Children &amp; Parents Media Use 2024]</span>
+        </div>
+      </div>
+      <div class="stat fade-in">
+        <div class="stat-num"><em>4hr</em><span style="font-size: 0.5em;"> 20m</span></div>
+        <div class="stat-text">
+          Average daily screen time for UK children aged 8–17, the majority of it on a mobile network beyond any home filter.
+          <span class="stat-source">[STAT — verify against Ofcom Online Nation 2024]</span>
+        </div>
+      </div>
+      <div class="stat fade-in">
+        <div class="stat-num"><em>1 in 4</em></div>
+        <div class="stat-text">
+          UK parents say they have no idea what their child does on their phone — and most existing controls are bypassed within weeks.
+          <span class="stat-source">[STAT — verify or replace]</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 80px; max-width: 60ch; font-size: 18px; color: var(--ink-soft); line-height: 1.6;">
+      Parental controls live on the device. Kids work around them. Filters live on the home Wi-Fi. Kids walk out the door. The mobile network — the layer that's <em style="font-style: italic; color: var(--accent);">always there</em> — has been designed for adults selling adults more data. Until now.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ HOW IT WORKS ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">What we're building</div>
+    <h2>Safety at the network layer. <em>Intelligence</em> on top.</h2>
+
+    <div class="steps">
+      <div class="step fade-in">
+        <span class="step-num">01 · NETWORK</span>
+        <h3>A real UK mobile network.</h3>
+        <p>SIMs that work everywhere a normal phone does, riding on the UK's largest 4G/5G infrastructure. No second device. No compromises on coverage.</p>
+      </div>
+      <div class="step fade-in">
+        <span class="step-num">02 · AI SAFETY</span>
+        <h3>An AI that actually understands.</h3>
+        <p>Not a blocklist from 2009. A model trained to recognise grooming patterns, age-inappropriate content, and the subtle signals that something is wrong — in real time, on-device, privately.</p>
+      </div>
+      <div class="step fade-in">
+        <span class="step-num">03 · PARENTS</span>
+        <h3>Insight, not surveillance.</h3>
+        <p>A weekly briefing that tells you what matters and ignores what doesn't. No reading your child's messages. No creepy dashboards. Just the things a thoughtful parent would want to know.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ KICKSTARTER CAMPAIGN ═══════ -->
+<section class="ks-campaign">
+  <div class="container">
+    <div class="ks-campaign-inner">
+      <div class="ks-section-label fade-in">Crowdfunding campaign · now open</div>
+      <h2 class="fade-in">Back Haven. <em>Own a piece of it.</em></h2>
+      <p class="ks-campaign-sub fade-in">
+        We're raising on Kickstarter — not from venture capital. The families Haven is built for should be the ones who fund it. Back us before the campaign closes and your founding price is locked forever.
+      </p>
+
+      <div class="ks-tiers">
+        <div class="ks-tier fade-in">
+          <div class="ks-tier-price">£25</div>
+          <div class="ks-tier-name">Founding SIM</div>
+          <p class="ks-tier-desc">One Haven SIM. Works on any phone, any OS. Safety built in at the network layer — not an app.</p>
+          <div class="ks-tier-locked">£8/month locked for life</div>
+          <div class="ks-tier-limit">500 slots available</div>
+        </div>
+        <div class="ks-tier fade-in">
+          <div class="ks-tier-price">£45</div>
+          <div class="ks-tier-name">Family Pack</div>
+          <p class="ks-tier-desc">Two Haven SIMs. Both lines at founding price — right for families with two children, or one to gift.</p>
+          <div class="ks-tier-locked">£8/month per SIM, locked for life</div>
+          <div class="ks-tier-limit">300 slots available</div>
+        </div>
+        <div class="ks-tier fade-in">
+          <div class="ks-tier-price">£75</div>
+          <div class="ks-tier-name">Full Family</div>
+          <p class="ks-tier-desc">Three SIMs plus a vote on the first three safety features we ship. Your household shapes what we build first.</p>
+          <div class="ks-tier-locked">£8/month per SIM, locked for life</div>
+          <div class="ks-tier-limit">150 slots available</div>
+        </div>
+      </div>
+
+      <div class="ks-cta-group fade-in">
+        <a href="https://kickstarter.com/PLACEHOLDER" class="ks-cta-btn" target="_blank" rel="noopener">
+          Back Haven on Kickstarter →
+        </a>
+        <span class="ks-cta-note">All-or-nothing · card charged only if we hit our goal · SIMs ship Q3/Q4 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOUNDING MEMBER ═══════ -->
+<section class="founding">
+  <div class="container">
+    <div class="founding-inner">
+      <div>
+        <div class="section-label" style="color: var(--accent-soft); --muted: var(--accent-soft);">Founding families</div>
+        <h2>The first thousand <em>shape what we build.</em></h2>
+        <p>
+          Haven is being built in the open, with the families who'll use it. Founding members get a permanent seat at the table — and a price that never goes up.
+        </p>
+        <a href="https://kickstarter.com/PLACEHOLDER" class="founding-btn" target="_blank" rel="noopener">
+          Claim your founding place →
+        </a>
+      </div>
+      <ul class="benefits-list">
+        <li>Founding member pricing locked for life</li>
+        <li>Priority access on launch day, ahead of public</li>
+        <li>A vote on the first three AI safety features we ship</li>
+        <li>Direct line to the founding team, not a support queue</li>
+        <li>Founding member status, recognised at every milestone</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOUNDER NOTE ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="founder-note">
+      <div class="section-label" style="justify-content: center;">A note from the founder</div>
+      <p class="quote">
+        "I started Haven because I couldn't find a mobile network I'd hand to my own child. Every option asked me to choose between safety and freedom, between trust and surveillance. So we're building the one that doesn't."
+      </p>
+      <p class="signoff">— [FOUNDER NAME], Founder, Haven</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="section section-bg-deep">
+  <div class="container">
+    <div class="section-label">Questions</div>
+    <h2>The honest answers.</h2>
+
+    <div class="faq">
+      <details class="faq-item">
+        <summary class="faq-q">When does Haven launch?</summary>
+        <p class="faq-a">We're launching in the UK in 2026. Joining the waitlist or backing us on Kickstarter is the best way to get early access — founding members will be invited first, ahead of any public launch.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Will Haven have proper coverage?</summary>
+        <p class="faq-a">Yes. Haven runs on one of the UK's tier-one mobile networks, so coverage will be the same as any major network — including 4G and 5G. You're not trading reach for safety.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How is this different from parental control apps?</summary>
+        <p class="faq-a">Apps live on the phone and can be uninstalled, bypassed, or worked around. Haven works at the network level — the safety travels with the SIM, not the app — and uses modern AI rather than the static blocklists most controls still rely on.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Are you reading my child's messages?</summary>
+        <p class="faq-a">No. Haven is being built privacy-first. Detection happens on-device wherever possible, parents see signals and summaries rather than content, and we'll publish a clear, plain-English data policy long before launch.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How much will it cost?</summary>
+        <p class="faq-a">Haven's planned retail price is £12–15/month per SIM. Founding members — anyone who backs the Kickstarter campaign — pay £8/month, locked for life. <a href="https://kickstarter.com/PLACEHOLDER" target="_blank" rel="noopener">See the Kickstarter tiers →</a></p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What happens if the Kickstarter campaign doesn't hit its target?</summary>
+        <p class="faq-a">Kickstarter is all-or-nothing. If we don't reach our funding goal, no one is charged — your card is never touched. The campaign will also continue growing the waitlist in the meantime, so signing up here still secures your founding status.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Are you raising investment?</summary>
+        <p class="faq-a">Yes — in two stages. First, the Kickstarter campaign raises operational seed capital from the families we serve. After that, we'll run an equity crowdfunding round on Crowdcube or Seedrs so you can own a piece of Haven too. Waitlist members and Kickstarter backers will hear about it first.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 Haven Mobile Ltd. · A UK mobile network for families.</div>
+    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 4px;">
+      <a href="https://kickstarter.com/PLACEHOLDER" class="footer-ks" target="_blank" rel="noopener">Back Haven on Kickstarter →</a>
+      <a href="mailto:hello@haven.example">hello@haven.example</a>
+      <a href="#">Privacy</a>
+      <a href="#">Twitter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── Form handling ───
+document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const button = form.querySelector('button');
+  const originalText = button.textContent;
+  button.textContent = 'Joining...';
+  button.disabled = true;
+
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      form.style.display = 'none';
+      document.getElementById('signupSuccess').classList.add('active');
+    } else {
+      throw new Error('Submission failed');
+    }
+  } catch (err) {
+    button.textContent = 'Try again';
+    button.disabled = false;
+    alert('Something went wrong. Please try again or email hello@haven.example');
+  }
+});
+
+// ─── Scroll reveal ───
+const observer = new IntersectionObserver(
+  (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.12 }
+);
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
