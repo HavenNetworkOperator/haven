@@ -62,6 +62,9 @@ First 1,000 signups receive:
 | `launch-plan.md` | Phased waitlist launch plan with checkbox task lists |
 | `context.md` | This file — project context for Claude |
 | `CLAUDE.md` | Agent instructions (WAT framework) |
+| `haven-kickstarter-philosophy.md` | Campaign video script and creative brief |
+| `haven-kickstarter.png` | Campaign hero image |
+| `haven-video/` | Remotion project — Kickstarter campaign video |
 
 ---
 
@@ -87,6 +90,28 @@ First 1,000 signups receive:
 
 ---
 
+## Kickstarter Campaign Video (April 2026)
+
+A cinematic motion graphics video has been built in Remotion (`haven-video/`), designed for the Kickstarter campaign page.
+
+**Tech:** Remotion 4.0.448 · 1920×1080 · 30fps · 75s (2250 frames)
+**Fonts:** Fraunces (serif display) + Inter Tight (sans) via `@remotion/google-fonts`
+**Style:** Documentary film title card aesthetic — full-bleed, sparse, editorial. One powerful statement per scene. Dark/light alternating backgrounds.
+
+**5 scenes:**
+1. **Opening Stat** — "98% of UK mobile networks were designed for adults." Staged reveal on black.
+2. **Founder Story** — 3 full-bleed statements, alternating paper/ink bg, word-by-word stagger animation.
+3. **The Product** — 4 dark cards with self-drawing SVG icons (SIM, Lock, Shield, Document). strokeDashoffset animation.
+4. **The Campaign** — Paper bg, sequential stat blocks (£25, £8/mo, 500 slots). Opening quote + closing copy.
+5. **End Card** — Haven logo mark, wordmark, tagline, Kickstarter CTA.
+
+**Dev server:** `cd haven-video && npm run dev` → http://localhost:3001
+**Render:** `npx remotion render src/index.ts HavenVideo out/haven-kickstarter.mp4`
+
+**Pending:** Update `kickstarter.com/projects/haven` placeholder URL in `Scene5EndCard.tsx:173` once live.
+
+---
+
 ## Immediate Next Actions (Phase 1 priority)
 
 1. Configure Formspree → update `index.html:535` → `vercel --prod`
@@ -95,3 +120,4 @@ First 1,000 signups receive:
 4. Set up Beehiiv + welcome email sequence
 5. Post founding story on Twitter/X and LinkedIn
 6. DM Smartphone Free Childhood UK on Instagram
+7. Render Kickstarter video MP4 and upload to campaign page
