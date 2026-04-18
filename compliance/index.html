@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Regulatory Commitment — Haven</title>
+<meta name="description" content="Haven is building the UK's most compliant children's mobile network. Here is every regulation we are working through before we launch." />
+
+<link rel="canonical" href="https://gethavenmobile.com/compliance/" />
+
+<meta property="og:title" content="Our Regulatory Commitment — Haven" />
+<meta property="og:description" content="Haven is building the UK's most compliant children's mobile network. Here is every regulation we are working through before we launch." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gethavenmobile.com/compliance/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Our Regulatory Commitment — Haven" />
+<meta name="twitter:description" content="Haven is building the UK's most compliant children's mobile network. Here is every regulation we are working through before we launch." />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #f4efe6;
+  --bg-deep: #ebe4d4;
+  --ink: #0f1b2d;
+  --ink-soft: #2a3a52;
+  --muted: #6a6253;
+  --accent: #c14a1f;
+  --accent-soft: #e88a5e;
+  --line: #d8cfbc;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* paper grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.07 0 0 0 0 0.1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── NAV ── */
+nav {
+  padding: 28px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: relative;
+  flex-shrink: 0;
+}
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav-meta {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.nav-meta:hover { color: var(--accent); }
+.nav-waitlist-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--sans);
+  color: var(--accent);
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  border-radius: 100px;
+  padding: 8px 16px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.nav-waitlist-btn:hover { background: var(--accent); color: var(--bg); }
+.nav-waitlist-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+.nav-waitlist-btn:hover .nav-waitlist-dot { background: var(--bg); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 60px 0 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 32px;
+  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  animation: fadeUp 0.8s ease-out;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(44px, 7vw, 86px);
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  margin-bottom: 32px;
+  max-width: 20ch;
+  animation: fadeUp 0.9s ease-out 0.1s backwards;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.hero-sub {
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 58ch;
+  animation: fadeUp 1s ease-out 0.2s backwards;
+}
+
+/* ── INTENT BANNER ── */
+.intent-banner {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+.intent-banner::before {
+  content: 'COMPLIANCE';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--serif);
+  font-size: 180px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  opacity: 0.04;
+  line-height: 1;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.intent-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.intent-statement {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.intent-statement em {
+  font-style: normal;
+  color: var(--accent-soft);
+}
+.intent-detail {
+  color: rgba(244,239,230,0.7);
+  font-size: 16px;
+  line-height: 1.7;
+  border-left: 2px solid var(--accent);
+  padding-left: 24px;
+}
+
+/* ── SECTION ── */
+.section {
+  padding: 100px 0;
+  border-top: 1px solid var(--line);
+}
+.section-bg-deep { background: var(--bg-deep); }
+
+.section-label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--muted);
+}
+.section h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(34px, 4.5vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+  max-width: 22ch;
+}
+.section h2 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.section-intro {
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 60ch;
+  margin-bottom: 64px;
+}
+
+/* ── COMPLIANCE LAYER ── */
+.layer {
+  margin-bottom: 80px;
+}
+.layer:last-child { margin-bottom: 0; }
+
+.layer-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 32px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.layer-badge {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  position: relative;
+  top: 4px;
+}
+.layer-badge.critical { background: rgba(193,74,31,0.12); border: 1.5px solid rgba(193,74,31,0.3); }
+.layer-badge.high { background: rgba(193,74,31,0.07); border: 1.5px solid rgba(193,74,31,0.2); }
+.layer-badge.operational { background: rgba(15,27,45,0.07); border: 1.5px solid rgba(15,27,45,0.15); }
+.layer-badge.watch { background: rgba(106,98,83,0.1); border: 1.5px solid rgba(106,98,83,0.2); }
+
+.layer-title-group { flex: 1; }
+.layer-number {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+  display: block;
+}
+.layer-title {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.layer-subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 60ch;
+}
+
+.layer-priority {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 100px;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+.priority-critical {
+  background: rgba(193,74,31,0.12);
+  color: var(--accent);
+  border: 1px solid rgba(193,74,31,0.25);
+}
+.priority-high {
+  background: rgba(193,74,31,0.07);
+  color: var(--accent);
+  border: 1px solid rgba(193,74,31,0.15);
+}
+.priority-operational {
+  background: rgba(15,27,45,0.07);
+  color: var(--ink-soft);
+  border: 1px solid rgba(15,27,45,0.12);
+}
+.priority-watch {
+  background: rgba(106,98,83,0.08);
+  color: var(--muted);
+  border: 1px solid rgba(106,98,83,0.15);
+}
+
+.obligations {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+.obligation {
+  padding: 20px 24px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: default;
+}
+.section-bg-deep .obligation { background: var(--bg-deep); }
+.obligation:hover {
+  border-color: var(--ink-soft);
+  transform: translateY(-2px);
+}
+.obligation-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.obligation-desc {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.obligation-status {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-dot.in-progress { background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+.status-dot.design { background: #4a7c59; }
+.status-dot.planned { background: var(--muted); }
+.status-label.in-progress { color: var(--accent); }
+.status-label.design { color: #4a7c59; }
+.status-label.planned { color: var(--muted); }
+
+/* ── PROGRESS TABLE ── */
+.progress-section {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 100px 0;
+}
+.progress-section .section-label { color: rgba(244,239,230,0.45); }
+.progress-section .section-label::before { background: rgba(244,239,230,0.2); }
+.progress-section h2 { color: var(--bg); }
+.progress-section h2 em { color: var(--accent-soft); }
+.progress-section .section-intro { color: rgba(244,239,230,0.6); }
+
+.tier-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 1px solid rgba(244,239,230,0.12);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.tier-row {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid rgba(244,239,230,0.08);
+  transition: background 0.2s;
+}
+.tier-row:last-child { border-bottom: none; }
+.tier-row:hover { background: rgba(244,239,230,0.04); }
+.tier-row.header-row {
+  background: rgba(244,239,230,0.06);
+}
+.tier-cell {
+  padding: 20px 28px;
+  font-size: 14px;
+  border-right: 1px solid rgba(244,239,230,0.08);
+  display: flex;
+  align-items: center;
+}
+.tier-cell:last-child { border-right: none; }
+.tier-cell.header {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244,239,230,0.4);
+  font-weight: 500;
+}
+.tier-area {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--bg);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.tier-why {
+  color: rgba(244,239,230,0.6);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.tier-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.tag-fire { background: rgba(193,74,31,0.2); color: var(--accent-soft); border: 1px solid rgba(193,74,31,0.3); }
+.tag-design { background: rgba(74,124,89,0.2); color: #7abf8f; border: 1px solid rgba(74,124,89,0.3); }
+.tag-ops { background: rgba(244,239,230,0.08); color: rgba(244,239,230,0.6); border: 1px solid rgba(244,239,230,0.12); }
+.tag-watch { background: rgba(106,98,83,0.25); color: rgba(244,239,230,0.5); border: 1px solid rgba(106,98,83,0.3); }
+
+/* ── SIGNAL SECTION ── */
+.signal-section {
+  padding: 100px 0;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.signal-section h2 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  max-width: 22ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.signal-section h2 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.signal-section p {
+  color: var(--ink-soft);
+  font-size: 18px;
+  max-width: 52ch;
+  margin: 0 auto 48px;
+  line-height: 1.65;
+}
+.signal-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+}
+.signal-cta:hover { background: var(--accent); }
+.signal-cta:active { transform: scale(0.97); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 36px 0;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-copy {
+  font-size: 13px;
+  color: var(--muted);
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+.footer-links a:hover { color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 760px) {
+  .container { padding: 0 20px; }
+  nav { padding: 20px 0; }
+  .intent-inner { grid-template-columns: 1fr; gap: 40px; }
+  .intent-banner::before { display: none; }
+  .tier-row { grid-template-columns: 1fr; }
+  .tier-cell { border-right: none; border-bottom: 1px solid rgba(244,239,230,0.08); padding: 14px 20px; }
+  .tier-row.header-row { display: none; }
+  .layer-header { flex-wrap: wrap; }
+  .layer-priority { order: -1; }
+  .nav-meta { display: none; }
+  .obligations { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="container">
+  <nav>
+    <a href="https://gethavenmobile.com" class="logo">
+      <div class="logo-mark"></div>
+      Haven
+    </a>
+    <div class="nav-right">
+      <a href="https://gethavenmobile.com/story/" class="nav-meta">Our story</a>
+      <a href="https://gethavenmobile.com/#waitlist" class="nav-waitlist-btn">
+        <span class="nav-waitlist-dot"></span>
+        Join the waitlist
+      </a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="container">
+  <div class="hero">
+    <span class="hero-eyebrow">Regulatory Commitment</span>
+    <h1>We built compliance <em>into the foundations.</em></h1>
+    <p class="hero-sub">This is every piece of legislation, every regulator, every code of practice we are working through before Haven launches. We publish it because we believe in transparency — and because this is what taking children's safety seriously actually looks like.</p>
+  </div>
+</div>
+
+<!-- INTENT BANNER -->
+<div class="intent-banner">
+  <div class="container">
+    <div class="intent-inner">
+      <div class="intent-statement">
+        Building a children's network without getting this right is <em>not an option.</em>
+      </div>
+      <div class="intent-detail">
+        Most networks treat regulatory compliance as a legal minimum. We treat it as a design principle. Every product decision at Haven is made with the ICO's Children's Code, the Online Safety Act, and UK GDPR in the room. This page exists to show our work — and to be honest about how much work there is.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER 1: DATA PROTECTION -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">Layer 1</div>
+    <h2>Data Protection <em>Foundation</em></h2>
+    <p class="section-intro">UK GDPR, the Data Protection Act 2018, and the Data (Use and Access) Act 2025 form the bedrock of everything Haven does with data. As of February 2026, the DUAA's new "children's higher protection matters" are now statute — not just guidance.</p>
+
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-badge critical">🔐</div>
+        <div class="layer-title-group">
+          <span class="layer-number">Regulation 01</span>
+          <div class="layer-title">UK GDPR & Data Protection Act 2018</div>
+          <div class="layer-subtitle">The foundational framework. Every other obligation sits on top of this. Enforced by the ICO with fines up to £17.5 million or 4% of global turnover.</div>
+        </div>
+        <div class="layer-priority priority-critical">🔥 Pre-launch</div>
+      </div>
+      <div class="obligations">
+        <div class="obligation">
+          <div class="obligation-title">Lawful basis mapping</div>
+          <div class="obligation-desc">Documented lawful basis for every category of data we process. Consent for children requires informed understanding — parental consent required under 13.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Data Protection Officer</div>
+          <div class="obligation-desc">Appointment of a qualified DPO given our user base of under-18s. Almost certainly mandatory for Haven's processing activities.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">DPIA Programme</div>
+          <div class="obligation-desc">Data Protection Impact Assessments for all high-risk processing — AI safety features, parental visibility tools, geolocation, and profiling are all in scope.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Right to erasure</div>
+          <div class="obligation-desc">Particularly relevant for data collected during childhood. Processes to honour erasure requests including from former child users who are now adults.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Age-appropriate privacy notices</div>
+          <div class="obligation-desc">Plain-language, genuinely readable notices for children — not legal boilerplate. Separate versions for under-13s, 13–15s, and 16–17s.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">No automated decision-making</div>
+          <div class="obligation-desc">Prohibition on decisions with significant effects on children based solely on automated processing, including profiling — with exceptions only where strong safeguards exist.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-badge critical">📋</div>
+        <div class="layer-title-group">
+          <span class="layer-number">Regulation 02</span>
+          <div class="layer-title">Data (Use and Access) Act 2025</div>
+          <div class="layer-subtitle">Now in force. Formalises children's higher protection matters into statute. Services likely to be accessed by children must account for children's specific needs at the design stage.</div>
+        </div>
+        <div class="layer-priority priority-critical">🔥 Pre-launch</div>
+      </div>
+      <div class="obligations">
+        <div class="obligation">
+          <div class="obligation-title">Children's higher protection matters</div>
+          <div class="obligation-desc">Documented consideration of how Haven protects and supports children, including age and developmental stage, in every product decision.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Data protection by design — children</div>
+          <div class="obligation-desc">Children's needs embedded into Article 25 compliance. The DUAA amendment now requires this at a statutory level, not just as good practice.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Complaint handling process</div>
+          <div class="obligation-desc">A statutory right for data subjects to complain to controllers directly. Process and communication mechanism required before June 2026.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-badge high">📡</div>
+        <div class="layer-title-group">
+          <span class="layer-number">Regulation 03</span>
+          <div class="layer-title">Privacy and Electronic Communications Regulations (PECR)</div>
+          <div class="layer-subtitle">Controls marketing communications and cookies. Distinct from UK GDPR but closely connected. Children have the same rights as adults to object to direct marketing.</div>
+        </div>
+        <div class="layer-priority priority-high">⚠️ Pre-launch</div>
+      </div>
+      <div class="obligations">
+        <div class="obligation">
+          <div class="obligation-title">Marketing consent rules</div>
+          <div class="obligation-desc">Children cannot be marketed to without explicit consent. SMS, email, push notifications all in scope. Must stop immediately on objection.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Cookie and tracking consent</div>
+          <div class="obligation-desc">Any tracking beyond strictly necessary functionality requires PECR-compliant consent. Haven's privacy-first architecture minimises this exposure.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER 2: CHILDREN'S CODE -->
+<div class="section section-bg-deep">
+  <div class="container">
+    <div class="section-label">Layer 2</div>
+    <h2>ICO Age Appropriate <em>Design Code</em></h2>
+    <p class="section-intro">The 15 standards of the Children's Code are Haven's most operationally intensive compliance area. They are also the clearest expression of what we believe: that children deserve a network designed for them, not retrofitted.</p>
+
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-badge critical">🧒</div>
+        <div class="layer-title-group">
+          <span class="layer-number">Regulation 04</span>
+          <div class="layer-title">ICO Children's Code — All 15 Standards</div>
+          <div class="layer-subtitle">The statutory code of practice for information society services likely to be accessed by children. The global gold standard in children's data protection. Haven is built around it.</div>
+        </div>
+        <div class="layer-priority priority-critical">🔥 Pre-launch</div>
+      </div>
+      <div class="obligations">
+        <div class="obligation">
+          <div class="obligation-title">Best interests of the child</div>
+          <div class="obligation-desc">The primary lens for every product and design decision. Commercial interests of Haven or its partners cannot outweigh this principle.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Data protection by design & default</div>
+          <div class="obligation-desc">Highest privacy settings as the default. Children should not need to opt in to safety — safety is the starting position.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Age-appropriate application</div>
+          <div class="obligation-desc">Different protections calibrated to different age groups. Under-13, 13–15, and 16–17 plans have distinct configurations and defaults.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Transparency</div>
+          <div class="obligation-desc">Privacy notices written at a level children can actually understand. No legal boilerplate dressed up as transparency.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Detrimental use of data</div>
+          <div class="obligation-desc">Absolute prohibition on using children's data against their own interests. No advertising targeting. No engagement optimisation at the expense of wellbeing.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Geolocation — off by default</div>
+          <div class="obligation-desc">Location tracking off by default. Clear indicator when it's on. Automatically resets to off at the end of each session. No ambient location logging.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Profiling — off by default</div>
+          <div class="obligation-desc">No profiling of children unless explicitly enabled. No behavioural advertising. No personality or user profiles built without active parental consent.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">No nudge techniques</div>
+          <div class="obligation-desc">Haven will not use any design patterns that push children toward sharing more data, weakening privacy settings, or extending their usage time.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Data minimisation</div>
+          <div class="obligation-desc">Collect only what is strictly necessary for the service to function. Regular reviews to eliminate data collection that cannot be justified.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Parental controls — proportionate</div>
+          <div class="obligation-desc">Tools that inform parents without surveilling children. Weekly signals, not dashboards. Visibility calibrated to age and risk, not parental anxiety.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER 3: ONLINE SAFETY ACT -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">Layer 3</div>
+    <h2>Online Safety Act <em>2023</em></h2>
+    <p class="section-intro">Children's safety duties came into force on 25 July 2025. Ofcom is actively enforcing. Fines reach £18 million or 10% of global turnover. Haven's app and platform almost certainly fall within scope as a user-to-user or interactive service.</p>
+
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-badge critical">🛡️</div>
+        <div class="layer-title-group">
+          <span class="layer-number">Regulation 05</span>
+          <div class="layer-title">Online Safety Act — Children's Safety Duties</div>
+          <div class="layer-subtitle">Ofcom's Children's Codes are now in force. Ofcom has stated it is actively checking compliance and is ready to enforce against non-compliant services immediately.</div>
+        </div>
+        <div class="layer-priority priority-critical">🔥 Pre-launch</div>
+      </div>
+      <div class="obligations">
+        <div class="obligation">
+          <div class="obligation-title">Children's Access Assessment</div>
+          <div class="obligation-desc">Documented assessment of whether children can normally access Haven's services or parts thereof. Must be evidenced and retained.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Children's Risk Assessment</div>
+          <div class="obligation-desc">Suitable and sufficient assessment of harms children could encounter on Haven's platform. Must be updated before significant design changes.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Age Assurance</div>
+          <div class="obligation-desc">Robust age verification or estimation mechanisms that comply with UK data protection law. Collect only necessary information, retained only as long as needed.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Content moderation systems</div>
+          <div class="obligation-desc">Systems and processes to detect, remove, and prevent harmful content. Including proactive detection tools, not just reactive takedown.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">CSAM hash-matching</div>
+          <div class="obligation-desc">Mandatory use of IWF hash-matching technology to detect and remove known child sexual abuse material. Non-negotiable and built in from day one.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Grooming protections</div>
+          <div class="obligation-desc">Children's profiles and locations not visible to strangers. Non-connected accounts cannot send direct messages to children by default.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Content reporting mechanisms</div>
+          <div class="obligation-desc">Easy routes for children, parents, and affected persons to report harmful content. Systems must be genuinely accessible, not buried.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Transparency reporting to Ofcom</div>
+          <div class="obligation-desc">Annual or periodic reporting obligations to Ofcom on children's safety measures and compliance status.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER 4: OFCOM GENERAL CONDITIONS -->
+<div class="section section-bg-deep">
+  <div class="container">
+    <div class="section-label">Layer 4</div>
+    <h2>Ofcom General <em>Conditions</em></h2>
+    <p class="section-intro">As an MVNO, Haven is a communications provider under the Communications Act 2003 and must comply with Ofcom's General Conditions of Entitlement. No licence required — but the conditions are binding, and Ofcom has substantial enforcement powers.</p>
+
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-badge operational">📞</div>
+        <div class="layer-title-group">
+          <span class="layer-number">Regulation 06</span>
+          <div class="layer-title">Communications Act 2003 — General Conditions</div>
+          <div class="layer-subtitle">The full suite of consumer protection conditions applies to Haven on the same basis as major mobile network operators. No carve-outs for size.</div>
+        </div>
+        <div class="layer-priority priority-operational">⚙️ Operational</div>
+      </div>
+      <div class="obligations">
+        <div class="obligation">
+          <div class="obligation-title">GC A1 — General requirements</div>
+          <div class="obligation-desc">Network access obligations. Registration with Ofcom's General Authorisation Regime as an electronic communications service provider.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">GC B1/B2 — Number portability</div>
+          <div class="obligation-desc">Customers can port their mobile number within one working day. One Touch Switch compliance — the gaining provider leads the switching process.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">GC C1–C8 — Consumer protection</div>
+          <div class="obligation-desc">Contract transparency, switching rights, complaint handling processes. Must match the standards of major network operators in full.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Emergency services access</div>
+          <div class="obligation-desc">999 and 112 must be accessible on all Haven plans — including basic calling plans for under-14s. Non-negotiable by design.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Lawful Interception</div>
+          <div class="obligation-desc">Obligations under the Investigatory Powers Act to cooperate with law enforcement. Contractually managed through host network agreement.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Quality of service reporting</div>
+          <div class="obligation-desc">Periodic reporting to Ofcom on network performance and customer complaints. Accuracy is mandatory — failure to respond can itself trigger enforcement.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER 5: CONTENT FILTERING -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">Layer 5</div>
+    <h2>Network Safety <em>and Content</em></h2>
+    <p class="section-intro">Haven doesn't just meet the regulatory minimum on content filtering — our network-level safety is our core product. But that means the regulatory obligations are also more complex to navigate than for a standard MVNO.</p>
+
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-badge high">🔒</div>
+        <div class="layer-title-group">
+          <span class="layer-number">Regulation 07</span>
+          <div class="layer-title">Network-Level Safety & Content Filtering</div>
+          <div class="layer-subtitle">Ofcom's active choice framework, IWF blocklist integration, SIM registration, and the specific obligations created by Haven's own content policies.</div>
+        </div>
+        <div class="layer-priority priority-high">⚠️ Design-time</div>
+      </div>
+      <div class="obligations">
+        <div class="obligation">
+          <div class="obligation-title">IWF blocklist integration</div>
+          <div class="obligation-desc">Internet Watch Foundation blocklist applied at the network layer. Mandatory for any MVNO serving children. Built into the infrastructure, not bolted on.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Default content filtering</div>
+          <div class="obligation-desc">Haven inverts the standard model: filtering is on by default, not opt-in. Regulatory framework requires careful documentation of how parents can adjust this.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">SIM registration / KYC</div>
+          <div class="obligation-desc">Know Your Customer obligations for SIM issuance. Complex where the customer is a child and the account holder is a parent or guardian — careful process design required.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Anti-spam & nuisance calls</div>
+          <div class="obligation-desc">PECR and Ofcom obligations on preventing spam SMS and nuisance calls from reaching Haven subscribers, particularly children.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">VPN & proxy blocking — legal basis</div>
+          <div class="obligation-desc">Haven blocks VPNs and proxies at the network layer. This policy must be clearly documented in consumer contracts and privacy notices to be lawfully enforceable.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER 6: CONSUMER & COMMERCIAL -->
+<div class="section section-bg-deep">
+  <div class="container">
+    <div class="section-label">Layer 6</div>
+    <h2>Consumer Protection <em>and Commercial</em></h2>
+    <p class="section-intro">The standard commercial regulatory layer for any business, with additional complexity given Haven's target market and the sensitive context of children's mobile services.</p>
+
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-badge operational">⚖️</div>
+        <div class="layer-title-group">
+          <span class="layer-number">Regulation 08</span>
+          <div class="layer-title">Consumer Rights, Advertising & Competition</div>
+          <div class="layer-subtitle">Consumer Rights Act 2015, Consumer Contracts Regulations 2013, ASA/CAP advertising rules, and CMA competition law obligations.</div>
+        </div>
+        <div class="layer-priority priority-operational">⚙️ Operational</div>
+      </div>
+      <div class="obligations">
+        <div class="obligation">
+          <div class="obligation-title">Contract fairness — Consumer Rights Act</div>
+          <div class="obligation-desc">All contract terms must be fair, transparent, and in plain language. Terms that disadvantage consumers as against businesses are voidable.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Cancellation rights — distance selling</div>
+          <div class="obligation-desc">14-day cooling off period under Consumer Contracts Regulations. Clear cancellation process required at point of sale and in ongoing communications.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">ASA/CAP — marketing to families</div>
+          <div class="obligation-desc">Marketing that targets or features children has additional rules. No exploitative claims. No exaggerated safety claims without substantiation.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">CMA competition compliance</div>
+          <div class="obligation-desc">Pricing, bundling, and market conduct must comply with competition law. Particular scrutiny likely given Haven's challenger positioning in a concentrated market.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">FCA authorisation assessment</div>
+          <div class="obligation-desc">If Haven ever offers device insurance, credit, or payment plans: Financial Conduct Authority authorisation required. Proactive assessment needed now to shape product roadmap.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER 7: SAFEGUARDING -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">Layer 7</div>
+    <h2>Safeguarding <em>and Duty of Care</em></h2>
+    <p class="section-intro">Beyond legal compliance, Haven has a genuine duty of care obligation as a service specifically designed for children. These are the internal practices that underpin every external-facing regulation.</p>
+
+    <div class="layer">
+      <div class="layer-header">
+        <div class="layer-badge high">🤝</div>
+        <div class="layer-title-group">
+          <span class="layer-number">Regulation 09</span>
+          <div class="layer-title">Safeguarding, Security and Incident Response</div>
+          <div class="layer-subtitle">Formal safeguarding policy, safer recruitment, Cyber Essentials certification, and mandatory reporting obligations if CSAM is ever encountered on Haven's network.</div>
+        </div>
+        <div class="layer-priority priority-high">⚠️ Pre-launch</div>
+      </div>
+      <div class="obligations">
+        <div class="obligation">
+          <div class="obligation-title">Formal safeguarding policy</div>
+          <div class="obligation-desc">Written policy covering how Haven identifies and responds to safeguarding concerns. Required wherever staff or contractors may interact with or about children.</div>
+          <div class="obligation-status"><div class="status-dot in-progress"></div><span class="status-label in-progress">In progress</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Safer recruitment practices</div>
+          <div class="obligation-desc">DBS checks and appropriate vetting for any employees or contractors with access to children's data or any potential contact with child users.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Cyber Essentials certification</div>
+          <div class="obligation-desc">Not mandatory for MVNOs, but the expected baseline for a children-focused service. Demonstrates minimum security hygiene to parents, partners, and regulators.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">CSAM incident response</div>
+          <div class="obligation-desc">Mandatory reporting to the NCA and IWF if CSAM is encountered on Haven's network. Response plan and escalation path required before launch.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Mental health & wellbeing design</div>
+          <div class="obligation-desc">Ofcom increasingly expects services to consider mental health impacts. Aligned with Haven's SFC roots — no engagement-maximising design patterns.</div>
+          <div class="obligation-status"><div class="status-dot design"></div><span class="status-label design">Design stage</span></div>
+        </div>
+        <div class="obligation">
+          <div class="obligation-title">Vulnerability provisions</div>
+          <div class="obligation-desc">Ofcom's General Conditions require communications providers to have provisions for vulnerable customers — children are definitionally a vulnerable category.</div>
+          <div class="obligation-status"><div class="status-dot planned"></div><span class="status-label planned">Planned</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIORITY TABLE -->
+<div class="progress-section">
+  <div class="container">
+    <div class="section-label">Summary</div>
+    <h2>Every obligation, <em>prioritised.</em></h2>
+    <p class="section-intro">A single view of where everything sits in Haven's compliance programme from now to UK launch and beyond.</p>
+
+    <div class="tier-grid">
+      <div class="tier-row header-row">
+        <div class="tier-cell header">Area</div>
+        <div class="tier-cell header">Why it matters for Haven</div>
+        <div class="tier-cell header">Status</div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">UK GDPR + DPA 2018</div></div>
+        <div class="tier-cell"><div class="tier-why">Legal foundation. Everything else fails without it. Mandatory DPO appointment given under-18 user base.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-fire">🔥 Pre-launch</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">ICO Children's Code — all 15 standards</div></div>
+        <div class="tier-cell"><div class="tier-why">Most design-impactful obligation. Shapes the entire product architecture from privacy defaults to parental controls.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-fire">🔥 Pre-launch</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">Online Safety Act — children's duties</div></div>
+        <div class="tier-cell"><div class="tier-why">In force July 2025. Ofcom actively enforcing. Risk assessment and age assurance required before Haven goes live.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-fire">🔥 Pre-launch</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">Ofcom General Conditions registration</div></div>
+        <div class="tier-cell"><div class="tier-why">The operational gate to launching as an MVNO. Must be in place before the first SIM is activated.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-fire">🔥 Pre-launch</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">Age assurance architecture</div></div>
+        <div class="tier-cell"><div class="tier-why">Must be embedded at product design stage. Retrofit is expensive and potentially non-compliant.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-design">✦ Design-time</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">Geolocation & profiling defaults</div></div>
+        <div class="tier-cell"><div class="tier-why">Off by default is a Children's Code requirement. Architectural decision that cannot be changed post-launch without a DPIA.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-design">✦ Design-time</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">Data (Use and Access) Act 2025</div></div>
+        <div class="tier-cell"><div class="tier-why">In force February 2026. Children's higher protection matters now in statute. Review DPIAs and product governance.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-design">✦ Design-time</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">IWF integration + CSAM response plan</div></div>
+        <div class="tier-cell"><div class="tier-why">Legal and moral baseline. Non-negotiable. Must be in place before any child user is on the network.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-fire">🔥 Pre-launch</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">Complaint handling + SIM KYC</div></div>
+        <div class="tier-cell"><div class="tier-why">Required as a communications provider. Parent/guardian as account holder adds complexity to standard KYC flows.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-ops">⚙ Operational</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">Safeguarding policy + Cyber Essentials</div></div>
+        <div class="tier-cell"><div class="tier-why">Trust and legal baseline. Required before Haven can credibly claim to be the safest network for children in the UK.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-ops">⚙ Operational</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">Digital age of consent bill</div></div>
+        <div class="tier-cell"><div class="tier-why">Progressing through Parliament. Could raise consent age from 13. Haven's age-tier architecture accommodates this already.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-watch">👁 Monitor</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">ICO AI & automated decision-making code</div></div>
+        <div class="tier-cell"><div class="tier-why">Will govern Haven's AI safety layer. Code under development — Haven's privacy-first AI architecture is designed to meet it.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-watch">👁 Monitor</span></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-cell"><div class="tier-area">US COPPA (for Spring 2027 launch)</div></div>
+        <div class="tier-cell"><div class="tier-why">Different framework to UK GDPR. Product architecture decisions made now should accommodate COPPA requirements to avoid costly re-engineering.</div></div>
+        <div class="tier-cell"><span class="tier-tag tag-watch">👁 Monitor</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNAL / CTA -->
+<div class="signal-section">
+  <div class="container">
+    <h2>This is what building responsibly <em>looks like.</em></h2>
+    <p>We publish this list not because we have to, but because families deserve to know what we're doing before they trust us with their children's mobile network. If you're building in this space without working through all of the above, you're not ready.</p>
+    <a href="https://gethavenmobile.com/#waitlist" class="signal-cta">Join the waitlist →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="container">
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 The Good Phone Company Ltd · Trading as Haven.</span>
+      <div class="footer-links">
+        <a href="https://gethavenmobile.com/#waitlist">Join the waitlist</a>
+        <a href="https://gethavenmobile.com/story/">Our story</a>
+        <a href="https://gethavenmobile.com/privacy/">Privacy</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
