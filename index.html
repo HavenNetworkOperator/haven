@@ -885,6 +885,12 @@ footer a:hover { color: var(--accent); }
   .values-cta-btn { width: 100%; justify-content: center; }
 }
 </style>
+
+<!-- PostHog (EU cloud, GDPR-friendly, anonymous by default) -->
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https://eu.i.posthog.com',person_profiles:'identified_only',capture_pageview:true,capture_pageleave:true});
+</script>
 </head>
 <body>
 
@@ -898,7 +904,7 @@ footer a:hover { color: var(--accent); }
     </a>
     <div class="nav-right">
       <a href="/story/" class="nav-meta" style="text-decoration: none; color: var(--muted); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">Our story</a>
-      <a href="#waitlist" class="nav-waitlist-btn">
+      <a href="https://gethavenmobile.com/waitlist" class="nav-waitlist-btn">
         <span class="nav-waitlist-dot"></span>
         Join the waitlist
       </a>
@@ -913,21 +919,8 @@ footer a:hover { color: var(--accent); }
     </p>
     <p class="hero-sub-byline">From the parents behind the Smartphone Free Childhood movement.</p>
 
-    <div class="signup" id="waitlist">
-      <form class="signup-form" id="waitlistForm" action="https://formspree.io/f/mpqkabdk" method="POST">
-        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" />
-        <input type="hidden" name="_subject" value="New Haven waitlist signup" />
-        <button type="submit">Claim your founding spot →</button>
-      </form>
-      <div class="signup-success" id="signupSuccess">
-        <h3>You're in. Welcome to Haven.</h3>
-        <p>Your founding member price is locked for life. We'll reach out before the public gets access.</p>
-        <div class="signup-share">
-          <p class="signup-share-label">Know a parent who'd want this?</p>
-          <a href="https://twitter.com/intent/tweet?text=Just+joined+the+Haven+waitlist+%E2%80%94+a+new+UK+mobile+network+built+for+families.+Safe+by+the+SIM%2C+not+an+app+kids+can+delete.+First+1%2C000+get+founding+member+pricing+for+life.+https%3A%2F%2Fgethavenmobile.com" target="_blank" rel="noopener" class="share-btn share-x">Share on X →</a>
-          <a href="whatsapp://send?text=Just+joined+the+Haven+waitlist+%E2%80%94+a+new+UK+mobile+network+built+for+families.+Safe+by+the+SIM%2C+not+an+app+kids+can+delete.+https%3A%2F%2Fgethavenmobile.com" class="share-btn share-wa">Share on WhatsApp →</a>
-        </div>
-      </div>
+    <div class="signup">
+      <a href="https://gethavenmobile.com/waitlist" class="values-cta-btn">Claim your founding spot →</a>
       <p class="signup-meta">First 1,000 families become founding members</p>
       <p class="signup-counter">
         <span class="counter-dot"></span>
@@ -1099,7 +1092,7 @@ footer a:hover { color: var(--accent); }
       </div>
 
       <div class="values-cta-group fade-in">
-        <a href="#waitlist" class="values-cta-btn">
+        <a href="https://gethavenmobile.com/waitlist" class="values-cta-btn">
           Join the waitlist →
         </a>
         <span class="values-cta-note">Free to join · no obligation · founding members first</span>
@@ -1131,7 +1124,7 @@ footer a:hover { color: var(--accent); }
         <p>
           Haven is being built in the open, with the families who'll use it. Join the waitlist now and you'll be the first to know when we launch, the first to get access, and the first to tell us what matters most.
         </p>
-        <a href="#waitlist" class="founding-btn">Join the waitlist →</a>
+        <a href="https://gethavenmobile.com/waitlist" class="founding-btn">Join the waitlist →</a>
       </div>
       <ul class="benefits-list">
         <li>Founding member pricing locked for life</li>
@@ -1241,7 +1234,7 @@ footer a:hover { color: var(--accent); }
   <div class="container footer-inner">
     <div>© 2026 The Good Phone Company Ltd · Trading as Haven.</div>
     <div class="footer-nav">
-      <a href="#waitlist">Join the waitlist →</a>
+      <a href="https://gethavenmobile.com/waitlist">Join the waitlist →</a>
       <a href="/story/">Our story</a>
       <a href="/privacy/">Privacy</a>
       <a href="/compliance/">Compliance</a>
@@ -1258,39 +1251,10 @@ footer a:hover { color: var(--accent); }
 </footer>
 
 <div class="sticky-cta" id="stickyCta">
-  <a href="#waitlist">Claim your founding spot →</a>
+  <a href="https://gethavenmobile.com/waitlist">Claim your founding spot →</a>
 </div>
 
 <script>
-// ─── Form handling ───
-document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const form = e.target;
-  const button = form.querySelector('button');
-  const originalText = button.textContent;
-  button.textContent = 'Joining...';
-  button.disabled = true;
-
-  try {
-    const response = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if (response.ok) {
-      form.style.display = 'none';
-      document.getElementById('signupSuccess').classList.add('active');
-    } else {
-      throw new Error('Submission failed');
-    }
-  } catch (err) {
-    button.textContent = 'Try again';
-    button.disabled = false;
-    alert('Something went wrong. Please try again or email hello@haven.example');
-  }
-});
-
 // ─── Scroll reveal ───
 const observer = new IntersectionObserver(
   (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),

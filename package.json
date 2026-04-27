@@ -1,0 +1,15 @@
+{
+  "name": "haven-waitlist",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {
+    "@vercel/postgres": "^0.10.0",
+    "nanoid": "^5.0.7",
+    "posthog-node": "^5.30.4",
+    "resend": "^4.0.0"
+  }
+}

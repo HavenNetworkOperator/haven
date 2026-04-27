@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Join the waitlist — Haven</title>
+<meta name="description" content="Claim your founding place in Britain's first mobile network designed around families. Move up the queue by inviting parents who'd want this too." />
+
+<link rel="canonical" href="https://gethavenmobile.com/waitlist" />
+
+<meta property="og:title" content="Join the Haven waitlist" />
+<meta property="og:description" content="The first 1,000 families become founding members. Move up the queue by sharing." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gethavenmobile.com/waitlist" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Join the Haven waitlist" />
+<meta name="twitter:description" content="The first 1,000 families become founding members. Move up the queue by sharing." />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,1,300;9..144,1,400&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #F2EDE5;
+  --bg-deep: #ebe4d4;
+  --ink: #0f1b2d;
+  --ink-soft: #2a3a52;
+  --muted: #6a6253;
+  --accent: #c14a1f;
+  --accent-soft: #e88a5e;
+  --line: #d8cfbc;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* paper grain intentionally omitted on /waitlist for a cleaner read */
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* ───── PAGE HEADER (full width) ───── */
+.page-header {
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .page-header { padding: 22px 24px; }
+}
+.logo {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: relative;
+}
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+.nav-back {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-back:hover { color: var(--accent); }
+
+/* ───── MAIN ───── */
+main {
+  flex: 1;
+  padding: 48px 0 96px;
+}
+@media (max-width: 768px) {
+  main { padding: 32px 0 64px; }
+  .container { padding: 0 24px; }
+}
+
+.section-label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--muted);
+}
+
+/* ───── SIGNUP STATE ───── */
+.signup-state h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  max-width: 14ch;
+}
+.signup-state h1 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+.lede {
+  font-size: clamp(17px, 1.5vw, 19px);
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 52ch;
+  margin-bottom: 40px;
+}
+
+.ref-banner {
+  display: inline-block;
+  background: rgba(193, 74, 31, 0.08);
+  border: 1px solid rgba(193, 74, 31, 0.25);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 10px 18px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+.signup-form {
+  display: flex;
+  gap: 8px;
+  background: var(--bg);
+  border: 1.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 6px 6px 6px 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  max-width: 520px;
+}
+.signup-form:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(193, 74, 31, 0.12);
+}
+.signup-form input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+  padding: 12px 0;
+}
+.signup-form input::placeholder { color: var(--muted); }
+.signup-form button {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  padding: 14px 28px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s;
+}
+.signup-form button:hover { background: var(--accent); }
+.signup-form button:active { transform: scale(0.97); }
+.signup-form button:disabled { opacity: 0.6; cursor: wait; }
+@media (max-width: 600px) {
+  .signup-form {
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 16px;
+  }
+  .signup-form input { padding: 12px 8px; }
+  .signup-form button { width: 100%; padding: 16px; }
+}
+
+.form-error {
+  color: var(--accent);
+  font-size: 14px;
+  margin-top: 12px;
+  min-height: 20px;
+}
+
+.benefits-list {
+  list-style: none;
+  margin-top: 56px;
+  display: grid;
+  gap: 14px;
+  max-width: 520px;
+}
+.benefits-list li {
+  font-size: 16px;
+  color: var(--ink-soft);
+  padding-left: 28px;
+  position: relative;
+  line-height: 1.5;
+}
+.benefits-list li::before {
+  content: '—';
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 400;
+}
+
+.fine-print {
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.55;
+}
+
+/* ───── STATUS STATE ───── */
+.status-state { display: none; }
+.status-state.active { display: block; }
+.signup-state.hidden { display: none; }
+
+.position-card {
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 48px 32px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.position-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.position-number {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(72px, 14vw, 144px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.position-number em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+.position-of {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.status-h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+  max-width: 18ch;
+}
+.status-h2 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+.status-lede {
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin-bottom: 40px;
+  max-width: 52ch;
+}
+
+.referral-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+.referral-stat-num {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 56px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.referral-stat-num em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+.referral-stat-label {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.share-block { margin-bottom: 40px; }
+.share-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.share-link {
+  display: flex;
+  gap: 8px;
+  background: var(--bg);
+  border: 1.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 6px 6px 6px 20px;
+  margin-bottom: 20px;
+}
+.share-link input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  padding: 10px 0;
+  min-width: 0;
+}
+.share-link button {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  padding: 10px 22px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s;
+}
+.share-link button:hover { background: var(--accent); }
+.share-link button:active { transform: scale(0.97); }
+.share-link button.copied { background: var(--accent); }
+@media (max-width: 600px) {
+  .share-link {
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 14px;
+  }
+  .share-link button { width: 100%; padding: 12px; }
+}
+
+.share-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.share-btn {
+  flex: 1;
+  min-width: 100px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.share-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.share-btn svg { width: 16px; height: 16px; }
+
+.refresh-row {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.refresh-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.refresh-btn:hover { color: var(--ink); }
+
+/* ───── PAGE FOOTER (full width) ───── */
+.page-footer {
+  border-top: 1px solid var(--line);
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--muted);
+  position: relative;
+  z-index: 2;
+}
+.footer-nav {
+  display: flex;
+  gap: 24px;
+}
+.footer-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-nav a:hover { color: var(--accent); }
+@media (max-width: 600px) {
+  .page-footer { flex-direction: column; text-align: center; padding: 28px 24px; }
+}
+
+/* ───── ENTRY ANIM ───── */
+.fade-up {
+  animation: fadeUp 0.7s ease-out backwards;
+}
+.fade-up.d1 { animation-delay: 0.05s; }
+.fade-up.d2 { animation-delay: 0.15s; }
+.fade-up.d3 { animation-delay: 0.25s; }
+.fade-up.d4 { animation-delay: 0.35s; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.skeleton { color: transparent; background: var(--line); border-radius: 8px; }
+
+/* Avoid flash of signup form for returning visitors */
+body.booting .signup-state,
+body.booting .status-state { visibility: hidden; }
+</style>
+<script>
+  // Set boot class synchronously so CSS hides both states until JS resolves which one to show.
+  (function () {
+    try {
+      if (localStorage.getItem('haven_waitlist_code')) {
+        document.documentElement.dataset.boot = 'returning';
+      }
+    } catch {}
+  })();
+</script>
+
+<!-- PostHog (EU cloud, GDPR-friendly, anonymous by default) -->
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https://eu.i.posthog.com',person_profiles:'identified_only',capture_pageview:true,capture_pageleave:true});
+</script>
+</head>
+<body class="booting">
+
+<header class="page-header">
+  <a href="/" class="logo"><span class="logo-mark"></span>Haven</a>
+  <a href="/" class="nav-back">← Back to home</a>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- ─── SIGNUP STATE ─── -->
+    <section class="signup-state" id="signupState">
+      <span class="section-label fade-up">Founding waitlist</span>
+      <div class="ref-banner fade-up d1" id="refBanner" hidden>A Haven founding member sent you here. Sign up and you'll both move up.</div>
+      <h1 class="fade-up d1">The first 1,000 families <em>shape the network.</em></h1>
+      <p class="lede fade-up d2">Claim your founding place. Move up the queue by inviting parents who'd want this too.</p>
+
+      <form class="signup-form fade-up d3" id="form" novalidate>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Your email address"
+          autocomplete="email"
+          required
+        />
+        <button type="submit" id="submitBtn">Claim my place</button>
+      </form>
+      <div class="form-error" id="formError" role="alert"></div>
+
+      <ul class="benefits-list fade-up d4">
+        <li>Founding pricing locked for life — £8/month, never increased</li>
+        <li>Priority access on launch day, in queue order</li>
+        <li>A vote on the first three AI safety features we ship</li>
+        <li>A direct line to the founding team — replies go to a real inbox</li>
+      </ul>
+
+      <p class="fine-print fade-up d4">By joining, you agree to receive fortnightly founder updates from Haven. Unsubscribe any time. We never share your email.</p>
+    </section>
+
+    <!-- ─── STATUS STATE ─── -->
+    <section class="status-state" id="statusState">
+      <span class="section-label">You're in</span>
+
+      <div class="position-card">
+        <div class="position-eyebrow">Your position</div>
+        <div class="position-number">#<em id="posNum">—</em></div>
+        <div class="position-of">of <span id="totalNum">—</span> founding members so far</div>
+      </div>
+
+      <h2 class="status-h2">Move up <em>the queue.</em></h2>
+      <p class="status-lede">Every parent who signs up via your link bumps you up. Position #1 gets their SIM first on launch day. Share with the parents who'd want this too.</p>
+
+      <div class="referral-stat">
+        <div class="referral-stat-num"><em id="refNum">0</em></div>
+        <div class="referral-stat-label">friends invited so far</div>
+      </div>
+
+      <div class="share-block">
+        <span class="share-label">Your invite link</span>
+        <div class="share-link">
+          <input type="text" id="shareUrl" readonly />
+          <button type="button" id="copyBtn">Copy</button>
+        </div>
+
+        <div class="share-buttons">
+          <a class="share-btn" id="whatsappBtn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
+            WhatsApp
+          </a>
+          <a class="share-btn" id="twitterBtn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Post on X
+          </a>
+          <a class="share-btn" id="emailBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+
+      <div class="refresh-row">
+        Counts update when others sign up via your link.
+        <button class="refresh-btn" id="refreshBtn">Refresh</button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="page-footer">
+  <div>© 2026 The Good Phone Company Ltd · Trading as Haven.</div>
+  <div class="footer-nav">
+    <a href="/">Home</a>
+    <a href="/story/">Our story</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/compliance/">Compliance</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const STORAGE_KEY = 'haven_waitlist_code';
+  const SITE = 'https://gethavenmobile.com';
+
+  const els = {
+    signup:    document.getElementById('signupState'),
+    status:    document.getElementById('statusState'),
+    refBanner: document.getElementById('refBanner'),
+    form:      document.getElementById('form'),
+    email:     document.getElementById('email'),
+    submitBtn: document.getElementById('submitBtn'),
+    formError: document.getElementById('formError'),
+    posNum:    document.getElementById('posNum'),
+    totalNum:  document.getElementById('totalNum'),
+    refNum:    document.getElementById('refNum'),
+    shareUrl:  document.getElementById('shareUrl'),
+    copyBtn:   document.getElementById('copyBtn'),
+    refreshBtn: document.getElementById('refreshBtn'),
+    whatsapp:  document.getElementById('whatsappBtn'),
+    twitter:   document.getElementById('twitterBtn'),
+    emailBtn:  document.getElementById('emailBtn'),
+  };
+
+  const CODE_RE = /^[2-9A-HJKMNP-Z]{8}$/;
+
+  function getQueryCode(name) {
+    const url = new URL(window.location.href);
+    const v = (url.searchParams.get(name) || '').trim().toUpperCase();
+    return CODE_RE.test(v) ? v : null;
+  }
+  function getRefFromUrl() { return getQueryCode('ref'); }
+  function getMyFromUrl()  { return getQueryCode('me'); }
+
+  function showStatus(data) {
+    els.signup.classList.add('hidden');
+    els.status.classList.add('active');
+    renderStatus(data);
+  }
+
+  function renderStatus(data) {
+    els.posNum.textContent   = data.position;
+    els.totalNum.textContent = data.total;
+    els.refNum.textContent   = data.referrals;
+
+    const url = `${SITE}/waitlist?ref=${data.ref_code}`;
+    els.shareUrl.value = url;
+
+    const text = `I just joined Haven — Britain's first mobile network designed around families. Use my link, you'll move up the queue too:`;
+    const fullMsg = encodeURIComponent(`${text} ${url}`);
+
+    els.whatsapp.href = `https://wa.me/?text=${fullMsg}`;
+    els.twitter.href  = `https://twitter.com/intent/tweet?text=${fullMsg}`;
+    els.emailBtn.href = `mailto:?subject=${encodeURIComponent('You should look at this — Haven')}&body=${fullMsg}`;
+  }
+
+  async function fetchStatus(refCode) {
+    const r = await fetch(`/api/status?ref=${encodeURIComponent(refCode)}`);
+    if (!r.ok) throw new Error('status_failed');
+    return r.json();
+  }
+
+  async function submitSignup(email, refCode) {
+    const r = await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, ref: refCode || undefined }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data?.error || 'signup_failed');
+    return data;
+  }
+
+  function unboot() { document.body.classList.remove('booting'); }
+
+  // Boot resolution rules:
+  //   1. ?me=CODE → "I am this user". Always show CODE's status, set localStorage.
+  //   2. ?ref=CODE present AND localStorage has a DIFFERENT valid code →
+  //      trust the URL (the user explicitly clicked a link for this account).
+  //      Show CODE's status WITHOUT overwriting localStorage so /waitlist returns
+  //      to their own account.
+  //   3. localStorage has a code → show that user's status (returning visitor).
+  //   4. Otherwise → show signup form. If ?ref=CODE present, show referrer banner.
+  (async function init() {
+    const myFromUrl  = getMyFromUrl();
+    const refFromUrl = getRefFromUrl();
+    const stored     = localStorage.getItem(STORAGE_KEY);
+    const storedValid = stored && CODE_RE.test(stored);
+
+    // Rule 1: ?me=CODE — auto-login as this account
+    if (myFromUrl) {
+      try {
+        const data = await fetchStatus(myFromUrl);
+        localStorage.setItem(STORAGE_KEY, myFromUrl);
+        showStatus(data);
+        unboot();
+        return;
+      } catch {
+        // unknown code — fall through to localStorage / signup
+      }
+    }
+
+    // Rule 2: ?ref=CODE that disagrees with stored — view that account, don't overwrite localStorage
+    if (refFromUrl && storedValid && refFromUrl !== stored) {
+      try {
+        const data = await fetchStatus(refFromUrl);
+        showStatus(data);
+        unboot();
+        return;
+      } catch {
+        // refFromUrl isn't a real signup → treat as a referrer attribution and fall through
+      }
+    }
+
+    // Rule 3: returning visitor, localStorage status
+    if (storedValid) {
+      try {
+        const data = await fetchStatus(stored);
+        showStatus(data);
+        unboot();
+        return;
+      } catch {
+        // stored code invalid (e.g. db cleared) — fall through to signup form
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+
+    // Rule 4: signup form (with referrer banner if URL has a fresh ?ref=)
+    if (refFromUrl) els.refBanner.hidden = false;
+    unboot();
+
+    els.form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      els.formError.textContent = '';
+      const email = els.email.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        els.formError.textContent = 'Please enter a valid email.';
+        return;
+      }
+      els.submitBtn.disabled = true;
+      els.submitBtn.textContent = 'Joining...';
+      try {
+        const data = await submitSignup(email, refFromUrl);
+        localStorage.setItem(STORAGE_KEY, data.ref_code);
+        showStatus(data);
+        // smooth scroll to top of status card on small screens
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        els.formError.textContent = err.message === 'signup_failed'
+          ? 'Something went wrong. Please try again.'
+          : err.message;
+        els.submitBtn.disabled = false;
+        els.submitBtn.textContent = 'Claim my place';
+      }
+    });
+  })();
+
+  // Copy link
+  els.copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(els.shareUrl.value);
+      const original = els.copyBtn.textContent;
+      els.copyBtn.textContent = 'Copied';
+      els.copyBtn.classList.add('copied');
+      setTimeout(() => {
+        els.copyBtn.textContent = original;
+        els.copyBtn.classList.remove('copied');
+      }, 1800);
+    } catch {
+      els.shareUrl.select();
+      document.execCommand('copy');
+    }
+  });
+
+  // Refresh standing
+  els.refreshBtn.addEventListener('click', async () => {
+    const code = localStorage.getItem(STORAGE_KEY);
+    if (!code) return;
+    els.refreshBtn.disabled = true;
+    els.refreshBtn.textContent = 'Refreshing...';
+    try {
+      const data = await fetchStatus(code);
+      renderStatus(data);
+    } catch {}
+    setTimeout(() => {
+      els.refreshBtn.disabled = false;
+      els.refreshBtn.textContent = 'Refresh';
+    }, 600);
+  });
+})();
+</script>
+
+</body>
+</html>
