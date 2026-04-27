@@ -100,7 +100,7 @@ const StatBlock: React.FC<StatProps> = ({ value, label, delay }) => {
       <p
         style={{
           fontFamily: sans,
-          fontSize: 16,
+          fontSize: 28,
           fontWeight: 400,
           color: COLORS.muted,
           margin: 0,
@@ -113,7 +113,7 @@ const StatBlock: React.FC<StatProps> = ({ value, label, delay }) => {
   );
 };
 
-export const Scene4Campaign: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 465 }) => {
+export const Scene4Campaign: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 356 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -122,8 +122,8 @@ export const Scene4Campaign: React.FC<{ sceneDuration?: number }> = ({ sceneDura
   const opacity = Math.min(fadeIn, fadeOut);
 
   // Stats appear one at a time, starting at frame 70
-  const closingOpacity = interpolate(frame, [300, 340], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const closingY = interpolate(frame, [300, 340], [16, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const closingOpacity = interpolate(frame, [230, 260], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const closingY = interpolate(frame, [230, 260], [16, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.paper, opacity }}>
@@ -138,32 +138,18 @@ export const Scene4Campaign: React.FC<{ sceneDuration?: number }> = ({ sceneDura
         {/* Opening quote */}
         <div style={{ marginBottom: 72 }}>
           <WordReveal
-            text={'"The people who should fund this are the parents it\u2019s built for."'}
+            text={'"We are building this for a better future for our families and the communities they are part of."'}
             frameOffset={8}
             color={COLORS.ink}
-            accentWords={['parents']}
+            accentWords={['children', 'families', 'communities']}
             accentColor={COLORS.accent}
-            fontSize={52}
+            fontSize={62}
             textAlign="left"
-            maxWidth={1000}
+            maxWidth={1100}
           />
         </div>
 
-        {/* Stats — sequential, 80 frames apart */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: 80,
-            alignItems: 'flex-start',
-          }}
-        >
-          <StatBlock value="£25" label="Founding member SIM — one-time" delay={70} />
-          <StatBlock value="£8/mo" label="Locked-for-life monthly rate" delay={130} />
-          <StatBlock value="500" label="Founding SIM slots total" delay={190} />
-        </div>
-
-        {/* Closing line */}
+        {/* Launch date */}
         <div
           style={{
             marginTop: 56,
@@ -174,15 +160,14 @@ export const Scene4Campaign: React.FC<{ sceneDuration?: number }> = ({ sceneDura
           <p
             style={{
               fontFamily: sans,
-              fontSize: 20,
+              fontSize: 28,
               fontWeight: 400,
               color: COLORS.muted,
               margin: 0,
-              maxWidth: 680,
               lineHeight: 1.6,
             }}
           >
-            Targeting Q3 this year. Every backer gets honest updates — not just the good news.
+            Target launch date: September 2026.
           </p>
         </div>
       </AbsoluteFill>

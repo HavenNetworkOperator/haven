@@ -1,41 +1,18 @@
 import React from 'react';
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing } from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, interpolate, Easing } from 'remotion';
 import { COLORS } from '../constants';
-import { serif, sans } from '../fonts';
+import { serif } from '../fonts';
 import { GrainOverlay } from '../components/GrainOverlay';
 
-export const Scene1Opening: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 315 }) => {
+export const Scene1Opening: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 158 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // 0–60f: pure black hold
-  // 60–120f: "98%" arrives
-  // 120–180f: "of UK mobile networks" arrives
-  // 180–240f: "were designed for adults." arrives
-  // 240–315f: hold + fade out
+  // 0–15f: pure black hold (short — opens fast)
+  // 15–90f: words reveal word by word
+  // 90–315f: hold + fade out
 
-  const makeReveal = (start: number, end: number) =>
-    interpolate(frame, [start, end], [0, 1], {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-      easing: Easing.out(Easing.quad),
-    });
-
-  const makeSlide = (start: number, end: number) =>
-    interpolate(frame, [start, end], [20, 0], {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-      easing: Easing.out(Easing.quad),
-    });
-
-  const stat = makeReveal(60, 100);
-  const statY = makeSlide(60, 100);
-
-  const sub = makeReveal(120, 160);
-  const subY = makeSlide(120, 160);
-
-  const line = makeReveal(180, 220);
-  const lineY = makeSlide(180, 220);
+  const words = 'Mobile phone networks were not designed with family safety in mind.'.split(' ');
 
   const fadeOut = interpolate(frame, [sceneDuration - 15, sceneDuration], [1, 0], {
     extrapolateLeft: 'clamp',
@@ -49,79 +26,45 @@ export const Scene1Opening: React.FC<{ sceneDuration?: number }> = ({ sceneDurat
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
-          gap: 0,
-          padding: '0 120px',
+          padding: '0 140px',
           textAlign: 'center',
         }}
       >
-        {/* "98%" — the anchor */}
-        <div
+        <p
           style={{
-            opacity: stat,
-            transform: `translateY(${statY}px)`,
-            marginBottom: 16,
+            fontFamily: serif,
+            fontSize: 64,
+            fontWeight: 400,
+            letterSpacing: '-0.025em',
+            lineHeight: 1.2,
+            color: COLORS.paper,
+            margin: 0,
+            textAlign: 'center',
+            maxWidth: 1500,
           }}
         >
-          <span
-            style={{
-              fontFamily: serif,
-              fontSize: 200,
-              fontWeight: 400,
-              letterSpacing: '-0.04em',
-              lineHeight: 1,
-              color: COLORS.paper,
-              display: 'block',
-            }}
-          >
-            98%
-          </span>
-        </div>
+          {words.map((word, i) => {
+            const delay = 15 + i * 6;
+            const progress = spring({ frame: frame - delay, fps, config: { damping: 200 } });
+            const opacity = interpolate(progress, [0, 1], [0, 1], { extrapolateRight: 'clamp' });
+            const y = interpolate(progress, [0, 1], [16, 0], { extrapolateRight: 'clamp' });
 
-        {/* "of UK mobile networks" */}
-        <div
-          style={{
-            opacity: sub,
-            transform: `translateY(${subY}px)`,
-            marginBottom: 12,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: sans,
-              fontSize: 36,
-              fontWeight: 400,
-              letterSpacing: '0.04em',
-              color: `rgba(244, 239, 230, 0.55)`,
-              textTransform: 'uppercase',
-              display: 'block',
-            }}
-          >
-            of UK mobile networks
-          </span>
-        </div>
-
-        {/* "were designed for adults." */}
-        <div
-          style={{
-            opacity: line,
-            transform: `translateY(${lineY}px)`,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: serif,
-              fontSize: 60,
-              fontWeight: 400,
-              fontStyle: 'italic',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.1,
-              color: COLORS.accentSoft,
-              display: 'block',
-            }}
-          >
-            were designed for adults.
-          </span>
-        </div>
+            return (
+              <span
+                key={i}
+                style={{
+                  opacity,
+                  display: 'inline-block',
+                  transform: `translateY(${y}px)`,
+                  marginRight: '0.25em',
+                  fontStyle: 'normal',
+                }}
+              >
+                {word}
+              </span>
+            );
+          })}
+        </p>
       </AbsoluteFill>
 
       <GrainOverlay opacity={0.2} />

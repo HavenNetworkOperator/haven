@@ -52,7 +52,7 @@ const WordReveal: React.FC<{
               display: 'inline-block',
               transform: `translateY(${y}px)`,
               marginRight: '0.25em',
-              fontStyle: isAccent ? 'italic' : 'normal',
+              fontStyle: 'normal',
               color: isAccent && accentColor ? accentColor : color,
             }}
           >
@@ -117,47 +117,66 @@ const FullBleedStatement: React.FC<StatementProps> = ({
   );
 };
 
-export const Scene2Founder: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 465 }) => {
+export const Scene2Founder: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 594 }) => {
   const { fps } = useVideoConfig();
 
-  const cardDuration = 155;
+  const card1Duration = 178; // 1.5x base duration (×0.85×0.9)
+  const cardDuration = 119;
+
+  // Timeline:
+  // Slide 1: 0–178
+  // Slide 2: 178–297
+  // Slide 3a: 297–416
+  // Slide 3b: 416–535
 
   return (
     <AbsoluteFill>
-      {/* Statement 1 — paper bg */}
-      <Sequence from={0} durationInFrames={cardDuration} premountFor={fps}>
+      {/* Statement 1 — paper bg, 1.5x duration */}
+      <Sequence from={0} durationInFrames={card1Duration} premountFor={fps}>
         <FullBleedStatement
-          text="I started Haven because my child is getting a phone soon."
+          text="Teenagers are dealing with the harsh impacts of social media on smartphones."
           bg={COLORS.paper}
           textColor={COLORS.ink}
           accentWords={['Haven']}
           accentColor={COLORS.accent}
-          sceneDuration={cardDuration}
-          fontSize={68}
+          sceneDuration={card1Duration}
+          fontSize={56}
         />
       </Sequence>
 
       {/* Statement 2 — ink bg (inverted) */}
-      <Sequence from={cardDuration} durationInFrames={cardDuration} premountFor={fps}>
+      <Sequence from={card1Duration} durationInFrames={cardDuration} premountFor={fps}>
         <FullBleedStatement
-          text="Every network treats a ten-year-old the same as a forty-year-old."
+          text="Every network treats a 14yr old the same as a 40yr old."
           bg={COLORS.ink}
           textColor={COLORS.paper}
-          accentWords={['ten-year-old', 'forty-year-old.']}
+          accentWords={['14yr', '40yr']}
           accentColor={COLORS.accentSoft}
           sceneDuration={cardDuration}
           fontSize={64}
         />
       </Sequence>
 
-      {/* Statement 3 — paper bg */}
-      <Sequence from={cardDuration * 2} durationInFrames={cardDuration + 0} premountFor={fps}>
+      {/* Statement 3a — paper bg */}
+      <Sequence from={card1Duration + cardDuration} durationInFrames={cardDuration} premountFor={fps}>
         <FullBleedStatement
-          text="They just need to find the passcode."
+          text="We can do better."
           bg={COLORS.paper}
           textColor={COLORS.ink}
-          accentWords={['passcode.']}
-          accentColor={COLORS.accent}
+          accentWords={[]}
+          sceneDuration={cardDuration}
+          fontSize={80}
+        />
+      </Sequence>
+
+      {/* Statement 3b — ink bg */}
+      <Sequence from={card1Duration + cardDuration * 2} durationInFrames={cardDuration} premountFor={fps}>
+        <FullBleedStatement
+          text="Which is why we are launching Haven."
+          bg={COLORS.ink}
+          textColor={COLORS.paper}
+          accentWords={['Haven.']}
+          accentColor={COLORS.accentSoft}
           sceneDuration={cardDuration}
           fontSize={72}
         />

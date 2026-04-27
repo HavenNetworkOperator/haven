@@ -58,7 +58,7 @@ const EndLogoMark: React.FC = () => {
   );
 };
 
-export const Scene5EndCard: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 450 }) => {
+export const Scene5EndCard: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 345 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -143,7 +143,7 @@ export const Scene5EndCard: React.FC<{ sceneDuration?: number }> = ({ sceneDurat
           <p
             style={{
               fontFamily: sans,
-              fontSize: 16,
+              fontSize: 36,
               fontWeight: 500,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
@@ -153,7 +153,7 @@ export const Scene5EndCard: React.FC<{ sceneDuration?: number }> = ({ sceneDurat
               textAlign: 'center',
             }}
           >
-            Back us on Kickstarter
+            Join the waiting list
           </p>
         </FadeUpText>
 
@@ -162,7 +162,7 @@ export const Scene5EndCard: React.FC<{ sceneDuration?: number }> = ({ sceneDurat
           <p
             style={{
               fontFamily: sans,
-              fontSize: 18,
+              fontSize: 32,
               fontWeight: 400,
               color: COLORS.inkSoft,
               margin: 0,
@@ -170,26 +170,11 @@ export const Scene5EndCard: React.FC<{ sceneDuration?: number }> = ({ sceneDurat
               letterSpacing: '0.01em',
             }}
           >
-            kickstarter.com/projects/haven
+            gethavenmobile.com
           </p>
         </FadeUpText>
 
-        {/* Founding slots note */}
-        <FadeUpText delay={58}>
-          <p
-            style={{
-              fontFamily: sans,
-              fontSize: 14,
-              fontWeight: 400,
-              color: COLORS.muted,
-              margin: 0,
-              marginTop: 32,
-              textAlign: 'center',
-            }}
-          >
-            500 founding SIM slots — when they're gone, they're gone.
-          </p>
-        </FadeUpText>
+
       </AbsoluteFill>
 
       {/* Fade to black overlay */}

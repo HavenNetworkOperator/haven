@@ -219,7 +219,7 @@ const WordReveal: React.FC<{
               display: 'inline-block',
               transform: `translateY(${y}px)`,
               marginRight: '0.25em',
-              fontStyle: isAccent ? 'italic' : 'normal',
+              fontStyle: 'normal',
               color: isAccent && accentColor ? accentColor : color,
             }}
           >
@@ -231,20 +231,94 @@ const WordReveal: React.FC<{
   );
 };
 
+// Multi-line reveal — each sentence on its own line, revealed sequentially
+const MultiLineReveal: React.FC<{
+  lines: string[];
+  frameOffset?: number;
+  color: string;
+  accentColor?: string;
+  fontSize?: number;
+  lineSpacing?: number;
+  maxWidth?: number;
+}> = ({ lines, frameOffset = 12, color, accentColor, fontSize = 54, lineSpacing = 28, maxWidth = 1100 }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: lineSpacing,
+        textAlign: 'center',
+        maxWidth,
+      }}
+    >
+      {lines.map((line, lineIndex) => {
+        const words = line.split(' ');
+        // Each line starts 30 frames after the previous line's first word
+        const lineStart = frameOffset + lineIndex * 45;
+
+        return (
+          <p
+            key={lineIndex}
+            style={{
+              fontFamily: serif,
+              fontSize,
+              fontWeight: 400,
+              letterSpacing: '-0.02em',
+              lineHeight: 1.2,
+              color,
+              margin: 0,
+            }}
+          >
+            {words.map((word, i) => {
+              const delay = lineStart + i * 5;
+              const progress = spring({ frame: frame - delay, fps, config: { damping: 200 } });
+              const opacity = interpolate(progress, [0, 1], [0, 1], { extrapolateRight: 'clamp' });
+              const y = interpolate(progress, [0, 1], [12, 0], { extrapolateRight: 'clamp' });
+
+              return (
+                <span
+                  key={i}
+                  style={{
+                    opacity,
+                    display: 'inline-block',
+                    transform: `translateY(${y}px)`,
+                    marginRight: '0.25em',
+                    fontStyle: 'normal',
+                  }}
+                >
+                  {word}
+                </span>
+              );
+            })}
+          </p>
+        );
+      })}
+    </div>
+  );
+};
+
 type ProductCardProps = {
   icon: React.ReactNode;
-  mainText: string;
+  mainText?: string;
+  lines?: string[];
   accentWords?: string[];
   sceneDuration: number;
   fontSize?: number;
+  lineMaxWidth?: number;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
   icon,
   mainText,
+  lines,
   accentWords = [],
   sceneDuration,
   fontSize = 60,
+  lineMaxWidth,
 }) => {
   const frame = useCurrentFrame();
 
@@ -271,14 +345,70 @@ const ProductCard: React.FC<ProductCardProps> = ({
         {icon}
       </div>
 
-      {/* Text */}
-      <WordReveal
-        text={mainText}
+      {/* Text — multi-line or single block */}
+      {lines ? (
+        <MultiLineReveal
+          lines={lines}
+          frameOffset={12}
+          color={COLORS.paper}
+          accentColor={COLORS.accentSoft}
+          fontSize={fontSize}
+          lineSpacing={20}
+          maxWidth={lineMaxWidth ?? 1100}
+        />
+      ) : (
+        <WordReveal
+          text={mainText ?? ''}
+          frameOffset={12}
+          color={COLORS.paper}
+          accentWords={accentWords}
+          accentColor={COLORS.accentSoft}
+          fontSize={fontSize}
+        />
+      )}
+
+      <GrainOverlay opacity={0.2} />
+    </AbsoluteFill>
+  );
+};
+
+// Special card for the network-layer slide: separate lines, 1.5x duration
+const NetworkLayerCard: React.FC<{ sceneDuration: number }> = ({ sceneDuration }) => {
+  const frame = useCurrentFrame();
+
+  const iconProgress = spring({ frame, fps: 30, config: { damping: 200 } });
+  const iconOpacity = interpolate(iconProgress, [0, 1], [0, 1], { extrapolateRight: 'clamp' });
+
+  const fadeIn = interpolate(frame, [0, 15], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const fadeOut = interpolate(frame, [sceneDuration - 15, sceneDuration], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+
+  return (
+    <AbsoluteFill
+      style={{
+        backgroundColor: COLORS.ink,
+        opacity: Math.min(fadeIn, fadeOut),
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        gap: 40,
+        padding: '0 160px',
+      }}
+    >
+      <div style={{ opacity: iconOpacity }}>
+        <LockSVG />
+      </div>
+
+      <MultiLineReveal
+        lines={[
+          "Safety: built in at the network layer.",
+          "It can't be deleted.",
+          "It can't be bypassed.",
+        ]}
         frameOffset={12}
         color={COLORS.paper}
-        accentWords={accentWords}
         accentColor={COLORS.accentSoft}
-        fontSize={fontSize}
+        fontSize={62}
+        lineSpacing={8}
       />
 
       <GrainOverlay opacity={0.2} />
@@ -286,39 +416,40 @@ const ProductCard: React.FC<ProductCardProps> = ({
   );
 };
 
-export const Scene3Product: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 615 }) => {
+export const Scene3Product: React.FC<{ sceneDuration?: number }> = ({ sceneDuration = 590 }) => {
   const { fps } = useVideoConfig();
-  const cardDuration = 150;
+  const cardDuration = 115;
+  const card2Duration = 172; // 1.5x (×0.85×0.9)
+
+  // Timings:
+  // Card 1: 0–115
+  // Card 2: 115–287  (172f)
+  // Card 3: 287–402
+  // Card 4: 402–531  (143f)
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.ink }}>
-      {/* Card 1: Haven is a SIM */}
+      {/* Card 1: Haven is a mobile network */}
       <Sequence from={0} durationInFrames={cardDuration} premountFor={fps}>
         <ProductCard
           icon={<SimSVG />}
-          mainText="Haven is a SIM. Not an app."
-          accentWords={['SIM.', 'app.']}
+          lines={['Haven is a safety-first mobile network.', 'Not another phone. Not another app.']}
           sceneDuration={cardDuration}
-          fontSize={72}
+          fontSize={64}
+          lineMaxWidth={1500}
         />
       </Sequence>
 
-      {/* Card 2: Can't be deleted */}
-      <Sequence from={cardDuration} durationInFrames={cardDuration} premountFor={fps}>
-        <ProductCard
-          icon={<LockSVG />}
-          mainText="The safety is at the network layer. It can't be deleted. It can't be bypassed."
-          accentWords={["deleted.", "bypassed."]}
-          sceneDuration={cardDuration}
-          fontSize={54}
-        />
+      {/* Card 2: Safety at the network layer — 1.5x duration, separate lines */}
+      <Sequence from={cardDuration} durationInFrames={card2Duration} premountFor={fps}>
+        <NetworkLayerCard sceneDuration={card2Duration} />
       </Sequence>
 
       {/* Card 3: AI on-device */}
-      <Sequence from={cardDuration * 2} durationInFrames={cardDuration} premountFor={fps}>
+      <Sequence from={cardDuration + card2Duration} durationInFrames={cardDuration} premountFor={fps}>
         <ProductCard
           icon={<ShieldSVG />}
-          mainText="Our AI detects grooming patterns in real time — on-device. Your child's messages stay private."
+          mainText="Our AI detects harmful patterns in real time, on-device. Messages stay private."
           accentWords={['on-device.', 'private.']}
           sceneDuration={cardDuration}
           fontSize={50}
@@ -326,12 +457,12 @@ export const Scene3Product: React.FC<{ sceneDuration?: number }> = ({ sceneDurat
       </Sequence>
 
       {/* Card 4: Weekly digest */}
-      <Sequence from={cardDuration * 3} durationInFrames={cardDuration + 15} premountFor={fps}>
+      <Sequence from={cardDuration + card2Duration + cardDuration} durationInFrames={cardDuration + 14} premountFor={fps}>
         <ProductCard
           icon={<DigestSVG />}
-          mainText="What you receive as a parent: a weekly digest. Not a surveillance feed."
-          accentWords={['digest.', 'surveillance']}
-          sceneDuration={cardDuration + 15}
+          mainText="As a parent: be notified when it matters. Not a surveillance feed."
+          accentWords={['matters.', 'surveillance']}
+          sceneDuration={cardDuration + 14}
           fontSize={56}
         />
       </Sequence>
