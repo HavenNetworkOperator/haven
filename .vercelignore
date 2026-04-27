@@ -2,12 +2,21 @@
 *.md
 *.pdf
 
-# Internal tooling and assets that aren't part of the deployed site
-haven-video/*
-!haven-video/out/
-haven-video/out/*
-!haven-video/out/haven-waitlist-60s.mp4
-!haven-video/out/haven-waitlist-poster-4s.jpg
+# Internal tooling and assets that aren't part of the deployed site.
+# haven-video/ contains the Remotion source for our videos — we keep the two
+# rendered files referenced by index.html / story/index.html and exclude the
+# rest (Remotion source, deps, unused renders).
+haven-video/node_modules
+haven-video/src
+haven-video/public
+haven-video/package.json
+haven-video/package-lock.json
+haven-video/remotion.config.ts
+haven-video/tsconfig.json
+haven-video/out/haven-kickstarter.mp4
+haven-video/out/haven-waitlist.mp4
+haven-video/out/haven-waitlist-poster.jpg
+haven-video/out/test-*
 db/
 .claude/
 .tmp/
