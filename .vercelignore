@@ -3,7 +3,11 @@
 *.pdf
 
 # Internal tooling and assets that aren't part of the deployed site
-haven-video/
+haven-video/*
+!haven-video/out/
+haven-video/out/*
+!haven-video/out/haven-waitlist-60s.mp4
+!haven-video/out/haven-waitlist-poster-4s.jpg
 db/
 .claude/
 .tmp/
