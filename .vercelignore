@@ -1,0 +1,21 @@
+# Internal strategy, marketing drafts, and outreach docs — not for the public web
+*.md
+*.pdf
+
+# Internal tooling and assets that aren't part of the deployed site
+haven-video/
+db/
+.claude/
+.tmp/
+node_modules/
+
+# Favicon / images that aren't referenced from any deployed HTML page
+haven-kickstarter.png
+
+# Local env + Vercel state (already in .gitignore but belt-and-braces)
+.env
+.env.local
+.env.development.local
+.env.production.local
+.vercel
+.DS_Store
