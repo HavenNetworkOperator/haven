@@ -23,12 +23,13 @@ type: project
 ## Status (as of April 2026)
 
 - Pre-launch, building waitlist toward 1,000 founding members
-- Landing page live at **https://haven-waitlist-two.vercel.app**
+- Live at **https://gethavenmobile.com** (and Vercel preview `haven-waitlist-two.vercel.app`)
 - Vercel project: `rich-bowdlers-projects/haven-waitlist` (account: `richbowdler-3826`)
-- Formspree not yet configured — `YOUR_FORM_ID` placeholder still in `index.html:535`
-- `[FOUNDER NAME]` placeholder still in `index.html:651`
-- Contact email `hello@haven.example` is a placeholder
-- Analytics not yet added to the page
+- v2 homepage shipped (commit `fb7bdb3`), with `/story`, `/privacy`, `/compliance` subpages and `vercel.json` cleanUrls
+- Formspree wired (commit `35817a8`); founder note signed by Richard Bowdler
+- Trading entity: **The Good Phone Company Ltd · Trading as Haven** (footer)
+- Real LinkedIn + Facebook pages linked in footer
+- **Still missing:** analytics snippet (Plausible/GA), `og:image` + `twitter:image` meta tags (declared as `summary_large_image` but no image source), Beehiiv list + welcome email automation
 
 ---
 
@@ -114,10 +115,11 @@ A cinematic motion graphics video has been built in Remotion (`haven-video/`), d
 
 ## Immediate Next Actions (Phase 1 priority)
 
-1. Configure Formspree → update `index.html:535` → `vercel --prod`
-2. Replace `[FOUNDER NAME]` on `index.html:651`
-3. Add analytics snippet to `index.html`
-4. Set up Beehiiv + welcome email sequence
-5. Post founding story on Twitter/X and LinkedIn
-6. DM Smartphone Free Childhood UK on Instagram
-7. Render Kickstarter video MP4 and upload to campaign page
+1. Add analytics snippet to `index.html` (Plausible recommended)
+2. Add `og:image` and `twitter:image` meta tags + host the social-preview asset
+3. Set up Beehiiv + welcome email sequence (auto-add Formspree submissions via Zapier)
+4. Post founding story on Twitter/X and LinkedIn (drafts in `marketing-twitter-launch-thread.md`, `marketing-linkedin-launch-post.md`)
+5. DM Smartphone Free Childhood UK on Instagram
+6. Render Kickstarter video MP4 and upload to campaign page
+
+The full strategic frame for these and the next 12 months is in `100-sales-per-day-haven-plan.md`.
