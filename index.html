@@ -414,6 +414,42 @@ nav {
   .landscape-steps .step p:last-child { margin-bottom: 0; }
 }
 
+/* ───── LANDSCAPE STEP — ACCENT VARIANT (Layer 4 / Network) ───── */
+.landscape-steps .step--accent {
+  position: relative;
+}
+.landscape-steps .step--accent::before {
+  content: '';
+  position: absolute;
+  inset: -28px -24px;
+  background: var(--accent);
+  border-radius: 14px;
+  z-index: 0;
+}
+.landscape-steps .step--accent > * {
+  position: relative;
+  z-index: 1;
+}
+.landscape-steps .step--accent .step-num {
+  color: rgba(244, 239, 230, 0.78);
+}
+.landscape-steps .step--accent h3,
+.landscape-steps .step--accent p {
+  color: var(--bg);
+}
+.landscape-steps .step--accent p em {
+  color: var(--bg);
+}
+.landscape-steps .step--accent p strong {
+  color: var(--bg) !important;
+}
+@media (max-width: 860px) {
+  .landscape-steps .step--accent::before {
+    inset: -20px -18px;
+    border-radius: 12px;
+  }
+}
+
 /* ───── VALUES SECTION ───── */
 .values-section {
   background: var(--ink);
@@ -1497,7 +1533,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <p><em>Router-level filtering.</em> Blocks harmful sites on your home network.</p>
         <p><strong style="color: var(--ink);">The gap:</strong> they stop at the front door. The moment your child's phone switches to mobile data — walking to school, on the bus — the filter is gone.</p>
       </div>
-      <div class="step fade-in">
+      <div class="step step--accent fade-in">
         <span class="step-num">LAYER 4 · NETWORK</span>
         <h3>The mobile network itself.</h3>
         <p>The layer that's <em>always there</em>. Every app and message passes through it.</p>
