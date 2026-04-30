@@ -642,6 +642,113 @@ nav {
   letter-spacing: 0.05em;
 }
 
+/* ───── ROADMAP ───── */
+.roadmap {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  margin-top: 80px;
+  position: relative;
+  padding: 0;
+}
+.roadmap::before {
+  content: '';
+  position: absolute;
+  top: 44px;
+  left: 8.333%;
+  right: 8.333%;
+  height: 1px;
+  background: var(--line);
+  z-index: 1;
+}
+.roadmap-step {
+  position: relative;
+  text-align: center;
+  padding: 36px 16px 0;
+}
+.roadmap-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-deep);
+  border: 2px solid var(--ink-soft);
+  z-index: 2;
+}
+.roadmap-step--current::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px rgba(193, 74, 31, 0.18);
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+.roadmap-step--final::before {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.roadmap-date {
+  display: block;
+  font-family: ui-monospace, 'IBM Plex Mono', Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px;
+  white-space: nowrap;
+}
+.roadmap-step--current .roadmap-date { color: var(--accent); }
+.roadmap-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 auto 6px;
+  max-width: 14ch;
+}
+.roadmap-detail {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  margin: 0 auto;
+  max-width: 20ch;
+}
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(193, 74, 31, 0.18); }
+  50%      { box-shadow: 0 0 0 10px rgba(193, 74, 31, 0.10); }
+}
+@media (max-width: 900px) {
+  .roadmap {
+    grid-template-columns: 1fr;
+    margin-top: 56px;
+  }
+  .roadmap::before {
+    top: 12px;
+    bottom: 12px;
+    left: 8px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+  .roadmap-step {
+    text-align: left;
+    padding: 0 0 32px 36px;
+  }
+  .roadmap-step:last-child { padding-bottom: 0; }
+  .roadmap-step::before {
+    top: 4px;
+    left: 0;
+    transform: none;
+  }
+  .roadmap-title { margin-left: 0; max-width: none; }
+  .roadmap-detail { margin-left: 0; max-width: none; }
+}
+
 /* ───── FAQ ───── */
 .faq { max-width: 760px; }
 .faq-item {
@@ -999,6 +1106,22 @@ footer a:hover { color: var(--accent); }
   }
 }
 
+/* ───── HERO KICKSTARTER TRIGGER ───── */
+.hero-trigger-note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin-top: 18px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  animation: fadeUp 1s ease-out 0.5s backwards;
+}
+.hero-trigger-note em {
+  font-style: normal;
+  font-weight: 500;
+}
+
 /* ───── MEMBER COUNTER ───── */
 .signup-counter {
   margin-top: 8px;
@@ -1171,6 +1294,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <span class="counter-dot"></span>
         Founding spots: open now · first 1,000 only
       </p>
+      <p class="hero-trigger-note">Get us to 1,000 — and <em>Haven launches on Kickstarter.</em></p>
     </div>
 
     <div class="hero-founding-benefits">
@@ -1462,10 +1586,54 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <div class="section-label">Why us</div>
     <h2>We are <em>from</em> the community, building <em>for</em> the community.</h2>
     <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">We have experienced, first-hand, products that either see community as something to shoe-horn into their growth plans, or products built by people who haven't been part of driving forward this vital conversation — except when seeking to profiteer.</p>
-    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">We are launching the Haven waitlist to demonstrate the groundswell of support for what we are building. As a waitlist member, you get to be at the front of the line for access to the network when we launch.</p>
-    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">You also get an amazing deal on a mobile contract — for life.</p>
-    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 32px;">Down the line, we may raise money via crowdfunding. This means you would also get an opportunity to own part of the network you use. We believe in shared ownership, and building together with the voice of the community at the heart of what we are creating.</p>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">So we're starting with you. The Haven waitlist is the proof-of-demand we need before we bring this network to market — and we've set the bar deliberately: <strong style="color: var(--ink); font-weight: 500;">1,000 founding members</strong>.</p>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">When we hit 1,000, <em style="color: var(--accent); font-style: normal;">we launch on Kickstarter</em> — that's the moment Haven becomes real to back and ship. Founding members get first access to the campaign, founding pricing locked for life, and a direct line to the team building the network you helped prove.</p>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 32px;">Later, we plan to open up equity to the community through crowdfunding — so the families using Haven can own a piece of what they helped build.</p>
     <a href="/story/" class="nav-waitlist-btn" style="display: inline-flex;">Our story →</a>
+  </div>
+</section>
+
+<!-- ═══════ ROADMAP ═══════ -->
+<section class="section section-bg-deep">
+  <div class="container">
+    <div class="section-label">Roadmap</div>
+    <h2>The path to <em>launch.</em></h2>
+    <p style="margin-top: 24px; max-width: 64ch; font-size: 18px; color: var(--ink-soft); line-height: 1.6;">
+      Six milestones from waitlist to live network — plotted publicly, so you can hold us to it.
+    </p>
+
+    <ol class="roadmap fade-in">
+      <li class="roadmap-step roadmap-step--current">
+        <span class="roadmap-date">May 1, 2026</span>
+        <h3 class="roadmap-title">Waitlist opens</h3>
+        <p class="roadmap-detail">We are here.</p>
+      </li>
+      <li class="roadmap-step">
+        <span class="roadmap-date">June 2026</span>
+        <h3 class="roadmap-title">Kickstarter launches</h3>
+        <p class="roadmap-detail">Trigger: 1,000 founding members.</p>
+      </li>
+      <li class="roadmap-step">
+        <span class="roadmap-date">End June 2026</span>
+        <h3 class="roadmap-title">Kickstarter closes</h3>
+        <p class="roadmap-detail">Campaign concludes.</p>
+      </li>
+      <li class="roadmap-step">
+        <span class="roadmap-date">Early Aug 2026</span>
+        <h3 class="roadmap-title">Crowdcube announced</h3>
+        <p class="roadmap-detail">Equity opens to the community.</p>
+      </li>
+      <li class="roadmap-step">
+        <span class="roadmap-date">End Aug 2026</span>
+        <h3 class="roadmap-title">Crowdcube closes</h3>
+        <p class="roadmap-detail">Equity round completes.</p>
+      </li>
+      <li class="roadmap-step roadmap-step--final">
+        <span class="roadmap-date">Sept 2026</span>
+        <h3 class="roadmap-title">Beta launches</h3>
+        <p class="roadmap-detail">Founding members go live.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
