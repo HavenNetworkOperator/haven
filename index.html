@@ -171,11 +171,11 @@ nav {
 .hero h1 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(44px, 7vw, 92px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
   margin-bottom: 36px;
-  max-width: 18ch;
+  max-width: 22ch;
   animation: fadeUp 0.9s ease-out 0.1s backwards;
 }
 .hero h1 em {
@@ -187,8 +187,8 @@ nav {
   font-size: clamp(18px, 1.5vw, 22px);
   line-height: 1.5;
   color: var(--ink-soft);
-  max-width: 56ch;
-  margin-bottom: 0;
+  max-width: 1000px;
+  margin-bottom: 48px;
   animation: fadeUp 1s ease-out 0.25s backwards;
 }
 
@@ -689,35 +689,138 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 
 /* ───── FOOTER ───── */
 footer {
-  padding: 60px 0 40px;
+  padding: 112px 0 56px;
   border-top: 1px solid var(--line);
+  margin-top: 40px;
 }
-.footer-inner {
+footer a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+footer a:hover { color: var(--accent); }
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+  gap: 56px 40px;
+  margin-bottom: 72px;
+  align-items: start;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-col-newsletter { max-width: 360px; }
+.footer-heading {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.footer-col a {
+  font-size: 14px;
+  letter-spacing: 0;
+}
+.footer-newsletter-text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0 0 6px 0;
+}
+.footer-form {
+  display: flex;
+  gap: 6px;
+  background: var(--bg);
+  border: 1.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 4px 4px 4px 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.footer-form:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(193, 74, 31, 0.12);
+}
+.footer-form input[type="email"] {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  min-width: 0;
+}
+.footer-form input::placeholder { color: var(--muted); }
+.footer-form button {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.footer-form button:hover { background: var(--accent); }
+.footer-form-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 16px;
   font-size: 13px;
   color: var(--muted);
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
 }
-footer a { color: var(--muted); text-decoration: none; margin-left: 24px; }
-footer a:hover { color: var(--accent); }
+.footer-legal-meta {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  max-width: 70ch;
+  margin-top: 16px;
+  line-height: 1.55;
+}
 .footer-social {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-left: 24px;
+  gap: 14px;
 }
 .footer-social a {
-  margin-left: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   color: var(--muted);
-  transition: color 0.2s;
 }
-.footer-social a:hover { color: var(--accent); }
 .footer-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+@media (max-width: 960px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 44px 32px;
+  }
+  .footer-col-newsletter {
+    grid-column: 1 / -1;
+    max-width: 480px;
+  }
+}
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; gap: 36px; }
+  footer { padding: 80px 0 48px; }
+}
 
 /* ───── HERO FOUNDING BENEFITS ───── */
 .hero-founding-benefits {
@@ -764,8 +867,136 @@ footer a:hover { color: var(--accent); }
   color: var(--muted);
   letter-spacing: 0.04em;
   margin-top: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   animation: fadeUp 1s ease-out 0.3s backwards;
+}
+
+/* ───── HERO CREDIBILITY (logo strip) ───── */
+.hero-credibility {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 36px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  animation: fadeUp 1s ease-out 0.35s backwards;
+  width: 100%;
+  max-width: 880px;
+}
+.hero-credibility-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px 22px;
+}
+.hero-credibility-label {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0.005em;
+  color: var(--muted);
+  font-weight: 400;
+  white-space: nowrap;
+}
+.hero-credibility-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 16px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 19px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+.hero-credibility-logos span + span::before {
+  content: '·';
+  color: var(--line);
+  margin-right: 16px;
+  font-weight: 400;
+}
+.hero-credibility-note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.005em;
+  margin-top: 4px;
+  text-align: center;
+  max-width: 100%;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+@media (max-width: 720px) {
+  .hero-credibility-note {
+    white-space: normal;
+  }
+}
+
+/* ───── HERO TESTIMONIALS ───── */
+.hero-testimonials {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 48px;
+  width: 100%;
+  max-width: 920px;
+  margin-top: 56px;
+  text-align: left;
+  animation: fadeUp 1s ease-out 0.5s backwards;
+}
+.hero-testimonial {
+  border-top: 1px solid var(--ink);
+  padding-top: 20px;
+}
+.hero-testimonial-quote {
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 18px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.hero-testimonial-quote::before {
+  content: '“';
+  color: var(--accent);
+  margin-right: 2px;
+}
+.hero-testimonial-quote::after {
+  content: '”';
+  color: var(--accent);
+  margin-left: 1px;
+}
+.hero-testimonial-author {
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.hero-testimonial-role {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+@media (max-width: 768px) {
+  .hero-testimonials {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .hero-credibility-logos {
+    font-size: 15px;
+  }
+  .hero-credibility-row {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 /* ───── MEMBER COUNTER ───── */
@@ -875,10 +1106,7 @@ footer a:hover { color: var(--accent); }
   .signup-form { flex-direction: column; border-radius: 20px; padding: 16px; }
   .signup-form input { padding: 12px 8px; }
   .signup-form button { width: 100%; padding: 16px; }
-  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .footer-nav { display: flex; flex-direction: column; gap: 12px; }
-  footer a { margin: 0; }
-  .footer-social { margin-left: 0; margin-top: 8px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
   .nav-meta { display: none; }
   .values-section { padding: 80px 0; }
   .values-cta-group { flex-direction: column; align-items: flex-start; }
@@ -914,11 +1142,27 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 
   <!-- ═══════ HERO ═══════ -->
   <section class="hero">
-    <h1>Safe by the SIM, not an app they can delete.</h1>
+    <h1>The UK's safety-first mobile phone network for parents &amp; teens</h1>
     <p class="hero-sub">
-      A mobile network where safety lives in the SIM — not an app your child can delete, a filter that stops at your front door, or a setting they can look up on YouTube.
+      A mobile network where safety lives at the network layer — not an app your child can delete, nor a filter that stops at your front door, nor a setting they can look up on YouTube.
     </p>
-    <p class="hero-sub-byline">From the parents behind the Smartphone Free Childhood movement.</p>
+    <div class="hero-credibility">
+      <div class="hero-credibility-row">
+        <span class="hero-credibility-label">Founders featured on</span>
+        <div class="hero-credibility-logos">
+          <span>BBC</span>
+          <span>TF1 France</span>
+        </div>
+      </div>
+      <div class="hero-credibility-row">
+        <span class="hero-credibility-label">Founders part of</span>
+        <div class="hero-credibility-logos">
+          <span>Smartphone Free Childhood</span>
+          <span>Generation Focus</span>
+        </div>
+      </div>
+      <p class="hero-credibility-note">Founder advised in government consultation on social media ban for under-16s</p>
+    </div>
 
     <div class="signup">
       <a href="https://gethavenmobile.com/waitlist" class="values-cta-btn">Claim your founding spot →</a>
@@ -933,6 +1177,23 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <span>✦ Founding price, locked for life</span>
       <span>✦ Priority access on launch day</span>
       <span>✦ First to shape what we build</span>
+    </div>
+
+    <div class="hero-testimonials">
+      <figure class="hero-testimonial">
+        <blockquote class="hero-testimonial-quote">Rich has played an important role in the Smartphone Free Childhood journey since day one — both locally and across the UK.</blockquote>
+        <figcaption>
+          <div class="hero-testimonial-author">Joe Ryrie</div>
+          <div class="hero-testimonial-role">Co-founder, Smartphone Free Childhood</div>
+        </figcaption>
+      </figure>
+      <figure class="hero-testimonial">
+        <blockquote class="hero-testimonial-quote">Rich has been a key person in helping to launch and drive the national discussion around safer use of technology for children across the UK.</blockquote>
+        <figcaption>
+          <div class="hero-testimonial-author">Clare Fernyhough Reynolds</div>
+          <div class="hero-testimonial-role">Co-founder, Generation Focus</div>
+        </figcaption>
+      </figure>
     </div>
 
     <div class="hero-video-details">
@@ -979,7 +1240,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     </div>
 
     <p style="margin-top: 80px; max-width: 60ch; font-size: 18px; color: var(--ink-soft); line-height: 1.6;">
-      Parental controls live on the device. Kids work around them. Filters live on the home Wi-Fi. Kids walk out the door. The mobile network — the layer that's <em style="color: var(--accent);">always there</em> — has been designed for adults selling adults more data. Until now.
+      Apps get uninstalled. Wi-Fi stops at the front door. The mobile network — the layer that's <em style="color: var(--accent);">always there</em> — has never been built with the principles of <em>The Anxious Generation</em> or the Smartphone Free Childhood movement at its core. Haven is that.
     </p>
   </div>
 </section>
@@ -994,7 +1255,100 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     </p>
 
     <figure style="margin: 72px 0 64px; padding: 0;">
-      <img src="four-layers.png" alt="Four layers of safety stacked vertically: device settings, parental-control apps, and home Wi-Fi filters each show a visible breach; the bottom network layer is solid terracotta and labelled Haven. A dashed path traces a child's route through the three breaches and is stopped at the Haven layer." style="display: block; width: 100%; height: auto; max-width: 1180px; margin: 0 auto;">
+      <svg viewBox="0 0 1600 870" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four layers of safety. Layers 1 (Device), 2 (Apps), and 3 (Wi-Fi) each show a breach. Layer 4 (Network) is solid Haven terracotta with no breach. A child's dashed path passes through the three breached layers and is stopped at the Haven layer." style="display:block; width:100%; height:auto; max-width:1180px; margin:0 auto;">
+        <defs>
+          <pattern id="hatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+            <rect width="8" height="8" fill="#0f1b2d" opacity="0.18"/>
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#0f1b2d" stroke-width="1.5" opacity="0.55"/>
+          </pattern>
+          <marker id="arrowhead" markerWidth="14" markerHeight="14" refX="6" refY="7" orient="auto">
+            <path d="M 0 0 L 12 7 L 0 14 z" fill="#0f1b2d"/>
+          </marker>
+        </defs>
+
+        <!-- Top header -->
+        <text x="80" y="60" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="16" fill="#6a6253" letter-spacing="2">FIG. 01 — THE STACK</text>
+        <text x="1520" y="60" text-anchor="end" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="16" fill="#6a6253" letter-spacing="2">HAVEN · BRITAIN'S FAMILY NETWORK</text>
+        <line x1="80" y1="86" x2="1520" y2="86" stroke="#d8cfbc" stroke-width="1"/>
+
+        <!-- Path origin -->
+        <text x="640" y="105" text-anchor="middle" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="14" fill="#0f1b2d" letter-spacing="2">A CHILD'S PATH</text>
+        <circle cx="640" cy="120" r="5" fill="#0f1b2d"/>
+
+        <!-- Child's path (drawn before bars so solid navy obscures it; semi-transparent breach hatch lets it show through) -->
+        <path d="M 640 128 L 640 295 L 850 295 L 850 450 L 1130 450 L 1130 615"
+              fill="none" stroke="#0f1b2d" stroke-width="2" stroke-dasharray="6 6"
+              marker-end="url(#arrowhead)"/>
+
+        <!-- ROW 1 — DEVICE (bar y=160-280, center=220) -->
+        <text x="170" y="215" font-family="Fraunces, Georgia, serif" font-size="44" fill="#0f1b2d">1</text>
+        <text x="170" y="252" font-family="'Inter Tight', sans-serif" font-size="30" font-weight="600" fill="#0f1b2d" letter-spacing="3">DEVICE</text>
+        <g transform="translate(380,190)" stroke="#0f1b2d" stroke-width="2.5" fill="none" stroke-linejoin="round">
+          <rect x="0" y="0" width="36" height="60" rx="6"/>
+          <line x1="10" y1="6" x2="26" y2="6"/>
+          <circle cx="18" cy="52" r="2" fill="#0f1b2d" stroke="none"/>
+        </g>
+        <rect x="470" y="160" width="120" height="120" fill="#0f1b2d"/>
+        <rect x="590" y="160" width="100" height="120" fill="url(#hatch)" stroke="#0f1b2d" stroke-width="1"/>
+        <rect x="690" y="160" width="590" height="120" fill="#0f1b2d"/>
+        <text x="1310" y="198" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="13" fill="#c14a1f" letter-spacing="2">BYPASS</text>
+        <text x="1310" y="224" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">bypassed by factory reset</text>
+        <text x="1310" y="250" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">or a learned passcode.</text>
+
+        <!-- ROW 2 — APPS (bar y=315-435, center=375) -->
+        <text x="170" y="370" font-family="Fraunces, Georgia, serif" font-size="44" fill="#0f1b2d">2</text>
+        <text x="170" y="407" font-family="'Inter Tight', sans-serif" font-size="30" font-weight="600" fill="#0f1b2d" letter-spacing="3">APPS</text>
+        <g transform="translate(380,356)" stroke="#0f1b2d" stroke-width="2.5" fill="none">
+          <rect x="0" y="0" width="16" height="16" rx="3"/>
+          <rect x="22" y="0" width="16" height="16" rx="3"/>
+          <rect x="0" y="22" width="16" height="16" rx="3"/>
+          <rect x="22" y="22" width="16" height="16" rx="3"/>
+        </g>
+        <rect x="470" y="315" width="330" height="120" fill="#0f1b2d"/>
+        <rect x="800" y="315" width="100" height="120" fill="url(#hatch)" stroke="#0f1b2d" stroke-width="1"/>
+        <rect x="900" y="315" width="380" height="120" fill="#0f1b2d"/>
+        <text x="1310" y="353" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="13" fill="#c14a1f" letter-spacing="2">BYPASS</text>
+        <text x="1310" y="379" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">uninstalled, force-stopped,</text>
+        <text x="1310" y="405" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">or starved of permissions.</text>
+
+        <!-- ROW 3 — WI-FI (bar y=470-590, center=530) -->
+        <text x="170" y="525" font-family="Fraunces, Georgia, serif" font-size="44" fill="#0f1b2d">3</text>
+        <text x="170" y="562" font-family="'Inter Tight', sans-serif" font-size="30" font-weight="600" fill="#0f1b2d" letter-spacing="3">WI-FI</text>
+        <g transform="translate(376,508)" stroke="#0f1b2d" stroke-width="2.5" fill="none" stroke-linecap="round">
+          <path d="M 4 28 Q 22 4 40 28"/>
+          <path d="M 12 36 Q 22 22 32 36"/>
+          <circle cx="22" cy="44" r="2.5" fill="#0f1b2d" stroke="none"/>
+        </g>
+        <rect x="470" y="470" width="610" height="120" fill="#0f1b2d"/>
+        <rect x="1080" y="470" width="100" height="120" fill="url(#hatch)" stroke="#0f1b2d" stroke-width="1"/>
+        <rect x="1180" y="470" width="100" height="120" fill="#0f1b2d"/>
+        <text x="1310" y="508" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="13" fill="#c14a1f" letter-spacing="2">BYPASS</text>
+        <text x="1310" y="534" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">the moment the phone</text>
+        <text x="1310" y="560" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">leaves the front door.</text>
+
+        <!-- ROW 4 — NETWORK (bar y=625-745, center=685) -->
+        <text x="170" y="680" font-family="Fraunces, Georgia, serif" font-size="44" fill="#c14a1f">4</text>
+        <text x="170" y="717" font-family="'Inter Tight', sans-serif" font-size="30" font-weight="600" fill="#c14a1f" letter-spacing="3">NETWORK</text>
+        <g transform="translate(380,655)" stroke="#c14a1f" stroke-width="2.5" fill="none">
+          <path d="M 8 0 L 36 0 L 36 60 L 0 60 L 0 8 Z"/>
+          <line x1="0" y1="20" x2="10" y2="20"/>
+          <line x1="0" y1="32" x2="10" y2="32"/>
+          <line x1="0" y1="44" x2="10" y2="44"/>
+        </g>
+        <rect x="470" y="625" width="810" height="120" fill="#c14a1f"/>
+        <circle cx="800" cy="685" r="18" fill="none" stroke="#f4efe6" stroke-width="3"/>
+        <text x="836" y="703" font-family="Fraunces, Georgia, serif" font-size="48" fill="#f4efe6" font-weight="500">Haven</text>
+        <text x="1310" y="677" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="22" fill="#2a3a52">No breach.</text>
+        <text x="1310" y="703" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="22" fill="#2a3a52">Safety lives in the SIM.</text>
+
+        <!-- STOPPED label (path arrow lands at top of row 4 bar) -->
+        <text x="1170" y="611" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="13" fill="#c14a1f" letter-spacing="2">STOPPED.</text>
+
+        <!-- Footer -->
+        <line x1="80" y1="800" x2="1520" y2="800" stroke="#d8cfbc" stroke-width="1"/>
+        <text x="80" y="830" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="14" fill="#6a6253" letter-spacing="2">THREE LAYERS WITH HOLES · ONE WITHOUT</text>
+        <text x="1520" y="830" text-anchor="end" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="14" fill="#c14a1f" letter-spacing="2">HAVEN IS THE FOURTH LAYER, DONE PROPERLY.</text>
+      </svg>
       <figcaption style="margin-top: 16px; font-family: var(--mono, 'IBM Plex Mono', ui-monospace, Menlo, monospace); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: center;">
         Fig. 01 — Three layers with holes. One without.
       </figcaption>
@@ -1180,7 +1534,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 </section>
 
 <!-- ═══════ FAQ ═══════ -->
-<section class="section section-bg-deep">
+<section class="section section-bg-deep" id="faq">
   <div class="container">
     <div class="section-label">Questions</div>
     <h2>The honest answers.</h2>
@@ -1232,22 +1586,54 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 
 <!-- ═══════ FOOTER ═══════ -->
 <footer>
-  <div class="container footer-inner">
-    <div>© 2026 The Good Phone Company Ltd · Trading as Haven.</div>
-    <div class="footer-nav">
-      <a href="https://gethavenmobile.com/waitlist">Join the waitlist →</a>
-      <a href="/story/">Our story</a>
-      <a href="/privacy/">Privacy</a>
-      <a href="/compliance/">Compliance</a>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col footer-col-newsletter">
+        <h3 class="footer-heading">Join the waitlist</h3>
+        <p class="footer-newsletter-text">First 1,000 families become founding members — pricing locked for life and a vote on what we ship.</p>
+        <form class="footer-form" action="https://formspree.io/f/mpqkabdk" method="POST">
+          <input type="email" name="email" placeholder="Your email" required>
+          <input type="hidden" name="_source" value="homepage-footer">
+          <button type="submit">Submit</button>
+        </form>
+        <p class="footer-form-meta">No spam. One short note when we launch.</p>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Quick links</h3>
+        <a href="/">Home</a>
+        <a href="/story/">Our story</a>
+        <a href="https://gethavenmobile.com/waitlist">Waitlist</a>
+        <a href="#faq">FAQs</a>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Social</h3>
+        <a href="https://www.linkedin.com/company/haven-mobile-network/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.facebook.com/people/Haven-mobile-network/61568796112245/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Contact</h3>
+        <a href="mailto:hello@gethavenmobile.com">hello@gethavenmobile.com</a>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Policy</h3>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/compliance/">Compliance</a>
+      </div>
     </div>
-    <div class="footer-social">
-      <a href="https://www.linkedin.com/company/haven-mobile-network/" target="_blank" rel="noopener" aria-label="Haven on LinkedIn">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-      <a href="https://www.facebook.com/people/Haven-mobile-network/61568796112245/" target="_blank" rel="noopener" aria-label="Haven on Facebook">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      </a>
+
+    <div class="footer-bottom">
+      <div>© 2026 The Good Phone Company Ltd · Trading as Haven.</div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/haven-mobile-network/" target="_blank" rel="noopener" aria-label="Haven on LinkedIn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/Haven-mobile-network/61568796112245/" target="_blank" rel="noopener" aria-label="Haven on Facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
     </div>
+
+    <p class="footer-legal-meta">The Good Phone Company Ltd, trading as Haven. Registered in England &amp; Wales. Haven runs on a tier-one UK mobile network — coverage and core service governed by the host network's terms. Final retail terms, pricing and service availability will be published before launch.</p>
   </div>
 </footer>
 
