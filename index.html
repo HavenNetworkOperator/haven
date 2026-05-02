@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Haven — A mobile network built for families.</title>
-<meta name="description" content="The UK's first mobile network designed for families. Safe by default, at the network layer — not an app your child can delete." />
+<title>Haven — The first UK mobile network built around the under-16s social-media ban.</title>
+<meta name="description" content="The first UK mobile network built around the social-media ban for under-16s. Safe at the SIM, not behind an app a child can delete. Add your name to help us prove there's demand — no commitment, no payment." />
 
 <link rel="canonical" href="https://gethavenmobile.com/" />
 
 <!-- OPEN GRAPH / SOCIAL PREVIEW -->
-<meta property="og:title" content="Haven — A mobile network built for families." />
-<meta property="og:description" content="Join the waitlist. The first 1,000 families become founding members." />
+<meta property="og:title" content="Haven — The first UK mobile network built around the under-16s social-media ban." />
+<meta property="og:description" content="Help us build the mobile network we all want to exist. No commitment, no payment — just adding your name to prove there's demand." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://gethavenmobile.com/" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Haven — A mobile network built for families." />
-<meta name="twitter:description" content="Join the waitlist. The first 1,000 families become founding members." />
+<meta name="twitter:title" content="Haven — The first UK mobile network built around the under-16s social-media ban." />
+<meta name="twitter:description" content="Help us build the mobile network we all want to exist. No commitment, no payment — just adding your name to prove there's demand." />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -177,6 +177,8 @@ nav {
   margin-bottom: 36px;
   max-width: 22ch;
   animation: fadeUp 0.9s ease-out 0.1s backwards;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 96;
 }
 .hero h1 em {
   font-style: normal;
@@ -247,6 +249,36 @@ nav {
   justify-content: center;
   gap: 8px;
 }
+.signup-clarity {
+  margin-top: 20px;
+  padding: 18px 22px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  text-align: left;
+}
+.signup-clarity-lead {
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.signup-clarity-lead strong {
+  font-weight: 600;
+  color: var(--accent);
+}
+.signup-clarity-detail {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.signup-clarity-detail em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+}
 .signup-meta::before {
   content: '';
   width: 6px;
@@ -312,6 +344,8 @@ nav {
   letter-spacing: -0.025em;
   margin-bottom: 64px;
   max-width: 18ch;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 72;
 }
 .section h2 em {
   font-style: normal;
@@ -340,9 +374,9 @@ nav {
 }
 .stat-num em { font-style: normal; color: var(--accent); }
 .stat-text {
-  font-size: 15px;
-  color: var(--ink-soft);
-  line-height: 1.5;
+  font-size: 17px;
+  color: var(--ink);
+  line-height: 1.55;
   max-width: 32ch;
 }
 .stat-source {
@@ -1156,6 +1190,14 @@ footer a:hover { color: var(--accent); }
   font-style: normal;
   font-weight: 500;
 }
+.hero-trigger-note--pre {
+  text-align: left;
+  font-size: clamp(17px, 1.6vw, 20px);
+  margin-top: 0;
+  margin-bottom: 40px;
+  max-width: 56ch;
+  animation: fadeUp 1s ease-out 0.3s backwards;
+}
 
 /* ───── MEMBER COUNTER ───── */
 .signup-counter {
@@ -1300,10 +1342,11 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 
   <!-- ═══════ HERO ═══════ -->
   <section class="hero">
-    <h1>The UK's safety-first mobile phone network for parents &amp; teens</h1>
+    <h1>The first UK mobile network built around the social-media ban for under-16s</h1>
     <p class="hero-sub">
-      A mobile network where safety lives at the network layer — not an app your child can delete, nor a filter that stops at your front door, nor a setting they can look up on YouTube.
+      Smartphone Free Childhood gave parents permission to wait. Haven is the network for when you finally hand over a phone — safe at the SIM, not behind an app they can delete.
     </p>
+    <p class="hero-trigger-note hero-trigger-note--pre">Help us reach <em>1,000 parents on the waitlist</em> — then Haven officially launches on Kickstarter.</p>
     <div class="hero-credibility">
       <div class="hero-credibility-row">
         <span class="hero-credibility-label">Founders featured on</span>
@@ -1323,19 +1366,21 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     </div>
 
     <div class="signup">
-      <a href="https://gethavenmobile.com/waitlist" class="values-cta-btn">Claim your founding spot →</a>
-      <p class="signup-meta">First 1,000 families become founding members</p>
+      <a href="https://gethavenmobile.com/waitlist" class="values-cta-btn">Add your name to the waitlist →</a>
+      <div class="signup-clarity">
+        <p class="signup-clarity-lead"><strong>No commitment. No payment.</strong> Please add your name to help us build the mobile network we all want to exist.</p>
+        <p class="signup-clarity-detail">We're proving there's enough demand to launch. The first 1,000 to sign up will be <em>offered</em> lifetime founding pricing (£25 eSIM, £8/month, locked for life) when we launch — it's your option, not a commitment.</p>
+      </div>
       <p class="signup-counter">
         <span class="counter-dot"></span>
         Founding spots: open now · first 1,000 only
       </p>
-      <p class="hero-trigger-note">Get us to 1,000 — and <em>Haven launches on Kickstarter.</em></p>
     </div>
 
     <div class="hero-founding-benefits">
-      <span>✦ Founding price, locked for life</span>
+      <span>✦ Option of founding pricing at launch</span>
       <span>✦ Priority access on launch day</span>
-      <span>✦ First to shape what we build</span>
+      <span>✦ Tell us what you most want blocked</span>
     </div>
 
     <div class="hero-testimonials">
@@ -1516,25 +1561,25 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <div class="steps landscape-steps">
       <div class="step fade-in">
         <span class="step-num">LAYER 1 · DEVICE</span>
-        <h3>Device settings.</h3>
+        <h3>Device settings</h3>
         <p><em>Screen Time, Family Link.</em> Built into the phone. Good for bedtime limits.</p>
         <p><strong style="color: var(--ink);">The gap:</strong> a child who learns the passcode, or factory-resets the device, turns them off in under a minute.</p>
       </div>
       <div class="step fade-in">
         <span class="step-num">LAYER 2 · APPS</span>
-        <h3>Parental-control apps.</h3>
+        <h3>Parental-control apps</h3>
         <p><em>Bark, Qustodio, and the rest.</em> More powerful than device settings.</p>
         <p><strong style="color: var(--ink);">The gap:</strong> they're apps. Apps can be uninstalled, force-stopped, or starved of permissions — one per device, forever renewed.</p>
       </div>
       <div class="step fade-in">
         <span class="step-num">LAYER 3 · WI-FI</span>
-        <h3>Home Wi-Fi filters.</h3>
+        <h3>Home Wi-Fi filters</h3>
         <p><em>Router-level filtering.</em> Blocks harmful sites on your home network.</p>
         <p><strong style="color: var(--ink);">The gap:</strong> they stop at the front door. The moment your child's phone switches to mobile data — walking to school, on the bus — the filter is gone.</p>
       </div>
       <div class="step step--accent fade-in">
         <span class="step-num">LAYER 4 · NETWORK</span>
-        <h3>The mobile network itself.</h3>
+        <h3>The mobile network itself</h3>
         <p>The layer that's <em>always there</em>. Every app and message passes through it.</p>
         <p><strong style="color: var(--ink);">The gap:</strong> until now, no UK network has been designed with this in mind.</p>
       </div>
@@ -1719,17 +1764,17 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <div class="steps" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px;">
       <div class="step fade-in">
         <span class="step-num" style="color: var(--accent);">WILL DO — RELIABLY</span>
-        <h3>The hard floor.</h3>
+        <h3>The hard floor</h3>
         <p>Blocks pornography, gambling, and known harmful sites at the network layer. Blocks VPNs and proxies that exist to bypass safety tools. Blocks social media platforms by default on under-16 plans. Works on any Wi-Fi or mobile data. Can't be uninstalled by your child.</p>
       </div>
       <div class="step fade-in">
         <span class="step-num" style="color: var(--muted);">WILL FLAG — IMPERFECTLY</span>
-        <h3>The AI layer.</h3>
+        <h3>The AI layer</h3>
         <p>Grooming patterns, coercion, and age-inappropriate content in messages. This is AI — it catches a lot, it will miss some, it will occasionally flag something harmless. We'll publish our detection rates openly once we're live. We'd rather show the real numbers than claim perfection.</p>
       </div>
       <div class="step fade-in">
         <span class="step-num" style="color: var(--muted);">WON'T DO — EVER</span>
-        <h3>The honest limits.</h3>
+        <h3>The honest limits</h3>
         <p>Replace a second SIM your child acquires on another network. Replace the conversations you have with your child about what they see online. Stop every bad thing from reaching them — no technology can, and any product that promises that is lying. Haven is a <em>very good</em> tool. It isn't a substitute for you.</p>
       </div>
     </div>
@@ -1746,6 +1791,10 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <details class="faq-item">
         <summary class="faq-q">When does Haven launch?</summary>
         <p class="faq-a">We're launching in the UK in 2026. Joining the waitlist is the best way to get early access — founding members will be invited first, ahead of any public launch.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Am I committing to anything by joining the waitlist?</summary>
+        <p class="faq-a">No. The waitlist is free and there's no payment now or later unless you choose to activate at launch. We're using the waitlist to prove there's enough demand to build this network — every name helps. The first 1,000 people to sign up will be <em>offered</em> lifetime founding pricing when we launch (£25 one-off eSIM, £8/month, locked for life). It's an option you can take or decline at that point. Until then there's nothing to pay and you can unsubscribe at any time.</p>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Will Haven have proper coverage?</summary>
@@ -1793,11 +1842,11 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <div class="footer-top">
       <div class="footer-col footer-col-newsletter">
         <h3 class="footer-heading">Join the waitlist</h3>
-        <p class="footer-newsletter-text">First 1,000 families become founding members — pricing locked for life and a vote on what we ship.</p>
+        <p class="footer-newsletter-text">No commitment, no payment. Add your name to help prove there's demand — the first 1,000 will be offered lifetime founding pricing when we launch.</p>
         <form class="footer-form" action="https://formspree.io/f/mpqkabdk" method="POST">
           <input type="email" name="email" placeholder="Your email" required>
           <input type="hidden" name="_source" value="homepage-footer">
-          <button type="submit">Submit</button>
+          <button type="submit">Join the waitlist</button>
         </form>
         <p class="footer-form-meta">No spam. One short note when we launch.</p>
       </div>
