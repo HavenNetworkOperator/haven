@@ -514,13 +514,46 @@ main {
   line-height: 1.5;
   color: var(--ink-soft);
 }
+.share-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
 .share-preview-label {
   display: block;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 6px;
+}
+.share-preview-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.share-preview-copy svg { width: 12px; height: 12px; }
+.share-preview-copy:hover {
+  background: #fff;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.share-preview-copy.copied {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
 }
 .share-preview-text { white-space: pre-wrap; word-break: break-word; }
 
@@ -728,7 +761,13 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         </div>
 
         <div class="share-preview">
-          <span class="share-preview-label">What gets sent</span>
+          <div class="share-preview-header">
+            <span class="share-preview-label">What gets sent</span>
+            <button type="button" class="share-preview-copy" id="copyPreviewBtn" data-share-channel="copy_preview">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="copyPreviewBtnLabel">COPY</span>
+            </button>
+          </div>
           <span class="share-preview-text" id="sharePreview"></span>
         </div>
 
@@ -789,6 +828,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     instagramBtnLabel: document.getElementById('instagramBtnLabel'),
     nativeShareBtn: document.getElementById('nativeShareBtn'),
     sharePreview: document.getElementById('sharePreview'),
+    copyPreviewBtn: document.getElementById('copyPreviewBtn'),
+    copyPreviewBtnLabel: document.getElementById('copyPreviewBtnLabel'),
   };
 
   let currentShareUrl = '';
@@ -800,6 +841,12 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     "No commitment.\n" +
     "Every name just helps prove there's enough demand to launch. Join the waitlist if you'd want this for your family too.\n\n" +
     "Takes 30 seconds - join me:";
+
+  // X (Twitter) caps posts at 280 chars and counts URLs as 23. The long
+  // blurb is ~381 chars — too long. Use a tightened version for X only.
+  // Length budget: 280 - 23 (URL) - 1 (space) = 256 chars max.
+  const buildShareBlurbX = () =>
+    "Just joined the Haven waitlist — first UK mobile network built around the under-16s social media ban. By SFC parents. No commitment. Join if you'd want this for your family too:";
 
   // Fire-and-forget PostHog event helper. Safe if posthog isn't loaded
   // (e.g. consent declined) — we just no-op.
@@ -849,8 +896,11 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     currentShareUrl = url;
     currentShareMessage = fullText;
 
+    const xText = `${buildShareBlurbX()} ${url}`;
+    const xMsg = encodeURIComponent(xText);
+
     els.whatsapp.href = `https://wa.me/?text=${fullMsg}`;
-    els.twitter.href  = `https://twitter.com/intent/tweet?text=${fullMsg}`;
+    els.twitter.href  = `https://twitter.com/intent/tweet?text=${xMsg}`;
     els.emailBtn.href = `mailto:?subject=${encodeURIComponent(SHARE_SUBJECT)}&body=${fullMsg}`;
     // Facebook & LinkedIn only accept the URL — they scrape the OG tags
     // from the linked page for the preview text. The blurb itself can't
@@ -991,6 +1041,29 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         els.copyBtn.classList.remove('copied');
       }, 1800);
     }
+  });
+
+  // In-context COPY button inside the "What gets sent" preview card
+  els.copyPreviewBtn.addEventListener('click', async () => {
+    trackShare('copy_preview');
+    const payload = currentShareMessage || els.shareUrl.value;
+    const label = els.copyPreviewBtnLabel;
+    const original = label ? label.textContent : 'COPY';
+    try {
+      await navigator.clipboard.writeText(payload);
+      if (label) label.textContent = 'COPIED';
+      els.copyPreviewBtn.classList.add('copied');
+      trackShareOutcome('share_copy_succeeded', 'copy_preview');
+    } catch {
+      els.shareUrl.select();
+      document.execCommand('copy');
+      if (label) label.textContent = 'COPIED';
+      els.copyPreviewBtn.classList.add('copied');
+    }
+    setTimeout(() => {
+      if (label) label.textContent = original;
+      els.copyPreviewBtn.classList.remove('copied');
+    }, 1800);
   });
 
   // Native share (mobile / supported desktops) — opens the OS share sheet
