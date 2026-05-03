@@ -455,8 +455,9 @@ main {
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 .share-btn:hover {
+  background: var(--accent);
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--bg);
 }
 .share-btn svg { width: 16px; height: 16px; }
 .share-btn.share-btn-primary {
@@ -479,9 +480,9 @@ main {
   font-size: 15px;
 }
 .share-btn.share-btn-strong:hover {
-  background: var(--ink);
+  background: var(--accent);
   color: var(--bg);
-  border-color: var(--ink);
+  border-color: var(--accent);
 }
 .share-btn.share-btn--quiet {
   flex-basis: 0;
@@ -794,7 +795,11 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   let currentShareMessage = '';
   const SHARE_SUBJECT = 'Help us build the mobile network we all want to exist';
   const buildShareBlurb = () =>
-    "Please share this to help us build the mobile network we all want to exist. Haven is a new UK network where safety lives at the network layer, not in an app a child can delete. They're building the first UK mobile network designed around the social media ban for under-16s. There's no commitment to join the waitlist — every name just helps prove there's enough demand to launch. Add yours if you'd want this for your family too:";
+    "I just signed up to this waitlist - Haven is the first UK mobile network built around the social media ban for under-16s, launching this year - by parents from the SFC community.\n\n" +
+    "Let's help get this thing launched.\n\n" +
+    "No commitment.\n" +
+    "Every name just helps prove there's enough demand to launch. Add yours if you'd want this for your family too.\n\n" +
+    "Takes 30 seconds - join me:";
 
   // Fire-and-forget PostHog event helper. Safe if posthog isn't loaded
   // (e.g. consent declined) — we just no-op.
