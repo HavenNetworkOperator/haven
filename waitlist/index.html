@@ -432,9 +432,6 @@ main {
 .share-buttons--secondary {
   margin-bottom: 12px;
 }
-.share-buttons--social {
-  margin-bottom: 16px;
-}
 .share-btn {
   flex: 1;
   min-width: 120px;
@@ -485,78 +482,12 @@ main {
   color: var(--accent);
   border-color: var(--accent);
 }
-.share-btn.share-btn--quiet {
-  flex-basis: 0;
-  flex-grow: 0.5;
-  min-width: 100px;
-  font-size: 13px;
-  color: var(--accent);
-  border-color: var(--accent);
-}
 .share-btn.copied {
   background: var(--accent);
   color: var(--bg);
   border-color: var(--accent);
 }
 .share-btn[hidden] { display: none; }
-/* When native share is available, hide WhatsApp from the primary cluster
-   to avoid two giant buttons fighting for the eye. */
-.share-buttons--primary:has(#nativeShareBtn:not([hidden])) #whatsappBtn {
-  display: none;
-}
-
-.share-preview {
-  margin-top: 16px;
-  padding: 14px 16px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-.share-preview-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-.share-preview-label {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.share-preview-copy {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border: 1px solid var(--line);
-  border-radius: 100px;
-  background: transparent;
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
-}
-.share-preview-copy svg { width: 12px; height: 12px; }
-.share-preview-copy:hover {
-  background: #fff;
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.share-preview-copy.copied {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--bg);
-}
-.share-preview-text { white-space: pre-wrap; word-break: break-word; }
 
 .refresh-row {
   margin-top: 32px;
@@ -721,13 +652,13 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <span class="share-label">Please share this to help us build the mobile network <em>we all want to exist.</em></span>
 
         <div class="share-buttons share-buttons--primary">
-          <button type="button" class="share-btn share-btn-primary" id="nativeShareBtn" hidden>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-            Share with other parents
-          </button>
-          <a class="share-btn share-btn-strong" id="whatsappBtn" target="_blank" rel="noopener" data-share-channel="whatsapp">
+          <a class="share-btn share-btn-primary" id="whatsappSchoolBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_school">
             <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
-            WhatsApp
+            Share with a school parent WhatsApp group
+          </a>
+          <a class="share-btn share-btn-strong" id="whatsappSfcBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_sfc">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
+            Share with your local SFC WhatsApp group
           </a>
         </div>
 
@@ -740,36 +671,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             <span id="copyBtnLabel">Copy link</span>
           </button>
-          <a class="share-btn share-btn--quiet" id="twitterBtn" target="_blank" rel="noopener" data-share-channel="twitter">
-            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            Post on X
-          </a>
-        </div>
-
-        <div class="share-buttons share-buttons--social">
-          <a class="share-btn share-btn--quiet" id="facebookBtn" target="_blank" rel="noopener" data-share-channel="facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
-            Post on Facebook
-          </a>
-          <button type="button" class="share-btn share-btn--quiet" id="instagramBtn" data-share-channel="instagram" title="Copies the message + link, then opens Instagram so you can paste into a Story or DM">
-            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-            <span id="instagramBtnLabel">Post on Instagram</span>
-          </button>
-          <a class="share-btn share-btn--quiet" id="linkedinBtn" target="_blank" rel="noopener" data-share-channel="linkedin">
-            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            Post on LinkedIn
-          </a>
-        </div>
-
-        <div class="share-preview">
-          <div class="share-preview-header">
-            <span class="share-preview-label">What gets sent</span>
-            <button type="button" class="share-preview-copy" id="copyPreviewBtn" data-share-channel="copy_preview">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <span id="copyPreviewBtnLabel">COPY</span>
-            </button>
-          </div>
-          <span class="share-preview-text" id="sharePreview"></span>
         </div>
 
         <input type="text" id="shareUrl" readonly aria-hidden="true" tabindex="-1" class="share-url-hidden" />
@@ -820,34 +721,31 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     copyBtn:   document.getElementById('copyBtn'),
     copyBtnLabel: document.getElementById('copyBtnLabel'),
     refreshBtn: document.getElementById('refreshBtn'),
-    whatsapp:  document.getElementById('whatsappBtn'),
-    twitter:   document.getElementById('twitterBtn'),
+    whatsappSchool: document.getElementById('whatsappSchoolBtn'),
+    whatsappSfc: document.getElementById('whatsappSfcBtn'),
     emailBtn:  document.getElementById('emailBtn'),
-    facebookBtn: document.getElementById('facebookBtn'),
-    linkedinBtn: document.getElementById('linkedinBtn'),
-    instagramBtn: document.getElementById('instagramBtn'),
-    instagramBtnLabel: document.getElementById('instagramBtnLabel'),
-    nativeShareBtn: document.getElementById('nativeShareBtn'),
-    sharePreview: document.getElementById('sharePreview'),
-    copyPreviewBtn: document.getElementById('copyPreviewBtn'),
-    copyPreviewBtnLabel: document.getElementById('copyPreviewBtnLabel'),
   };
 
   let currentShareUrl = '';
   let currentShareMessage = '';
   const SHARE_SUBJECT = 'Help us build the mobile network we all want to exist';
-  const buildShareBlurb = () =>
-    "I just signed up to this waitlist - Haven is the first UK mobile network built around the social media ban for under-16s, launching this year - by parents from the SFC community.\n\n" +
-    "Let's help get this thing launched.\n\n" +
-    "No commitment.\n" +
-    "Every name just helps prove there's enough demand to launch. Join the waitlist if you'd want this for your family too.\n\n" +
-    "Takes 30 seconds - join me:";
 
-  // X (Twitter) caps posts at 280 chars and counts URLs as 23. The long
-  // blurb is ~381 chars — too long. Use a tightened version for X only.
-  // Length budget: 280 - 23 (URL) - 1 (space) = 256 chars max.
-  const buildShareBlurbX = () =>
-    "Just joined the Haven waitlist — first UK mobile network built around the under-16s social media ban. By SFC parents. No commitment. Join if you'd want this for your family too:";
+  // Tailored to a class / school year WhatsApp group. Assumes zero context
+  // — explains what Haven is, what SFC is, and why it matters.
+  const buildSchoolBlurb = () =>
+    "Off topic but worth 30 seconds for any parents here.\n\n" +
+    "A new UK mobile network — Haven — is being built specifically around the under-16s social media ban. By parents from the Smartphone Free Childhood community.\n\n" +
+    "Pre-launch. They need 1,000 waitlist names to take it to Kickstarter and actually launch.\n\n" +
+    "No commitment, no payment — just a name on a list to help prove demand.\n\n" +
+    "If you'd want this for your kid's first phone, join me:";
+
+  // Tailored to a local SFC group. Assumes the audience already knows the
+  // smartphone-free-childhood context — leans on insider tone.
+  const buildSfcBlurb = () =>
+    "Heads up — one of our community is building Haven, a UK mobile network from scratch around the under-16s social media ban (and what SFC stands for).\n\n" +
+    "Pre-launch. They need 1,000 waitlist names to take it to Kickstarter.\n\n" +
+    "No commitment, no payment. Just a name on a list.\n\n" +
+    "If you'd want a no-social-media phone option for your kid at launch, join me:";
 
   // Fire-and-forget PostHog event helper. Safe if posthog isn't loaded
   // (e.g. consent declined) — we just no-op.
@@ -922,30 +820,17 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     const url = `${SITE}/?ref=${data.ref_code}`;
     els.shareUrl.value = url;
 
-    const blurb = buildShareBlurb();
-    const fullText = `${blurb} ${url}`;
-    const fullMsg = encodeURIComponent(fullText);
+    const schoolText = `${buildSchoolBlurb()} ${url}`;
+    const sfcText    = `${buildSfcBlurb()} ${url}`;
 
     currentShareUrl = url;
-    currentShareMessage = fullText;
+    // Copy / email default to the school-group blurb — it assumes the least
+    // context and reads cleanly to anyone.
+    currentShareMessage = schoolText;
 
-    const xText = `${buildShareBlurbX()} ${url}`;
-    const xMsg = encodeURIComponent(xText);
-
-    els.whatsapp.href = `https://wa.me/?text=${fullMsg}`;
-    els.twitter.href  = `https://twitter.com/intent/tweet?text=${xMsg}`;
-    els.emailBtn.href = `mailto:?subject=${encodeURIComponent(SHARE_SUBJECT)}&body=${fullMsg}`;
-    // Facebook & LinkedIn only accept the URL — they scrape the OG tags
-    // from the linked page for the preview text. The blurb itself can't
-    // be pre-filled, so the user pastes it manually if they want it.
-    els.facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-    els.linkedinBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-
-    els.sharePreview.textContent = fullText;
-
-    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
-      els.nativeShareBtn.hidden = false;
-    }
+    els.whatsappSchool.href = `https://wa.me/?text=${encodeURIComponent(schoolText)}`;
+    els.whatsappSfc.href    = `https://wa.me/?text=${encodeURIComponent(sfcText)}`;
+    els.emailBtn.href       = `mailto:?subject=${encodeURIComponent(SHARE_SUBJECT)}&body=${encodeURIComponent(schoolText)}`;
   }
 
   async function fetchStatus(refCode) {
@@ -1089,76 +974,13 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     }
   });
 
-  // In-context COPY button inside the "What gets sent" preview card
-  els.copyPreviewBtn.addEventListener('click', async () => {
-    trackShare('copy_preview');
-    const payload = currentShareMessage || els.shareUrl.value;
-    const label = els.copyPreviewBtnLabel;
-    const original = label ? label.textContent : 'COPY';
-    try {
-      await navigator.clipboard.writeText(payload);
-      if (label) label.textContent = 'COPIED';
-      els.copyPreviewBtn.classList.add('copied');
-      trackShareOutcome('share_copy_succeeded', 'copy_preview');
-    } catch {
-      els.shareUrl.select();
-      document.execCommand('copy');
-      if (label) label.textContent = 'COPIED';
-      els.copyPreviewBtn.classList.add('copied');
-    }
-    setTimeout(() => {
-      if (label) label.textContent = original;
-      els.copyPreviewBtn.classList.remove('copied');
-    }, 1800);
-  });
-
-  // Native share (mobile / supported desktops) — opens the OS share sheet
-  els.nativeShareBtn.addEventListener('click', async () => {
-    if (typeof navigator.share !== 'function') return;
-    trackShare('native');
-    try {
-      await navigator.share({
-        title: SHARE_SUBJECT,
-        text: currentShareMessage,
-        url: currentShareUrl,
-      });
-      trackShareOutcome('share_native_completed', 'native');
-    } catch {
-      // user cancelled or share failed — no-op
-    }
-  });
-
-  // Click-tracking for the link-style share buttons (WhatsApp / Email / X /
-  // Facebook / LinkedIn). The browser handles navigation; we record intent.
-  ['whatsapp', 'twitter', 'emailBtn', 'facebookBtn', 'linkedinBtn'].forEach((id) => {
+  // Click-tracking for the link-style share buttons. The browser handles
+  // navigation; we just record the intent.
+  ['whatsappSchoolBtn', 'whatsappSfcBtn', 'emailBtn'].forEach((id) => {
     const node = document.getElementById(id);
     if (!node) return;
     const channel = node.getAttribute('data-share-channel') || id;
     node.addEventListener('click', () => trackShare(channel));
-  });
-
-  // Instagram has no web share intent. Best we can do: copy the message + URL
-  // to the clipboard so the user can paste it into a Story/DM, then open
-  // instagram.com in a new tab.
-  els.instagramBtn.addEventListener('click', async () => {
-    trackShare('instagram');
-    const payload = currentShareMessage || els.shareUrl.value;
-    const label = els.instagramBtnLabel;
-    const original = label ? label.textContent : 'Post on Instagram';
-    try {
-      await navigator.clipboard.writeText(payload);
-      trackShareOutcome('share_copy_succeeded', 'instagram');
-      if (label) label.textContent = 'Copied — opening Instagram';
-      els.instagramBtn.classList.add('copied');
-    } catch {
-      // Clipboard blocked — fall back to opening Instagram anyway.
-      if (label) label.textContent = 'Opening Instagram';
-    }
-    window.open('https://www.instagram.com/', '_blank', 'noopener');
-    setTimeout(() => {
-      if (label) label.textContent = original;
-      els.instagramBtn.classList.remove('copied');
-    }, 2400);
   });
 
   // Refresh standing
