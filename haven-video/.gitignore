@@ -1,3 +1,5 @@
 node_modules/
-out/
+out/*
+!out/haven-waitlist-60s.mp4
+!out/haven-waitlist-poster-4s.jpg
 .cache/
