@@ -876,6 +876,17 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   function getRefFromUrl() { return getQueryCode('ref'); }
   function getMyFromUrl()  { return getQueryCode('me'); }
 
+  // Pending referrer: when a share link drops a visitor on the homepage
+  // (/?ref=CODE), the homepage stashes the code in localStorage so it
+  // survives the journey to /waitlist. We read it as a fallback below.
+  const PENDING_REF_KEY = 'haven_pending_ref';
+  function getPendingRef() {
+    try {
+      const v = (localStorage.getItem(PENDING_REF_KEY) || '').trim().toUpperCase();
+      return CODE_RE.test(v) ? v : null;
+    } catch { return null; }
+  }
+
   function showStatus(data) {
     els.signup.classList.add('hidden');
     els.status.classList.add('active');
@@ -887,7 +898,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     els.totalNum.textContent = data.total;
     els.refNum.textContent   = data.referrals;
 
-    const url = `${SITE}/waitlist?ref=${data.ref_code}`;
+    const url = `${SITE}/?ref=${data.ref_code}`;
     els.shareUrl.value = url;
 
     const blurb = buildShareBlurb();
@@ -946,6 +957,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   (async function init() {
     const myFromUrl  = getMyFromUrl();
     const refFromUrl = getRefFromUrl();
+    const pendingRef = !refFromUrl ? getPendingRef() : null;
+    const refForSignup = refFromUrl || pendingRef;
     const stored     = localStorage.getItem(STORAGE_KEY);
     const storedValid = stored && CODE_RE.test(stored);
 
@@ -987,8 +1000,9 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       }
     }
 
-    // Rule 4: signup form (with referrer banner if URL has a fresh ?ref=)
-    if (refFromUrl) els.refBanner.hidden = false;
+    // Rule 4: signup form (with referrer banner if URL has a fresh ?ref= OR
+    // a pending ref was carried over from the homepage)
+    if (refForSignup) els.refBanner.hidden = false;
     unboot();
 
     els.form.addEventListener('submit', async (e) => {
@@ -1002,8 +1016,9 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       els.submitBtn.disabled = true;
       els.submitBtn.textContent = 'Adding...';
       try {
-        const data = await submitSignup(email, refFromUrl);
+        const data = await submitSignup(email, refForSignup);
         localStorage.setItem(STORAGE_KEY, data.ref_code);
+        try { localStorage.removeItem(PENDING_REF_KEY); } catch {}
         showStatus(data);
         // smooth scroll to top of status card on small screens
         window.scrollTo({ top: 0, behavior: 'smooth' });
