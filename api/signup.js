@@ -8,6 +8,7 @@ import {
   getStanding,
   recomputePositions,
   sendToFormspree,
+  sendToSlack,
   maybeSubscribeBeehiiv,
 } from './_lib.js';
 import { sendWelcomeEmail, sendReferrerNotification } from './_emails.js';
@@ -165,6 +166,14 @@ export default async function handler(req, res) {
       referredBy,
       position: standing.position,
       total: standing.total,
+    }),
+    sendToSlack({
+      email,
+      refCode,
+      referredBy,
+      position: standing.position,
+      total: standing.total,
+      referrals: standing.referrals,
     }),
     maybeSubscribeBeehiiv({ email, refCode, referredBy }),
     sendWelcomeEmail({

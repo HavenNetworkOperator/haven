@@ -119,6 +119,44 @@ export async function sendToFormspree({ email, refCode, referredBy, position, to
   }
 }
 
+export async function sendToSlack({ email, refCode, referredBy, position, total, referrals }) {
+  const url = process.env.SLACK_WEBHOOK_URL;
+  if (!url) return;
+
+  const milestone = position % 25 === 0 ? ' 🎉' : '';
+  const headline = `New waitlist signup${milestone} — *#${position}* of ${total}`;
+  const fields = [
+    { type: 'mrkdwn', text: `*Email*\n${email}` },
+    { type: 'mrkdwn', text: `*Ref code*\n\`${refCode}\`` },
+  ];
+  if (referredBy) {
+    fields.push({ type: 'mrkdwn', text: `*Referred by*\n\`${referredBy}\`` });
+  }
+  if (typeof referrals === 'number') {
+    fields.push({ type: 'mrkdwn', text: `*Their referrals*\n${referrals}` });
+  }
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        text: `New waitlist signup: ${email} (#${position} of ${total})`,
+        blocks: [
+          { type: 'section', text: { type: 'mrkdwn', text: headline } },
+          { type: 'section', fields },
+        ],
+      }),
+    });
+    if (!res.ok) {
+      const body = await res.text();
+      console.error('Slack fan-out failed', res.status, body);
+    }
+  } catch (err) {
+    console.error('Slack fan-out threw', err);
+  }
+}
+
 export async function maybeSubscribeBeehiiv({ email, refCode, referredBy }) {
   const apiKey = process.env.BEEHIIV_API_KEY;
   const pubId = process.env.BEEHIIV_PUBLICATION_ID;
