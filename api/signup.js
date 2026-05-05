@@ -29,6 +29,9 @@ export default async function handler(req, res) {
 
   const email = String(payload?.email ?? '').trim().toLowerCase();
   const refRaw = payload?.ref ? String(payload.ref).trim().toUpperCase() : null;
+  const landingRaw = payload?.landing_page ? String(payload.landing_page).slice(0, 64) : null;
+  const landingPage = landingRaw === '/' || landingRaw === '/waitlist' ? landingRaw : null;
+  const landedAt = payload?.landed_at ? String(payload.landed_at).slice(0, 32) : null;
 
   if (!EMAIL_RE.test(email)) return badRequest(res, 'Please enter a valid email.');
   if (email.length > 254) return badRequest(res, 'Email too long.');
@@ -144,6 +147,8 @@ export default async function handler(req, res) {
       position: standing.position,
       total: standing.total,
       referred_by: referredBy ?? null,
+      landing_page: landingPage,
+      landed_at: landedAt,
     },
   });
   if (referredBy) {
@@ -166,6 +171,8 @@ export default async function handler(req, res) {
       referredBy,
       position: standing.position,
       total: standing.total,
+      landingPage,
+      landedAt,
     }),
     sendToSlack({
       email,

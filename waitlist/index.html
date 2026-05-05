@@ -880,11 +880,32 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   // (/?ref=CODE), the homepage stashes the code in localStorage so it
   // survives the journey to /waitlist. We read it as a fallback below.
   const PENDING_REF_KEY = 'haven_pending_ref';
+  const LANDING_PAGE_KEY = 'haven_landing_page';
+  const LANDED_AT_KEY = 'haven_landed_at';
   function getPendingRef() {
     try {
       const v = (localStorage.getItem(PENDING_REF_KEY) || '').trim().toUpperCase();
       return CODE_RE.test(v) ? v : null;
     } catch { return null; }
+  }
+  // Landing-page attribution: if visitor hits /waitlist?ref=CODE directly
+  // (no homepage stash yet), record this page as the landing page so the
+  // signup carries entry-point context to Formspree.
+  (function captureWaitlistLanding() {
+    try {
+      const refOnUrl = getRefFromUrl();
+      const alreadyStashed = localStorage.getItem(LANDING_PAGE_KEY);
+      if (refOnUrl && !alreadyStashed) {
+        localStorage.setItem(LANDING_PAGE_KEY, '/waitlist');
+        localStorage.setItem(LANDED_AT_KEY, new Date().toISOString());
+      }
+    } catch {}
+  })();
+  function getLandingPage() {
+    try { return localStorage.getItem(LANDING_PAGE_KEY) || null; } catch { return null; }
+  }
+  function getLandedAt() {
+    try { return localStorage.getItem(LANDED_AT_KEY) || null; } catch { return null; }
   }
 
   function showStatus(data) {
@@ -937,10 +958,19 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     const r = await fetch('/api/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, ref: refCode || undefined }),
+      body: JSON.stringify({
+        email,
+        ref: refCode || undefined,
+        landing_page: getLandingPage() || undefined,
+        landed_at: getLandedAt() || undefined,
+      }),
     });
     const data = await r.json().catch(() => ({}));
     if (!r.ok) throw new Error(data?.error || 'signup_failed');
+    try {
+      localStorage.removeItem(LANDING_PAGE_KEY);
+      localStorage.removeItem(LANDED_AT_KEY);
+    } catch {}
     return data;
   }
 

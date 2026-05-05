@@ -90,7 +90,7 @@ export async function getStanding(refCode) {
 // All return promises but are safe to fire-and-forget.
 // ───────────────────────────────────────────────────────────
 
-export async function sendToFormspree({ email, refCode, referredBy, position, total }) {
+export async function sendToFormspree({ email, refCode, referredBy, position, total, landingPage, landedAt }) {
   const formId = process.env.FORMSPREE_FORM_ID || 'mpqkabdk';
   if (!formId) return;
   try {
@@ -105,6 +105,8 @@ export async function sendToFormspree({ email, refCode, referredBy, position, to
         source: 'waitlist-page',
         ref_code: refCode,
         referred_by: referredBy ?? '',
+        landing_page: landingPage ?? '',
+        landed_at: landedAt ?? '',
         position,
         total,
         signed_up_at: new Date().toISOString(),

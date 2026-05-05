@@ -7,13 +7,17 @@
 <script>
 // Referral capture: share links land here as /?ref=CODE. Stash the code
 // in localStorage so it survives the click through to /waitlist, where
-// the signup form picks it up as the referrer.
+// the signup form picks it up as the referrer. Also stash the landing
+// page so /waitlist can attribute the funnel entry point ("/" vs
+// "/waitlist") at signup time.
 (function () {
   try {
     var params = new URLSearchParams(window.location.search);
     var raw = (params.get('ref') || '').trim().toUpperCase();
     if (/^[2-9A-HJKMNP-Z]{8}$/.test(raw)) {
       localStorage.setItem('haven_pending_ref', raw);
+      localStorage.setItem('haven_landing_page', '/');
+      localStorage.setItem('haven_landed_at', new Date().toISOString());
     }
   } catch {}
 })();
