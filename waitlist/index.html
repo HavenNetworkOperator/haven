@@ -395,6 +395,35 @@ main {
   font-style: normal;
   color: var(--accent);
 }
+.share-sublabel {
+  display: block;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--muted);
+  margin: -8px 0 22px;
+  letter-spacing: -0.005em;
+}
+.share-testimonial {
+  margin: 28px auto 0;
+  max-width: 44ch;
+  text-align: center;
+  font-family: var(--serif);
+  color: var(--ink-soft);
+}
+.share-testimonial blockquote {
+  font-size: 17px;
+  line-height: 1.4;
+  font-style: italic;
+  margin: 0 0 8px;
+  letter-spacing: -0.005em;
+}
+.share-testimonial figcaption {
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
 
 .share-buttons {
   display: flex;
@@ -509,16 +538,6 @@ main {
   position: relative;
   z-index: 2;
 }
-.footer-nav {
-  display: flex;
-  gap: 24px;
-}
-.footer-nav a {
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.footer-nav a:hover { color: var(--accent); }
 @media (max-width: 600px) {
   .page-footer { flex-direction: column; text-align: center; padding: 28px 24px; }
 }
@@ -623,6 +642,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <!-- ─── SHARE BLOCK (front-and-centre) ─── -->
       <div class="share-block">
         <span class="share-label">Your move: <em>bring one more parent</em>.</span>
+        <span class="share-sublabel">Lock in your founding spot when they sign up</span>
 
         <div class="share-buttons share-buttons--primary">
           <a class="share-btn share-btn-primary" id="whatsappDmBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_dm">
@@ -630,6 +650,11 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
             Send to another parent
           </a>
         </div>
+
+        <figure class="share-testimonial">
+          <blockquote>“Sharing this in my local SFC group makes me look awesome by proxy.”</blockquote>
+          <figcaption>- Sam Benstead, parent, Sussex</figcaption>
+        </figure>
       </div>
 
       <div class="share-footnote">
@@ -649,12 +674,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 
 <footer class="page-footer">
   <div>© 2026 The Good Phone Company Ltd · Trading as Haven.</div>
-  <div class="footer-nav">
-    <a href="/">Home</a>
-    <a href="/story/">Our story</a>
-    <a href="/privacy/">Privacy</a>
-    <a href="/compliance/">Compliance</a>
-  </div>
 </footer>
 
 <script>
