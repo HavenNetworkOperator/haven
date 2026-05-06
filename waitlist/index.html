@@ -311,15 +311,35 @@ main {
   height: 6px;
   background: var(--line);
   border-radius: 100px;
-  overflow: hidden;
   margin-bottom: 12px;
 }
 .goal-tracker-fill {
+  position: relative;
   height: 100%;
   background: var(--accent);
   border-radius: 100px;
   transition: width 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   width: 0%;
+}
+/* Pulsating beacon at the right edge of the fill — draws the eye to the
+   "we're here" point so the user sees momentum, not just a static bar. */
+.goal-tracker-fill::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse-dot 1.6s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0   rgba(193, 74, 31, 0.55); }
+  70%  { box-shadow: 0 0 0 12px rgba(193, 74, 31, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(193, 74, 31, 0); }
 }
 .goal-tracker-text {
   font-family: var(--serif);
@@ -358,13 +378,6 @@ main {
   font-weight: 400;
 }
 .share-footnote-sep { color: var(--line); }
-.share-url-hidden {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-}
 
 .share-block { margin-bottom: 24px; }
 .share-label {
@@ -426,11 +439,19 @@ main {
   flex: 2 1 100%;
   font-size: 16px;
   padding: 18px 24px;
+  animation: pulse-btn 2.4s ease-out infinite;
 }
 .share-btn.share-btn-primary:hover {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--bg);
+}
+/* Faint burnt-orange halo expanding outward — draws the eye to the
+   primary share button without competing with it. */
+@keyframes pulse-btn {
+  0%   { box-shadow: 0 0 0 0   rgba(193, 74, 31, 0.32); }
+  70%  { box-shadow: 0 0 0 16px rgba(193, 74, 31, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(193, 74, 31, 0); }
 }
 .share-btn.share-btn-strong {
   border-color: var(--accent);
@@ -450,59 +471,6 @@ main {
   border-color: var(--accent);
 }
 .share-btn[hidden] { display: none; }
-
-.share-preview {
-  margin-top: 16px;
-  padding: 14px 16px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-.share-preview-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-.share-preview-label {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.share-preview-copy {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border: 1px solid var(--line);
-  border-radius: 100px;
-  background: transparent;
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
-}
-.share-preview-copy svg { width: 12px; height: 12px; }
-.share-preview-copy:hover {
-  background: #fff;
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.share-preview-copy.copied {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--bg);
-}
-.share-preview-text { white-space: pre-wrap; word-break: break-word; }
 
 .refresh-row {
   margin-top: 32px;
@@ -662,19 +630,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
             Send to another parent
           </a>
         </div>
-
-        <div class="share-preview">
-          <div class="share-preview-header">
-            <span class="share-preview-label">What gets shared</span>
-            <button type="button" class="share-preview-copy" id="copyPreviewBtn" data-share-channel="copy_preview">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <span id="copyPreviewBtnLabel">COPY</span>
-            </button>
-          </div>
-          <span class="share-preview-text" id="sharePreview"></span>
-        </div>
-
-        <input type="text" id="shareUrl" readonly aria-hidden="true" tabindex="-1" class="share-url-hidden" />
       </div>
 
       <div class="share-footnote">
@@ -717,12 +672,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     posNum:    document.getElementById('posNum'),
     totalNum:  document.getElementById('totalNum'),
     refNum:    document.getElementById('refNum'),
-    shareUrl:  document.getElementById('shareUrl'),
     refreshBtn: document.getElementById('refreshBtn'),
     whatsappDm: document.getElementById('whatsappDmBtn'),
-    sharePreview: document.getElementById('sharePreview'),
-    copyPreviewBtn: document.getElementById('copyPreviewBtn'),
-    copyPreviewBtnLabel: document.getElementById('copyPreviewBtnLabel'),
     goalFill: document.getElementById('goalFill'),
     goalCurrent: document.getElementById('goalCurrent'),
     goalRemaining: document.getElementById('goalRemaining'),
@@ -730,10 +681,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     shareFootnoteSep: document.getElementById('shareFootnoteSep'),
   };
 
-  let currentShareUrl = '';
-  let currentShareMessage = '';
   let goalAnimated = false;
-  const SHARE_SUBJECT = 'Help us build the mobile network we all want to exist';
 
   // 1:1 DM to a single parent. Personal, warm opener — single message,
   // single paragraph, the way someone actually pings a friend on WhatsApp.
@@ -746,13 +694,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     try {
       if (typeof posthog !== 'undefined' && typeof posthog.capture === 'function') {
         posthog.capture('share_clicked', Object.assign({ channel }, extra || {}));
-      }
-    } catch {}
-  }
-  function trackShareOutcome(eventName, channel) {
-    try {
-      if (typeof posthog !== 'undefined' && typeof posthog.capture === 'function') {
-        posthog.capture(eventName, { channel });
       }
     } catch {}
   }
@@ -811,18 +752,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     els.refNum.textContent   = data.referrals;
 
     const url = `${SITE}/?ref=${data.ref_code}`;
-    els.shareUrl.value = url;
-
     const dmText = `${buildDmBlurb()} ${url}`;
-
-    currentShareUrl = url;
-    // Preview-card COPY button uses this — same text as the DM button sends.
-    currentShareMessage = dmText;
-
     els.whatsappDm.href = `https://wa.me/?text=${encodeURIComponent(dmText)}`;
-
-    // Preview shows the exact DM message that gets sent.
-    els.sharePreview.textContent = dmText;
 
     // Goal tracker — community progress to the 1,000-name launch threshold.
     const GOAL = 1000;
@@ -966,29 +897,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       }
     });
   })();
-
-  // In-context COPY button inside the "What gets shared" preview card
-  els.copyPreviewBtn.addEventListener('click', async () => {
-    trackShare('copy_preview');
-    const payload = currentShareMessage || els.shareUrl.value;
-    const label = els.copyPreviewBtnLabel;
-    const original = label ? label.textContent : 'COPY';
-    try {
-      await navigator.clipboard.writeText(payload);
-      if (label) label.textContent = 'COPIED';
-      els.copyPreviewBtn.classList.add('copied');
-      trackShareOutcome('share_copy_succeeded', 'copy_preview');
-    } catch {
-      els.shareUrl.select();
-      document.execCommand('copy');
-      if (label) label.textContent = 'COPIED';
-      els.copyPreviewBtn.classList.add('copied');
-    }
-    setTimeout(() => {
-      if (label) label.textContent = original;
-      els.copyPreviewBtn.classList.remove('copied');
-    }, 1800);
-  });
 
   // Click-tracking for the link-style share buttons. The browser handles
   // navigation; we just record the intent.
