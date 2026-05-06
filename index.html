@@ -492,7 +492,7 @@ nav {
     min-height: 600px;
     margin-bottom: 56px;
   }
-  .hero-split-image img { object-position: 70% center; }
+  .hero-split-image img { object-position: center; }
   .hero-split-image::after {
     content: '';
     position: absolute;
@@ -1356,6 +1356,8 @@ footer a:hover { color: var(--accent); }
   }
   .hero-credibility-row {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 4px;
   }
 }
@@ -1668,33 +1670,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <span>✦ Priority access on launch day</span>
       <span>✦ Tell us what you most want blocked</span>
     </div>
-
-    <div class="hero-testimonials">
-      <figure class="hero-testimonial">
-        <blockquote class="hero-testimonial-quote">Rich has played an important role in the Smartphone Free Childhood journey since day one — both locally and across the UK.</blockquote>
-        <figcaption>
-          <div class="hero-testimonial-author">Joe Ryrie</div>
-          <div class="hero-testimonial-role">Co-founder, Smartphone Free Childhood</div>
-        </figcaption>
-      </figure>
-      <figure class="hero-testimonial">
-        <blockquote class="hero-testimonial-quote">Rich has been a key person in helping to launch and drive the national discussion around safer use of technology for children across the UK.</blockquote>
-        <figcaption>
-          <div class="hero-testimonial-author">Clare Fernyhough Reynolds</div>
-          <div class="hero-testimonial-role">Co-founder, Generation Focus</div>
-        </figcaption>
-      </figure>
-    </div>
-
-    <div class="hero-video-details">
-      <video
-        src="haven-video/out/haven-waitlist-60s.mp4"
-        poster="haven-video/out/haven-waitlist-poster-4s.jpg"
-        controls
-        preload="metadata"
-        playsinline
-      ></video>
-    </div>
   </section>
 
 </div>
@@ -1738,6 +1713,39 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         </a>
         <span class="values-cta-note">Free to join · no obligation · founding members first</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TESTIMONIALS + INTRO VIDEO ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">In their words</div>
+    <div class="hero-testimonials">
+      <figure class="hero-testimonial">
+        <blockquote class="hero-testimonial-quote">Rich has played an important role in the Smartphone Free Childhood journey since day one — both locally and across the UK.</blockquote>
+        <figcaption>
+          <div class="hero-testimonial-author">Joe Ryrie</div>
+          <div class="hero-testimonial-role">Co-founder, Smartphone Free Childhood</div>
+        </figcaption>
+      </figure>
+      <figure class="hero-testimonial">
+        <blockquote class="hero-testimonial-quote">Rich has been a key person in helping to launch and drive the national discussion around safer use of technology for children across the UK.</blockquote>
+        <figcaption>
+          <div class="hero-testimonial-author">Clare Fernyhough Reynolds</div>
+          <div class="hero-testimonial-role">Co-founder, Generation Focus</div>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="hero-video-details" style="margin-top: 56px;">
+      <video
+        src="haven-video/out/haven-waitlist-60s.mp4"
+        poster="haven-video/out/haven-waitlist-poster-4s.jpg"
+        controls
+        preload="metadata"
+        playsinline
+      ></video>
     </div>
   </div>
 </section>
@@ -1946,19 +1954,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   </div>
 </section>
 
-<!-- ═══════ WHY US ═══════ -->
-<section class="section">
-  <div class="container">
-    <div class="section-label">Why us</div>
-    <h2>We are <em>from</em> the community, building <em>for</em> the community.</h2>
-    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">We have experienced, first-hand, products that either see community as something to shoe-horn into their growth plans, or products built by people who haven't been part of driving forward this vital conversation — except when seeking to profiteer.</p>
-    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">So we're starting with you. The Haven waitlist is the proof-of-demand we need before we bring this network to market — and we've set the bar deliberately: <strong style="color: var(--ink); font-weight: 500;">1,000 founding members</strong>.</p>
-    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">When we hit 1,000, <em style="color: var(--accent); font-style: normal;">we launch on Kickstarter</em> — that's the moment Haven becomes real to back and ship. Founding members get first access to the campaign, founding pricing locked for life, and a direct line to the team building the network you helped prove.</p>
-    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 32px;">Later, we plan to open up equity to the community through crowdfunding — so the families using Haven can own a piece of what they helped build.</p>
-    <a href="/story/" class="nav-waitlist-btn" style="display: inline-flex;">Our story →</a>
-  </div>
-</section>
-
 <!-- ═══════ ROADMAP ═══════ -->
 <section class="section section-bg-deep">
   <div class="container">
@@ -2000,6 +1995,19 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <p class="roadmap-detail">Founding members go live.</p>
       </li>
     </ol>
+  </div>
+</section>
+
+<!-- ═══════ WHY US ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">Why us</div>
+    <h2>We are <em>from</em> the community, building <em>for</em> the community.</h2>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">We have experienced, first-hand, products that either see community as something to shoe-horn into their growth plans, or products built by people who haven't been part of driving forward this vital conversation — except when seeking to profiteer.</p>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">So we're starting with you. The Haven waitlist is the proof-of-demand we need before we bring this network to market — and we've set the bar deliberately: <strong style="color: var(--ink); font-weight: 500;">1,000 founding members</strong>.</p>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">When we hit 1,000, <em style="color: var(--accent); font-style: normal;">we launch on Kickstarter</em> — that's the moment Haven becomes real to back and ship. Founding members get first access to the campaign, founding pricing locked for life, and a direct line to the team building the network you helped prove.</p>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 32px;">Later, we plan to open up equity to the community through crowdfunding — so the families using Haven can own a piece of what they helped build.</p>
+    <a href="/story/" class="nav-waitlist-btn" style="display: inline-flex;">Our story →</a>
   </div>
 </section>
 
