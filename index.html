@@ -497,7 +497,7 @@ nav {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(15,27,45,0.55) 0%, rgba(15,27,45,0.35) 60%, rgba(15,27,45,0.7) 100%);
+    background: linear-gradient(180deg, rgba(15,27,45,0.78) 0%, rgba(15,27,45,0.62) 50%, rgba(15,27,45,0.85) 100%);
     pointer-events: none;
   }
   .hero-split-text {
@@ -735,11 +735,11 @@ nav {
 .values-section h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(36px, 5vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.025em;
+  font-size: clamp(30px, 3.6vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   margin-bottom: 24px;
-  max-width: 22ch;
+  max-width: 28ch;
   color: var(--bg);
 }
 .values-section h2 em {
@@ -1497,36 +1497,6 @@ footer a:hover { color: var(--accent); }
 }
 .share-btn:hover { background: var(--accent); color: var(--bg); }
 
-/* ───── STICKY MOBILE CTA ───── */
-.sticky-cta {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--ink);
-  padding: 16px 24px;
-  z-index: 100;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-.sticky-cta a {
-  display: block;
-  background: var(--accent);
-  color: var(--bg);
-  text-align: center;
-  padding: 14px;
-  border-radius: 100px;
-  font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.sticky-cta a:hover { background: #a83d18; }
-@media (max-width: 768px) {
-  .sticky-cta.visible { display: block; }
-}
-
 /* ───── ANIMATIONS ───── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -2201,10 +2171,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   </div>
 </footer>
 
-<div class="sticky-cta" id="stickyCta">
-  <a href="https://gethavenmobile.com/waitlist">Claim your founding spot →</a>
-</div>
-
 <script>
 // ─── Scroll reveal ───
 const observer = new IntersectionObserver(
@@ -2212,15 +2178,6 @@ const observer = new IntersectionObserver(
   { threshold: 0.12 }
 );
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// ─── Sticky mobile CTA ───
-const stickyCta = document.getElementById('stickyCta');
-const heroSection = document.querySelector('.hero');
-const stickyObserver = new IntersectionObserver(
-  ([entry]) => stickyCta.classList.toggle('visible', !entry.isIntersecting),
-  { threshold: 0 }
-);
-stickyObserver.observe(heroSection);
 </script>
 
 </body>
