@@ -274,26 +274,27 @@ main {
 .position-card {
   background: var(--bg-deep);
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 48px 32px;
-  text-align: center;
-  margin-bottom: 48px;
+  border-radius: 12px;
+  padding: 14px 22px;
+  text-align: left;
+  margin: 0 auto 24px 0;
+  width: fit-content;
 }
 .position-eyebrow {
-  font-size: 12px;
-  letter-spacing: 0.2em;
+  font-size: 11px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 16px;
+  margin-bottom: 2px;
 }
 .position-number {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(72px, 14vw, 144px);
-  line-height: 1;
-  letter-spacing: -0.04em;
+  font-size: clamp(34px, 5vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   color: var(--ink);
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 .position-number em {
   font-style: normal;
@@ -301,8 +302,15 @@ main {
   font-weight: 400;
 }
 .position-of {
-  font-size: 15px;
+  font-size: 12px;
   color: var(--ink-soft);
+}
+@media (max-width: 600px) {
+  .position-card {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
 }
 
 /* ───── GOAL TRACKER (community progress to 1,000) ───── */
@@ -653,18 +661,18 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
           <div class="goal-tracker-fill" id="goalFill"></div>
         </div>
         <div class="goal-tracker-text">
-          Haven launches at 1,000 names. <em id="goalCurrent">—</em> in. <em id="goalRemaining">—</em> to go.
+          Haven launches on Kickstarter at 1,000 names. <em id="goalCurrent">—</em> in. <em id="goalRemaining">—</em> to go.
         </div>
       </div>
 
       <!-- ─── SHARE BLOCK (front-and-centre) ─── -->
       <div class="share-block">
-        <span class="share-label">Your move: bring <em>one more parent</em>.</span>
+        <span class="share-label">Your move: <em>bring one more parent</em>.</span>
 
         <div class="share-buttons share-buttons--primary">
           <a class="share-btn share-btn-primary" id="whatsappDmBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_dm">
             <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
-            Send to one parent friend
+            Send to another parent
           </a>
           <a class="share-btn share-btn-strong" id="whatsappSchoolBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_school">
             <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
