@@ -64,7 +64,7 @@ body {
 
 /* ───── PAGE HEADER (full width) ───── */
 .page-header {
-  padding: 28px 32px;
+  padding: 14px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,7 +72,7 @@ body {
   z-index: 2;
 }
 @media (max-width: 768px) {
-  .page-header { padding: 22px 24px; }
+  .page-header { padding: 12px 24px; }
 }
 .logo {
   font-family: var(--serif);
@@ -122,7 +122,7 @@ main {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -155,19 +155,6 @@ main {
   line-height: 1.55;
   max-width: 52ch;
   margin-bottom: 40px;
-}
-
-.ref-banner {
-  display: inline-block;
-  background: rgba(193, 74, 31, 0.08);
-  border: 1px solid rgba(193, 74, 31, 0.25);
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 10px 18px;
-  border-radius: 100px;
-  margin-bottom: 24px;
 }
 
 .signup-form {
@@ -219,6 +206,14 @@ main {
   }
   .signup-form input { padding: 12px 8px; }
   .signup-form button { width: 100%; padding: 16px; }
+}
+
+.signup-reassurance {
+  margin: 12px auto 0;
+  max-width: 520px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .form-error {
@@ -305,13 +300,6 @@ main {
   font-size: 12px;
   color: var(--ink-soft);
 }
-@media (max-width: 600px) {
-  .position-card {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
-}
 
 /* ───── GOAL TRACKER (community progress to 1,000) ───── */
 .goal-tracker {
@@ -330,7 +318,7 @@ main {
   height: 100%;
   background: var(--accent);
   border-radius: 100px;
-  transition: width 0.6s ease;
+  transition: width 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   width: 0%;
 }
 .goal-tracker-text {
@@ -608,7 +596,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 
 <header class="page-header">
   <a href="/" class="logo"><span class="logo-mark"></span>Haven</a>
-  <a href="/" class="nav-back">← Back to home</a>
 </header>
 
 <main>
@@ -617,7 +604,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <!-- ─── SIGNUP STATE ─── -->
     <section class="signup-state" id="signupState">
       <span class="section-label fade-up">Founding waitlist</span>
-      <div class="ref-banner fade-up d1" id="refBanner" hidden>A Haven founding member sent you here. Join the waitlist &amp; share with others too. No commitment.</div>
       <h1 class="fade-up d1">Help us build the mobile network <em>we all want to exist.</em></h1>
       <p class="lede fade-up d2">No commitment. No payment. Adding your name proves there's demand — and gets us to the 1,000 we need before Haven launches on Kickstarter.</p>
 
@@ -632,11 +618,11 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         />
         <button type="submit" id="submitBtn">Add my name</button>
       </form>
+      <p class="signup-reassurance fade-up d3">No commitment, no payment.</p>
       <div class="form-error" id="formError" role="alert"></div>
 
       <ul class="benefits-list fade-up d4">
-        <li><strong>No commitment, no payment.</strong> Joining the waitlist is just adding your name to the count.</li>
-        <li>If you're one of the first 1,000, you'll be <em>offered</em> lifetime founding pricing (£25 eSIM, £8/month) when we launch — your option, not a commitment.</li>
+        <li>First 1,000 signups <em>offered</em> lifetime founding pricing of £8/month at launch — your option then, NOT a commitment to a contract now.</li>
         <li>If you do choose to activate at launch, you get priority access in queue order.</li>
         <li>Tell us what you most want blocked — we build for the founding families first.</li>
         <li>A direct line to the founding team — replies go to a real inbox.</li>
@@ -661,7 +647,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
           <div class="goal-tracker-fill" id="goalFill"></div>
         </div>
         <div class="goal-tracker-text">
-          Haven launches on Kickstarter at 1,000 names. <em id="goalCurrent">—</em> in. <em id="goalRemaining">—</em> to go.
+          Haven launches on Kickstarter at 1,000 names.<br>
+          <em id="goalCurrent">—</em> already signed up. <em id="goalRemaining">—</em> to go.
         </div>
       </div>
 
@@ -674,25 +661,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
             <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
             Send to another parent
           </a>
-          <a class="share-btn share-btn-strong" id="whatsappSchoolBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_school">
-            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
-            Share with a school parent WhatsApp group
-          </a>
-          <a class="share-btn share-btn-strong" id="whatsappSfcBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_sfc">
-            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
-            Share with your local SFC WhatsApp group
-          </a>
-        </div>
-
-        <div class="share-buttons share-buttons--secondary">
-          <a class="share-btn" id="emailBtn" data-share-channel="email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            Email
-          </a>
-          <button type="button" class="share-btn" id="copyBtn" data-share-channel="copy">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <span id="copyBtnLabel">Copy link</span>
-          </button>
         </div>
 
         <div class="share-preview">
@@ -742,7 +710,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   const els = {
     signup:    document.getElementById('signupState'),
     status:    document.getElementById('statusState'),
-    refBanner: document.getElementById('refBanner'),
     form:      document.getElementById('form'),
     email:     document.getElementById('email'),
     submitBtn: document.getElementById('submitBtn'),
@@ -751,13 +718,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     totalNum:  document.getElementById('totalNum'),
     refNum:    document.getElementById('refNum'),
     shareUrl:  document.getElementById('shareUrl'),
-    copyBtn:   document.getElementById('copyBtn'),
-    copyBtnLabel: document.getElementById('copyBtnLabel'),
     refreshBtn: document.getElementById('refreshBtn'),
     whatsappDm: document.getElementById('whatsappDmBtn'),
-    whatsappSchool: document.getElementById('whatsappSchoolBtn'),
-    whatsappSfc: document.getElementById('whatsappSfcBtn'),
-    emailBtn:  document.getElementById('emailBtn'),
     sharePreview: document.getElementById('sharePreview'),
     copyPreviewBtn: document.getElementById('copyPreviewBtn'),
     copyPreviewBtnLabel: document.getElementById('copyPreviewBtnLabel'),
@@ -770,32 +732,13 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 
   let currentShareUrl = '';
   let currentShareMessage = '';
+  let goalAnimated = false;
   const SHARE_SUBJECT = 'Help us build the mobile network we all want to exist';
 
-  // 1:1 DM to a single parent friend. Personal, warm opener — universal
-  // fallback for users who aren't in either a class WhatsApp group or a
-  // local SFC chapter.
+  // 1:1 DM to a single parent. Personal, warm opener — single message,
+  // single paragraph, the way someone actually pings a friend on WhatsApp.
   const buildDmBlurb = () =>
-    "Hey - thought of you. New UK mobile network being built around the under-16s social media ban. It's called Haven, by parents from the Smartphone Free Childhood community.\n\n" +
-    "Pre-launch. They need 1,000 names on the waitlist to take it to Kickstarter.\n\n" +
-    "No commitment, no payment - just a name. Worth 30 secs if you'd want this for your family:";
-
-  // Tailored to a class / school year WhatsApp group. Assumes zero context
-  // — explains what Haven is, what SFC is, and why it matters.
-  const buildSchoolBlurb = () =>
-    "Off topic but worth 30 seconds for any parents here.\n\n" +
-    "A new UK mobile network - Haven - is being built specifically around the under-16s social media ban. By parents from the Smartphone Free Childhood community.\n\n" +
-    "Pre-launch. They need 1,000 waitlist names to take it to Kickstarter and actually launch.\n\n" +
-    "No commitment, no payment - just a name on a list to prove demand.\n\n" +
-    "If you'd want this for your family, join me:";
-
-  // Tailored to a local SFC group. Assumes the audience already knows the
-  // smartphone-free-childhood context — leans on insider tone.
-  const buildSfcBlurb = () =>
-    "Heads up — one of our community is building Haven, a UK mobile network from scratch around the under-16s social media ban (and what SFC stands for).\n\n" +
-    "Pre-launch. They need 1,000 waitlist names to take it to Kickstarter.\n\n" +
-    "No commitment, no payment. Just a name on a list.\n\n" +
-    "If you'd want a no-social-media phone option for your kid at launch, join me:";
+    "Hey - just thought of you. New UK mobile network being built around the under-16s social media ban. It's called Haven, by parents from the Smartphone Free Childhood community. Pre-launch. They need 1,000 names on the waitlist to take it to Kickstarter. No commitment, no payment - just a name. Worth 30 secs if you'd want this for your family:";
 
   // Fire-and-forget PostHog event helper. Safe if posthog isn't loaded
   // (e.g. consent declined) — we just no-op.
@@ -870,31 +813,38 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     const url = `${SITE}/?ref=${data.ref_code}`;
     els.shareUrl.value = url;
 
-    const dmText     = `${buildDmBlurb()} ${url}`;
-    const schoolText = `${buildSchoolBlurb()} ${url}`;
-    const sfcText    = `${buildSfcBlurb()} ${url}`;
+    const dmText = `${buildDmBlurb()} ${url}`;
 
     currentShareUrl = url;
-    // Copy / email default to the school-group blurb — it assumes the least
-    // context and reads cleanly to anyone.
-    currentShareMessage = schoolText;
+    // Preview-card COPY button uses this — same text as the DM button sends.
+    currentShareMessage = dmText;
 
-    els.whatsappDm.href     = `https://wa.me/?text=${encodeURIComponent(dmText)}`;
-    els.whatsappSchool.href = `https://wa.me/?text=${encodeURIComponent(schoolText)}`;
-    els.whatsappSfc.href    = `https://wa.me/?text=${encodeURIComponent(sfcText)}`;
-    els.emailBtn.href       = `mailto:?subject=${encodeURIComponent(SHARE_SUBJECT)}&body=${encodeURIComponent(schoolText)}`;
+    els.whatsappDm.href = `https://wa.me/?text=${encodeURIComponent(dmText)}`;
 
-    // Preview shows the school-group blurb — same text Email and Copy default to.
-    els.sharePreview.textContent = schoolText;
+    // Preview shows the exact DM message that gets sent.
+    els.sharePreview.textContent = dmText;
 
     // Goal tracker — community progress to the 1,000-name launch threshold.
     const GOAL = 1000;
     const total = Number(data.total) || 0;
     const remaining = Math.max(0, GOAL - total);
     const pct = Math.min(100, (total / GOAL) * 100);
-    els.goalFill.style.width = `${pct}%`;
     els.goalCurrent.textContent = total.toLocaleString('en-GB');
     els.goalRemaining.textContent = remaining.toLocaleString('en-GB');
+
+    // First render: pin to 0% then defer to next frame so the CSS transition
+    // catches the change and animates up. Subsequent renders just slide.
+    if (!goalAnimated) {
+      goalAnimated = true;
+      els.goalFill.style.width = '0%';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          els.goalFill.style.width = `${pct}%`;
+        });
+      });
+    } else {
+      els.goalFill.style.width = `${pct}%`;
+    }
 
     // Show the "X shared via your link" stat only once the user has actually
     // shared at least once — at zero it's demotivating.
@@ -986,9 +936,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       }
     }
 
-    // Rule 4: signup form (with referrer banner if URL has a fresh ?ref= OR
-    // a pending ref was carried over from the homepage)
-    if (refForSignup) els.refBanner.hidden = false;
+    // Rule 4: signup form. refForSignup still flows into submitSignup() as
+    // attribution; the banner that used to surface the referrer was removed.
     unboot();
 
     els.form.addEventListener('submit', async (e) => {
@@ -1018,33 +967,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     });
   })();
 
-  // Copy invite (message + link, so paste anywhere has context)
-  els.copyBtn.addEventListener('click', async () => {
-    trackShare('copy');
-    const payload = currentShareMessage || els.shareUrl.value;
-    const label = els.copyBtnLabel;
-    const original = label ? label.textContent : 'Copy link';
-    try {
-      await navigator.clipboard.writeText(payload);
-      if (label) label.textContent = 'Copied';
-      els.copyBtn.classList.add('copied');
-      trackShareOutcome('share_copy_succeeded', 'copy');
-      setTimeout(() => {
-        if (label) label.textContent = original;
-        els.copyBtn.classList.remove('copied');
-      }, 1800);
-    } catch {
-      els.shareUrl.select();
-      document.execCommand('copy');
-      if (label) label.textContent = 'Copied';
-      els.copyBtn.classList.add('copied');
-      setTimeout(() => {
-        if (label) label.textContent = original;
-        els.copyBtn.classList.remove('copied');
-      }, 1800);
-    }
-  });
-
   // In-context COPY button inside the "What gets shared" preview card
   els.copyPreviewBtn.addEventListener('click', async () => {
     trackShare('copy_preview');
@@ -1070,7 +992,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 
   // Click-tracking for the link-style share buttons. The browser handles
   // navigation; we just record the intent.
-  ['whatsappDmBtn', 'whatsappSchoolBtn', 'whatsappSfcBtn', 'emailBtn'].forEach((id) => {
+  ['whatsappDmBtn'].forEach((id) => {
     const node = document.getElementById(id);
     if (!node) return;
     const channel = node.getAttribute('data-share-channel') || id;
