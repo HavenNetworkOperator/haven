@@ -305,6 +305,38 @@ main {
   color: var(--ink-soft);
 }
 
+/* ───── GOAL TRACKER (community progress to 1,000) ───── */
+.goal-tracker {
+  margin: 0 0 32px;
+  padding: 0 4px;
+}
+.goal-tracker-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--line);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.goal-tracker-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 100px;
+  transition: width 0.6s ease;
+  width: 0%;
+}
+.goal-tracker-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--ink-soft);
+  letter-spacing: -0.005em;
+}
+.goal-tracker-text em {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: 400;
+}
+
 /* ───── SHARE FOOTNOTE (proof + reassurance) ───── */
 .share-footnote {
   display: flex;
@@ -317,6 +349,8 @@ main {
   font-size: 13px;
   color: var(--muted);
 }
+.share-footnote-stat[hidden],
+.share-footnote-sep[hidden] { display: none; }
 .share-footnote-stat {
   font-family: var(--serif);
   font-size: 15px;
@@ -613,12 +647,26 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <div class="position-of">of <span id="totalNum">—</span> founding members so far</div>
       </div>
 
+      <!-- ─── GOAL TRACKER (community progress to 1,000) ─── -->
+      <div class="goal-tracker">
+        <div class="goal-tracker-bar">
+          <div class="goal-tracker-fill" id="goalFill"></div>
+        </div>
+        <div class="goal-tracker-text">
+          Haven launches at 1,000 names. <em id="goalCurrent">—</em> in. <em id="goalRemaining">—</em> to go.
+        </div>
+      </div>
+
       <!-- ─── SHARE BLOCK (front-and-centre) ─── -->
       <div class="share-block">
-        <span class="share-label">Please share this to help us build the mobile network <em>we all want to exist.</em></span>
+        <span class="share-label">Your move: bring <em>one more parent</em>.</span>
 
         <div class="share-buttons share-buttons--primary">
-          <a class="share-btn share-btn-primary" id="whatsappSchoolBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_school">
+          <a class="share-btn share-btn-primary" id="whatsappDmBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_dm">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
+            Send to one parent friend
+          </a>
+          <a class="share-btn share-btn-strong" id="whatsappSchoolBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_school">
             <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.523 5.846L0 24l6.328-1.65A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.058 21.785a9.823 9.823 0 01-5.005-1.371l-.359-.213-3.713.967.989-3.62-.234-.371A9.79 9.79 0 012.273 12c0-5.401 4.395-9.795 9.797-9.795a9.74 9.74 0 016.927 2.872 9.74 9.74 0 012.872 6.927c-.002 5.402-4.396 9.781-9.811 9.781z"/></svg>
             Share with a school parent WhatsApp group
           </a>
@@ -654,8 +702,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       </div>
 
       <div class="share-footnote">
-        <span class="share-footnote-stat"><em id="refNum">0</em> shared via your link so far</span>
-        <span class="share-footnote-sep">·</span>
+        <span class="share-footnote-stat" id="shareFootnoteStat" hidden><em id="refNum">0</em> shared via your link so far</span>
+        <span class="share-footnote-sep" id="shareFootnoteSep" hidden>·</span>
         <span class="share-footnote-text">Your share link is also in your welcome email.</span>
       </div>
 
@@ -698,17 +746,31 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     copyBtn:   document.getElementById('copyBtn'),
     copyBtnLabel: document.getElementById('copyBtnLabel'),
     refreshBtn: document.getElementById('refreshBtn'),
+    whatsappDm: document.getElementById('whatsappDmBtn'),
     whatsappSchool: document.getElementById('whatsappSchoolBtn'),
     whatsappSfc: document.getElementById('whatsappSfcBtn'),
     emailBtn:  document.getElementById('emailBtn'),
     sharePreview: document.getElementById('sharePreview'),
     copyPreviewBtn: document.getElementById('copyPreviewBtn'),
     copyPreviewBtnLabel: document.getElementById('copyPreviewBtnLabel'),
+    goalFill: document.getElementById('goalFill'),
+    goalCurrent: document.getElementById('goalCurrent'),
+    goalRemaining: document.getElementById('goalRemaining'),
+    shareFootnoteStat: document.getElementById('shareFootnoteStat'),
+    shareFootnoteSep: document.getElementById('shareFootnoteSep'),
   };
 
   let currentShareUrl = '';
   let currentShareMessage = '';
   const SHARE_SUBJECT = 'Help us build the mobile network we all want to exist';
+
+  // 1:1 DM to a single parent friend. Personal, warm opener — universal
+  // fallback for users who aren't in either a class WhatsApp group or a
+  // local SFC chapter.
+  const buildDmBlurb = () =>
+    "Hey - thought of you. New UK mobile network being built around the under-16s social media ban. It's called Haven, by parents from the Smartphone Free Childhood community.\n\n" +
+    "Pre-launch. They need 1,000 names on the waitlist to take it to Kickstarter.\n\n" +
+    "No commitment, no payment - just a name. Worth 30 secs if you'd want this for your family:";
 
   // Tailored to a class / school year WhatsApp group. Assumes zero context
   // — explains what Haven is, what SFC is, and why it matters.
@@ -800,6 +862,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     const url = `${SITE}/?ref=${data.ref_code}`;
     els.shareUrl.value = url;
 
+    const dmText     = `${buildDmBlurb()} ${url}`;
     const schoolText = `${buildSchoolBlurb()} ${url}`;
     const sfcText    = `${buildSfcBlurb()} ${url}`;
 
@@ -808,12 +871,29 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     // context and reads cleanly to anyone.
     currentShareMessage = schoolText;
 
+    els.whatsappDm.href     = `https://wa.me/?text=${encodeURIComponent(dmText)}`;
     els.whatsappSchool.href = `https://wa.me/?text=${encodeURIComponent(schoolText)}`;
     els.whatsappSfc.href    = `https://wa.me/?text=${encodeURIComponent(sfcText)}`;
     els.emailBtn.href       = `mailto:?subject=${encodeURIComponent(SHARE_SUBJECT)}&body=${encodeURIComponent(schoolText)}`;
 
     // Preview shows the school-group blurb — same text Email and Copy default to.
     els.sharePreview.textContent = schoolText;
+
+    // Goal tracker — community progress to the 1,000-name launch threshold.
+    const GOAL = 1000;
+    const total = Number(data.total) || 0;
+    const remaining = Math.max(0, GOAL - total);
+    const pct = Math.min(100, (total / GOAL) * 100);
+    els.goalFill.style.width = `${pct}%`;
+    els.goalCurrent.textContent = total.toLocaleString('en-GB');
+    els.goalRemaining.textContent = remaining.toLocaleString('en-GB');
+
+    // Show the "X shared via your link" stat only once the user has actually
+    // shared at least once — at zero it's demotivating.
+    const shared = Number(data.referrals) || 0;
+    const showStat = shared > 0;
+    els.shareFootnoteStat.hidden = !showStat;
+    els.shareFootnoteSep.hidden = !showStat;
   }
 
   async function fetchStatus(refCode) {
@@ -982,7 +1062,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 
   // Click-tracking for the link-style share buttons. The browser handles
   // navigation; we just record the intent.
-  ['whatsappSchoolBtn', 'whatsappSfcBtn', 'emailBtn'].forEach((id) => {
+  ['whatsappDmBtn', 'whatsappSchoolBtn', 'whatsappSfcBtn', 'emailBtn'].forEach((id) => {
     const node = document.getElementById(id);
     if (!node) return;
     const channel = node.getAttribute('data-share-channel') || id;
