@@ -489,6 +489,59 @@ main {
 }
 .share-btn[hidden] { display: none; }
 
+.share-preview {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.share-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.share-preview-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.share-preview-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.share-preview-copy svg { width: 12px; height: 12px; }
+.share-preview-copy:hover {
+  background: #fff;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.share-preview-copy.copied {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+.share-preview-text { white-space: pre-wrap; word-break: break-word; }
+
 .refresh-row {
   margin-top: 32px;
   display: flex;
@@ -673,6 +726,17 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
           </button>
         </div>
 
+        <div class="share-preview">
+          <div class="share-preview-header">
+            <span class="share-preview-label">What gets shared</span>
+            <button type="button" class="share-preview-copy" id="copyPreviewBtn" data-share-channel="copy_preview">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="copyPreviewBtnLabel">COPY</span>
+            </button>
+          </div>
+          <span class="share-preview-text" id="sharePreview"></span>
+        </div>
+
         <input type="text" id="shareUrl" readonly aria-hidden="true" tabindex="-1" class="share-url-hidden" />
       </div>
 
@@ -724,6 +788,9 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     whatsappSchool: document.getElementById('whatsappSchoolBtn'),
     whatsappSfc: document.getElementById('whatsappSfcBtn'),
     emailBtn:  document.getElementById('emailBtn'),
+    sharePreview: document.getElementById('sharePreview'),
+    copyPreviewBtn: document.getElementById('copyPreviewBtn'),
+    copyPreviewBtnLabel: document.getElementById('copyPreviewBtnLabel'),
   };
 
   let currentShareUrl = '';
@@ -734,10 +801,10 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   // — explains what Haven is, what SFC is, and why it matters.
   const buildSchoolBlurb = () =>
     "Off topic but worth 30 seconds for any parents here.\n\n" +
-    "A new UK mobile network — Haven — is being built specifically around the under-16s social media ban. By parents from the Smartphone Free Childhood community.\n\n" +
+    "A new UK mobile network - Haven - is being built specifically around the under-16s social media ban. By parents from the Smartphone Free Childhood community.\n\n" +
     "Pre-launch. They need 1,000 waitlist names to take it to Kickstarter and actually launch.\n\n" +
-    "No commitment, no payment — just a name on a list to help prove demand.\n\n" +
-    "If you'd want this for your kid's first phone, join me:";
+    "No commitment, no payment - just a name on a list to prove demand.\n\n" +
+    "If you'd want this for your family, join me:";
 
   // Tailored to a local SFC group. Assumes the audience already knows the
   // smartphone-free-childhood context — leans on insider tone.
@@ -831,6 +898,9 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     els.whatsappSchool.href = `https://wa.me/?text=${encodeURIComponent(schoolText)}`;
     els.whatsappSfc.href    = `https://wa.me/?text=${encodeURIComponent(sfcText)}`;
     els.emailBtn.href       = `mailto:?subject=${encodeURIComponent(SHARE_SUBJECT)}&body=${encodeURIComponent(schoolText)}`;
+
+    // Preview shows the school-group blurb — same text Email and Copy default to.
+    els.sharePreview.textContent = schoolText;
   }
 
   async function fetchStatus(refCode) {
@@ -972,6 +1042,29 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         els.copyBtn.classList.remove('copied');
       }, 1800);
     }
+  });
+
+  // In-context COPY button inside the "What gets shared" preview card
+  els.copyPreviewBtn.addEventListener('click', async () => {
+    trackShare('copy_preview');
+    const payload = currentShareMessage || els.shareUrl.value;
+    const label = els.copyPreviewBtnLabel;
+    const original = label ? label.textContent : 'COPY';
+    try {
+      await navigator.clipboard.writeText(payload);
+      if (label) label.textContent = 'COPIED';
+      els.copyPreviewBtn.classList.add('copied');
+      trackShareOutcome('share_copy_succeeded', 'copy_preview');
+    } catch {
+      els.shareUrl.select();
+      document.execCommand('copy');
+      if (label) label.textContent = 'COPIED';
+      els.copyPreviewBtn.classList.add('copied');
+    }
+    setTimeout(() => {
+      if (label) label.textContent = original;
+      els.copyPreviewBtn.classList.remove('copied');
+    }, 1800);
   });
 
   // Click-tracking for the link-style share buttons. The browser handles
