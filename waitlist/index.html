@@ -305,69 +305,6 @@ main {
   color: var(--ink-soft);
 }
 
-.status-h2 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(28px, 4vw, 40px);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  margin-bottom: 16px;
-  max-width: 18ch;
-}
-.status-h2 em {
-  font-style: normal;
-  color: var(--accent);
-  font-weight: 400;
-}
-.status-lede {
-  font-size: 17px;
-  color: var(--ink-soft);
-  margin-bottom: 40px;
-  max-width: 52ch;
-}
-
-/* ───── WHAT HAPPENS NEXT ───── */
-.next-steps {
-  list-style: none;
-  margin: 8px 0 48px;
-  padding: 28px 28px 24px;
-  background: var(--bg-deep);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  display: grid;
-  gap: 20px;
-}
-.next-steps li {
-  display: grid;
-  grid-template-columns: minmax(140px, 200px) 1fr;
-  gap: 20px;
-  align-items: baseline;
-}
-.next-step-label {
-  font-family: var(--serif);
-  font-style: normal;
-  font-size: 15px;
-  color: var(--accent);
-  font-weight: 400;
-  line-height: 1.3;
-}
-.next-step-text {
-  font-size: 15px;
-  color: var(--ink-soft);
-  line-height: 1.55;
-}
-@media (max-width: 600px) {
-  .next-steps {
-    padding: 22px 20px 20px;
-    gap: 18px;
-  }
-  .next-steps li {
-    grid-template-columns: 1fr;
-    gap: 4px;
-  }
-  .next-step-label { font-size: 14px; }
-}
-
 /* ───── SHARE FOOTNOTE (proof + reassurance) ───── */
 .share-footnote {
   display: flex;
@@ -414,11 +351,6 @@ main {
 .share-label em {
   font-style: normal;
   color: var(--accent);
-}
-.next-step-text em {
-  font-style: normal;
-  color: var(--accent);
-  font-weight: 400;
 }
 
 .share-buttons {
@@ -680,25 +612,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <div class="position-number">#<em id="posNum">—</em></div>
         <div class="position-of">of <span id="totalNum">—</span> founding members so far</div>
       </div>
-
-      <h2 class="status-h2">Please share this to help us build the mobile network <em>we all want to exist.</em></h2>
-      <p class="status-lede">No commitment for anyone who signs up — every name just helps prove there's enough demand to launch. Get us to 1,000 and Haven officially goes to Kickstarter. The first 1,000 to sign up will be offered lifetime founding pricing at launch — your option. You are not committing to a contract!</p>
-
-      <!-- ─── WHAT HAPPENS NEXT ─── -->
-      <ol class="next-steps">
-        <li>
-          <span class="next-step-label">Now</span>
-          <span class="next-step-text">A welcome email is on its way. Your share link is in there too — in case you close this tab.</span>
-        </li>
-        <li>
-          <span class="next-step-label">Every other Friday</span>
-          <span class="next-step-text">One short founder update. What we built, who we spoke to, how many waitlist names remain to go.</span>
-        </li>
-        <li>
-          <span class="next-step-label">September 2026 (target)</span>
-          <span class="next-step-text">Launch. The first 1,000 to sign up will be <em>offered</em> lifetime founding pricing (£25 eSIM, £8/month) — your option, not a commitment. Change your mind anytime; nothing to pay until you say yes.</span>
-        </li>
-      </ol>
 
       <!-- ─── SHARE BLOCK (front-and-centre) ─── -->
       <div class="share-block">
