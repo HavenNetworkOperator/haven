@@ -332,6 +332,180 @@ nav {
   pointer-events: none;
 }
 
+/* ───── SITE HEADER (overlays hero) ───── */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: transparent;
+}
+.site-header .container { padding-top: 0; padding-bottom: 0; }
+.site-header--over-dark .logo { color: var(--bg); }
+.site-header--over-dark .logo-mark::after { background: var(--ink); }
+.site-header--over-dark .nav-meta {
+  color: rgba(244, 239, 230, 0.78);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.site-header--over-dark .nav-meta:hover { color: var(--bg) !important; }
+.site-header--over-dark .nav-waitlist-btn {
+  color: var(--bg);
+  border-color: rgba(244, 239, 230, 0.45);
+}
+.site-header--over-dark .nav-waitlist-btn:hover {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--bg);
+}
+.site-header--over-dark .nav-waitlist-btn:hover .nav-waitlist-dot { background: var(--accent); }
+.site-header--over-dark .nav-waitlist-dot { background: var(--accent-soft); }
+
+/* ───── HERO (split layout) ───── */
+.hero-split {
+  position: relative;
+  z-index: 2;
+  background: var(--ink);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 620px;
+  overflow: hidden;
+  margin-bottom: 80px;
+}
+.hero-split-text {
+  padding-top: clamp(120px, 10vw, 160px);
+  padding-right: clamp(32px, 5vw, 88px);
+  padding-bottom: clamp(72px, 8vw, 110px);
+  padding-left: max(32px, calc((100vw - 1180px) / 2 + 32px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--bg);
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+.hero-split-text h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 4.4vw, 62px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--bg);
+  margin: 0 0 26px;
+  max-width: 16ch;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 96;
+  animation: fadeUp 0.9s ease-out 0.05s backwards;
+}
+.hero-split-text h1 em {
+  font-style: normal;
+  color: var(--accent-soft);
+  font-weight: 400;
+}
+.hero-split-sub {
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(244, 239, 230, 0.72);
+  margin: 0 0 36px;
+  max-width: 42ch;
+  animation: fadeUp 1s ease-out 0.15s backwards;
+}
+.hero-split-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 16px 32px;
+  border-radius: 100px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: background 0.2s, transform 0.1s;
+  animation: fadeUp 1s ease-out 0.25s backwards;
+}
+.hero-split-cta:hover { background: #a83d18; }
+.hero-split-cta:active { transform: scale(0.97); }
+
+.hero-split-features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(48px, 6vw, 76px);
+  max-width: 480px;
+  animation: fadeUp 1s ease-out 0.35s backwards;
+}
+.hero-split-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  min-width: 0;
+}
+.hero-split-feature-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg);
+  opacity: 0.9;
+}
+.hero-split-feature-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+.hero-split-feature span {
+  font-size: 12px;
+  color: rgba(244, 239, 230, 0.72);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.hero-split-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--ink);
+  overflow: hidden;
+}
+.hero-split-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    margin-bottom: 56px;
+  }
+  .hero-split-image {
+    order: -1;
+    height: 280px;
+  }
+  .hero-split-text { padding: 56px 28px; }
+  .hero-split-text h1 { max-width: none; }
+  .hero-split-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+    max-width: none;
+  }
+}
+
 /* ───── SECTION BASE ───── */
 .section {
   padding: 120px 0;
@@ -1196,6 +1370,73 @@ footer a:hover { color: var(--accent); }
   animation: fadeUp 1s ease-out 0.3s backwards;
 }
 
+/* ───── HERO TRIGGER BLOCK (with progress bar) ───── */
+.hero-trigger-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  animation: fadeUp 1s ease-out 0.3s backwards;
+}
+.hero-trigger-block .hero-trigger-note--pre {
+  margin-bottom: 6px;
+  animation: none;
+}
+.hero-trigger-progress-text {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink-soft);
+  text-align: center;
+  letter-spacing: 0.01em;
+  margin-bottom: 16px;
+}
+.hero-trigger-progress-text strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+.hero-progress {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  height: 4px;
+  background: rgba(15, 27, 45, 0.1);
+  border-radius: 999px;
+  overflow: visible;
+}
+.hero-progress-fill {
+  position: relative;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+.hero-progress-dot {
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.hero-progress-dot::before,
+.hero-progress-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  z-index: -1;
+}
+.hero-progress-dot::before { animation: ring-pulse 2s ease-out infinite; }
+.hero-progress-dot::after  { animation: ring-pulse 2s ease-out infinite 1s; }
+@keyframes ring-pulse {
+  0%   { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
 /* ───── MEMBER COUNTER ───── */
 .signup-counter {
   margin-top: 8px;
@@ -1320,30 +1561,92 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 </head>
 <body>
 
-<div class="container">
-
-  <!-- ═══════ NAV ═══════ -->
-  <nav>
-    <a href="https://gethavenmobile.com/" class="logo">
-      <span class="logo-mark"></span>
-      <span>Haven</span>
-    </a>
-    <div class="nav-right">
-      <a href="/story/" class="nav-meta" style="text-decoration: none; color: var(--muted); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;">Our story</a>
-      <a href="https://gethavenmobile.com/waitlist" class="nav-waitlist-btn">
-        <span class="nav-waitlist-dot"></span>
-        Join the waitlist
+<!-- ═══════ NAV (overlays the hero) ═══════ -->
+<header class="site-header site-header--over-dark">
+  <div class="container">
+    <nav>
+      <a href="https://gethavenmobile.com/" class="logo">
+        <span class="logo-mark"></span>
+        <span>Haven</span>
       </a>
-    </div>
-  </nav>
+      <div class="nav-right">
+        <a href="/story/" class="nav-meta">Our story</a>
+        <a href="https://gethavenmobile.com/waitlist" class="nav-waitlist-btn">
+          <span class="nav-waitlist-dot"></span>
+          Join the waitlist
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
 
-  <!-- ═══════ HERO ═══════ -->
-  <section class="hero">
-    <h1>The first UK mobile network built around the social media ban for under-16s</h1>
-    <p class="hero-sub">
+<!-- ═══════ HERO (split — dark panel + image) ═══════ -->
+<section class="hero-split">
+  <div class="hero-split-text">
+    <h1>The first UK mobile network <em>built around the social media ban for under-16s</em></h1>
+    <p class="hero-split-sub">
       Smartphone Free Childhood gave parents permission to wait. Haven is the network for when you finally hand over a phone — safe at the network layer, not simply an app they can delete.
     </p>
-    <p class="hero-trigger-note hero-trigger-note--pre">Help us reach <em>1,000 parents on the waitlist</em> — then Haven officially launches on Kickstarter.</p>
+    <a href="https://gethavenmobile.com/waitlist" class="hero-split-cta">Join the waitlist →</a>
+    <div class="hero-split-features">
+      <div class="hero-split-feature">
+        <span class="hero-split-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </span>
+        <span>Network-level<br>protection</span>
+      </div>
+      <div class="hero-split-feature">
+        <span class="hero-split-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="3" width="14" height="18" rx="2"/>
+            <rect x="9" y="9" width="6" height="6" rx="1"/>
+          </svg>
+        </span>
+        <span>eSIM<br>first</span>
+      </div>
+      <div class="hero-split-feature">
+        <span class="hero-split-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="11" width="16" height="10" rx="2"/>
+            <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+          </svg>
+        </span>
+        <span>No app to<br>uninstall</span>
+      </div>
+      <div class="hero-split-feature">
+        <span class="hero-split-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
+        <span>Built for UK<br>families</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-split-image">
+    <img src="/hero-hallway.svg" alt="A parent handing a phone to their teenage daughter in a hallway." onerror="this.style.display='none'" />
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- ═══════ HERO SUPPORTING (proof / trust) ═══════ -->
+  <section class="hero hero--supporting">
+    <div class="hero-trigger-block">
+      <p class="hero-trigger-note hero-trigger-note--pre">Haven launches on Kickstarter at <em>1,000 names</em>.</p>
+      <p class="hero-trigger-progress-text"><strong>140</strong> already signed up. <strong>860</strong> to go.</p>
+      <div class="hero-progress" role="progressbar" aria-valuenow="140" aria-valuemin="0" aria-valuemax="1000" aria-label="Waitlist progress">
+        <div class="hero-progress-fill" style="width: 14%;">
+          <span class="hero-progress-dot"></span>
+        </div>
+      </div>
+    </div>
     <div class="hero-credibility">
       <div class="hero-credibility-row">
         <span class="hero-credibility-label">Founders featured on</span>
@@ -1409,6 +1712,49 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   </section>
 
 </div>
+
+<!-- ═══════ VALUES ═══════ -->
+<section class="values-section">
+  <div class="container">
+    <div class="values-inner">
+      <div class="values-label fade-in">How Haven is different</div>
+      <h2 class="fade-in">We have a point of view.<br><em>And we're not hiding it.</em></h2>
+      <p class="values-sub fade-in">
+        Most networks are neutral. We're not. We think children deserve a network with opinions — and the backbone to act on them.
+      </p>
+
+      <div class="values-grid">
+        <div class="value-card fade-in">
+          <div class="value-card-icon">📵</div>
+          <h3>Young children don't need smartphones.</h3>
+          <p>We offer basic calling and SMS plans designed for under-14s. A phone to reach parents — not a portal to everything.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-card-icon">✓</div>
+          <h3>14 is a reasonable age for a smartphone.</h3>
+          <p>Haven is built for it. A full smartphone plan that's safe by default — not locked down, just sensibly configured.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-card-icon">16</div>
+          <h3>Social media can wait until 16.</h3>
+          <p>We block social platforms by default on under-16 plans. Not because teenagers are bad — because algorithms designed to addict adults shouldn't be let loose on children.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-card-icon">🚫</div>
+          <h3>No porn. No proxies. No VPNs.</h3>
+          <p>Blocked at the network layer — not an app your child can uninstall. If it exists to circumvent safety tools, it doesn't exist on Haven.</p>
+        </div>
+      </div>
+
+      <div class="values-cta-group fade-in">
+        <a href="https://gethavenmobile.com/waitlist" class="values-cta-btn">
+          Join the waitlist →
+        </a>
+        <span class="values-cta-note">Free to join · no obligation · founding members first</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ═══════ PROBLEM ═══════ -->
 <section class="section section-bg-deep">
@@ -1609,49 +1955,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <span class="step-num">03 · PARENTS</span>
         <h3>Insight, not surveillance.</h3>
         <p>A weekly briefing that tells you what matters and ignores what doesn't. No reading your child's messages. No creepy dashboards. Just the things a thoughtful parent would want to know.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ VALUES ═══════ -->
-<section class="values-section">
-  <div class="container">
-    <div class="values-inner">
-      <div class="values-label fade-in">How Haven is different</div>
-      <h2 class="fade-in">We have a point of view.<br><em>And we're not hiding it.</em></h2>
-      <p class="values-sub fade-in">
-        Most networks are neutral. We're not. We think children deserve a network with opinions — and the backbone to act on them.
-      </p>
-
-      <div class="values-grid">
-        <div class="value-card fade-in">
-          <div class="value-card-icon">📵</div>
-          <h3>Young children don't need smartphones.</h3>
-          <p>We offer basic calling and SMS plans designed for under-14s. A phone to reach parents — not a portal to everything.</p>
-        </div>
-        <div class="value-card fade-in">
-          <div class="value-card-icon">✓</div>
-          <h3>14 is a reasonable age for a smartphone.</h3>
-          <p>Haven is built for it. A full smartphone plan that's safe by default — not locked down, just sensibly configured.</p>
-        </div>
-        <div class="value-card fade-in">
-          <div class="value-card-icon">16</div>
-          <h3>Social media can wait until 16.</h3>
-          <p>We block social platforms by default on under-16 plans. Not because teenagers are bad — because algorithms designed to addict adults shouldn't be let loose on children.</p>
-        </div>
-        <div class="value-card fade-in">
-          <div class="value-card-icon">🚫</div>
-          <h3>No porn. No proxies. No VPNs.</h3>
-          <p>Blocked at the network layer — not an app your child can uninstall. If it exists to circumvent safety tools, it doesn't exist on Haven.</p>
-        </div>
-      </div>
-
-      <div class="values-cta-group fade-in">
-        <a href="https://gethavenmobile.com/waitlist" class="values-cta-btn">
-          Join the waitlist →
-        </a>
-        <span class="values-cta-note">Free to join · no obligation · founding members first</span>
       </div>
     </div>
   </div>
