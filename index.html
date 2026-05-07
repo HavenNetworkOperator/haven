@@ -1628,9 +1628,9 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   <section class="hero hero--supporting">
     <div class="hero-trigger-block">
       <p class="hero-trigger-note hero-trigger-note--pre">Haven launches on Kickstarter at <em>1,000 names</em>.</p>
-      <p class="hero-trigger-progress-text"><strong>140</strong> already signed up. <strong>860</strong> to go.</p>
-      <div class="hero-progress" role="progressbar" aria-valuenow="140" aria-valuemin="0" aria-valuemax="1000" aria-label="Waitlist progress">
-        <div class="hero-progress-fill" style="width: 14%;">
+      <p class="hero-trigger-progress-text"><strong id="heroProgressCurrent">—</strong> already signed up. <strong id="heroProgressRemaining">—</strong> to go.</p>
+      <div class="hero-progress" id="heroProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1000" aria-label="Waitlist progress">
+        <div class="hero-progress-fill" id="heroProgressFill" style="width: 0%;">
           <span class="hero-progress-dot"></span>
         </div>
       </div>
@@ -2186,6 +2186,40 @@ const observer = new IntersectionObserver(
   { threshold: 0.12 }
 );
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ─── Hero progress bar — community count toward 1,000.
+// Mirrors the post-signup tracker on /waitlist: same GOAL, same animation
+// pattern (pin to 0% → double-rAF → animate up so the CSS transition fires).
+(async function loadHeroProgress() {
+  const cur  = document.getElementById('heroProgressCurrent');
+  const rem  = document.getElementById('heroProgressRemaining');
+  const bar  = document.getElementById('heroProgress');
+  const fill = document.getElementById('heroProgressFill');
+  if (!fill) return;
+  try {
+    const r = await fetch('/api/total');
+    if (!r.ok) return;
+    const data = await r.json();
+    const GOAL = Number(data.goal) || 1000;
+    const total = Math.max(0, Number(data.total) || 0);
+    const remaining = Math.max(0, GOAL - total);
+    const pct = Math.min(100, (total / GOAL) * 100);
+
+    if (cur) cur.textContent = total.toLocaleString('en-GB');
+    if (rem) rem.textContent = remaining.toLocaleString('en-GB');
+    if (bar) {
+      bar.setAttribute('aria-valuenow', String(total));
+      bar.setAttribute('aria-valuemax', String(GOAL));
+    }
+
+    fill.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        fill.style.width = `${pct}%`;
+      });
+    });
+  } catch {}
+})();
 </script>
 
 </body>
