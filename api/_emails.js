@@ -152,7 +152,7 @@ export async function sendWelcomeEmail({ email, position, total, refCode }) {
   const c = client();
   if (!c || !process.env.RESEND_FROM) return { skipped: 'no_resend_config' };
 
-  const shareUrl = `${SITE}/waitlist?ref=${refCode}`;     // for sharing with friends
+  const shareUrl = `${SITE}/?ref=${refCode}`;             // for sharing with friends — lands on homepage
   const personalUrl = `${SITE}/waitlist?me=${refCode}`;   // for opening own status page
   try {
     const result = await c.emails.send({
@@ -241,8 +241,8 @@ export async function sendReferrerNotification({ email, position, total, referra
     return { skipped: 'no_recipient' };
   }
 
-  const shareUrl = `${SITE}/waitlist?ref=${refCode}`;
-  const personalUrl = `${SITE}/waitlist?me=${refCode}`;
+  const shareUrl = `${SITE}/?ref=${refCode}`;             // for sharing with friends — lands on homepage
+  const personalUrl = `${SITE}/waitlist?me=${refCode}`;   // for opening own status page
   try {
     console.log('[email] sending referrer notification', { to: email, position, oldPosition, referrals });
     const result = await c.emails.send({
