@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#F2EDE5" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="apple-touch-icon" href="/favicon.svg" />
 <title>Add your name — Haven</title>
 <meta name="description" content="Help us build the mobile network we all want to exist. No commitment, no payment — just adding your name to prove there's enough demand to launch." />
 
@@ -35,8 +40,17 @@
   --sans: 'Inter Tight', -apple-system, sans-serif;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 body {
   background: var(--bg);
@@ -47,6 +61,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
@@ -65,6 +80,7 @@ body {
 /* ───── PAGE HEADER (full width) ───── */
 .page-header {
   padding: 14px 32px;
+  padding-top: max(14px, env(safe-area-inset-top));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,7 +88,12 @@ body {
   z-index: 2;
 }
 @media (max-width: 768px) {
-  .page-header { padding: 12px 24px; }
+  .page-header {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 12px;
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
 }
 .logo {
   font-family: var(--serif);
@@ -204,8 +225,8 @@ main {
     border-radius: 20px;
     padding: 16px;
   }
-  .signup-form input { padding: 12px 8px; }
-  .signup-form button { width: 100%; padding: 16px; }
+  .signup-form input { padding: 12px 8px; font-size: 16px; }
+  .signup-form button { width: 100%; padding: 16px; min-height: 52px; }
 }
 
 .signup-reassurance {
@@ -451,6 +472,7 @@ main {
   justify-content: center;
   gap: 8px;
   padding: 14px 18px;
+  min-height: 48px;
   border: 1px solid var(--accent);
   border-radius: 100px;
   background: var(--bg);
@@ -525,9 +547,11 @@ main {
   font-weight: 500;
   letter-spacing: 0.02em;
   cursor: pointer;
-  padding: 0;
+  padding: 8px 4px;
+  margin: -8px -4px;
   text-decoration: underline;
   text-underline-offset: 3px;
+  min-height: 44px;
 }
 .refresh-btn:hover { color: var(--ink); }
 
@@ -535,6 +559,7 @@ main {
 .page-footer {
   border-top: 1px solid var(--line);
   padding: 32px;
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -546,7 +571,12 @@ main {
   z-index: 2;
 }
 @media (max-width: 600px) {
-  .page-footer { flex-direction: column; text-align: center; padding: 28px 24px; }
+  .page-footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 24px;
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
+  }
 }
 
 /* ───── ENTRY ANIM ───── */
@@ -608,6 +638,11 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
           id="email"
           placeholder="Your email address"
           autocomplete="email"
+          inputmode="email"
+          enterkeyhint="send"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
           required
         />
         <button type="submit" id="submitBtn">Add my name</button>
