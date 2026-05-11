@@ -173,6 +173,7 @@ nav {
   background: var(--accent);
   color: var(--bg);
 }
+.nav-waitlist-btn-short { display: none; }
 .nav-waitlist-dot {
   width: 6px;
   height: 6px;
@@ -1564,7 +1565,14 @@ footer a:hover { color: var(--accent); }
   .signup-form input { padding: 12px 8px; font-size: 16px; }
   .signup-form button { width: 100%; padding: 16px; min-height: 52px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .nav-meta { display: none; }
+  nav { gap: 12px; }
+  .nav-right { gap: 14px; }
+  .logo { font-size: 22px; gap: 8px; }
+  .logo-mark { width: 24px; height: 24px; }
+  .nav-meta { font-size: 12px; letter-spacing: 0.03em; }
+  .nav-waitlist-btn { padding: 8px 14px; font-size: 12px; min-height: 44px; }
+  .nav-waitlist-btn-full { display: none; }
+  .nav-waitlist-btn-short { display: inline; }
   .values-section { padding: 72px 0; }
   .values-cta-group { flex-direction: column; align-items: stretch; }
   .values-cta-btn { width: 100%; justify-content: center; min-height: 52px; }
@@ -1594,7 +1602,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <a href="/story/" class="nav-meta">Our story</a>
         <a href="https://gethavenmobile.com/waitlist" class="nav-waitlist-btn">
           <span class="nav-waitlist-dot"></span>
-          Join the waitlist
+          <span class="nav-waitlist-btn-full">Join the waitlist</span>
+          <span class="nav-waitlist-btn-short">Waitlist</span>
         </a>
       </div>
     </nav>
