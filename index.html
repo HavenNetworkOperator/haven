@@ -1579,6 +1579,98 @@ footer a:hover { color: var(--accent); }
   .founding-btn { width: 100%; justify-content: center; min-height: 52px; }
   footer { padding-bottom: max(48px, env(safe-area-inset-bottom)); }
 }
+
+/* ───── SFC ENDORSEMENT (under hero) ───── */
+.sfc-endorsement {
+  background: var(--bg);
+  padding: clamp(64px, 8vw, 112px) 0;
+  border-bottom: 1px solid var(--line);
+}
+.sfc-endorsement-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+.sfc-endorsement-label::before,
+.sfc-endorsement-label::after {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--muted);
+}
+.sfc-endorsement-label strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+.sfc-endorsement-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(40px, 5vw, 72px);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.sfc-endorsement-quote {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.sfc-endorsement-quote blockquote {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 96;
+}
+.sfc-endorsement-quote blockquote::before {
+  content: '“';
+  color: var(--accent);
+  font-family: var(--serif);
+}
+.sfc-endorsement-quote blockquote::after {
+  content: '”';
+  color: var(--accent);
+  font-family: var(--serif);
+}
+.sfc-endorsement-cite {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sfc-endorsement-name {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.sfc-endorsement-role {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+@media (max-width: 820px) {
+  .sfc-endorsement-grid { grid-template-columns: 1fr; gap: 48px; }
+  .sfc-endorsement-label::before,
+  .sfc-endorsement-label::after { width: 20px; }
+}
+@media (max-width: 480px) {
+  .sfc-endorsement { padding: 56px 0; }
+  .sfc-endorsement-quote blockquote { font-size: clamp(24px, 7vw, 32px); }
+}
 </style>
 
 <!-- PostHog (EU cloud, GDPR-friendly, anonymous by default) -->
@@ -1661,6 +1753,31 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   </div>
   <div class="hero-split-image">
     <img src="/hero-hallway.svg" alt="A parent handing a phone to their teenage daughter in a hallway." onerror="this.style.display='none'" />
+  </div>
+</section>
+
+<!-- ═══════ SFC FOUNDER ENDORSEMENT ═══════ -->
+<section class="sfc-endorsement" aria-label="Supported by the founders of Smartphone Free Childhood">
+  <div class="container">
+    <div class="sfc-endorsement-label">
+      Supported by the SFC founders, <strong>Clare &amp; Daisy</strong>
+    </div>
+    <div class="sfc-endorsement-grid">
+      <figure class="sfc-endorsement-quote">
+        <blockquote>I think it's an amazing idea and I'm fully supportive…</blockquote>
+        <figcaption class="sfc-endorsement-cite">
+          <span class="sfc-endorsement-name">Clare Fernyhough</span>
+          <span class="sfc-endorsement-role">Co-founder, Smartphone Free Childhood</span>
+        </figcaption>
+      </figure>
+      <figure class="sfc-endorsement-quote">
+        <blockquote>Haven looks awesome. It's really exciting and it sounds like something that would really help parents and kids.</blockquote>
+        <figcaption class="sfc-endorsement-cite">
+          <span class="sfc-endorsement-name">Daisy Greenwell</span>
+          <span class="sfc-endorsement-role">Co-founder, Smartphone Free Childhood</span>
+        </figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
