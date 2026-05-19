@@ -1585,7 +1585,10 @@ footer a:hover { color: var(--accent); }
   background: var(--bg);
   padding: clamp(32px, 4vw, 56px) 0 clamp(64px, 8vw, 112px);
   border-bottom: 1px solid var(--line);
+  position: relative;
+  z-index: 3;
 }
+.hero-split + .sfc-endorsement { margin-top: -80px; }
 .sfc-endorsement-label {
   font-family: var(--sans);
   font-size: 13px;
