@@ -1,0 +1,79 @@
+.page {
+  padding: 24px 0 80px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.head {
+  padding: 48px 0 40px;
+}
+
+.title {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 24px 0 16px;
+  max-width: 18ch;
+}
+
+.title em {
+  color: var(--accent);
+}
+
+.lede {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 56ch;
+}
+
+.lede strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.tips {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tips li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.tipNum {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+.note {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.back {
+  color: var(--accent);
+  text-decoration: none;
+}
+.back:hover { text-decoration: underline; }

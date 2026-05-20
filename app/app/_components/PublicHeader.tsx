@@ -16,7 +16,7 @@ export default function PublicHeader() {
           <a className="nav-link" href="https://gethavenmobile.com" aria-label="Back to gethavenmobile.com">
             Home
           </a>
-          <Link href="/account" className="nav-link" aria-disabled="true">
+          <Link href="/sign-in" className="nav-link">
             Sign in
           </Link>
         </div>
