@@ -1,4 +1,21 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/plans", "destination": "https://haven-app-lilac.vercel.app/plans" },
+    { "source": "/plans/:path*", "destination": "https://haven-app-lilac.vercel.app/plans/:path*" },
+    { "source": "/setup", "destination": "https://haven-app-lilac.vercel.app/setup" },
+    { "source": "/setup/:path*", "destination": "https://haven-app-lilac.vercel.app/setup/:path*" },
+    { "source": "/c/:path*", "destination": "https://haven-app-lilac.vercel.app/c/:path*" },
+    { "source": "/family", "destination": "https://haven-app-lilac.vercel.app/family" },
+    { "source": "/council", "destination": "https://haven-app-lilac.vercel.app/council" },
+    { "source": "/account", "destination": "https://haven-app-lilac.vercel.app/account" },
+    { "source": "/me/:path*", "destination": "https://haven-app-lilac.vercel.app/me/:path*" },
+    { "source": "/api/webhooks/gigs", "destination": "https://haven-app-lilac.vercel.app/api/webhooks/gigs" },
+    { "source": "/_next/:path*", "destination": "https://haven-app-lilac.vercel.app/_next/:path*" },
+    { "source": "/manifest.webmanifest", "destination": "https://haven-app-lilac.vercel.app/manifest.webmanifest" },
+    { "source": "/sw.js", "destination": "https://haven-app-lilac.vercel.app/sw.js" },
+    { "source": "/icon.svg", "destination": "https://haven-app-lilac.vercel.app/icon.svg" },
+    { "source": "/icon-monochrome.svg", "destination": "https://haven-app-lilac.vercel.app/icon-monochrome.svg" }
+  ]
 }
