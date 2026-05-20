@@ -1,0 +1,124 @@
+.page {
+  padding: 24px 0 80px;
+  max-width: 720px;
+}
+
+@media (max-width: 768px) {
+  .page { padding: 16px 0 56px; }
+}
+
+.header {
+  padding: 32px 0 56px;
+}
+
+.title {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(40px, 5.6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 24px 0 0;
+}
+
+.title em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.section {
+  padding-bottom: 56px;
+}
+
+.sectionTitle {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  padding-bottom: 20px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.sectionLead {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin: 16px 0 24px;
+}
+
+.toggles {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toggle {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.toggleText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 56ch;
+}
+
+.toggleTitle {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.toggleSub {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ───── Switch (visual only — disabled state in v1) ───── */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  width: 48px;
+  height: 28px;
+  border-radius: 100px;
+  background: var(--line);
+  position: relative;
+  cursor: not-allowed;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.switchKnob {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg);
+  position: absolute;
+  left: 3px;
+  transition: left 0.2s, background 0.2s;
+  box-shadow: 0 1px 2px rgba(15, 27, 45, 0.15);
+}
+
+.switchOn {
+  background: var(--accent);
+}
+.switchOn .switchKnob {
+  left: 23px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}

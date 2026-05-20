@@ -1,0 +1,13 @@
+.wrap {
+  padding: 16px 0 80px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.body {
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding-bottom: 56px; }
+}

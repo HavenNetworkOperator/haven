@@ -1,0 +1,160 @@
+.options {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.option:hover {
+  border-color: var(--ink);
+}
+
+.option:has(.radio:checked) {
+  border-color: var(--accent);
+  border-width: 1.5px;
+  background: var(--bg-deep);
+  padding: 19.5px 21.5px; /* compensate for thicker border so siblings don't jump */
+}
+
+.optionFeatured {
+  /* keeps the "Recommended" card visible even when not selected */
+}
+
+.radio {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+  position: relative;
+  cursor: pointer;
+  background: var(--bg);
+}
+
+.radio:checked {
+  border-color: var(--accent);
+}
+
+.radio:checked::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.optionBody {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
+  align-items: baseline;
+}
+
+.optionTop {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  grid-column: 1 / -1;
+}
+
+.optionTier {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.optionBadge {
+  padding: 2px 8px;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 100px;
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.optionData {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.optionDataNum {
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.optionDataUnit {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.optionTagline {
+  grid-column: 1 / -1;
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.optionPrice {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.optionPrice em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.optionPriceUnit {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  font-style: normal;
+}
+
+@media (max-width: 600px) {
+  .option { padding: 16px 18px; gap: 12px; }
+  .optionBody {
+    grid-template-columns: 1fr;
+  }
+  .optionPrice { text-align: left; font-size: 24px; }
+  .optionDataNum { font-size: 26px; }
+}

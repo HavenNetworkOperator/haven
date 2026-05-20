@@ -1,0 +1,177 @@
+/* Phone summary card. The "press photograph" of the week.
+   Rounded rect + notch — evocative of a phone without being skeuomorphic.
+   No app logos, no gradients. Type and a thin bar. */
+
+.card {
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  padding: 28px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+
+/* Notch — a small ink pill at the top */
+.notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 6px;
+  background: var(--ink);
+  border-radius: 100px;
+  opacity: 0.5;
+}
+
+.header {
+  padding: 14px 4px 4px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+
+.name {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.age {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.weekLabel {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.apps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px;
+  margin: 0;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  align-items: baseline;
+}
+
+.appName {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.appTime {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--ink-soft);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.bar {
+  grid-column: 1 / -1;
+  height: 3px;
+  background: var(--line);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 100px;
+}
+
+/* Top app gets the single accent. Others are a quieter ink tone so the
+   eye lands on the most-used app, in keeping with the editorial principle
+   of one accent per screen — applied here at the card scale. */
+.app:not(:first-child) .barFill {
+  background: var(--ink);
+  opacity: 0.18;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 16px 4px 4px;
+  margin-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.footStat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footLabel {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.footValue {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.footValueZero {
+  /* "Blocked: 0" — the proof-of-protection number. The single
+     terracotta accent at the card footer. */
+  color: var(--accent);
+  font-style: normal;
+}
+
+/* Home indicator bar at the bottom — the small editorial nod */
+.home {
+  height: 4px;
+  width: 96px;
+  margin: 8px auto 0;
+  background: var(--ink);
+  opacity: 0.18;
+  border-radius: 100px;
+}
+
+@media (max-width: 768px) {
+  .card { padding: 24px 20px 18px; border-radius: 28px; }
+  .name { font-size: 24px; }
+  .age { font-size: 16px; }
+  .footValue { font-size: 20px; }
+}

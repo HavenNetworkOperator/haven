@@ -1,0 +1,156 @@
+/* /me/[token] — child PWA view. Mobile-first, personal, plainspoken. */
+
+.hello {
+  padding-bottom: 8px;
+}
+
+.eyebrow {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.name {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(44px, 11vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.lede {
+  margin-top: 16px;
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: normal;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  max-width: 28ch;
+}
+
+.sectionLabel {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sectionLabel::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--muted);
+}
+
+.intro {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  max-width: 44ch;
+}
+
+/* ───── Today facts ───── */
+.facts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fact {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.fact:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.factLabel {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.factValue {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+
+/* ───── People list ───── */
+.people {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 16px;
+}
+
+.people li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+@media (max-width: 480px) {
+  .people { grid-template-columns: 1fr; }
+}
+
+/* ───── Blocked categories ───── */
+.cats {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+
+.cats li {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+}

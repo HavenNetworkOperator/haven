@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Haven">
+  <title>Haven</title>
+  <!-- Monochrome variant for Android notification badges. The OS tints the
+       black silhouette to match the device theme; only the alpha is read. -->
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#000" stroke-width="60"/>
+</svg>

@@ -1,0 +1,113 @@
+.intro {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: normal;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 58ch;
+  padding: 0 0 40px;
+}
+
+.row {
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+  max-width: 720px;
+}
+.row:first-of-type {
+  border-top: 1px solid var(--line);
+}
+
+.rowHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.rowTitle {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.rowValue {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.015em;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.rowDetail {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+.rowAside {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.bar {
+  margin-top: 14px;
+  height: 4px;
+  background: var(--line);
+  border-radius: 100px;
+  overflow: hidden;
+  max-width: 360px;
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  border-radius: 100px;
+}
+
+/* Locked row — the hard line. Single accent at the section scale. */
+.rowLocked {
+  /* visually distinguished without shouting */
+}
+
+.lock {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: normal;
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.rowValueLocked em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.cats {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+
+.cats li {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+}

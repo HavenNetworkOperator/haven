@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Haven">
+  <title>Haven</title>
+  <!-- Maskable PWA icon. Paper bg fills full canvas so any Android
+       adaptive-icon mask shape stays brand-consistent. Burnt-orange ring
+       sits inside the 80% safe zone (~410×410 centred). -->
+  <rect width="512" height="512" fill="#f4efe6"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#c14a1f" stroke-width="60"/>
+</svg>

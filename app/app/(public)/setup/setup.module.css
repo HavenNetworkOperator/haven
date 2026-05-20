@@ -1,0 +1,166 @@
+/* Shared wizard-step styles. Imported by each step page so the
+   editorial cadence is identical across all four. */
+
+.headline {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 16px;
+  max-width: 18ch;
+}
+
+.headline em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.lede {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin-bottom: 40px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldLabel {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.fieldLabel.optional::after {
+  content: '· optional';
+  margin-left: 8px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: none;
+  font-style: normal;
+}
+
+.input {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 20px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--ink);
+  padding: 12px 4px;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.input:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.input:invalid:not(:placeholder-shown) {
+  border-bottom-color: var(--accent);
+}
+
+select.input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a6253' stroke-width='1.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  background-size: 20px;
+  padding-right: 32px;
+}
+
+.fieldHelp {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.fieldError {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 13px;
+  color: var(--accent);
+  font-style: normal;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.back {
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.back:hover { color: var(--accent); }
+
+.continueBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  min-height: 48px;
+}
+
+.continueBtn:hover { background: var(--accent); }
+.continueBtn:active { transform: scale(0.98); }
+.continueBtn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.note {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-sans), -apple-system, sans-serif;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 56ch;
+}
