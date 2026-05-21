@@ -14,9 +14,11 @@ export default async function handler(req, res) {
   try {
     const { rows } = await sql`SELECT COUNT(*)::int AS total FROM waitlist`;
     const total = (rows[0]?.total ?? 0) + WAITLIST_BASELINE;
-    // Short edge cache so the homepage doesn't hit Postgres on every
-    // visit, but stays close to live for new signups.
-    res.setHeader('Cache-Control', 'public, max-age=15, s-maxage=15, stale-while-revalidate=60');
+    // No caching: during launch we want every page load to reflect the
+    // true count. Postgres COUNT(*) on this table is cheap at our scale.
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+    res.setHeader('CDN-Cache-Control', 'no-store');
+    res.setHeader('Vercel-CDN-Cache-Control', 'no-store');
     return res.status(200).json({ total, goal: 1000 });
   } catch (err) {
     return serverError(res, err);

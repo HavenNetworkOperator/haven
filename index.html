@@ -2364,7 +2364,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   const fill = document.getElementById('heroProgressFill');
   if (!fill) return;
   try {
-    const r = await fetch('/api/total');
+    const r = await fetch(`/api/total?t=${Date.now()}`, { cache: 'no-store' });
     if (!r.ok) return;
     const data = await r.json();
     const GOAL = Number(data.goal) || 1000;
