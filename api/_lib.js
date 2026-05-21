@@ -159,37 +159,31 @@ export async function sendToSlack({ email, refCode, referredBy, position, total,
   }
 }
 
-export async function maybeSubscribeBeehiiv({ email, refCode, referredBy }) {
-  const apiKey = process.env.BEEHIIV_API_KEY;
-  const pubId = process.env.BEEHIIV_PUBLICATION_ID;
-  if (!apiKey || !pubId) return;
+// Adds the new signup to the Resend Audience used for the fortnightly Friday
+// newsletter. We use Resend Broadcasts (not Beehiiv) so the immediate welcome
+// email and the ongoing newsletter run through the same provider.
+export async function maybeAddToResendAudience({ email }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const audienceId = process.env.RESEND_AUDIENCE_ID;
+  if (!apiKey || !audienceId) return;
 
   try {
     const res = await fetch(
-      `https://api.beehiiv.com/v2/publications/${pubId}/subscriptions`,
+      `https://api.resend.com/audiences/${audienceId}/contacts`,
       {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email,
-          send_welcome_email: false, // we send our own welcome via Resend
-          utm_source: 'waitlist',
-          referring_site: 'https://gethavenmobile.com/waitlist',
-          custom_fields: [
-            { name: 'haven_ref_code', value: refCode },
-            ...(referredBy ? [{ name: 'haven_referred_by', value: referredBy }] : []),
-          ],
-        }),
+        body: JSON.stringify({ email, unsubscribed: false }),
       }
     );
     if (!res.ok) {
       const body = await res.text();
-      console.error('Beehiiv subscribe failed', res.status, body);
+      console.error('Resend audience add failed', res.status, body);
     }
   } catch (err) {
-    console.error('Beehiiv subscribe threw', err);
+    console.error('Resend audience add threw', err);
   }
 }

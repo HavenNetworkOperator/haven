@@ -9,7 +9,7 @@ import {
   recomputePositions,
   sendToFormspree,
   sendToSlack,
-  maybeSubscribeBeehiiv,
+  maybeAddToResendAudience,
 } from './_lib.js';
 import { sendWelcomeEmail, sendReferrerNotification } from './_emails.js';
 import { getPostHog } from './_posthog.js';
@@ -182,7 +182,7 @@ export default async function handler(req, res) {
       total: standing.total,
       referrals: standing.referrals,
     }),
-    maybeSubscribeBeehiiv({ email, refCode, referredBy }),
+    maybeAddToResendAudience({ email }),
     sendWelcomeEmail({
       email,
       position: standing.position,
