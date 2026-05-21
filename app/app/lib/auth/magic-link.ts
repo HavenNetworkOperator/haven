@@ -49,8 +49,12 @@ export async function issueMagicLink(opts: {
   const url = `${opts.origin}/api/auth/verify?token=${encodeURIComponent(token)}`;
   const sent = await sendMagicLinkEmail({ to: email, url });
 
-  if (!sent && process.env.NODE_ENV !== "production") {
-    console.log("[haven.auth] dev magic link →", url);
+  if (!sent) {
+    // No Resend yet — log the link so the user (project owner) can fish
+    // it out of `vercel logs` and sign themselves in. Tokens are still
+    // single-use + 15-minute expiry, and Vercel logs are project-scoped.
+    // Remove this branch once RESEND_API_KEY is set for real.
+    console.log(`[haven.auth] magic link (email-fallback) for ${email} → ${url}`);
     return { ok: true, emailSent: false, devLink: url };
   }
 
