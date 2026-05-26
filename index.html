@@ -1296,8 +1296,9 @@ footer a:hover { color: var(--accent); }
           mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
 }
 .cred-ticker-track {
-  display: flex;
-  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  will-change: transform;
   animation: cred-ticker-scroll 28s linear infinite;
 }
 .cred-ticker:hover .cred-ticker-track {
