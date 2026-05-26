@@ -30,7 +30,7 @@ Pick one (A is the recommendation — concrete, specific, signals the scarcity w
 >
 > Welcome to Haven, and thank you for adding your name.
 >
-> Quick reminder of what you've actually signed up to: **nothing financial, no commitment.** You're on the waitlist. That's it. We're using the waitlist to prove there's enough demand from parents who want this network to exist — every name helps us get to 1,000 and on to Kickstarter.
+> Quick reminder of what you've actually signed up to: **nothing financial, no commitment.** You're on the waitlist. That's it. We're using the waitlist to prove there's enough demand from parents who want this network to exist — every name helps us get to 1,000 and on to launch.
 >
 > If you're one of the first 1,000 to sign up, here's what you'll be **offered** at launch (your option, not a commitment):
 >
@@ -38,7 +38,7 @@ Pick one (A is the recommendation — concrete, specific, signals the scarcity w
 > — Priority access on launch day. The first 1,000 SIMs go before anyone else.
 > — Tell us what you most want blocked. We build for the founding families first.
 > — A direct line to me and the rest of the founding team. Reply to this email and I'll see it.
-> — Founding member status on every milestone we hit — when we're on the news, on Kickstarter, on Crowdcube, you're named.
+> — Founding member status on every milestone we hit — when we're on the news, on Crowdcube, when we launch, you're named.
 >
 > If at launch you decide it isn't for you, that's fine. There's nothing to pay until you say yes.
 >
@@ -62,7 +62,7 @@ Pick one (A is the recommendation — concrete, specific, signals the scarcity w
 >
 > **One last thing — please share this to help us build the network.**
 >
-> Get us to 1,000 names and Haven officially launches on Kickstarter. If you know a parent who'd want this network to exist too, here's your link:
+> Get us to 1,000 names and Haven officially launches. If you know a parent who'd want this network to exist too, here's your link:
 >
 > {{share_url}}
 >
@@ -151,7 +151,7 @@ Merge tags use the `{{first_name}}`, `{{signup_number}}`, `{{share_url}}` syntax
           <td style="font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.6;color:#0f1b2d;">
             <p style="margin:0 0 18px 0;">Hi {{first_name|"there"}},</p>
             <p style="margin:0 0 18px 0;">Welcome to Haven, and thank you for adding your name.</p>
-            <p style="margin:0 0 18px 0;">Quick reminder of what you've actually signed up to: <strong>nothing financial, no commitment.</strong> You're on the waitlist. That's it. We're using the waitlist to prove there's enough demand from parents who want this network to exist — every name helps us get to 1,000 and on to Kickstarter.</p>
+            <p style="margin:0 0 18px 0;">Quick reminder of what you've actually signed up to: <strong>nothing financial, no commitment.</strong> You're on the waitlist. That's it. We're using the waitlist to prove there's enough demand from parents who want this network to exist — every name helps us get to 1,000 and on to launch.</p>
 
             <p style="margin:0 0 12px 0;font-weight:600;">If you're one of the first 1,000 to sign up, here's what you'll be <em style="color:#c14a1f;font-style:italic;">offered</em> at launch (your option, not a commitment):</p>
 
@@ -159,7 +159,7 @@ Merge tags use the `{{first_name}}`, `{{signup_number}}`, `{{share_url}}` syntax
             <p style="margin:0 0 10px 0;"><span style="color:#c14a1f;">—</span> Priority access on launch day. The first 1,000 SIMs go before anyone else.</p>
             <p style="margin:0 0 10px 0;"><span style="color:#c14a1f;">—</span> Tell us what you most want blocked. We build for the founding families first.</p>
             <p style="margin:0 0 10px 0;"><span style="color:#c14a1f;">—</span> A direct line to me and the rest of the founding team. Reply to this email and I'll see it.</p>
-            <p style="margin:0 0 18px 0;"><span style="color:#c14a1f;">—</span> Founding member status on every milestone — when we're on the news, on Kickstarter, on Crowdcube, you're named.</p>
+            <p style="margin:0 0 18px 0;"><span style="color:#c14a1f;">—</span> Founding member status on every milestone — when we're on the news, on Crowdcube, when we launch, you're named.</p>
             <p style="margin:0 0 24px 0;color:#2a3a52;font-size:15px;">If at launch you decide it isn't for you, that's fine. There's nothing to pay until you say yes.</p>
 
             <!-- ── Divider ── -->
@@ -178,7 +178,7 @@ Merge tags use the `{{first_name}}`, `{{signup_number}}`, `{{share_url}}` syntax
             <p style="margin:24px 0;border-top:1px solid #d8cfbc;font-size:0;line-height:0;">&nbsp;</p>
 
             <p style="margin:0 0 18px 0;font-weight:600;">One last thing — please share this to help us build the network.</p>
-            <p style="margin:0 0 18px 0;">Get us to 1,000 names and Haven officially launches on Kickstarter. If you know a parent who'd want this network to exist too, here's your link:</p>
+            <p style="margin:0 0 18px 0;">Get us to 1,000 names and Haven officially launches. If you know a parent who'd want this network to exist too, here's your link:</p>
             <p style="margin:0 0 18px 0;font-family:'Courier New',monospace;font-size:14px;background:#ebe4d4;padding:12px 16px;border-left:3px solid #c14a1f;color:#0f1b2d;word-break:break-all;">{{share_url}}</p>
             <p style="margin:0 0 24px 0;color:#2a3a52;font-size:15px;">No commitment for them either — every name just helps prove the demand is real.</p>
 

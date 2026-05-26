@@ -22,10 +22,10 @@ Haven's customers came in through Smartphone Free Childhood. The motivation that
 - "Share to unlock"
 
 **Accept:**
-- "Help us reach 1,000 — then Haven launches on Kickstarter"
+- "Help us reach 1,000 — then Haven launches"
 - "Every parent you invite is one more vote that this needs to exist"
 - "Send this to the parent at the school gate who's also been waiting"
-- Milestone framing tied to Kickstarter / Crowdcube / launch
+- Milestone framing tied to Crowdcube / launch
 - Local-pact framing (school WhatsApps, year groups, friendship circles)
 
 **Why:** financial incentives invite a different audience than mission incentives — the audience that already came in for mission reasons (per Hannah, per Al) explicitly told us financial framing was wrong for them. We are not running a referral program. We are running a movement that someone happens to be paying for.

@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 // Placeholder: parent's tier-based vote allocation. Real value pulled
 // from accounts/households once auth lands. See plan §Council route.
 const remainingVotes = 3;
-const tierLabel = "Full Family"; // £75 Kickstarter tier — 3 SIMs, 3 votes
+const tierLabel = "Full Family"; // £75 founding tier — 3 SIMs, 3 votes
 const totalCouncilMembers = 412;
 
 export default function Council() {

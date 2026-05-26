@@ -67,7 +67,7 @@ const FAQS: { q: string; a: string }[] = [
   {
     q: "Which UK network is behind Haven?",
     a:
-      "We're finalising the carrier partnership during the Kickstarter build. The plan " +
+      "We're finalising the carrier partnership during the pre-launch build. The plan " +
       "is whichever UK carrier can offer the kid-safe APN profile that makes network-level " +
       "social-app blocking workable — we'll publish the partner before we ship the first SIM.",
   },
