@@ -1542,6 +1542,16 @@ footer a:hover { color: var(--accent); }
   align-items: center;
   gap: clamp(8px, 1.2vw, 16px);
 }
+.sfc-raise-the-age-prefix {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-align: center;
+  display: block;
+}
 .sfc-raise-the-age-number {
   font-family: var(--serif);
   font-weight: 500;
@@ -1651,7 +1661,11 @@ footer a:hover { color: var(--accent); }
 @media (max-width: 480px) {
   .sfc-endorsement { padding: 28px 0 56px; }
   .sfc-endorsement-quote blockquote { font-size: clamp(24px, 7vw, 32px); }
-  .sfc-raise-the-age-number { font-size: clamp(80px, 26vw, 140px); }
+  .sfc-raise-the-age-number {
+    font-size: clamp(80px, 26vw, 140px);
+    padding: 0 10px;
+  }
+  .sfc-raise-the-age-prefix,
   .sfc-raise-the-age-caption { font-size: clamp(17px, 4.6vw, 22px); }
 }
 </style>
@@ -1743,6 +1757,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 <section class="sfc-endorsement" aria-label="Supported by the founders of Smartphone Free Childhood">
   <div class="container">
     <div class="sfc-raise-the-age">
+      <span class="sfc-raise-the-age-prefix">Over</span>
       <span class="sfc-raise-the-age-number">250,000+</span>
       <p class="sfc-raise-the-age-caption">families support the SFC <em>‘Raise the Age’</em> (of social media) campaign</p>
     </div>
