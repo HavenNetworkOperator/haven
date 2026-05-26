@@ -284,6 +284,16 @@ nav {
 }
 .signup-form button:hover { background: var(--accent); }
 .signup-form button:active { transform: scale(0.97); }
+.signup-form button:disabled { opacity: 0.6; cursor: wait; }
+.signup-error {
+  color: var(--accent);
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  min-height: 1em;
+  font-family: var(--sans);
+}
+.signup-error:empty { margin-top: 0; }
 
 .signup-meta {
   margin-top: 16px;
@@ -1768,7 +1778,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       </a>
       <div class="nav-right">
         <a href="/story/" class="nav-meta">Our story</a>
-        <a href="https://gethavenmobile.com/waitlist" class="nav-waitlist-btn">
+        <a href="#join-waitlist" class="nav-waitlist-btn">
           <span class="nav-waitlist-dot"></span>
           <span class="nav-waitlist-btn-full">Join the waitlist</span>
           <span class="nav-waitlist-btn-short">Waitlist</span>
@@ -1785,7 +1795,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <p class="hero-split-sub">
       Smartphone Free Childhood gave parents permission to wait. Haven is the network for when you finally hand over a phone. Safe at the network layer, not simply an app they can delete.
     </p>
-    <a href="https://gethavenmobile.com/waitlist" class="hero-split-cta">Join the waitlist →</a>
+    <a href="#join-waitlist" class="hero-split-cta">Join the waitlist →</a>
     <div class="hero-split-features">
       <div class="hero-split-feature">
         <span class="hero-split-feature-icon">
@@ -1899,8 +1909,24 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <p class="hero-credibility-note">Founder advised in government consultation on social media ban for under-16s</p>
     </div>
 
-    <div class="signup">
-      <a href="https://gethavenmobile.com/waitlist" class="values-cta-btn">Add your name to the waitlist →</a>
+    <div class="signup" id="join-waitlist">
+      <form class="signup-form" id="homepageSignupForm" novalidate>
+        <input
+          type="email"
+          name="email"
+          id="homepageSignupEmail"
+          placeholder="Your email address"
+          autocomplete="email"
+          inputmode="email"
+          enterkeyhint="send"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          required
+        />
+        <button type="submit" id="homepageSignupBtn">Join the waitlist</button>
+      </form>
+      <p class="signup-error" id="homepageSignupError" role="alert"></p>
       <div class="signup-clarity">
         <p class="signup-clarity-lead"><strong>No commitment. No payment.</strong><br>Simply add your name to the waitlist to signal your support. It will help us build the mobile network we all want to exist.</p>
         <p class="signup-clarity-detail">We're proving there's enough demand to launch. The first 1,000 to sign up will be <em>offered</em> lifetime founding pricing (£25 eSIM, £8/month, locked for life) when we launch. It's your option, not a commitment.</p>
@@ -1954,7 +1980,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       </div>
 
       <div class="values-cta-group fade-in">
-        <a href="https://gethavenmobile.com/waitlist" class="values-cta-btn">
+        <a href="#join-waitlist" class="values-cta-btn">
           Join the waitlist →
         </a>
         <span class="values-cta-note">Free to join · no obligation · founding members first</span>
@@ -2279,7 +2305,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <p>
           Haven is being built in the open, with the families who'll use it. Join the waitlist now and you'll be the first to know when we launch, the first to get access, and the first to tell us what matters most.
         </p>
-        <a href="https://gethavenmobile.com/waitlist" class="founding-btn">Join the waitlist →</a>
+        <a href="#join-waitlist" class="founding-btn">Join the waitlist →</a>
       </div>
       <ul class="benefits-list">
         <li>Founding member pricing locked for life</li>
@@ -2395,7 +2421,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <div class="footer-col footer-col-newsletter">
         <h3 class="footer-heading">Join the waitlist</h3>
         <p class="footer-newsletter-text">No commitment, no payment. Add your name to help prove there's demand. The first 1,000 will be offered lifetime founding pricing when we launch.</p>
-        <a class="footer-cta" href="/waitlist">Join the waitlist</a>
+        <a class="footer-cta" href="#join-waitlist">Join the waitlist</a>
         <p class="footer-form-meta">No spam. One short note when we launch.</p>
       </div>
       <div class="footer-col">
@@ -2445,6 +2471,69 @@ const observer = new IntersectionObserver(
 );
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+// ─── Inline homepage signup form ───
+// Submits to the same /api/signup endpoint as /waitlist. On success we stash
+// the ref code in localStorage (key the waitlist page reads) and redirect to
+// /waitlist — which boots straight into the status state thanks to Rule 3.
+(function () {
+  const CODE_RE = /^[2-9A-HJKMNP-Z]{8}$/;
+  const STORAGE_KEY = 'haven_waitlist_code';
+  const PENDING_REF_KEY = 'haven_pending_ref';
+  const LANDING_PAGE_KEY = 'haven_landing_page';
+  const LANDED_AT_KEY = 'haven_landed_at';
+
+  const form  = document.getElementById('homepageSignupForm');
+  const email = document.getElementById('homepageSignupEmail');
+  const btn   = document.getElementById('homepageSignupBtn');
+  const error = document.getElementById('homepageSignupError');
+  if (!form) return;
+
+  const getStored = (k) => { try { return localStorage.getItem(k) || null; } catch { return null; } };
+  const getPendingRef = () => {
+    const v = (getStored(PENDING_REF_KEY) || '').trim().toUpperCase();
+    return CODE_RE.test(v) ? v : null;
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    error.textContent = '';
+    const value = email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      error.textContent = 'Please enter a valid email.';
+      return;
+    }
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = 'Joining…';
+    try {
+      const r = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: value,
+          ref: getPendingRef() || undefined,
+          landing_page: getStored(LANDING_PAGE_KEY) || '/',
+          landed_at: getStored(LANDED_AT_KEY) || undefined,
+        }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data?.error || 'signup_failed');
+      try {
+        if (data.ref_code) localStorage.setItem(STORAGE_KEY, data.ref_code);
+        localStorage.removeItem(PENDING_REF_KEY);
+        localStorage.removeItem(LANDING_PAGE_KEY);
+        localStorage.removeItem(LANDED_AT_KEY);
+      } catch {}
+      window.location.href = '/waitlist';
+    } catch (err) {
+      error.textContent = err.message === 'signup_failed'
+        ? 'Something went wrong. Please try again.'
+        : err.message;
+      btn.disabled = false;
+      btn.textContent = orig;
+    }
+  });
+})();
 </script>
 
 </body>
