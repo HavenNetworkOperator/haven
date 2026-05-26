@@ -8,27 +8,28 @@ If a recommendation violates one of the rules below, **drop it from the audit ou
 
 ---
 
-## Rule 1 — Mission framing only, never financial
+## Rule 1 — Mission framing first; one simple reciprocity offer allowed
 
-Haven's customers came in through Smartphone Free Childhood. The motivation that brought them is parent-to-parent collective action against a crisis that's hurting their kids. That motivation also has to be the motivation we use when we ask them to do anything.
+Haven's customers came in through Smartphone Free Childhood. The motivation that brought them is parent-to-parent collective action against a crisis that's hurting their kids. That motivation has to lead every ask. The one financial element we allow is a **flat, symmetric, untiered free-month-per-signup offer** — both the new signup and the inviter get one free month at launch, no cap. Mission framing in the headline, the free-month reciprocity as the practical mechanic alongside it.
 
 **Reject:**
-- "Refer 3 friends, get a free month"
-- "Earn credit"
-- "$X off your first SIM"
-- Any tiered referral reward ladder (5 → bronze, 10 → silver, etc.)
+- Tiered referral reward ladders (5 → bronze, 10 → silver, etc.)
 - Discount codes for invitees
-- Loyalty points
-- "Share to unlock"
+- Cash credit / store credit / loyalty points
+- "Share to unlock" or any gated content/feature
+- Variable rewards that change based on volume or speed
+- "$X off your first SIM"
 
 **Accept:**
+- "Your first month is on us — and one more free month for every parent you invite"
+- "You both get a free month of Haven when they sign up"
 - "Help us reach 1,000 — then Haven launches"
 - "Every parent you invite is one more vote that this needs to exist"
 - "Send this to the parent at the school gate who's also been waiting"
 - Milestone framing tied to Crowdcube / launch
 - Local-pact framing (school WhatsApps, year groups, friendship circles)
 
-**Why:** financial incentives invite a different audience than mission incentives — the audience that already came in for mission reasons (per Hannah, per Al) explicitly told us financial framing was wrong for them. We are not running a referral program. We are running a movement that someone happens to be paying for.
+**Why:** the original rule rejected all financial incentives because Hannah and Al said tiered/transactional framing felt wrong for mission-driven parents. A single symmetric reciprocity — both sides get the same thing, no ladders, no exclusion — keeps the parent-to-parent voice intact while removing the friction that pure mission framing left on the table. We are still running a movement; the free month is the thank-you, not the bait.
 
 ---
 

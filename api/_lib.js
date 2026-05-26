@@ -64,6 +64,8 @@ export async function recomputePositions() {
 }
 
 // Returns standing for a ref_code, or null if not found.
+// `free_months` is derived: 1 month for signing up + 1 month per successful
+// referral. No new column needed.
 export async function getStanding(refCode) {
   const { rows } = await sql`
     SELECT
@@ -82,6 +84,7 @@ export async function getStanding(refCode) {
     ...row,
     position: row.position + WAITLIST_BASELINE,
     total: row.total + WAITLIST_BASELINE,
+    free_months: 1 + row.referrals,
   };
 }
 

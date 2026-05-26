@@ -287,23 +287,37 @@ main {
 .status-state.active { display: block; }
 .signup-state.hidden { display: none; }
 
-.position-card {
+.status-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 24px;
+}
+.position-card,
+.freemonths-card {
   background: var(--bg-deep);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 14px 22px;
   text-align: left;
-  margin: 0 auto 24px 0;
-  width: fit-content;
+  flex: 1 1 220px;
+  min-width: 0;
 }
-.position-eyebrow {
+.freemonths-card {
+  background: rgba(193, 74, 31, 0.08);
+  border-color: rgba(193, 74, 31, 0.3);
+}
+.position-eyebrow,
+.freemonths-eyebrow {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 2px;
 }
-.position-number {
+.freemonths-eyebrow { color: var(--accent); }
+.position-number,
+.freemonths-number {
   font-family: var(--serif);
   font-weight: 400;
   font-size: clamp(34px, 5vw, 44px);
@@ -312,14 +326,20 @@ main {
   color: var(--ink);
   margin-bottom: 0;
 }
-.position-number em {
+.position-number em,
+.freemonths-number em {
   font-style: normal;
   color: var(--accent);
   font-weight: 400;
 }
-.position-of {
+.position-of,
+.freemonths-detail {
   font-size: 12px;
   color: var(--ink-soft);
+}
+.freemonths-detail strong {
+  color: var(--accent);
+  font-weight: 500;
 }
 
 /* ───── GOAL TRACKER (community progress to 1,000) ───── */
@@ -664,10 +684,17 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <section class="status-state" id="statusState">
       <span class="section-label">You're in</span>
 
-      <div class="position-card">
-        <div class="position-eyebrow">Your position</div>
-        <div class="position-number">#<em id="posNum">—</em></div>
-        <div class="position-of">of <span id="totalNum">—</span> founding members so far</div>
+      <div class="status-stats">
+        <div class="position-card">
+          <div class="position-eyebrow">Your position</div>
+          <div class="position-number">#<em id="posNum">—</em></div>
+          <div class="position-of">of <span id="totalNum">—</span> founding members so far</div>
+        </div>
+        <div class="freemonths-card">
+          <div class="freemonths-eyebrow">Free months earned</div>
+          <div class="freemonths-number"><em id="freeMonthsNum">—</em></div>
+          <div class="freemonths-detail" id="freeMonthsDetail">1 for joining · <strong>+1 for every parent you invite</strong></div>
+        </div>
       </div>
 
       <!-- ─── GOAL TRACKER (community progress to 1,000) ─── -->
@@ -684,7 +711,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <!-- ─── SHARE BLOCK (front-and-centre) ─── -->
       <div class="share-block">
         <span class="share-label">Your move: <em>who else needs to see this?</em></span>
-        <span class="share-sublabel">Lock in your founding spot when they sign up</span>
+        <span class="share-sublabel">You both get a free month of Haven when they sign up</span>
 
         <div class="share-buttons share-buttons--primary">
           <a class="share-btn share-btn-primary" id="whatsappDmBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_dm">
@@ -693,7 +720,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
           </a>
         </div>
 
-        <p class="share-micro">30 seconds · Free to sign up · No payment · No commitment</p>
+        <p class="share-micro">30 seconds · Free to sign up · No payment · Each signup = +1 month free for you</p>
 
         <figure class="share-testimonial">
           <blockquote>“Sharing this in my local SFC group makes me look awesome by proxy.”</blockquote>
@@ -734,6 +761,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     formError: document.getElementById('formError'),
     posNum:    document.getElementById('posNum'),
     totalNum:  document.getElementById('totalNum'),
+    freeMonthsNum:    document.getElementById('freeMonthsNum'),
+    freeMonthsDetail: document.getElementById('freeMonthsDetail'),
     refNum:    document.getElementById('refNum'),
     refreshBtn: document.getElementById('refreshBtn'),
     whatsappDm: document.getElementById('whatsappDmBtn'),
@@ -749,7 +778,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   // 1:1 DM to a single parent. Personal, warm opener — single message,
   // single paragraph, the way someone actually pings a friend on WhatsApp.
   const buildDmBlurb = () =>
-    "Hey - just thought of you. New UK mobile network being built around the under-16s social media ban. It's called Haven, by parents from the Smartphone Free Childhood community. Pre-launch. They need 1,000 names on the waitlist to launch. No commitment, no payment - just a name. Worth 30 secs if you'd want this for your family:";
+    "Hey - just thought of you. New UK mobile network being built around the under-16s social media ban. It's called Haven, by parents from the Smartphone Free Childhood community. Pre-launch. Sign up via my link and you get your first month free when they launch. No commitment, no payment - just a name. Worth 30 secs if you'd want this for your family:";
 
   // Fire-and-forget PostHog event helper. Safe if posthog isn't loaded
   // (e.g. consent declined) — we just no-op.
@@ -813,6 +842,17 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     els.posNum.textContent   = data.position;
     els.totalNum.textContent = data.total;
     els.refNum.textContent   = data.referrals;
+
+    // Free months: 1 for joining + 1 per successful referral.
+    // Derived server-side as data.free_months; fall back to 1 + referrals if absent.
+    const referrals = Number(data.referrals) || 0;
+    const freeMonths = Number(data.free_months ?? (1 + referrals));
+    if (els.freeMonthsNum) els.freeMonthsNum.textContent = freeMonths;
+    if (els.freeMonthsDetail) {
+      els.freeMonthsDetail.innerHTML = referrals === 0
+        ? `1 for joining · <strong>+1 for every parent you invite</strong>`
+        : `1 for joining · ${referrals} from invites · <strong>+1 more for every signup</strong>`;
+    }
 
     const url = `${SITE}/?ref=${data.ref_code}`;
     const dmText = `${buildDmBlurb()} ${url}`;

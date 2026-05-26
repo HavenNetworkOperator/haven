@@ -32,6 +32,8 @@ Pick one (A is the recommendation — concrete, specific, signals the scarcity w
 >
 > Quick reminder of what you've actually signed up to: **nothing financial, no commitment.** You're on the waitlist. That's it. We're using the waitlist to prove there's enough demand from parents who want this network to exist — every name helps us get to 1,000 and on to launch.
 >
+> **Your first month of Haven is on us when we launch** — our thank-you for being early. And every parent you invite who joins the waitlist earns you another free month, no cap. They get their first month free too.
+>
 > If you're one of the first 1,000 to sign up, here's what you'll be **offered** at launch (your option, not a commitment):
 >
 > — A £25 one-time eSIM and £8 a month, **locked for life.** Not for the first year. For as long as you stay with Haven.
@@ -152,6 +154,8 @@ Merge tags use the `{{first_name}}`, `{{signup_number}}`, `{{share_url}}` syntax
             <p style="margin:0 0 18px 0;">Hi {{first_name|"there"}},</p>
             <p style="margin:0 0 18px 0;">Welcome to Haven, and thank you for adding your name.</p>
             <p style="margin:0 0 18px 0;">Quick reminder of what you've actually signed up to: <strong>nothing financial, no commitment.</strong> You're on the waitlist. That's it. We're using the waitlist to prove there's enough demand from parents who want this network to exist — every name helps us get to 1,000 and on to launch.</p>
+
+            <p style="margin:0 0 18px 0;background:rgba(193,74,31,0.08);border-left:3px solid #c14a1f;padding:14px 18px;border-radius:6px;"><strong>Your first month of Haven is on us when we launch</strong> — our thank-you for being early. And every parent you invite who joins the waitlist earns you another free month, no cap. They get their first month free too.</p>
 
             <p style="margin:0 0 12px 0;font-weight:600;">If you're one of the first 1,000 to sign up, here's what you'll be <em style="color:#c14a1f;font-style:italic;">offered</em> at launch (your option, not a commitment):</p>
 
