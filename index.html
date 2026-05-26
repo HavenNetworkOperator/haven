@@ -1325,17 +1325,22 @@ footer a:hover { color: var(--accent); }
 .cred-ticker-track {
   display: inline-flex;
   align-items: center;
-  /* CSS animation is the fallback only — JS at the bottom of the page
-     measures the set width in pixels and drives a rAF loop instead.
-     iOS Safari was overshooting translateX(-50%) on inline-flex containers
-     and snapping all the logos off-screen on reset. !important defeats the
-     site-wide prefers-reduced-motion override (* {animation-duration: 0.01ms !important}). */
-  animation: cred-ticker-scroll 39s linear infinite !important;
-  animation-play-state: running !important;
+  /* CSS animation is a NO-JS fallback only. JS at the bottom of the page
+     cancels this animation (inline !important) and drives transform via
+     requestAnimationFrame instead — iOS Safari was overshooting the CSS
+     translateX(-50%) on inline-flex containers and snapping logos
+     off-screen on the loop reset, plus the CSS animation was fighting the
+     JS transform when both ran. */
+  animation: cred-ticker-scroll 39s linear infinite;
+}
+.cred-ticker.js-active .cred-ticker-track {
+  /* JS layer sets transform inline every frame; suppress CSS animation
+     so the two don't fight. */
+  animation: none !important;
 }
 @media (hover: hover) {
   .cred-ticker:hover .cred-ticker-track {
-    animation-play-state: paused !important;
+    animation-play-state: paused;
   }
 }
 .cred-ticker-set {
@@ -1484,7 +1489,7 @@ footer a:hover { color: var(--accent); }
     padding-right: 64px;
   }
   .cred-ticker-track {
-    animation-duration: 16s !important;
+    animation-duration: 16s;
   }
 }
 
@@ -2485,9 +2490,12 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     }
 
     function run() {
-      // Take over from the CSS animation now that we can measure accurately.
-      track.style.animation = 'none';
-      track.style.willChange = 'transform';
+      // Take over from the CSS animation. The .js-active class on the parent
+      // adds 'animation: none !important' to the track so the two layers
+      // don't fight over the transform property.
+      const ticker = track.closest('.cred-ticker');
+      if (ticker) ticker.classList.add('js-active');
+      track.style.setProperty('will-change', 'transform');
 
       let setWidth = firstSet.offsetWidth;
       if (!setWidth) return;
@@ -2509,7 +2517,13 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
           // Wrap when one full set has scrolled past — the duplicated set is
           // already in position, so the user sees no jump.
           if (position <= -setWidth) position += setWidth;
-          track.style.transform = `translate3d(${position.toFixed(2)}px, 0, 0)`;
+          // setProperty with 'important' guarantees we win the cascade even
+          // if any stylesheet rule tries to set transform with !important.
+          track.style.setProperty(
+            'transform',
+            `translate3d(${position.toFixed(2)}px, 0, 0)`,
+            'important'
+          );
         }
         requestAnimationFrame(step);
       }
