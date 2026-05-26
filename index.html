@@ -1325,13 +1325,16 @@ footer a:hover { color: var(--accent); }
 .cred-ticker-track {
   display: inline-flex;
   align-items: center;
-  will-change: transform;
-  transform: translateZ(0);
-  animation: cred-ticker-scroll 39s linear infinite;
+  /* !important to defeat the site-wide prefers-reduced-motion rule that
+     uses *, *::before, *::after with !important to zero out all animations.
+     For a decorative ticker, we'd rather keep it moving even when reduce-
+     motion is on, since iOS users commonly have it enabled by default. */
+  animation: cred-ticker-scroll 39s linear infinite !important;
+  animation-play-state: running !important;
 }
 @media (hover: hover) {
   .cred-ticker:hover .cred-ticker-track {
-    animation-play-state: paused;
+    animation-play-state: paused !important;
   }
 }
 .cred-ticker-set {
@@ -1358,9 +1361,6 @@ footer a:hover { color: var(--accent); }
 @keyframes cred-ticker-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cred-ticker-track { animation: none; }
 }
 .hero-credibility-note {
   font-family: var(--serif);
@@ -1483,7 +1483,7 @@ footer a:hover { color: var(--accent); }
     padding-right: 64px;
   }
   .cred-ticker-track {
-    animation-duration: 31s;
+    animation-duration: 31s !important;
   }
 }
 
