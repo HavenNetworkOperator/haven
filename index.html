@@ -1325,10 +1325,11 @@ footer a:hover { color: var(--accent); }
 .cred-ticker-track {
   display: inline-flex;
   align-items: center;
-  /* !important to defeat the site-wide prefers-reduced-motion rule that
-     uses *, *::before, *::after with !important to zero out all animations.
-     For a decorative ticker, we'd rather keep it moving even when reduce-
-     motion is on, since iOS users commonly have it enabled by default. */
+  /* CSS animation is the fallback only — JS at the bottom of the page
+     measures the set width in pixels and drives a rAF loop instead.
+     iOS Safari was overshooting translateX(-50%) on inline-flex containers
+     and snapping all the logos off-screen on reset. !important defeats the
+     site-wide prefers-reduced-motion override (* {animation-duration: 0.01ms !important}). */
   animation: cred-ticker-scroll 39s linear infinite !important;
   animation-play-state: running !important;
 }
@@ -1483,7 +1484,7 @@ footer a:hover { color: var(--accent); }
     padding-right: 64px;
   }
   .cred-ticker-track {
-    animation-duration: 31s !important;
+    animation-duration: 16s !important;
   }
 }
 
@@ -2457,6 +2458,94 @@ const observer = new IntersectionObserver(
   { threshold: 0.12 }
 );
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ─── Logo ticker (JS-driven, pixel-precise) ───
+// CSS-only version used translateX(-50%) which iOS Safari miscalculated on
+// inline-flex containers, snapping all logos off-screen at the loop reset.
+// JS measures the actual width of one logo set after images load, then drives
+// transform with rAF so the seam is pixel-perfect.
+(function initLogoTicker() {
+  function start() {
+    const track = document.querySelector('.cred-ticker-track');
+    const firstSet = track && track.querySelector('.cred-ticker-set');
+    if (!track || !firstSet) return;
+
+    // Wait for all logo images to be loaded so widths are accurate.
+    const imgs = Array.from(track.querySelectorAll('img'));
+    const pending = imgs.filter(img => !img.complete);
+    if (pending.length) {
+      let left = pending.length;
+      const done = () => { if (--left === 0) run(); };
+      pending.forEach(img => {
+        img.addEventListener('load',  done, { once: true });
+        img.addEventListener('error', done, { once: true });
+      });
+    } else {
+      run();
+    }
+
+    function run() {
+      // Take over from the CSS animation now that we can measure accurately.
+      track.style.animation = 'none';
+      track.style.willChange = 'transform';
+
+      let setWidth = firstSet.offsetWidth;
+      if (!setWidth) return;
+
+      // Match the previous CSS durations but JS-driven so the seam is exact.
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const DURATION_SEC = isMobile ? 16 : 39;
+      let pxPerSec = setWidth / DURATION_SEC;
+
+      let position = 0;
+      let lastTime = performance.now();
+      let paused = false;
+
+      function step(now) {
+        const dt = (now - lastTime) / 1000;
+        lastTime = now;
+        if (!paused && dt < 0.5) {
+          position -= pxPerSec * dt;
+          // Wrap when one full set has scrolled past — the duplicated set is
+          // already in position, so the user sees no jump.
+          if (position <= -setWidth) position += setWidth;
+          track.style.transform = `translate3d(${position.toFixed(2)}px, 0, 0)`;
+        }
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+
+      // Pause on hover (real pointing devices only — never on touch).
+      if (window.matchMedia('(hover: hover)').matches) {
+        const ticker = track.closest('.cred-ticker');
+        if (ticker) {
+          ticker.addEventListener('mouseenter', () => { paused = true; });
+          ticker.addEventListener('mouseleave', () => { paused = false; });
+        }
+      }
+
+      // Recompute on viewport changes (rotation, browser chrome show/hide).
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const newSetWidth = firstSet.offsetWidth;
+          if (!newSetWidth || newSetWidth === setWidth) return;
+          setWidth = newSetWidth;
+          const newIsMobile = window.matchMedia('(max-width: 768px)').matches;
+          pxPerSec = setWidth / (newIsMobile ? 16 : 39);
+          if (position <= -setWidth) position = 0;
+        }, 200);
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+})();
 
 // ─── Inline homepage signup form ───
 // Submits to the same /api/signup endpoint as /waitlist. On success we stash
