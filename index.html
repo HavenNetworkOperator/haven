@@ -1271,48 +1271,66 @@ footer a:hover { color: var(--accent); }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  padding: 22px 36px;
+  gap: 20px;
+  padding: 28px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   animation: fadeUp 1s ease-out 0.35s backwards;
   width: 100%;
   max-width: 880px;
 }
-.hero-credibility-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: center;
-  gap: 10px 22px;
-}
-.hero-credibility-label {
+.hero-credibility-eyebrow {
   font-family: var(--serif);
   font-style: italic;
   font-size: 14px;
   letter-spacing: 0.005em;
   color: var(--muted);
   font-weight: 400;
-  white-space: nowrap;
+  text-align: center;
+  margin: 0;
+  padding: 0 16px;
 }
-.hero-credibility-logos {
+.cred-ticker {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.cred-ticker-track {
   display: flex;
-  flex-wrap: wrap;
+  width: max-content;
+  animation: cred-ticker-scroll 28s linear infinite;
+}
+.cred-ticker:hover .cred-ticker-track {
+  animation-play-state: paused;
+}
+.cred-ticker-set {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 14px 28px;
-  line-height: 1;
+  flex-shrink: 0;
+  gap: 56px;
+  padding-right: 56px;
 }
 .cred-logo {
   display: inline-flex;
   align-items: center;
-  height: 28px;
+  justify-content: center;
+  height: 48px;
 }
 .cred-logo img {
   display: block;
   height: 100%;
   width: auto;
-  max-width: 100%;
+  max-width: none;
+  object-fit: contain;
+}
+@keyframes cred-ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cred-ticker-track { animation: none; }
 }
 .hero-credibility-note {
   font-family: var(--serif);
@@ -1325,6 +1343,7 @@ footer a:hover { color: var(--accent); }
   max-width: 100%;
   line-height: 1.4;
   white-space: nowrap;
+  padding: 0 16px;
 }
 @media (max-width: 720px) {
   .hero-credibility-note {
@@ -1426,13 +1445,14 @@ footer a:hover { color: var(--accent); }
     gap: 10px;
   }
   .cred-logo {
-    height: 22px;
+    height: 36px;
   }
-  .hero-credibility-row {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
+  .cred-ticker-set {
+    gap: 40px;
+    padding-right: 40px;
+  }
+  .cred-ticker-track {
+    animation-duration: 22s;
   }
 }
 
@@ -1836,26 +1856,21 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   <!-- ═══════ HERO SUPPORTING (proof / trust) ═══════ -->
   <section class="hero hero--supporting">
     <div class="hero-credibility">
-      <div class="hero-credibility-row">
-        <span class="hero-credibility-label">Founders featured on</span>
-        <div class="hero-credibility-logos">
-          <span class="cred-logo">
-            <img src="/bbc.png" alt="BBC" />
-          </span>
-          <span class="cred-logo">
-            <img src="/tf1.png" alt="TF1 France" />
-          </span>
-        </div>
-      </div>
-      <div class="hero-credibility-row">
-        <span class="hero-credibility-label">Founders part of</span>
-        <div class="hero-credibility-logos">
-          <span class="cred-logo">
-            <img src="/sfc.png" alt="Smartphone Free Childhood" />
-          </span>
-          <span class="cred-logo">
-            <img src="/generation-focus.png" alt="Generation Focus" />
-          </span>
+      <p class="hero-credibility-eyebrow">Founders featured on &amp; part of</p>
+      <div class="cred-ticker" aria-label="Brands and organisations the founders are featured on or part of">
+        <div class="cred-ticker-track">
+          <div class="cred-ticker-set">
+            <span class="cred-logo"><img src="/bbc.png" alt="BBC" /></span>
+            <span class="cred-logo"><img src="/tf1.png" alt="TF1 France" /></span>
+            <span class="cred-logo"><img src="/sfc.png" alt="Smartphone Free Childhood" /></span>
+            <span class="cred-logo"><img src="/generation-focus.png" alt="Generation Focus" /></span>
+          </div>
+          <div class="cred-ticker-set" aria-hidden="true">
+            <span class="cred-logo"><img src="/bbc.png" alt="" /></span>
+            <span class="cred-logo"><img src="/tf1.png" alt="" /></span>
+            <span class="cred-logo"><img src="/sfc.png" alt="" /></span>
+            <span class="cred-logo"><img src="/generation-focus.png" alt="" /></span>
+          </div>
         </div>
       </div>
       <p class="hero-credibility-note">Founder advised in government consultation on social media ban for under-16s</p>
