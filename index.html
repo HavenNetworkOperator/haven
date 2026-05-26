@@ -1594,8 +1594,40 @@ footer a:hover { color: var(--accent); }
 }
 .sfc-endorsement-cite {
   display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.sfc-endorsement-cite-text {
+  display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
+}
+.sfc-endorsement-avatar {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(15, 27, 45, 0.12);
+}
+.sfc-endorsement-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .sfc-endorsement-name {
   font-family: var(--sans);
@@ -1720,15 +1752,27 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <figure class="sfc-endorsement-quote">
         <blockquote>I think Haven is an amazing idea and I'm fully supportive…</blockquote>
         <figcaption class="sfc-endorsement-cite">
-          <span class="sfc-endorsement-name">Clare Fernyhough</span>
-          <span class="sfc-endorsement-role">Co-founder, Smartphone Free Childhood</span>
+          <span class="sfc-endorsement-avatar" aria-hidden="true">
+            <img src="/clare.jpg" alt="" onerror="this.remove()" />
+            C
+          </span>
+          <span class="sfc-endorsement-cite-text">
+            <span class="sfc-endorsement-name">Clare Fernyhough</span>
+            <span class="sfc-endorsement-role">Co-founder, Smartphone Free Childhood</span>
+          </span>
         </figcaption>
       </figure>
       <figure class="sfc-endorsement-quote">
         <blockquote>Haven looks awesome. It's really exciting and it sounds like something that would really help parents and kids.</blockquote>
         <figcaption class="sfc-endorsement-cite">
-          <span class="sfc-endorsement-name">Daisy Greenwell</span>
-          <span class="sfc-endorsement-role">Co-founder, Smartphone Free Childhood</span>
+          <span class="sfc-endorsement-avatar" aria-hidden="true">
+            <img src="/daisy.jpg" alt="" onerror="this.remove()" />
+            D
+          </span>
+          <span class="sfc-endorsement-cite-text">
+            <span class="sfc-endorsement-name">Daisy Greenwell</span>
+            <span class="sfc-endorsement-role">Co-founder, Smartphone Free Childhood</span>
+          </span>
         </figcaption>
       </figure>
     </div>
