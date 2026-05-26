@@ -199,6 +199,7 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  scroll-margin-top: 32px;
 }
 .hero-eyebrow {
   display: inline-block;
@@ -1887,7 +1888,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 <div class="container">
 
   <!-- ═══════ HERO SUPPORTING (proof / trust) ═══════ -->
-  <section class="hero hero--supporting">
+  <section class="hero hero--supporting" id="join-waitlist">
     <div class="hero-credibility">
       <p class="hero-credibility-eyebrow">Founders featured on &amp; part of</p>
       <div class="cred-ticker" aria-label="Brands and organisations the founders are featured on or part of">
@@ -1909,7 +1910,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <p class="hero-credibility-note">Founder advised in government consultation on social media ban for under-16s</p>
     </div>
 
-    <div class="signup" id="join-waitlist">
+    <div class="signup">
       <form class="signup-form" id="homepageSignupForm" novalidate>
         <input
           type="email"
