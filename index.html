@@ -1292,17 +1292,36 @@ footer a:hover { color: var(--accent); }
   position: relative;
   width: 100%;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.cred-ticker::before,
+.cred-ticker::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6%;
+  pointer-events: none;
+  z-index: 2;
+}
+.cred-ticker::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg) 0%, rgba(244, 239, 230, 0) 100%);
+}
+.cred-ticker::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg) 0%, rgba(244, 239, 230, 0) 100%);
 }
 .cred-ticker-track {
   display: inline-flex;
   align-items: center;
   will-change: transform;
+  transform: translateZ(0);
   animation: cred-ticker-scroll 28s linear infinite;
 }
-.cred-ticker:hover .cred-ticker-track {
-  animation-play-state: paused;
+@media (hover: hover) {
+  .cred-ticker:hover .cred-ticker-track {
+    animation-play-state: paused;
+  }
 }
 .cred-ticker-set {
   display: flex;
