@@ -1399,99 +1399,6 @@ footer a:hover { color: var(--accent); }
   }
 }
 
-/* ───── HERO KICKSTARTER TRIGGER ───── */
-.hero-trigger-note {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 16px;
-  color: var(--accent);
-  margin-top: 18px;
-  letter-spacing: 0.005em;
-  text-align: center;
-  animation: fadeUp 1s ease-out 0.5s backwards;
-}
-.hero-trigger-note em {
-  font-style: normal;
-  font-weight: 500;
-}
-.hero-trigger-note--pre {
-  text-align: center;
-  font-size: clamp(17px, 1.6vw, 20px);
-  margin-top: 0;
-  margin-bottom: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 56ch;
-  animation: fadeUp 1s ease-out 0.3s backwards;
-}
-
-/* ───── HERO TRIGGER BLOCK (with progress bar) ───── */
-.hero-trigger-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 40px;
-  animation: fadeUp 1s ease-out 0.3s backwards;
-}
-.hero-trigger-block .hero-trigger-note--pre {
-  margin-bottom: 6px;
-  animation: none;
-}
-.hero-trigger-progress-text {
-  font-family: var(--sans);
-  font-size: 14px;
-  color: var(--ink-soft);
-  text-align: center;
-  letter-spacing: 0.01em;
-  margin-bottom: 16px;
-}
-.hero-trigger-progress-text strong {
-  color: var(--accent);
-  font-weight: 600;
-}
-.hero-progress {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  height: 4px;
-  background: rgba(15, 27, 45, 0.1);
-  border-radius: 999px;
-  overflow: visible;
-}
-.hero-progress-fill {
-  position: relative;
-  height: 100%;
-  background: var(--accent);
-  border-radius: 999px;
-  transition: width 0.6s ease;
-}
-.hero-progress-dot {
-  position: absolute;
-  right: -5px;
-  top: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  transform: translateY(-50%);
-  z-index: 2;
-}
-.hero-progress-dot::before,
-.hero-progress-dot::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--accent);
-  z-index: -1;
-}
-.hero-progress-dot::before { animation: ring-pulse 2s ease-out infinite; }
-.hero-progress-dot::after  { animation: ring-pulse 2s ease-out infinite 1s; }
-@keyframes ring-pulse {
-  0%   { transform: scale(1); opacity: 0.55; }
-  100% { transform: scale(2.6); opacity: 0; }
-}
-
 /* ───── MEMBER COUNTER ───── */
 .signup-counter {
   margin-top: 8px;
@@ -1811,7 +1718,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     </div>
     <div class="sfc-endorsement-grid">
       <figure class="sfc-endorsement-quote">
-        <blockquote>I think it's an amazing idea and I'm fully supportive…</blockquote>
+        <blockquote>I think Haven is an amazing idea and I'm fully supportive…</blockquote>
         <figcaption class="sfc-endorsement-cite">
           <span class="sfc-endorsement-name">Clare Fernyhough</span>
           <span class="sfc-endorsement-role">Co-founder, Smartphone Free Childhood</span>
@@ -1832,15 +1739,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
 
   <!-- ═══════ HERO SUPPORTING (proof / trust) ═══════ -->
   <section class="hero hero--supporting">
-    <div class="hero-trigger-block">
-      <p class="hero-trigger-note hero-trigger-note--pre">Haven launches on Kickstarter at <em>1,000 names</em>.</p>
-      <p class="hero-trigger-progress-text"><strong id="heroProgressCurrent">…</strong> already signed up. <strong id="heroProgressRemaining">…</strong> to go.</p>
-      <div class="hero-progress" id="heroProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1000" aria-label="Waitlist progress">
-        <div class="hero-progress-fill" id="heroProgressFill" style="width: 0%;">
-          <span class="hero-progress-dot"></span>
-        </div>
-      </div>
-    </div>
     <div class="hero-credibility">
       <div class="hero-credibility-row">
         <span class="hero-credibility-label">Founders featured on</span>
@@ -2393,39 +2291,6 @@ const observer = new IntersectionObserver(
 );
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// ─── Hero progress bar — community count toward 1,000.
-// Mirrors the post-signup tracker on /waitlist: same GOAL, same animation
-// pattern (pin to 0% → double-rAF → animate up so the CSS transition fires).
-(async function loadHeroProgress() {
-  const cur  = document.getElementById('heroProgressCurrent');
-  const rem  = document.getElementById('heroProgressRemaining');
-  const bar  = document.getElementById('heroProgress');
-  const fill = document.getElementById('heroProgressFill');
-  if (!fill) return;
-  try {
-    const r = await fetch(`/api/total?t=${Date.now()}`, { cache: 'no-store' });
-    if (!r.ok) return;
-    const data = await r.json();
-    const GOAL = Number(data.goal) || 1000;
-    const total = Math.max(0, Number(data.total) || 0);
-    const remaining = Math.max(0, GOAL - total);
-    const pct = Math.min(100, (total / GOAL) * 100);
-
-    if (cur) cur.textContent = total.toLocaleString('en-GB');
-    if (rem) rem.textContent = remaining.toLocaleString('en-GB');
-    if (bar) {
-      bar.setAttribute('aria-valuenow', String(total));
-      bar.setAttribute('aria-valuemax', String(GOAL));
-    }
-
-    fill.style.width = '0%';
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        fill.style.width = `${pct}%`;
-      });
-    });
-  } catch {}
-})();
 </script>
 
 </body>
