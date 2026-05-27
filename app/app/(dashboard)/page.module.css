@@ -29,7 +29,10 @@
 .masthead-date {
   color: var(--muted);
   font-weight: 400;
+  text-decoration: none;
+  transition: color 0.2s;
 }
+.masthead-date:hover { color: var(--accent); }
 
 @media (max-width: 768px) {
   .masthead { font-size: 11px; letter-spacing: 0.14em; }

@@ -33,7 +33,9 @@ export default function Home() {
     <div className={styles.page}>
       <div className={styles.masthead}>
         <span>Haven · {week.ofLabel}</span>
-        <span className={styles["masthead-date"]}>{week.publishedLabel}</span>
+        <Link href="/digest/2026-05-11" className={styles["masthead-date"]}>
+          {week.publishedLabel} · Read full digest →
+        </Link>
       </div>
 
       <section className={styles.headline}>

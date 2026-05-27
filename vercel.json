@@ -11,6 +11,7 @@
     { "source": "/council", "destination": "https://haven-app-lilac.vercel.app/council" },
     { "source": "/account", "destination": "https://haven-app-lilac.vercel.app/account" },
     { "source": "/me/:path*", "destination": "https://haven-app-lilac.vercel.app/me/:path*" },
+    { "source": "/digest/:path*", "destination": "https://haven-app-lilac.vercel.app/digest/:path*" },
     { "source": "/sign-in", "destination": "https://haven-app-lilac.vercel.app/sign-in" },
     { "source": "/sign-in/:path*", "destination": "https://haven-app-lilac.vercel.app/sign-in/:path*" },
     { "source": "/api/auth/:path*", "destination": "https://haven-app-lilac.vercel.app/api/auth/:path*" },
