@@ -577,12 +577,26 @@ main {
   border-color: var(--accent);
   color: var(--bg);
 }
-/* Faint burnt-orange halo expanding outward — draws the eye to the
-   primary share button without competing with it. */
+/* Combined pulse: burnt-orange halo expanding outward + background/border
+   cycling ink → accent → ink, in sync over the same 2.4s loop. The colour
+   shift is the louder cue (calls the eye to the share button), the halo
+   gives it the "soft glow" feel. */
 @keyframes pulse-btn {
-  0%   { box-shadow: 0 0 0 0   rgba(193, 74, 31, 0.32); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(193, 74, 31, 0.32);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  50% {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
   70%  { box-shadow: 0 0 0 16px rgba(193, 74, 31, 0); }
-  100% { box-shadow: 0 0 0 0   rgba(193, 74, 31, 0); }
+  100% {
+    box-shadow: 0 0 0 0 rgba(193, 74, 31, 0);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
 }
 .share-btn.share-btn-strong {
   border-color: var(--accent);
