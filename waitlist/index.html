@@ -444,6 +444,19 @@ main {
   margin: -8px 0 22px;
   letter-spacing: -0.005em;
 }
+.share-sublabel-pointer {
+  display: inline-block;
+  animation: share-pointer-bounce 1.2s ease-in-out infinite;
+  will-change: transform;
+}
+.share-sublabel-pointer--end {
+  /* stagger the right-hand emoji by half a cycle so they pulse alternately */
+  animation-delay: 0.6s;
+}
+@keyframes share-pointer-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(5px); }
+}
 .share-micro {
   margin: 12px 0 0;
   text-align: center;
@@ -751,7 +764,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <!-- ─── SHARE BLOCK (front-and-centre) ─── -->
       <div class="share-block">
         <span class="share-label">Your move: <em>who else needs to see this?</em></span>
-        <span class="share-sublabel">👇 You both get a free month of Haven when they sign up - SHARE NOW! 👇</span>
+        <span class="share-sublabel"><span class="share-sublabel-pointer" aria-hidden="true">👇</span> You both get a free month of Haven when they sign up - SHARE NOW! <span class="share-sublabel-pointer share-sublabel-pointer--end" aria-hidden="true">👇</span></span>
 
         <div class="share-buttons share-buttons--primary">
           <a class="share-btn share-btn-primary" id="whatsappDmBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_dm">
