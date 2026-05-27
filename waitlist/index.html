@@ -453,12 +453,15 @@ main {
   line-height: 1;
   vertical-align: -0.1em;
   margin: 0 6px;
-  animation: share-pointer-bounce 1.2s ease-in-out infinite;
+  /* !important defeats the global @media (prefers-reduced-motion: reduce)
+     rule (* { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important }).
+     Many iOS users have Reduce Motion enabled which silently killed the bounce. */
+  animation: share-pointer-bounce 1.2s ease-in-out infinite !important;
   will-change: transform;
 }
 .share-pointer--end {
   /* stagger the right-hand emoji by half a cycle so they pulse alternately */
-  animation-delay: 0.6s;
+  animation-delay: 0.6s !important;
 }
 @keyframes share-pointer-bounce {
   0%, 100% { transform: translateY(0); }
@@ -578,7 +581,10 @@ main {
   flex: 2 1 100%;
   font-size: 16px;
   padding: 18px 24px;
-  animation: pulse-btn 2.4s ease-out infinite;
+  /* !important defeats the global prefers-reduced-motion rule that zeroes
+     out all animation-durations on iOS where many users have Reduce Motion
+     enabled — without this the colour pulse + halo silently never play. */
+  animation: pulse-btn 2.4s ease-out infinite !important;
 }
 .share-btn.share-btn-primary:hover {
   background: var(--accent);
