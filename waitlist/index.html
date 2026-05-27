@@ -453,16 +453,49 @@ main {
 }
 .share-testimonial {
   margin: 28px auto 0;
-  max-width: 44ch;
-  text-align: center;
+  max-width: 48ch;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
   font-family: var(--serif);
   color: var(--ink-soft);
+}
+.share-testimonial-avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(15, 27, 45, 0.1);
+}
+.share-testimonial-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.share-testimonial-body {
+  min-width: 0;
+  flex: 1;
 }
 .share-testimonial blockquote {
   font-size: 17px;
   line-height: 1.4;
   font-style: italic;
-  margin: 0 0 8px;
+  margin: 0 0 4px;
   letter-spacing: -0.005em;
 }
 .share-testimonial figcaption {
@@ -471,6 +504,13 @@ main {
   font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--muted);
+}
+@media (max-width: 768px) {
+  .share-testimonial {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
 }
 
 .share-buttons {
@@ -723,8 +763,14 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <p class="share-micro">30 seconds · Free to sign up · No payment · Each signup = +1 month free for you</p>
 
         <figure class="share-testimonial">
-          <blockquote>“Sharing this in my local SFC group makes me look awesome by proxy.”</blockquote>
-          <figcaption>- Sam Benstead, parent, Sussex</figcaption>
+          <span class="share-testimonial-avatar" aria-hidden="true">
+            <img src="/daisy.jpg" alt="" style="object-position: center 28%;" onerror="this.remove()" />
+            D
+          </span>
+          <div class="share-testimonial-body">
+            <blockquote>“I’ve just signed up to the waitlist!”</blockquote>
+            <figcaption>- Daisy Greenwell, Co-founder, Smartphone Free Childhood</figcaption>
+          </div>
         </figure>
       </div>
 
@@ -735,7 +781,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       </div>
 
       <div class="refresh-row">
-        Counts update when others sign up via your link.
+        Your free months update when others sign up via your link.
         <button class="refresh-btn" id="refreshBtn">Refresh</button>
       </div>
     </section>
