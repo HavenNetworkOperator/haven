@@ -220,12 +220,32 @@ main {
 .signup-form button:active { transform: scale(0.97); }
 .signup-form button:disabled { opacity: 0.6; cursor: wait; }
 @media (max-width: 600px) {
+  /* On mobile the input and button stack — give the input its own pill
+     outline instead of relying on the outer wrapper to frame both. */
   .signup-form {
     flex-direction: column;
-    border-radius: 20px;
-    padding: 16px;
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    gap: 10px;
   }
-  .signup-form input { padding: 12px 8px; font-size: 16px; }
+  .signup-form:focus-within {
+    border-color: transparent;
+    box-shadow: none;
+  }
+  .signup-form input {
+    border: 1.5px solid var(--ink);
+    background: var(--bg);
+    border-radius: 100px;
+    padding: 14px 22px;
+    font-size: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .signup-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(193, 74, 31, 0.12);
+  }
   .signup-form button { width: 100%; padding: 16px; min-height: 52px; }
 }
 
