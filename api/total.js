@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
     res.setHeader('CDN-Cache-Control', 'no-store');
     res.setHeader('Vercel-CDN-Cache-Control', 'no-store');
-    return res.status(200).json({ total, goal: 1000 });
+    return res.status(200).json({ total, goal: 250 });
   } catch (err) {
     return serverError(res, err);
   }

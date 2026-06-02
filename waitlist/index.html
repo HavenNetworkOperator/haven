@@ -362,7 +362,7 @@ main {
   font-weight: 500;
 }
 
-/* ───── GOAL TRACKER (community progress to 1,000) ───── */
+/* ───── GOAL TRACKER (community progress to 250) ───── */
 .goal-tracker {
   margin: 0 0 32px;
   padding: 0 4px;
@@ -750,7 +750,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <section class="signup-state" id="signupState">
       <span class="section-label fade-up">Founding waitlist</span>
       <h1 class="fade-up d1">Help us build the mobile network <em>we all want to exist.</em></h1>
-      <p class="lede fade-up d2">No commitment. No payment. Adding your name proves there's demand — and gets us to the 1,000 we need before Haven launches.</p>
+      <p class="lede fade-up d2">No commitment. No payment. Adding your name proves there's demand — and gets us to the 250 we need before Haven launches.</p>
 
       <form class="signup-form fade-up d3" id="form" novalidate>
         <input
@@ -772,7 +772,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <div class="form-error" id="formError" role="alert"></div>
 
       <ul class="benefits-list fade-up d4">
-        <li>First 1,000 signups <em>offered</em> lifetime founding pricing of £8/month at launch — your option then, NOT a commitment to a contract now.</li>
+        <li>First 250 signups <em>offered</em> lifetime founding pricing of £8/month at launch — your option then, NOT a commitment to a contract now.</li>
         <li>If you do choose to activate at launch, you get priority access in queue order.</li>
         <li>Tell us what you most want blocked — we build for the founding families first.</li>
         <li>A direct line to the founding team — replies go to a real inbox.</li>
@@ -798,13 +798,13 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         </div>
       </div>
 
-      <!-- ─── GOAL TRACKER (community progress to 1,000) ─── -->
+      <!-- ─── GOAL TRACKER (community progress to 250) ─── -->
       <div class="goal-tracker">
         <div class="goal-tracker-bar">
           <div class="goal-tracker-fill" id="goalFill"></div>
         </div>
         <div class="goal-tracker-text">
-          Haven launches at 1,000 names.<br>
+          Haven launches at 250 names.<br>
           <em id="goalCurrent">—</em> already signed up. <em id="goalRemaining">—</em> to go.
         </div>
       </div>
@@ -965,8 +965,8 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     const dmText = `${buildDmBlurb()} ${url}`;
     els.whatsappDm.href = `https://wa.me/?text=${encodeURIComponent(dmText)}`;
 
-    // Goal tracker — community progress to the 1,000-name launch threshold.
-    const GOAL = 1000;
+    // Goal tracker — community progress to the 250-name launch threshold.
+    const GOAL = 250;
     const total = Number(data.total) || 0;
     const remaining = Math.max(0, GOAL - total);
     const pct = Math.min(100, (total / GOAL) * 100);

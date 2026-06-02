@@ -49,7 +49,7 @@ function welcomeEmailHtml({ email, position, total, shareUrl, personalUrl }) {
   <div style="${STYLE.wrap}">
     <p style="${STYLE.pSoft}">Hi there,</p>
     <h1 style="${STYLE.h1}">Welcome to Haven.</h1>
-    <p style="${STYLE.p}">You're one of the first 1,000 parents who've put their name down — which makes you a founding member of Britain's first mobile network designed around families.</p>
+    <p style="${STYLE.p}">You're one of the first 250 parents who've put their name down — which makes you a founding member of Britain's first mobile network designed around families.</p>
 
     <div style="${STYLE.position}">#<span style="${STYLE.positionEm}">${position}</span></div>
     <p style="${STYLE.positionMeta}">YOUR PLACE IN THE FOUNDING QUEUE · ${total} signed up so far</p>
@@ -58,7 +58,7 @@ function welcomeEmailHtml({ email, position, total, shareUrl, personalUrl }) {
 
     <p style="${STYLE.p}"><strong>As a founding member you get:</strong></p>
     <p style="${STYLE.pSoft}">— A £25 one-time eSIM and £8 a month, <strong>locked for life.</strong> Not for the first year. For as long as you stay with Haven.<br>
-    — Priority access on launch day. The first 1,000 SIMs go to founding members in queue order.<br>
+    — Priority access on launch day. The first 250 SIMs go to founding members in queue order.<br>
     — A vote on the first three AI safety features we ship. We're building the network, but you're shaping what it does first.<br>
     — A direct line to me and the rest of the founding team. Reply to this email and I'll see it.<br>
     — Founding member status on every milestone we hit.</p>
@@ -98,7 +98,7 @@ function welcomeEmailText({ position, total, shareUrl, personalUrl }) {
 
 Welcome to Haven.
 
-You're one of the first 1,000 parents who've put their name down — which makes you a founding member of Britain's first mobile network designed around families.
+You're one of the first 250 parents who've put their name down — which makes you a founding member of Britain's first mobile network designed around families.
 
 YOUR PLACE IN THE FOUNDING QUEUE: #${position}
 (${total} signed up so far.)
@@ -108,7 +108,7 @@ I want to be straight with you about what founding membership actually means, be
 As a founding member you get:
 
 — A £25 one-time eSIM and £8 a month, locked for life. Not for the first year. For as long as you stay with Haven.
-— Priority access on launch day. The first 1,000 SIMs go to founding members in queue order.
+— Priority access on launch day. The first 250 SIMs go to founding members in queue order.
 — A vote on the first three AI safety features we ship. We're building the network, but you're shaping what it does first.
 — A direct line to me and the rest of the founding team. Reply to this email and I'll see it.
 — Founding member status on every milestone we hit.
@@ -158,7 +158,7 @@ export async function sendWelcomeEmail({ email, position, total, refCode }) {
     const result = await c.emails.send({
       from: process.env.RESEND_FROM,
       to: email,
-      subject: `You're #${position} of 1,000 — welcome to Haven`,
+      subject: `You're #${position} of 250 — welcome to Haven`,
       html: welcomeEmailHtml({ email, position, total, shareUrl, personalUrl }),
       text: welcomeEmailText({ position, total, shareUrl, personalUrl }),
       replyTo: process.env.RESEND_REPLY_TO || undefined,
