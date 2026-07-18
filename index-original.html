@@ -1,0 +1,2630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0f1b2d" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="apple-touch-icon" href="/favicon.svg" />
+
+<script>
+// Referral capture: share links land here as /?ref=CODE. Stash the code
+// in localStorage so it survives the click through to /waitlist, where
+// the signup form picks it up as the referrer. Also stash the landing
+// page so /waitlist can attribute the funnel entry point ("/" vs
+// "/waitlist") at signup time.
+(function () {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var raw = (params.get('ref') || '').trim().toUpperCase();
+    if (/^[2-9A-HJKMNP-Z]{8}$/.test(raw)) {
+      localStorage.setItem('haven_pending_ref', raw);
+      localStorage.setItem('haven_landing_page', '/');
+      localStorage.setItem('haven_landed_at', new Date().toISOString());
+    }
+  } catch {}
+})();
+</script>
+<title>Haven — The first UK mobile network built around the under-16s social media ban.</title>
+<meta name="description" content="The first UK mobile network built around the social media ban for under-16s. Safe at the SIM, not behind an app a child can delete. Add your name to help us prove there's demand — no commitment, no payment." />
+
+<link rel="canonical" href="https://gethavenmobile.com/" />
+
+<!-- OPEN GRAPH / SOCIAL PREVIEW -->
+<meta property="og:title" content="Haven — The first UK mobile network built around the under-16s social media ban." />
+<meta property="og:description" content="Help us build the mobile network we all want to exist. No commitment, no payment — just adding your name to prove there's demand." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gethavenmobile.com/" />
+<meta property="og:image" content="https://gethavenmobile.com/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="A parent handing a phone to their teenage daughter in a hallway." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Haven — The first UK mobile network built around the under-16s social media ban." />
+<meta name="twitter:description" content="Help us build the mobile network we all want to exist. No commitment, no payment — just adding your name to prove there's demand." />
+<meta name="twitter:image" content="https://gethavenmobile.com/og-image.jpg" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #f4efe6;
+  --bg-deep: #ebe4d4;
+  --ink: #0f1b2d;
+  --ink-soft: #2a3a52;
+  --muted: #6a6253;
+  --accent: #c14a1f;
+  --accent-soft: #e88a5e;
+  --line: #d8cfbc;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* subtle paper grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.07 0 0 0 0 0.1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  transform: translateZ(0);
+  will-change: transform;
+}
+@media (max-width: 768px) {
+  body::before { opacity: 0.22; }
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ───── NAV ───── */
+nav {
+  padding: 28px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: relative;
+}
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav-meta {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.nav-meta:hover { color: var(--accent) !important; }
+.nav-waitlist-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--sans);
+  color: var(--accent);
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  border-radius: 100px;
+  padding: 10px 18px;
+  min-height: 44px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.nav-waitlist-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+.nav-waitlist-btn-short { display: none; }
+.nav-waitlist-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.nav-waitlist-btn:hover .nav-waitlist-dot {
+  background: var(--bg);
+}
+
+/* ───── HERO ───── */
+.hero {
+  padding: 24px 0 80px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scroll-margin-top: 32px;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 32px;
+  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  animation: fadeUp 0.8s ease-out;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin-bottom: 36px;
+  max-width: 22ch;
+  animation: fadeUp 0.9s ease-out 0.1s backwards;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 96;
+}
+.hero h1 em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--accent);
+}
+.hero-sub {
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 1000px;
+  margin-bottom: 48px;
+  animation: fadeUp 1s ease-out 0.25s backwards;
+}
+
+/* ───── FORM ───── */
+.signup {
+  max-width: 520px;
+  width: 100%;
+  animation: fadeUp 1s ease-out 0.4s backwards;
+}
+.signup-form {
+  display: flex;
+  gap: 8px;
+  background: var(--bg);
+  border: 1.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 6px 6px 6px 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.signup-form:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(193, 74, 31, 0.12);
+}
+.signup-form input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+  min-width: 0;
+}
+.signup-form input::placeholder { color: var(--muted); }
+.signup-form button {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  padding: 14px 28px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s;
+}
+.signup-form button:hover { background: var(--accent); }
+.signup-form button:active { transform: scale(0.97); }
+.signup-form button:disabled { opacity: 0.6; cursor: wait; }
+.signup-error {
+  color: var(--accent);
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  min-height: 1em;
+  font-family: var(--sans);
+}
+.signup-error:empty { margin-top: 0; }
+
+.signup-meta {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.signup-clarity {
+  margin-top: 20px;
+  padding: 18px 22px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  text-align: left;
+}
+.signup-clarity-lead {
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.signup-clarity-lead strong {
+  font-weight: 600;
+  color: var(--accent);
+}
+.signup-clarity-detail {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.signup-clarity-detail em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+}
+.signup-meta::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+.signup-success {
+  display: none;
+  padding: 24px;
+  border: 1.5px solid var(--accent);
+  border-radius: 16px;
+  background: rgba(193, 74, 31, 0.06);
+}
+.signup-success.active { display: block; }
+.signup-success h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* decorative side mark */
+.hero-mark {
+  position: absolute;
+  right: -40px;
+  top: 80px;
+  width: 320px;
+  height: 320px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ───── SITE HEADER (overlays hero) ───── */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: transparent;
+  padding-top: env(safe-area-inset-top);
+}
+.site-header .container { padding-top: 0; padding-bottom: 0; }
+.site-header--over-dark .logo { color: var(--bg); }
+.site-header--over-dark .logo-mark::after { background: var(--ink); }
+.site-header--over-dark .nav-meta {
+  color: rgba(244, 239, 230, 0.78);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.site-header--over-dark .nav-meta:hover { color: var(--bg) !important; }
+.site-header--over-dark .nav-waitlist-btn {
+  color: var(--bg);
+  border-color: rgba(244, 239, 230, 0.45);
+}
+.site-header--over-dark .nav-waitlist-btn:hover {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--bg);
+}
+.site-header--over-dark .nav-waitlist-btn:hover .nav-waitlist-dot { background: var(--accent); }
+.site-header--over-dark .nav-waitlist-dot { background: var(--accent-soft); }
+
+/* ───── HERO (split layout) ───── */
+.hero-split {
+  position: relative;
+  z-index: 2;
+  background: var(--ink);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 620px;
+  overflow: hidden;
+  margin-bottom: 80px;
+}
+.hero-split-text {
+  padding-top: clamp(120px, 10vw, 160px);
+  padding-right: clamp(32px, 5vw, 88px);
+  padding-bottom: clamp(72px, 8vw, 110px);
+  padding-left: max(32px, calc((100vw - 1180px) / 2 + 32px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--bg);
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+.hero-split-text h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 4.4vw, 62px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--bg);
+  margin: 0 0 26px;
+  max-width: 16ch;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 96;
+  animation: fadeUp 0.9s ease-out 0.05s backwards;
+}
+.hero-split-text h1 em {
+  font-style: normal;
+  color: inherit;
+  font-weight: 400;
+}
+.hero-split-sub {
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(244, 239, 230, 0.72);
+  margin: 0 0 36px;
+  max-width: 42ch;
+  animation: fadeUp 1s ease-out 0.15s backwards;
+}
+.hero-split-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 16px 32px;
+  border-radius: 100px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: background 0.2s, transform 0.1s;
+  animation: fadeUp 1s ease-out 0.25s backwards;
+}
+.hero-split-cta:hover { background: #a83d18; }
+.hero-split-cta:active { transform: scale(0.97); }
+
+.hero-split-features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(48px, 6vw, 76px);
+  max-width: 480px;
+  animation: fadeUp 1s ease-out 0.35s backwards;
+}
+.hero-split-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  min-width: 0;
+}
+.hero-split-feature-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg);
+  opacity: 0.9;
+}
+.hero-split-feature-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+.hero-split-feature span {
+  font-size: 12px;
+  color: rgba(244, 239, 230, 0.72);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.hero-split-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--ink);
+  overflow: hidden;
+}
+.hero-split-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+    min-height: 600px;
+    margin-bottom: 56px;
+  }
+  .hero-split-image img { object-position: center; }
+  .hero-split-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15,27,45,0.78) 0%, rgba(15,27,45,0.62) 50%, rgba(15,27,45,0.85) 100%);
+    pointer-events: none;
+  }
+  .hero-split-text {
+    padding: 120px 24px 64px;
+  }
+  .hero-split-text h1 {
+    max-width: none;
+    font-size: clamp(34px, 7.5vw, 44px);
+  }
+  .hero-split-sub { font-size: 15px; margin-bottom: 28px; }
+  .hero-split-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+    max-width: none;
+  }
+}
+@media (max-width: 480px) {
+  .hero-split-text { padding: 110px 20px 56px; }
+  .hero-split-text h1 { font-size: clamp(30px, 8vw, 38px); }
+  .hero-split-cta {
+    padding: 16px 26px;
+    font-size: 16px;
+    align-self: stretch;
+    justify-content: center;
+    min-height: 52px;
+  }
+  .hero-split-features { gap: 20px; }
+}
+
+/* ───── SECTION BASE ───── */
+.section {
+  padding: 120px 0;
+  border-top: 1px solid var(--line);
+}
+.section-bg-deep { background: var(--bg-deep); }
+
+.section-label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--muted);
+}
+.section h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 64px;
+  max-width: 18ch;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 72;
+}
+.section h2 em {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+/* ───── STATS ───── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 48px 64px;
+  margin-top: 40px;
+}
+.stat {
+  border-top: 1px solid var(--ink);
+  padding-top: 24px;
+}
+.stat-num {
+  font-family: var(--serif);
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.stat-num em { font-style: normal; color: var(--accent); }
+.stat-text {
+  font-size: 17px;
+  color: var(--ink);
+  line-height: 1.55;
+  max-width: 32ch;
+}
+.stat-source {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ───── HOW IT WORKS ───── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 48px;
+  margin-top: 40px;
+}
+.step { position: relative; }
+.step-num {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  display: block;
+}
+.step h3 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.step p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ───── LANDSCAPE SECTION: aligned four-column layout via subgrid ───── */
+.landscape-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto auto auto;
+  column-gap: 40px;
+  row-gap: 20px;
+  margin-top: 40px;
+}
+.landscape-steps .step {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 4;
+}
+.landscape-steps .step > * { margin: 0; }
+.landscape-steps .step-num { margin-bottom: 0; }
+@media (max-width: 860px) {
+  .landscape-steps {
+    display: block;
+  }
+  .landscape-steps .step {
+    display: block;
+    margin-bottom: 48px;
+  }
+  .landscape-steps .step-num { display: block; margin-bottom: 20px; }
+  .landscape-steps .step h3 { margin-bottom: 16px; }
+  .landscape-steps .step p { margin-bottom: 16px; }
+  .landscape-steps .step p:last-child { margin-bottom: 0; }
+}
+
+/* ───── LANDSCAPE STEP — ACCENT VARIANT (Layer 4 / Network) ───── */
+.landscape-steps .step--accent {
+  position: relative;
+}
+.landscape-steps .step--accent::before {
+  content: '';
+  position: absolute;
+  inset: -28px -24px;
+  background: var(--accent);
+  border-radius: 14px;
+  z-index: 0;
+}
+.landscape-steps .step--accent > * {
+  position: relative;
+  z-index: 1;
+}
+.landscape-steps .step--accent .step-num {
+  color: rgba(244, 239, 230, 0.78);
+}
+.landscape-steps .step--accent h3,
+.landscape-steps .step--accent p {
+  color: var(--bg);
+}
+.landscape-steps .step--accent p em {
+  color: var(--bg);
+}
+.landscape-steps .step--accent p strong {
+  color: var(--bg) !important;
+}
+@media (max-width: 860px) {
+  .landscape-steps .step--accent::before {
+    inset: -20px -18px;
+    border-radius: 12px;
+  }
+}
+
+/* ───── VALUES SECTION ───── */
+.values-section {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 100px 0;
+  border-top: none;
+  position: relative;
+  overflow: hidden;
+}
+.values-section::before {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(193, 74, 31, 0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.values-inner {
+  position: relative;
+  z-index: 2;
+}
+.values-label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.values-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent-soft);
+}
+.values-section h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  max-width: 28ch;
+  color: var(--bg);
+}
+.values-section h2 em {
+  font-style: normal;
+  color: var(--accent-soft);
+  font-weight: 400;
+}
+.values-sub {
+  font-size: 18px;
+  color: rgba(244, 239, 230, 0.7);
+  max-width: 52ch;
+  line-height: 1.6;
+  margin-bottom: 64px;
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 56px;
+}
+.value-card {
+  border: 1px solid rgba(244, 239, 230, 0.15);
+  border-radius: 16px;
+  padding: 28px;
+  transition: border-color 0.25s, background 0.25s;
+}
+.value-card:hover {
+  border-color: rgba(232, 138, 94, 0.5);
+  background: rgba(244, 239, 230, 0.04);
+}
+.value-card-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+.value-card h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--bg);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.value-card p {
+  font-size: 15px;
+  color: rgba(244, 239, 230, 0.65);
+  line-height: 1.55;
+}
+.values-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.values-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+.values-cta-btn:hover { background: #a83d18; }
+.values-cta-btn:active { transform: scale(0.97); }
+.values-cta-note {
+  font-size: 13px;
+  color: rgba(244, 239, 230, 0.45);
+  letter-spacing: 0.02em;
+}
+
+/* ───── FOUNDING MEMBER ───── */
+.founding {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.founding::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(193, 74, 31, 0.25) 0%, transparent 60%);
+  pointer-events: none;
+}
+.founding-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.founding h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+}
+.founding h2 em { font-style: normal; color: var(--accent-soft); font-weight: 400; }
+.founding p {
+  color: rgba(244, 239, 230, 0.75);
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 50ch;
+}
+.founding-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+}
+.founding-btn:hover { background: #a83d18; }
+.founding-btn:active { transform: scale(0.97); }
+.benefits-list {
+  list-style: none;
+  padding: 32px;
+  border: 1px solid rgba(244, 239, 230, 0.2);
+  border-radius: 16px;
+}
+.benefits-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(244, 239, 230, 0.1);
+  font-size: 15px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.benefits-list li:last-child { border-bottom: none; }
+.benefits-list li::before {
+  content: '✦';
+  color: var(--accent-soft);
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+/* ───── FOUNDER NOTE ───── */
+.founder-note {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.founder-note .quote {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 300;
+  font-style: normal;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 32px;
+}
+.founder-note .signoff {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* ───── ROADMAP ───── */
+.roadmap {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 80px;
+  position: relative;
+  padding: 0;
+}
+.roadmap::before {
+  content: '';
+  position: absolute;
+  top: 44px;
+  left: 16.667%;
+  right: 16.667%;
+  height: 1px;
+  background: var(--line);
+  z-index: 1;
+}
+.roadmap-step {
+  position: relative;
+  text-align: center;
+  padding: 36px 16px 0;
+}
+.roadmap-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-deep);
+  border: 2px solid var(--ink-soft);
+  z-index: 2;
+}
+.roadmap-step--current::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px rgba(193, 74, 31, 0.18);
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+.roadmap-step--final::before {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.roadmap-date {
+  display: block;
+  font-family: ui-monospace, 'IBM Plex Mono', Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px;
+  white-space: nowrap;
+}
+.roadmap-step--current .roadmap-date { color: var(--accent); }
+.roadmap-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 auto 6px;
+  max-width: 14ch;
+}
+.roadmap-detail {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  margin: 0 auto;
+  max-width: 20ch;
+}
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(193, 74, 31, 0.18); }
+  50%      { box-shadow: 0 0 0 10px rgba(193, 74, 31, 0.10); }
+}
+@media (max-width: 900px) {
+  .roadmap {
+    grid-template-columns: 1fr;
+    margin-top: 56px;
+  }
+  .roadmap::before {
+    top: 12px;
+    bottom: 12px;
+    left: 8px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+  .roadmap-step {
+    text-align: left;
+    padding: 0 0 32px 36px;
+  }
+  .roadmap-step:last-child { padding-bottom: 0; }
+  .roadmap-step::before {
+    top: 4px;
+    left: 0;
+    transform: none;
+  }
+  .roadmap-title { margin-left: 0; max-width: none; }
+  .roadmap-detail { margin-left: 0; max-width: none; }
+}
+
+/* ───── FAQ ───── */
+.faq { max-width: 760px; }
+.faq-item {
+  border-top: 1px solid var(--line);
+  padding: 28px 0;
+}
+.faq-item:last-child { border-bottom: 1px solid var(--line); }
+.faq-q {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after {
+  content: '+';
+  font-family: var(--sans);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--accent);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+details[open] .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  margin-top: 16px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+.faq-a a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(193, 74, 31, 0.3);
+  transition: border-color 0.2s;
+}
+.faq-a a:hover { border-color: var(--accent); }
+
+/* ───── FOOTER ───── */
+footer {
+  padding: 112px 0 56px;
+  margin-top: 40px;
+}
+footer a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+footer a:hover { color: var(--accent); }
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+  gap: 56px 40px;
+  margin-bottom: 72px;
+  align-items: start;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-col-newsletter { max-width: 360px; }
+.footer-heading {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.footer-col a {
+  font-size: 14px;
+  letter-spacing: 0;
+}
+.footer-newsletter-text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0 0 6px 0;
+}
+.footer-cta {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 100px;
+  padding: 12px 22px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.footer-cta:hover { background: var(--accent); color: var(--bg); }
+.footer-form-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--muted);
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+}
+.footer-legal-meta {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  max-width: 70ch;
+  margin-top: 16px;
+  line-height: 1.55;
+}
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+}
+.footer-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+@media (max-width: 960px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 44px 32px;
+  }
+  .footer-col-newsletter {
+    grid-column: 1 / -1;
+    max-width: 480px;
+  }
+}
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; gap: 36px; }
+  footer { padding: 80px 0 48px; }
+}
+
+/* ───── HERO FOUNDING BENEFITS ───── */
+.hero-founding-benefits {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* ───── HERO VIDEO (collapsible) ───── */
+.hero-video-details {
+  margin-top: 40px;
+  width: 100%;
+  animation: fadeUp 1s ease-out 0.3s backwards;
+}
+.hero-video-details summary {
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  list-style: none;
+  letter-spacing: 0.04em;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+.hero-video-details summary:hover { color: var(--accent); }
+.hero-video-details summary::-webkit-details-marker { display: none; }
+.hero-video-details[open] summary { margin-bottom: 16px; }
+.hero-video-details video {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+/* ───── HERO SUB BYLINE ───── */
+.hero-sub-byline {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 12px;
+  margin-bottom: 24px;
+  animation: fadeUp 1s ease-out 0.3s backwards;
+}
+
+/* ───── HERO CREDIBILITY (logo strip) ───── */
+.hero-credibility {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 0;
+  animation: fadeUp 1s ease-out 0.35s backwards;
+  width: 100%;
+  max-width: 880px;
+}
+.hero-credibility-eyebrow {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0.005em;
+  color: var(--muted);
+  font-weight: 400;
+  text-align: center;
+  margin: 0;
+  padding: 0 16px;
+}
+.cred-ticker {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.cred-ticker::before,
+.cred-ticker::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6%;
+  pointer-events: none;
+  z-index: 2;
+}
+.cred-ticker::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg) 0%, rgba(244, 239, 230, 0) 100%);
+}
+.cred-ticker::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg) 0%, rgba(244, 239, 230, 0) 100%);
+}
+.cred-ticker-track {
+  display: inline-flex;
+  align-items: center;
+  /* CSS animation is a NO-JS fallback only. JS at the bottom of the page
+     cancels this animation (inline !important) and drives transform via
+     requestAnimationFrame instead — iOS Safari was overshooting the CSS
+     translateX(-50%) on inline-flex containers and snapping logos
+     off-screen on the loop reset, plus the CSS animation was fighting the
+     JS transform when both ran. */
+  animation: cred-ticker-scroll 39s linear infinite;
+}
+.cred-ticker.js-active .cred-ticker-track {
+  /* JS layer sets transform inline every frame; suppress CSS animation
+     so the two don't fight. */
+  animation: none !important;
+}
+@media (hover: hover) {
+  .cred-ticker:hover .cred-ticker-track {
+    animation-play-state: paused;
+  }
+}
+.cred-ticker-set {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 90px;
+  padding-right: 90px;
+}
+.cred-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 72px;
+}
+.cred-logo--bbc { height: 144px; }
+.cred-logo img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+}
+@keyframes cred-ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.hero-credibility-note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.005em;
+  margin-top: 4px;
+  text-align: center;
+  max-width: 100%;
+  line-height: 1.4;
+  white-space: nowrap;
+  padding: 0 16px;
+}
+@media (max-width: 720px) {
+  .hero-credibility-note {
+    white-space: normal;
+  }
+}
+
+/* ───── HERO TESTIMONIALS ───── */
+.hero-testimonials {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 48px;
+  width: 100%;
+  max-width: 920px;
+  margin-top: 56px;
+  text-align: left;
+  animation: fadeUp 1s ease-out 0.5s backwards;
+}
+.hero-testimonial {
+  border-top: 1px solid var(--ink);
+  padding-top: 20px;
+}
+.hero-testimonial-quote {
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 18px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.hero-testimonial-quote::before {
+  content: '“';
+  color: var(--accent);
+  margin-right: 2px;
+}
+.hero-testimonial-quote::after {
+  content: '”';
+  color: var(--accent);
+  margin-left: 1px;
+}
+.hero-testimonial figcaption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-testimonial-cite-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.hero-testimonial-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(15, 27, 45, 0.1);
+}
+.hero-testimonial-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-testimonial-author {
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.hero-testimonial-role {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+@media (max-width: 768px) {
+  .hero-testimonials {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .hero-credibility {
+    padding: 18px 16px;
+    gap: 10px;
+  }
+  .cred-logo {
+    height: 54px;
+  }
+  .cred-logo--bbc { height: 108px; }
+  .cred-ticker-set {
+    gap: 64px;
+    padding-right: 64px;
+  }
+  .cred-ticker-track {
+    animation-duration: 16s;
+  }
+}
+
+/* ───── MEMBER COUNTER ───── */
+.signup-counter {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.counter-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ───── SHARE BUTTONS (success state) ───── */
+.signup-share { margin-top: 16px; }
+.signup-share-label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.share-btn {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--sans);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  padding: 7px 16px;
+  text-decoration: none;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.share-btn:hover { background: var(--accent); color: var(--bg); }
+
+/* ───── ANIMATIONS ───── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+@keyframes drift {
+  0%, 100% { transform: rotate(0deg); }
+  50%       { transform: rotate(8deg); }
+}
+.hero-mark { animation: drift 12s ease-in-out infinite; }
+
+/* scroll reveal */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ───── RESPONSIVE ───── */
+@media (max-width: 768px) {
+  .container { padding: 0 24px; }
+  .hero { padding: 40px 0 64px; }
+  .section { padding: 72px 0; }
+  .hero-mark { display: none; }
+  .founding-inner { grid-template-columns: 1fr; gap: 48px; }
+  .signup-form { flex-direction: column; border-radius: 20px; padding: 16px; }
+  .signup-form input { padding: 12px 8px; font-size: 16px; }
+  .signup-form button { width: 100%; padding: 16px; min-height: 52px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+  nav { gap: 12px; }
+  .nav-right { gap: 14px; }
+  .logo { font-size: 22px; gap: 8px; }
+  .logo-mark { width: 24px; height: 24px; }
+  .nav-meta { font-size: 12px; letter-spacing: 0.03em; }
+  .nav-waitlist-btn { padding: 8px 14px; font-size: 12px; min-height: 44px; }
+  .nav-waitlist-btn-full { display: none; }
+  .nav-waitlist-btn-short { display: inline; }
+  .values-section { padding: 72px 0; }
+  .values-cta-group { flex-direction: column; align-items: stretch; }
+  .values-cta-btn { width: 100%; justify-content: center; min-height: 52px; }
+  .founding-btn { width: 100%; justify-content: center; min-height: 52px; }
+  footer { padding-bottom: max(48px, env(safe-area-inset-bottom)); }
+}
+
+/* ───── SFC ENDORSEMENT (under hero) ───── */
+.sfc-endorsement {
+  background: var(--bg);
+  padding: clamp(32px, 4vw, 56px) 0 clamp(64px, 8vw, 112px);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  z-index: 3;
+}
+.hero-split + .sfc-endorsement { margin-top: -80px; }
+.sfc-endorsement-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+.sfc-endorsement-label::before,
+.sfc-endorsement-label::after {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--muted);
+}
+.sfc-endorsement-label strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+.sfc-endorsement-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(40px, 5vw, 72px);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.sfc-raise-the-age {
+  max-width: 1080px;
+  margin: 0 auto clamp(48px, 6vw, 80px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.2vw, 16px);
+}
+.sfc-raise-the-age-prefix {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-align: center;
+  display: block;
+}
+.sfc-raise-the-age-number {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(62px, 11.7vw, 143px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144;
+  display: block;
+}
+.sfc-raise-the-age-caption {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  max-width: 720px;
+}
+.sfc-raise-the-age-caption em {
+  font-style: italic;
+}
+.sfc-raise-the-age-name {
+  color: var(--accent);
+  font-style: normal;
+}
+.sfc-endorsement-quote {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.sfc-endorsement-quote blockquote {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 96;
+}
+.sfc-endorsement-quote blockquote::before {
+  content: '“';
+  color: var(--accent);
+  font-family: var(--serif);
+}
+.sfc-endorsement-quote blockquote::after {
+  content: '”';
+  color: var(--accent);
+  font-family: var(--serif);
+}
+.sfc-endorsement-cite {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.sfc-endorsement-cite-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.sfc-endorsement-avatar {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(15, 27, 45, 0.12);
+}
+.sfc-endorsement-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sfc-endorsement-name {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.sfc-endorsement-role {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+@media (max-width: 820px) {
+  .sfc-endorsement-grid { grid-template-columns: 1fr; gap: 48px; }
+  .sfc-endorsement-label::before,
+  .sfc-endorsement-label::after { width: 20px; }
+}
+@media (max-width: 480px) {
+  .sfc-endorsement { padding: 28px 0 56px; }
+  .sfc-endorsement-quote blockquote { font-size: clamp(24px, 7vw, 32px); }
+  .sfc-raise-the-age-number {
+    font-size: clamp(52px, 17vw, 91px);
+    padding: 0 10px;
+  }
+  .sfc-raise-the-age-prefix,
+  .sfc-raise-the-age-caption { font-size: clamp(17px, 4.6vw, 22px); }
+}
+</style>
+
+<!-- PostHog (EU cloud, GDPR-friendly, anonymous by default) -->
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https://eu.i.posthog.com',person_profiles:'identified_only',capture_pageview:true,capture_pageleave:true,opt_out_capturing_by_default:true,disable_session_recording:false,session_recording:{maskAllInputs:true}});
+</script>
+<script src="/consent.js" defer></script>
+</head>
+<body>
+
+<!-- ═══════ NAV (overlays the hero) ═══════ -->
+<header class="site-header site-header--over-dark">
+  <div class="container">
+    <nav>
+      <a href="https://gethavenmobile.com/" class="logo">
+        <span class="logo-mark"></span>
+        <span>Haven</span>
+      </a>
+      <div class="nav-right">
+        <a href="/story/" class="nav-meta">Our story</a>
+        <a href="#join-waitlist" class="nav-waitlist-btn">
+          <span class="nav-waitlist-dot"></span>
+          <span class="nav-waitlist-btn-full">Join the waitlist</span>
+          <span class="nav-waitlist-btn-short">Waitlist</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════ HERO (split — dark panel + image) ═══════ -->
+<section class="hero-split">
+  <div class="hero-split-text">
+    <h1>The first UK mobile network <em>built around the social media ban for under-16s</em></h1>
+    <p class="hero-split-sub">
+      Smartphone Free Childhood gave parents permission to wait. Haven is the network for when you finally hand over a phone. Safe at the network layer, not simply an app they can delete.
+    </p>
+    <a href="#join-waitlist" class="hero-split-cta">Join the waitlist →</a>
+    <div class="hero-split-features">
+      <div class="hero-split-feature">
+        <span class="hero-split-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </span>
+        <span>Network-level<br>protection</span>
+      </div>
+      <div class="hero-split-feature">
+        <span class="hero-split-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="3" width="14" height="18" rx="2"/>
+            <rect x="9" y="9" width="6" height="6" rx="1"/>
+          </svg>
+        </span>
+        <span>eSIM<br>first</span>
+      </div>
+      <div class="hero-split-feature">
+        <span class="hero-split-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="11" width="16" height="10" rx="2"/>
+            <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+          </svg>
+        </span>
+        <span>No app to<br>uninstall</span>
+      </div>
+      <div class="hero-split-feature">
+        <span class="hero-split-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
+        <span>Built for UK<br>families</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-split-image">
+    <img src="/hero-hallway.svg" alt="A parent handing a phone to their teenage daughter in a hallway." onerror="this.style.display='none'" />
+  </div>
+</section>
+
+<!-- ═══════ SFC FOUNDER ENDORSEMENT ═══════ -->
+<section class="sfc-endorsement" aria-label="Supported by the founders of Smartphone Free Childhood">
+  <div class="container">
+    <div class="sfc-raise-the-age">
+      <span class="sfc-raise-the-age-prefix">Over</span>
+      <span class="sfc-raise-the-age-number">250,000</span>
+      <p class="sfc-raise-the-age-caption">families support the SFC <span class="sfc-raise-the-age-name">‘Raise the Age’</span> <em>(of social media)</em> campaign</p>
+    </div>
+    <div class="sfc-endorsement-label">
+      <span><strong>Haven</strong> is supported by the SFC founders</span>
+    </div>
+    <div class="sfc-endorsement-grid">
+      <figure class="sfc-endorsement-quote">
+        <blockquote>I think Haven is an amazing idea and I'm fully supportive…</blockquote>
+        <figcaption class="sfc-endorsement-cite">
+          <span class="sfc-endorsement-avatar" aria-hidden="true">
+            <img src="/clare.jpg" alt="" onerror="this.remove()" />
+            C
+          </span>
+          <span class="sfc-endorsement-cite-text">
+            <span class="sfc-endorsement-name">Clare Fernyhough</span>
+            <span class="sfc-endorsement-role">Co-founder, Smartphone Free Childhood &amp; Generation Focus</span>
+          </span>
+        </figcaption>
+      </figure>
+      <figure class="sfc-endorsement-quote">
+        <blockquote>Haven looks awesome. It's really exciting and it sounds like something that would really help parents and kids.</blockquote>
+        <figcaption class="sfc-endorsement-cite">
+          <span class="sfc-endorsement-avatar" aria-hidden="true">
+            <img src="/daisy.jpg" alt="" style="object-position: center 28%;" onerror="this.remove()" />
+            D
+          </span>
+          <span class="sfc-endorsement-cite-text">
+            <span class="sfc-endorsement-name">Daisy Greenwell</span>
+            <span class="sfc-endorsement-role">Co-founder, Smartphone Free Childhood</span>
+          </span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- ═══════ HERO SUPPORTING (proof / trust) ═══════ -->
+  <section class="hero hero--supporting" id="join-waitlist">
+    <div class="hero-credibility">
+      <p class="hero-credibility-eyebrow">Founders featured on &amp; part of</p>
+      <div class="cred-ticker" aria-label="Brands and organisations the founders are featured on or part of">
+        <div class="cred-ticker-track">
+          <div class="cred-ticker-set">
+            <span class="cred-logo cred-logo--bbc"><img src="/bbc.png" alt="BBC" /></span>
+            <span class="cred-logo"><img src="/tf1.png" alt="TF1 France" /></span>
+            <span class="cred-logo"><img src="/sfc.png" alt="Smartphone Free Childhood" /></span>
+            <span class="cred-logo"><img src="/generation-focus.png" alt="Generation Focus" /></span>
+          </div>
+          <div class="cred-ticker-set" aria-hidden="true">
+            <span class="cred-logo cred-logo--bbc"><img src="/bbc.png" alt="" /></span>
+            <span class="cred-logo"><img src="/tf1.png" alt="" /></span>
+            <span class="cred-logo"><img src="/sfc.png" alt="" /></span>
+            <span class="cred-logo"><img src="/generation-focus.png" alt="" /></span>
+          </div>
+        </div>
+      </div>
+      <p class="hero-credibility-note">Founder advised in government consultation on social media ban for under-16s</p>
+    </div>
+
+    <div class="signup">
+      <form class="signup-form" id="homepageSignupForm" novalidate>
+        <input
+          type="email"
+          name="email"
+          id="homepageSignupEmail"
+          placeholder="Your email address"
+          autocomplete="email"
+          inputmode="email"
+          enterkeyhint="send"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          required
+        />
+        <button type="submit" id="homepageSignupBtn">Join the waitlist</button>
+      </form>
+      <p class="signup-error" id="homepageSignupError" role="alert"></p>
+      <div class="signup-clarity">
+        <p class="signup-clarity-lead"><strong>No commitment. No payment.</strong><br>Simply add your name to the waitlist to signal your support. It will help us build the mobile network we all want to exist.</p>
+        <p class="signup-clarity-detail"><strong>Your first month is on us</strong> when we launch — plus <em>one extra free month</em> for every parent you invite who signs up.</p>
+        <p class="signup-clarity-detail">We're proving there's enough demand to launch. The first 250 to sign up will be <em>offered</em> founding pricing, locked for the first 12 months from launch, when we launch. It's your option, not a commitment.</p>
+      </div>
+      <p class="signup-counter">
+        <span class="counter-dot"></span>
+        Founding spots: open now · first 250 only
+      </p>
+    </div>
+
+    <div class="hero-founding-benefits">
+      <span>✦ Option of founding pricing at launch</span>
+      <span>✦ Priority access on launch day</span>
+      <span>✦ Tell us what you most want blocked</span>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══════ VALUES ═══════ -->
+<section class="values-section">
+  <div class="container">
+    <div class="values-inner">
+      <div class="values-label fade-in">How Haven is different</div>
+      <h2 class="fade-in">We have a point of view.<br><em>And we're not hiding it.</em></h2>
+      <p class="values-sub fade-in">
+        Most networks are neutral. We're not. We think children deserve a network with opinions, and the backbone to act on them.
+      </p>
+
+      <div class="values-grid">
+        <div class="value-card fade-in">
+          <div class="value-card-icon">📵</div>
+          <h3>Young children don't need smartphones.</h3>
+          <p>We offer basic calling and SMS plans designed for under-14s. A phone to reach parents, not a portal to everything.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-card-icon">✓</div>
+          <h3>14 is a reasonable age for a smartphone.</h3>
+          <p>Haven is built for it. A full smartphone plan that's safe by default. Not locked down, just sensibly configured.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-card-icon">16</div>
+          <h3>Social media can wait until 16.</h3>
+          <p>We block social platforms by default on under-16 plans. Not because teenagers are bad. Because algorithms designed to addict adults shouldn't be let loose on children.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-card-icon">🚫</div>
+          <h3>No porn. No proxies. No VPNs.</h3>
+          <p>Blocked at the network layer, not an app your child can uninstall. If it exists to circumvent safety tools, it doesn't exist on Haven.</p>
+        </div>
+      </div>
+
+      <div class="values-cta-group fade-in">
+        <a href="#join-waitlist" class="values-cta-btn">
+          Join the waitlist →
+        </a>
+        <span class="values-cta-note">Free to join · no obligation · founding members first</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TESTIMONIALS + INTRO VIDEO ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">In their words</div>
+    <div class="hero-testimonials">
+      <figure class="hero-testimonial">
+        <blockquote class="hero-testimonial-quote">Rich has played an important role in the Smartphone Free Childhood journey since day one, both locally and across the UK.</blockquote>
+        <figcaption>
+          <span class="hero-testimonial-avatar" aria-hidden="true">
+            <img src="/joe.jpg" alt="" onerror="this.remove()" />
+            J
+          </span>
+          <div class="hero-testimonial-cite-text">
+            <div class="hero-testimonial-author">Joe Ryrie</div>
+            <div class="hero-testimonial-role">Co-founder, Smartphone Free Childhood</div>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="hero-testimonial">
+        <blockquote class="hero-testimonial-quote">Rich has been a key person in helping to launch and drive the national discussion around safer use of technology for children across the UK.</blockquote>
+        <figcaption>
+          <span class="hero-testimonial-avatar" aria-hidden="true">
+            <img src="/clare.jpg" alt="" onerror="this.remove()" />
+            C
+          </span>
+          <div class="hero-testimonial-cite-text">
+            <div class="hero-testimonial-author">Clare Fernyhough</div>
+            <div class="hero-testimonial-role">Co-founder, Smartphone Free Childhood &amp; Generation Focus</div>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="hero-video-details" style="margin-top: 56px;">
+      <video
+        src="haven-video/out/haven-waitlist-60s.mp4"
+        poster="haven-video/out/haven-waitlist-poster-4s.jpg"
+        controls
+        preload="metadata"
+        playsinline
+      ></video>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PROBLEM ═══════ -->
+<section class="section section-bg-deep">
+  <div class="container">
+    <div class="section-label">The problem</div>
+    <h2>The phone in your child's hand was never <em>designed for them.</em></h2>
+
+    <div class="stats">
+      <div class="stat fade-in">
+        <div class="stat-num"><em>96%</em></div>
+        <div class="stat-text">
+          of UK children aged 12–15 own a smartphone, and more than half of 8–11 year olds already have one too.
+          <span class="stat-source">Ofcom Children &amp; Parents: Media Use and Attitudes, April 2024</span>
+        </div>
+      </div>
+      <div class="stat fade-in">
+        <div class="stat-num"><em>3hrs</em></div>
+        <div class="stat-text">
+          Average time UK children aged 8–17 spend online every day, rising to 4 hours for 13–14 year olds, the majority on a mobile network beyond any home filter.
+          <span class="stat-source">Ofcom Children &amp; Parents: Media Use and Attitudes, April 2024</span>
+        </div>
+      </div>
+      <div class="stat fade-in">
+        <div class="stat-num"><em>1 in 5</em></div>
+        <div class="stat-text">
+          UK parents of 8–15 year olds have a dedicated monitoring app on their child's phone. The other four have little visibility into what their child does the moment they leave the house.
+          <span class="stat-source">Ofcom Children &amp; Parents: Media Use and Attitudes, April 2024</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 80px; max-width: 60ch; font-size: 18px; color: var(--ink-soft); line-height: 1.6;">
+      Apps get uninstalled. Wi-Fi stops at the front door. The mobile network, the layer that's <em style="color: var(--accent);">always there</em>, has never been built with the principles of <em>The Anxious Generation</em> or the Smartphone Free Childhood movement at its core. Haven is that.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ THE LANDSCAPE ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">The landscape</div>
+    <h2>Four layers.<br><em>Three have a hole in them.</em></h2>
+    <p style="margin-top: 24px; max-width: 64ch; font-size: 18px; color: var(--ink-soft); line-height: 1.6;">
+      Most parents we speak to assume "parental controls" is one thing. It isn't. There are four separate layers where safety can live, and each one has a different gap a child can walk through.
+    </p>
+
+    <figure style="margin: 72px 0 64px; padding: 0;">
+      <svg viewBox="0 0 1600 870" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four layers of safety. Layers 1 (Device), 2 (Apps), and 3 (Wi-Fi) each show a breach. Layer 4 (Network) is solid Haven terracotta with no breach. A child's dashed path passes through the three breached layers and is stopped at the Haven layer." style="display:block; width:100%; height:auto; max-width:1180px; margin:0 auto;">
+        <defs>
+          <pattern id="hatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+            <rect width="8" height="8" fill="#0f1b2d" opacity="0.18"/>
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#0f1b2d" stroke-width="1.5" opacity="0.55"/>
+          </pattern>
+          <marker id="arrowhead" markerWidth="14" markerHeight="14" refX="6" refY="7" orient="auto">
+            <path d="M 0 0 L 12 7 L 0 14 z" fill="#0f1b2d"/>
+          </marker>
+        </defs>
+
+        <!-- Top header -->
+        <text x="80" y="60" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="16" fill="#6a6253" letter-spacing="2">FIG. 01 · THE STACK</text>
+        <text x="1520" y="60" text-anchor="end" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="16" fill="#6a6253" letter-spacing="2">HAVEN · BRITAIN'S FAMILY NETWORK</text>
+        <line x1="80" y1="86" x2="1520" y2="86" stroke="#d8cfbc" stroke-width="1"/>
+
+        <!-- Path origin -->
+        <text x="640" y="105" text-anchor="middle" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="14" fill="#0f1b2d" letter-spacing="2">A CHILD'S PATH</text>
+        <circle cx="640" cy="120" r="5" fill="#0f1b2d"/>
+
+        <!-- Child's path (drawn before bars so solid navy obscures it; semi-transparent breach hatch lets it show through) -->
+        <path d="M 640 128 L 640 295 L 850 295 L 850 450 L 1130 450 L 1130 615"
+              fill="none" stroke="#0f1b2d" stroke-width="2" stroke-dasharray="6 6"
+              marker-end="url(#arrowhead)"/>
+
+        <!-- ROW 1 — DEVICE (bar y=160-280, center=220) -->
+        <text x="170" y="215" font-family="Fraunces, Georgia, serif" font-size="44" fill="#0f1b2d">1</text>
+        <text x="170" y="252" font-family="'Inter Tight', sans-serif" font-size="30" font-weight="600" fill="#0f1b2d" letter-spacing="3">DEVICE</text>
+        <g transform="translate(380,190)" stroke="#0f1b2d" stroke-width="2.5" fill="none" stroke-linejoin="round">
+          <rect x="0" y="0" width="36" height="60" rx="6"/>
+          <line x1="10" y1="6" x2="26" y2="6"/>
+          <circle cx="18" cy="52" r="2" fill="#0f1b2d" stroke="none"/>
+        </g>
+        <rect x="470" y="160" width="120" height="120" fill="#0f1b2d"/>
+        <rect x="590" y="160" width="100" height="120" fill="url(#hatch)" stroke="#0f1b2d" stroke-width="1"/>
+        <rect x="690" y="160" width="590" height="120" fill="#0f1b2d"/>
+        <text x="1310" y="198" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="13" fill="#c14a1f" letter-spacing="2">BYPASS</text>
+        <text x="1310" y="224" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">bypassed by factory reset</text>
+        <text x="1310" y="250" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">or a learned passcode.</text>
+
+        <!-- ROW 2 — APPS (bar y=315-435, center=375) -->
+        <text x="170" y="370" font-family="Fraunces, Georgia, serif" font-size="44" fill="#0f1b2d">2</text>
+        <text x="170" y="407" font-family="'Inter Tight', sans-serif" font-size="30" font-weight="600" fill="#0f1b2d" letter-spacing="3">APPS</text>
+        <g transform="translate(380,356)" stroke="#0f1b2d" stroke-width="2.5" fill="none">
+          <rect x="0" y="0" width="16" height="16" rx="3"/>
+          <rect x="22" y="0" width="16" height="16" rx="3"/>
+          <rect x="0" y="22" width="16" height="16" rx="3"/>
+          <rect x="22" y="22" width="16" height="16" rx="3"/>
+        </g>
+        <rect x="470" y="315" width="330" height="120" fill="#0f1b2d"/>
+        <rect x="800" y="315" width="100" height="120" fill="url(#hatch)" stroke="#0f1b2d" stroke-width="1"/>
+        <rect x="900" y="315" width="380" height="120" fill="#0f1b2d"/>
+        <text x="1310" y="353" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="13" fill="#c14a1f" letter-spacing="2">BYPASS</text>
+        <text x="1310" y="379" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">uninstalled, force-stopped,</text>
+        <text x="1310" y="405" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">or starved of permissions.</text>
+
+        <!-- ROW 3 — WI-FI (bar y=470-590, center=530) -->
+        <text x="170" y="525" font-family="Fraunces, Georgia, serif" font-size="44" fill="#0f1b2d">3</text>
+        <text x="170" y="562" font-family="'Inter Tight', sans-serif" font-size="30" font-weight="600" fill="#0f1b2d" letter-spacing="3">WI-FI</text>
+        <g transform="translate(376,508)" stroke="#0f1b2d" stroke-width="2.5" fill="none" stroke-linecap="round">
+          <path d="M 4 28 Q 22 4 40 28"/>
+          <path d="M 12 36 Q 22 22 32 36"/>
+          <circle cx="22" cy="44" r="2.5" fill="#0f1b2d" stroke="none"/>
+        </g>
+        <rect x="470" y="470" width="610" height="120" fill="#0f1b2d"/>
+        <rect x="1080" y="470" width="100" height="120" fill="url(#hatch)" stroke="#0f1b2d" stroke-width="1"/>
+        <rect x="1180" y="470" width="100" height="120" fill="#0f1b2d"/>
+        <text x="1310" y="508" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="13" fill="#c14a1f" letter-spacing="2">BYPASS</text>
+        <text x="1310" y="534" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">the moment the phone</text>
+        <text x="1310" y="560" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a3a52">leaves the front door.</text>
+
+        <!-- ROW 4 — NETWORK (bar y=625-745, center=685) -->
+        <text x="170" y="680" font-family="Fraunces, Georgia, serif" font-size="44" fill="#c14a1f">4</text>
+        <text x="170" y="717" font-family="'Inter Tight', sans-serif" font-size="30" font-weight="600" fill="#c14a1f" letter-spacing="3">NETWORK</text>
+        <g transform="translate(380,655)" stroke="#c14a1f" stroke-width="2.5" fill="none">
+          <path d="M 8 0 L 36 0 L 36 60 L 0 60 L 0 8 Z"/>
+          <line x1="0" y1="20" x2="10" y2="20"/>
+          <line x1="0" y1="32" x2="10" y2="32"/>
+          <line x1="0" y1="44" x2="10" y2="44"/>
+        </g>
+        <rect x="470" y="625" width="810" height="120" fill="#c14a1f"/>
+        <circle cx="800" cy="685" r="18" fill="none" stroke="#f4efe6" stroke-width="3"/>
+        <text x="836" y="703" font-family="Fraunces, Georgia, serif" font-size="48" fill="#f4efe6" font-weight="500">Haven</text>
+        <text x="1310" y="677" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="22" fill="#2a3a52">No breach.</text>
+        <text x="1310" y="703" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="22" fill="#2a3a52">Safety lives in the SIM.</text>
+
+        <!-- STOPPED label (path arrow lands at top of row 4 bar) -->
+        <text x="1170" y="611" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="13" fill="#c14a1f" letter-spacing="2">STOPPED.</text>
+
+        <!-- Footer -->
+        <line x1="80" y1="800" x2="1520" y2="800" stroke="#d8cfbc" stroke-width="1"/>
+        <text x="80" y="830" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="14" fill="#6a6253" letter-spacing="2">THREE LAYERS WITH HOLES · ONE WITHOUT</text>
+        <text x="1520" y="830" text-anchor="end" font-family="ui-monospace, 'IBM Plex Mono', Menlo, monospace" font-size="14" fill="#c14a1f" letter-spacing="2">HAVEN IS THE FOURTH LAYER, DONE PROPERLY.</text>
+      </svg>
+      <figcaption style="margin-top: 16px; font-family: var(--mono, 'IBM Plex Mono', ui-monospace, Menlo, monospace); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: center;">
+        Fig. 01 · Three layers with holes. One without.
+      </figcaption>
+    </figure>
+
+    <div class="steps landscape-steps">
+      <div class="step fade-in">
+        <span class="step-num">LAYER 1 · DEVICE</span>
+        <h3>Device settings</h3>
+        <p><em>Screen Time, Family Link.</em> Built into the phone. Good for bedtime limits.</p>
+        <p><strong style="color: var(--ink);">The gap:</strong> a child who learns the passcode, or factory-resets the device, turns them off in under a minute.</p>
+      </div>
+      <div class="step fade-in">
+        <span class="step-num">LAYER 2 · APPS</span>
+        <h3>Parental-control apps</h3>
+        <p><em>Bark, Qustodio, and the rest.</em> More powerful than device settings.</p>
+        <p><strong style="color: var(--ink);">The gap:</strong> they're apps. Apps can be uninstalled, force-stopped, or starved of permissions. One per device, forever renewed.</p>
+      </div>
+      <div class="step fade-in">
+        <span class="step-num">LAYER 3 · WI-FI</span>
+        <h3>Home Wi-Fi filters</h3>
+        <p><em>Router-level filtering.</em> Blocks harmful sites on your home network.</p>
+        <p><strong style="color: var(--ink);">The gap:</strong> they stop at the front door. The moment your child's phone switches to mobile data (walking to school, on the bus), the filter is gone.</p>
+      </div>
+      <div class="step step--accent fade-in">
+        <span class="step-num">LAYER 4 · NETWORK</span>
+        <h3>The mobile network itself</h3>
+        <p>The layer that's <em>always there</em>. Every app and message passes through it.</p>
+        <p><strong style="color: var(--ink);">The gap:</strong> until now, no UK network has been designed with this in mind.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 64px; font-family: var(--serif); font-style: italic; font-size: clamp(22px, 2.4vw, 28px); color: var(--accent); line-height: 1.35; text-align: center; max-width: 30ch; margin-left: auto; margin-right: auto;">
+      Haven is the fourth layer, done properly.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ HOW IT WORKS ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">What we're building</div>
+    <h2>Safety at the network layer. <em>Intelligence</em> on top.</h2>
+
+    <div class="steps">
+      <div class="step fade-in">
+        <span class="step-num">01 · NETWORK</span>
+        <h3>Safety lives in the SIM, not the phone.</h3>
+        <p>Most parental controls run on the device or in an app, which means they can be toggled off, uninstalled, or worked around by any child with ten minutes and a YouTube tutorial. Haven's safety is wired into the SIM itself. It travels with the phone, works on Wi-Fi and mobile data, and can't be removed without removing the SIM. Full 4G/5G coverage on the UK's largest network. No second device. No compromises.</p>
+      </div>
+      <div class="step fade-in">
+        <span class="step-num">02 · AI SAFETY</span>
+        <h3>Pattern detection, not a 2009 blocklist.</h3>
+        <p>A model trained on the grooming patterns, coercion tactics, and age-inappropriate content that flat blocklists miss. Running in real time, on-device, privately. We're not going to claim it catches everything. No system does, and anyone who says otherwise is selling something. What we <em>will</em> do is publish how it performs, what it misses, and how it improves. Openly, to the families using it.</p>
+      </div>
+      <div class="step fade-in">
+        <span class="step-num">03 · PARENTS</span>
+        <h3>Insight, not surveillance.</h3>
+        <p>A weekly briefing that tells you what matters and ignores what doesn't. No reading your child's messages. No creepy dashboards. Just the things a thoughtful parent would want to know.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TIMELINE ═══════ -->
+<section class="section section-bg-deep">
+  <div class="container">
+    <div class="section-label">Timeline</div>
+    <h2>The path to <em>launch.</em></h2>
+    <p style="margin-top: 24px; max-width: 64ch; font-size: 18px; color: var(--ink-soft); line-height: 1.6;">
+      Three milestones from waitlist to live network.
+    </p>
+
+    <ol class="roadmap fade-in">
+      <li class="roadmap-step roadmap-step--current">
+        <span class="roadmap-date">June 2026</span>
+        <h3 class="roadmap-title">Waitlist opens</h3>
+        <p class="roadmap-detail">We are here.</p>
+      </li>
+      <li class="roadmap-step">
+        <span class="roadmap-date">July 2026</span>
+        <h3 class="roadmap-title">Crowdfunding opens</h3>
+        <p class="roadmap-detail">Equity round goes live to the community.</p>
+      </li>
+      <li class="roadmap-step roadmap-step--final">
+        <span class="roadmap-date">September 2026</span>
+        <h3 class="roadmap-title">Beta launches</h3>
+        <p class="roadmap-detail">Founding members go live.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════ WHY US ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">Why us</div>
+    <h2>We are <em>from</em> the community, building <em>for</em> the community.</h2>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">We have experienced, first-hand, products that either see community as something to shoe-horn into their growth plans, or products built by people who haven't been part of driving forward this vital conversation, except when seeking to profiteer.</p>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">So we're starting with you. The Haven waitlist is the proof-of-demand we need before we bring this network to market. We've set the bar deliberately: <strong style="color: var(--ink); font-weight: 500;">250 founding members</strong>.</p>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 16px;">When we hit 250, <em style="color: var(--accent); font-style: normal;">we launch.</em> That's the moment Haven becomes real to back and ship. Founding members get first access, founding pricing locked for the first 12 months from launch, and a direct line to the team building the network you helped prove.</p>
+    <p style="color: var(--ink-soft); font-size: 17px; line-height: 1.7; max-width: 68ch; margin-bottom: 32px;">In July, we open equity to the community through <em style="color: var(--accent); font-style: normal;">crowdfunding</em>, so the families using Haven can own a piece of what they helped build.</p>
+    <a href="/story/" class="nav-waitlist-btn" style="display: inline-flex;">Our story →</a>
+  </div>
+</section>
+
+<!-- ═══════ FOUNDING MEMBER ═══════ -->
+<section class="founding">
+  <div class="container">
+    <div class="founding-inner">
+      <div>
+        <div class="section-label" style="color: var(--accent-soft); --muted: var(--accent-soft);">Founding families</div>
+        <h2>The first 250 families <em>shape what we build.</em></h2>
+        <p>
+          Haven is being built in the open, with the families who'll use it. Join the waitlist now and you'll be the first to know when we launch, the first to get access, and the first to tell us what matters most.
+        </p>
+        <a href="#join-waitlist" class="founding-btn">Join the waitlist →</a>
+      </div>
+      <ul class="benefits-list">
+        <li>Founding member pricing locked for the first 12 months from launch</li>
+        <li>Priority access on launch day, ahead of public</li>
+        <li>First to know when we go live</li>
+<li>Founding member status, recognised at every milestone</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOUNDER NOTE ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="founder-note">
+      <div class="section-label" style="justify-content: center;">A note from the founder</div>
+      <p class="quote">
+        "I started Haven because I couldn't find a mobile network I'd hand to my own children. Every option asked me to choose between safety and freedom, between trust and surveillance. So we're building the one that doesn't."
+      </p>
+      <p class="signoff">Richard Bowdler, Founder, Haven</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ HONEST EDGES ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">Honest edges</div>
+    <h2>What Haven <em>will</em> do. What it won't.</h2>
+    <p style="margin-top: 24px; max-width: 64ch; font-size: 18px; color: var(--ink-soft); line-height: 1.6;">
+      We'd rather be trusted than impressive. Here's the real shape of what we're building: the parts we're confident in, the parts we're still getting right, and the parts no mobile network can solve.
+    </p>
+
+    <div class="steps" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px;">
+      <div class="step fade-in">
+        <span class="step-num" style="color: var(--accent);">WILL DO · RELIABLY</span>
+        <h3>The hard floor</h3>
+        <p>Blocks pornography, gambling, and known harmful sites at the network layer. Blocks VPNs and proxies that exist to bypass safety tools. Blocks social media platforms by default on under-16 plans. Works on any Wi-Fi or mobile data. Can't be uninstalled by your child.</p>
+      </div>
+      <div class="step fade-in">
+        <span class="step-num" style="color: var(--muted);">WILL FLAG · IMPERFECTLY</span>
+        <h3>The AI layer</h3>
+        <p>Grooming patterns, coercion, and age-inappropriate content in messages. This is AI. It catches a lot, it will miss some, it will occasionally flag something harmless. We'll publish our detection rates openly once we're live. We'd rather show the real numbers than claim perfection.</p>
+      </div>
+      <div class="step fade-in">
+        <span class="step-num" style="color: var(--muted);">WON'T DO · EVER</span>
+        <h3>The honest limits</h3>
+        <p>Replace a second SIM your child acquires on another network. Replace the conversations you have with your child about what they see online. Stop every bad thing from reaching them. No technology can, and any product that promises that is lying. Haven is a <em>very good</em> tool. It isn't a substitute for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="section section-bg-deep" id="faq">
+  <div class="container">
+    <div class="section-label">Questions</div>
+    <h2>The honest answers.</h2>
+
+    <div class="faq">
+      <details class="faq-item">
+        <summary class="faq-q">When does Haven launch?</summary>
+        <p class="faq-a">We're launching in the UK in 2026. Joining the waitlist is the best way to get early access. Founding members will be invited first, ahead of any public launch.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Am I committing to anything by joining the waitlist?</summary>
+        <p class="faq-a">No. The waitlist is free and there's no payment now or later unless you choose to activate at launch. We're using the waitlist to prove there's enough demand to build this network. Every name helps. The first 250 people to sign up will be <em>offered</em> founding pricing when we launch, locked for the first 12 months from launch. It's an option you can take or decline at that point. Until then there's nothing to pay and you can unsubscribe at any time.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Will Haven have proper coverage?</summary>
+        <p class="faq-a">Yes. Haven runs on one of the UK's tier-one mobile networks, so coverage will be the same as any major network, including 4G and 5G. You're not trading reach for safety.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How is this different from parental control apps?</summary>
+        <p class="faq-a">Apps live on the phone and can be uninstalled, bypassed, or worked around. Haven works at the network level (the safety travels with the SIM, not the app) and uses modern AI rather than the static blocklists most controls still rely on.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What if my child gets a second SIM on another network?</summary>
+        <p class="faq-a">Honest answer: Haven only protects traffic that goes through Haven. A second SIM on another network bypasses it, and no mobile network can fix that for you. What we can do is make Haven good enough that switching away feels like a downgrade. Most SFC-aligned families we've spoken to treat this the same way they treat everything else at this stage: with a clear parent-child agreement, reviewed openly. We'll share the contract template we use ourselves with founding members.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Will the AI catch everything?</summary>
+        <p class="faq-a">No, and we're not going to pretend otherwise. Our AI is strongest at pattern-based threats (grooming scripts, coercion tactics, known categories of harmful content) and weaker at one-off, novel, or deeply context-dependent situations. We'll publish detection rates openly once we're live, and we'll tell you when we get it wrong. This is one layer of safety, not the only one.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What happens when you make a mistake?</summary>
+        <p class="faq-a">Every product gets things wrong. What matters is what happens next. Founding members get a direct review path on any flag or block, a clear appeal process, and a published post-mortem whenever we make a meaningful mistake. No quiet fixes, no corporate deflection. We'd rather be the network that tells you when it failed than the one that hopes you don't notice.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Why do you block social media for under-16s?</summary>
+        <p class="faq-a">The evidence is clear: social media platforms are algorithmically designed to maximise engagement, and that design is harmful to developing brains. We block them by default on under-16 plans. Parents who want to unlock specific platforms for older teenagers can do so, but the default is off, not on.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Why no VPNs or proxies?</summary>
+        <p class="faq-a">VPNs and proxies exist, in this context, for one reason: to circumvent safety controls. We block them at the network layer. A child who genuinely needs a VPN for privacy or security reasons is a conversation worth having, but it's not the default use case, and we're not pretending it is.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Are you reading my child's messages?</summary>
+        <p class="faq-a">No. Haven is being built privacy-first. Detection happens on-device wherever possible, parents see signals and summaries rather than content, and we'll publish a clear, plain-English data policy long before launch.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How much will it cost?</summary>
+        <p class="faq-a">We're still finalising pricing and will announce it before launch. Founding members (the first 250 families to join the waitlist) will get our best rate, locked for the first 12 months from launch.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col footer-col-newsletter">
+        <h3 class="footer-heading">Join the waitlist</h3>
+        <p class="footer-newsletter-text">No commitment, no payment. Add your name to help prove there's demand. The first 250 will be offered founding pricing locked for the first 12 months from launch.</p>
+        <a class="footer-cta" href="#join-waitlist">Join the waitlist</a>
+        <p class="footer-form-meta">No spam. One short note when we launch.</p>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Quick links</h3>
+        <a href="/">Home</a>
+        <a href="/story/">Our story</a>
+        <a href="https://gethavenmobile.com/waitlist">Waitlist</a>
+        <a href="#faq">FAQs</a>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Social</h3>
+        <a href="https://www.linkedin.com/company/haven-mobile-network/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.facebook.com/people/Haven-mobile-network/61568796112245/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Contact</h3>
+        <a href="mailto:hello@gethavenmobile.com">hello@gethavenmobile.com</a>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Policy</h3>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/compliance/">Compliance</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 The Good Phone Company Ltd · Trading as Haven.</div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/haven-mobile-network/" target="_blank" rel="noopener" aria-label="Haven on LinkedIn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/Haven-mobile-network/61568796112245/" target="_blank" rel="noopener" aria-label="Haven on Facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-legal-meta">The Good Phone Company Ltd, trading as Haven. Registered in England &amp; Wales. Haven runs on a tier-one UK mobile network. Coverage and core service governed by the host network's terms. Final retail terms, pricing and service availability will be published before launch.</p>
+  </div>
+</footer>
+
+<script>
+// ─── Scroll reveal ───
+const observer = new IntersectionObserver(
+  (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.12 }
+);
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ─── Logo ticker (JS-driven, pixel-precise) ───
+// CSS-only version used translateX(-50%) which iOS Safari miscalculated on
+// inline-flex containers, snapping all logos off-screen at the loop reset.
+// JS measures the actual width of one logo set after images load, then drives
+// transform with rAF so the seam is pixel-perfect.
+(function initLogoTicker() {
+  function start() {
+    const track = document.querySelector('.cred-ticker-track');
+    const firstSet = track && track.querySelector('.cred-ticker-set');
+    if (!track || !firstSet) return;
+
+    // Wait for all logo images to be loaded so widths are accurate.
+    const imgs = Array.from(track.querySelectorAll('img'));
+    const pending = imgs.filter(img => !img.complete);
+    if (pending.length) {
+      let left = pending.length;
+      const done = () => { if (--left === 0) run(); };
+      pending.forEach(img => {
+        img.addEventListener('load',  done, { once: true });
+        img.addEventListener('error', done, { once: true });
+      });
+    } else {
+      run();
+    }
+
+    function run() {
+      // Take over from the CSS animation. The .js-active class on the parent
+      // adds 'animation: none !important' to the track so the two layers
+      // don't fight over the transform property.
+      const ticker = track.closest('.cred-ticker');
+      if (ticker) ticker.classList.add('js-active');
+      track.style.setProperty('will-change', 'transform');
+
+      let setWidth = firstSet.offsetWidth;
+      if (!setWidth) return;
+
+      // Match the previous CSS durations but JS-driven so the seam is exact.
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const DURATION_SEC = isMobile ? 16 : 39;
+      let pxPerSec = setWidth / DURATION_SEC;
+
+      let position = 0;
+      let lastTime = performance.now();
+      let paused = false;
+
+      function step(now) {
+        const dt = (now - lastTime) / 1000;
+        lastTime = now;
+        if (!paused && dt < 0.5) {
+          position -= pxPerSec * dt;
+          // Wrap when one full set has scrolled past — the duplicated set is
+          // already in position, so the user sees no jump.
+          if (position <= -setWidth) position += setWidth;
+          // setProperty with 'important' guarantees we win the cascade even
+          // if any stylesheet rule tries to set transform with !important.
+          track.style.setProperty(
+            'transform',
+            `translate3d(${position.toFixed(2)}px, 0, 0)`,
+            'important'
+          );
+        }
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+
+      // Pause on hover (real pointing devices only — never on touch).
+      if (window.matchMedia('(hover: hover)').matches) {
+        const ticker = track.closest('.cred-ticker');
+        if (ticker) {
+          ticker.addEventListener('mouseenter', () => { paused = true; });
+          ticker.addEventListener('mouseleave', () => { paused = false; });
+        }
+      }
+
+      // Recompute on viewport changes (rotation, browser chrome show/hide).
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const newSetWidth = firstSet.offsetWidth;
+          if (!newSetWidth || newSetWidth === setWidth) return;
+          setWidth = newSetWidth;
+          const newIsMobile = window.matchMedia('(max-width: 768px)').matches;
+          pxPerSec = setWidth / (newIsMobile ? 16 : 39);
+          if (position <= -setWidth) position = 0;
+        }, 200);
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+})();
+
+// ─── Inline homepage signup form ───
+// Submits to the same /api/signup endpoint as /waitlist. On success we stash
+// the ref code in localStorage (key the waitlist page reads) and redirect to
+// /waitlist — which boots straight into the status state thanks to Rule 3.
+(function () {
+  const CODE_RE = /^[2-9A-HJKMNP-Z]{8}$/;
+  const STORAGE_KEY = 'haven_waitlist_code';
+  const PENDING_REF_KEY = 'haven_pending_ref';
+  const LANDING_PAGE_KEY = 'haven_landing_page';
+  const LANDED_AT_KEY = 'haven_landed_at';
+
+  const form  = document.getElementById('homepageSignupForm');
+  const email = document.getElementById('homepageSignupEmail');
+  const btn   = document.getElementById('homepageSignupBtn');
+  const error = document.getElementById('homepageSignupError');
+  if (!form) return;
+
+  const getStored = (k) => { try { return localStorage.getItem(k) || null; } catch { return null; } };
+  const getPendingRef = () => {
+    const v = (getStored(PENDING_REF_KEY) || '').trim().toUpperCase();
+    return CODE_RE.test(v) ? v : null;
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    error.textContent = '';
+    const value = email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      error.textContent = 'Please enter a valid email.';
+      return;
+    }
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = 'Joining…';
+    try {
+      const r = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: value,
+          ref: getPendingRef() || undefined,
+          landing_page: getStored(LANDING_PAGE_KEY) || '/',
+          landed_at: getStored(LANDED_AT_KEY) || undefined,
+        }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data?.error || 'signup_failed');
+      try {
+        if (data.ref_code) localStorage.setItem(STORAGE_KEY, data.ref_code);
+        localStorage.removeItem(PENDING_REF_KEY);
+        localStorage.removeItem(LANDING_PAGE_KEY);
+        localStorage.removeItem(LANDED_AT_KEY);
+      } catch {}
+      window.location.href = '/waitlist';
+    } catch (err) {
+      error.textContent = err.message === 'signup_failed'
+        ? 'Something went wrong. Please try again.'
+        : err.message;
+      btn.disabled = false;
+      btn.textContent = orig;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
