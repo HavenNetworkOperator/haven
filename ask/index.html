@@ -249,6 +249,12 @@ input[type="text"]:last-child { margin-bottom: 0; }
       <textarea id="wand" rows="5" placeholder="Dream freely. Forget what is realistic. Paint the version you actually want."></textarea>
     </div>
 
+    <div class="block">
+      <div class="wand-label">Bonus question</div>
+      <label class="q" for="otherConcerns">Aside from phones, screens, and social media, what else is at the top of your list of parental concerns?</label>
+      <textarea id="otherConcerns" rows="4" placeholder="Optional — I would love to build up a deeper, broader picture of what it means to be a parent in this day and age."></textarea>
+    </div>
+
     <div class="contact-box">
       <div class="hint">Optional. If you would not mind me coming back with a follow-up question or two, leave a name and the best way to reach you.</div>
       <input type="text" id="name" placeholder="First name">
@@ -368,6 +374,7 @@ input[type="text"]:last-child { margin-bottom: 0; }
           weight: weight,
           year: year,
           wand: document.getElementById('wand').value.trim(),
+          other_concerns: document.getElementById('otherConcerns').value.trim(),
           name: document.getElementById('name').value.trim(),
           contact: document.getElementById('contact').value.trim(),
           website: document.getElementById('website').value.trim(),

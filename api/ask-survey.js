@@ -29,7 +29,7 @@ function clip(value, max) {
   return String(value ?? '').trim().slice(0, max);
 }
 
-async function notifyEmail({ question, weight, year, wand, name, contact }) {
+async function notifyEmail({ question, weight, year, wand, otherConcerns, name, contact }) {
   if (!process.env.RESEND_API_KEY || !process.env.RESEND_FROM) return;
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -37,6 +37,7 @@ async function notifyEmail({ question, weight, year, wand, name, contact }) {
       weight ? `<p><strong>Weight:</strong> ${weight}/5</p>` : '',
       year ? `<p><strong>Eldest's year:</strong> ${escapeHtml(year)}</p>` : '',
       wand ? `<p><strong>Magic wand:</strong> ${escapeHtml(wand).replace(/\n/g, '<br>')}</p>` : '',
+      otherConcerns ? `<p><strong>Beyond screens:</strong> ${escapeHtml(otherConcerns).replace(/\n/g, '<br>')}</p>` : '',
       (name || contact) ? `<p><strong>From:</strong> ${escapeHtml([name, contact].filter(Boolean).join(' · '))}</p>` : '',
     ].join('');
     await resend.emails.send({
@@ -53,6 +54,7 @@ async function notifyEmail({ question, weight, year, wand, name, contact }) {
         weight ? `Weight: ${weight}/5` : '',
         year ? `Eldest's year: ${year}` : '',
         wand ? `Magic wand: ${wand}` : '',
+        otherConcerns ? `Beyond screens: ${otherConcerns}` : '',
         (name || contact) ? `From: ${[name, contact].filter(Boolean).join(' · ')}` : '',
       ].filter(Boolean).join('\n\n'),
     });
@@ -61,13 +63,14 @@ async function notifyEmail({ question, weight, year, wand, name, contact }) {
   }
 }
 
-async function notifySlack({ question, weight, year, name, contact }) {
+async function notifySlack({ question, weight, year, otherConcerns, name, contact }) {
   const url = process.env.SLACK_WEBHOOK_URL;
   if (!url) return;
   try {
     const fields = [{ type: 'mrkdwn', text: `*Question*\n${question}` }];
     if (year) fields.push({ type: 'mrkdwn', text: `*Year*\n${year}` });
     if (weight) fields.push({ type: 'mrkdwn', text: `*Weight*\n${weight}/5` });
+    if (otherConcerns) fields.push({ type: 'mrkdwn', text: `*Beyond screens*\n${otherConcerns}` });
     if (name || contact) fields.push({ type: 'mrkdwn', text: `*From*\n${[name, contact].filter(Boolean).join(' · ')}` });
     await fetch(url, {
       method: 'POST',
@@ -108,6 +111,7 @@ async function handlePost(req, res) {
   const yearRaw = clip(payload?.year, 40);
   const year = YEARS.includes(yearRaw) ? yearRaw : null;
   const wand = clip(payload?.wand, 4000) || null;
+  const otherConcerns = clip(payload?.other_concerns, 4000) || null;
   const name = clip(payload?.name, 200) || null;
   const contact = clip(payload?.contact, 200) || null;
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || null;
@@ -115,8 +119,8 @@ async function handlePost(req, res) {
 
   try {
     await sql`
-      INSERT INTO ask_survey_responses (question, weight, year, wand, name, contact, ip, user_agent)
-      VALUES (${question}, ${weight}, ${year}, ${wand}, ${name}, ${contact}, ${ip}, ${userAgent})
+      INSERT INTO ask_survey_responses (question, weight, year, wand, other_concerns, name, contact, ip, user_agent)
+      VALUES (${question}, ${weight}, ${year}, ${wand}, ${otherConcerns}, ${name}, ${contact}, ${ip}, ${userAgent})
     `;
   } catch (err) {
     console.error('ask-survey insert failed', err);
@@ -124,8 +128,8 @@ async function handlePost(req, res) {
   }
 
   await Promise.all([
-    notifyEmail({ question, weight, year, wand, name, contact }),
-    notifySlack({ question, weight, year, name, contact }),
+    notifyEmail({ question, weight, year, wand, otherConcerns, name, contact }),
+    notifySlack({ question, weight, year, otherConcerns, name, contact }),
   ]);
 
   return res.status(200).json({ ok: true });
@@ -140,7 +144,7 @@ async function handleGet(req, res) {
 
   try {
     const { rows } = await sql`
-      SELECT question, weight, year, wand, name, contact, submitted_at
+      SELECT question, weight, year, wand, other_concerns, name, contact, submitted_at
       FROM ask_survey_responses
       ORDER BY submitted_at DESC
     `;

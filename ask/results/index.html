@@ -128,6 +128,9 @@ h1 { font-family: var(--serif); font-weight: 500; font-size: 26px; margin: 0 0 2
       if (r.wand) {
         html += '<p class="wand"><span class="tag">Wand · </span>' + escapeHtml(r.wand) + '</p>';
       }
+      if (r.other_concerns) {
+        html += '<p class="wand"><span class="tag">Beyond screens · </span>' + escapeHtml(r.other_concerns) + '</p>';
+      }
       var metaParts = [r.name, r.year, r.weight ? ('weight ' + r.weight + '/5') : null, r.contact].filter(Boolean);
       html += '<div class="meta">' + escapeHtml(metaParts.join(' · ')) + '</div>';
       html += '</div>';
