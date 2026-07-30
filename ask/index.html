@@ -146,6 +146,43 @@ input[type="text"]:last-child { margin-bottom: 0; }
 .thanks h1 { font-family: var(--serif); font-weight: 500; font-size: 32px; line-height: 1.15; margin: 0 0 16px; }
 .thanks p { font-size: 16px; line-height: 1.6; color: var(--navy); margin: 0 auto; max-width: 420px; }
 .thanks .pass-it-on { font-size: 14px; line-height: 1.6; color: var(--muted); margin-top: 28px; }
+.share-row {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.share-row a.share-url {
+  font-size: 14px;
+  color: var(--orange);
+  text-decoration: underline;
+  word-break: break-all;
+}
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  transition: border-color 0.12s, color 0.12s;
+}
+.icon-btn:hover, .icon-btn:focus-visible { border-color: var(--orange); color: var(--orange); }
+.icon-btn svg { width: 16px; height: 16px; }
+.copy-feedback {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--orange);
+  min-height: 16px;
+}
 [hidden] { display: none !important; }
 </style>
 </head>
@@ -214,15 +251,62 @@ input[type="text"]:last-child { margin-bottom: 0; }
   <h1>Thank you. Truly.</h1>
   <p>You have just told me something no market report could. If you left your name I may come back with one or two questions. Otherwise, that is the whole ask.</p>
   <p class="pass-it-on">Pass it on to one other parent who is wrestling with the same thing.</p>
+
+  <div class="share-row">
+    <a class="share-url" id="shareUrl" href="https://gethavenmobile.com/ask">gethavenmobile.com/ask</a>
+    <button type="button" class="icon-btn" id="copyBtn" aria-label="Copy link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+    </button>
+    <button type="button" class="icon-btn" id="shareBtn" aria-label="Share link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"></line><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line></svg>
+    </button>
+  </div>
+  <div class="copy-feedback" id="copyFeedback"></div>
 </div>
 
 <script>
 (function () {
   var weight = 0;
   var year = '';
+  var SHARE_URL = 'https://gethavenmobile.com/ask';
 
   var weightGroup = document.getElementById('weightGroup');
   var yearGroup = document.getElementById('yearGroup');
+  var copyBtn = document.getElementById('copyBtn');
+  var shareBtn = document.getElementById('shareBtn');
+  var copyFeedback = document.getElementById('copyFeedback');
+
+  copyBtn.addEventListener('click', async function () {
+    try {
+      await navigator.clipboard.writeText(SHARE_URL);
+      copyFeedback.textContent = 'Link copied.';
+    } catch (err) {
+      copyFeedback.textContent = SHARE_URL;
+    }
+    setTimeout(function () { copyFeedback.textContent = ''; }, 2500);
+  });
+
+  shareBtn.addEventListener('click', async function () {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Haven — a quick ask',
+          text: 'Ninety seconds on the one thing you most want to get right with your kid’s first phone.',
+          url: SHARE_URL,
+        });
+      } catch (err) {
+        /* user cancelled the share sheet — nothing to do */
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(SHARE_URL);
+        copyFeedback.textContent = 'Link copied.';
+      } catch (err) {
+        copyFeedback.textContent = SHARE_URL;
+      }
+      setTimeout(function () { copyFeedback.textContent = ''; }, 2500);
+    }
+  });
 
   weightGroup.addEventListener('click', function (e) {
     var btn = e.target.closest('button');
