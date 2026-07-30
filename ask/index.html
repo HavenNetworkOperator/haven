@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#faf8f3" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>A quick ask — Haven</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #1a1a2e;
+  --parchment: #faf8f3;
+  --orange: #c84b0f;
+  --navy: #2b2b52;
+  --line: #e8e4dc;
+  --muted: #8a857c;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', system-ui, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  min-height: 100vh;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--sans);
+  display: flex;
+  justify-content: center;
+  padding: 0 20px 64px;
+}
+.col { width: 100%; max-width: 560px; }
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.intro { padding-top: 56px; margin-bottom: 40px; }
+.intro p { font-size: 16px; line-height: 1.6; color: var(--navy); }
+.block { margin-bottom: 40px; }
+label.q {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+textarea {
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  line-height: 1.55;
+  font-family: inherit;
+  color: var(--ink);
+  resize: vertical;
+  outline: none;
+}
+textarea:focus { border-color: var(--orange); }
+.field-label { font-size: 15px; font-weight: 500; margin-bottom: 12px; color: var(--ink); }
+.weights { display: flex; gap: 8px; margin-bottom: 36px; }
+.weights button {
+  flex: 1;
+  padding: 12px 4px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.3;
+  transition: all 0.12s;
+}
+.weights button.on { border-color: var(--orange); background: var(--orange); color: #fff; }
+.years { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+.years button {
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.12s;
+}
+.years button.on { border-color: var(--navy); background: var(--navy); color: #fff; }
+.wand-label {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.contact-box {
+  margin-bottom: 32px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+}
+.contact-box .hint { font-size: 13px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+input[type="text"], input[type="email"] {
+  width: 100%;
+  background: var(--parchment);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--ink);
+  margin-bottom: 10px;
+  outline: none;
+}
+input[type="text"]:last-child { margin-bottom: 0; }
+.honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.error { color: var(--orange); font-size: 14px; margin-bottom: 16px; line-height: 1.5; }
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.submit-btn:disabled { background: var(--muted); cursor: default; }
+.thanks { padding-top: 96px; text-align: center; }
+.thanks h1 { font-family: var(--serif); font-weight: 500; font-size: 32px; line-height: 1.15; margin: 0 0 16px; }
+.thanks p { font-size: 16px; line-height: 1.6; color: var(--navy); margin: 0 auto; max-width: 420px; }
+.thanks .pass-it-on { font-size: 14px; line-height: 1.6; color: var(--muted); margin-top: 28px; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="col" id="formView">
+  <div class="intro">
+    <div class="eyebrow">Haven · a quick ask</div>
+    <p>I am building something for parents facing the first-phone decision, and I would rather build it around what you actually worry about than what I assume. One real question, a couple of taps. Ninety seconds.</p>
+  </div>
+
+  <form id="surveyForm" novalidate>
+    <div class="honeypot" aria-hidden="true">
+      <label for="website">Leave this field empty</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="block">
+      <label class="q" for="question">When you picture handing your child their first phone, what is the one thing you most want to get right, or most dread getting wrong?</label>
+      <textarea id="question" rows="5" placeholder="Say it however it comes out. Messy is fine. The more honest, the more useful."></textarea>
+    </div>
+
+    <div>
+      <div class="field-label">How much is this on your mind right now?</div>
+      <div class="weights" id="weightGroup">
+        <button type="button" data-value="1">Barely</button>
+        <button type="button" data-value="2">A bit</button>
+        <button type="button" data-value="3">Often</button>
+        <button type="button" data-value="4">A lot</button>
+        <button type="button" data-value="5">Constantly</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="field-label">Where is your eldest right now?</div>
+      <div class="years" id="yearGroup">
+        <button type="button" data-value="Not near this yet">Not near this yet</button>
+        <button type="button" data-value="Year 4 or below">Year 4 or below</button>
+        <button type="button" data-value="Year 5">Year 5</button>
+        <button type="button" data-value="Year 6">Year 6</button>
+        <button type="button" data-value="Year 7">Year 7</button>
+        <button type="button" data-value="Year 8 or above">Year 8 or above</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="wand-label">The magic wand</div>
+      <label class="q" for="wand">If you could wave a magic wand, regardless of cost or effort, what would the ideal picture look like for your family and your community?</label>
+      <textarea id="wand" rows="5" placeholder="Dream freely. Forget what is realistic. Paint the version you actually want."></textarea>
+    </div>
+
+    <div class="contact-box">
+      <div class="hint">Optional. If you would not mind me coming back with a follow-up question or two, leave a name and the best way to reach you.</div>
+      <input type="text" id="name" placeholder="First name">
+      <input type="text" id="contact" placeholder="WhatsApp, email, however you like">
+    </div>
+
+    <div class="error" id="formError" hidden></div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">Send it to Rich</button>
+  </form>
+</div>
+
+<div class="col thanks" id="thanksView" hidden>
+  <div class="eyebrow" style="margin-bottom:24px;">Haven</div>
+  <h1>Thank you. Truly.</h1>
+  <p>You have just told me something no market report could. If you left your name I may come back with one or two questions. Otherwise, that is the whole ask.</p>
+  <p class="pass-it-on">Pass it on to one other parent who is wrestling with the same thing.</p>
+</div>
+
+<script>
+(function () {
+  var weight = 0;
+  var year = '';
+
+  var weightGroup = document.getElementById('weightGroup');
+  var yearGroup = document.getElementById('yearGroup');
+
+  weightGroup.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var val = Number(btn.dataset.value);
+    weight = weight === val ? 0 : val;
+    Array.from(weightGroup.children).forEach(function (b) {
+      b.classList.toggle('on', Number(b.dataset.value) === weight);
+    });
+  });
+
+  yearGroup.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var val = btn.dataset.value;
+    year = year === val ? '' : val;
+    Array.from(yearGroup.children).forEach(function (b) {
+      b.classList.toggle('on', b.dataset.value === year);
+    });
+  });
+
+  var form = document.getElementById('surveyForm');
+  var errorEl = document.getElementById('formError');
+  var submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var question = document.getElementById('question').value.trim();
+    if (!question) {
+      errorEl.textContent = 'Just the first question, if nothing else. That is the one that helps me most.';
+      errorEl.hidden = false;
+      return;
+    }
+    errorEl.hidden = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      var res = await fetch('/api/ask-survey', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: question,
+          weight: weight,
+          year: year,
+          wand: document.getElementById('wand').value.trim(),
+          name: document.getElementById('name').value.trim(),
+          contact: document.getElementById('contact').value.trim(),
+          website: document.getElementById('website').value.trim(),
+        }),
+      });
+      if (!res.ok) throw new Error('submit_failed');
+      document.getElementById('formView').hidden = true;
+      document.getElementById('thanksView').hidden = false;
+    } catch (err) {
+      errorEl.textContent = 'That did not send. Check your connection and try once more.';
+      errorEl.hidden = false;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send it to Rich';
+    }
+  });
+})();
+</script>
+</body>
+</html>
