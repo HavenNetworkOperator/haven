@@ -82,8 +82,12 @@ textarea {
   outline: none;
 }
 textarea:focus { border-color: var(--orange); }
+textarea.invalid { border-color: var(--orange); background: #fff6f1; }
+.required { color: var(--orange); margin-left: 3px; font-weight: 700; }
+.invalid-msg { color: var(--orange); font-size: 12px; margin-top: 8px; }
 .field-label { font-size: 15px; font-weight: 500; margin-bottom: 12px; color: var(--ink); }
-.weights { display: flex; gap: 8px; margin-bottom: 36px; }
+.weights { display: flex; gap: 8px; }
+.weights.invalid, .years.invalid { outline: 1.5px solid var(--orange); outline-offset: 6px; border-radius: 14px; }
 .weights button {
   flex: 1;
   padding: 12px 4px;
@@ -99,7 +103,7 @@ textarea:focus { border-color: var(--orange); }
   transition: all 0.12s;
 }
 .weights button.on { border-color: var(--orange); background: var(--orange); color: #fff; }
-.years { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+.years { display: flex; flex-wrap: wrap; gap: 8px; }
 .years button {
   padding: 10px 14px;
   border-radius: 20px;
@@ -216,12 +220,13 @@ input[type="text"]:last-child { margin-bottom: 0; }
     </div>
 
     <div class="block">
-      <label class="q" for="question">When you picture handing your child their first phone, what is the one thing you most want to get right, or most dread getting wrong?</label>
+      <label class="q" for="question">When you picture handing your child their first phone, what is the one thing you most want to get right, or most dread getting wrong?<span class="required">*</span></label>
       <textarea id="question" rows="5" placeholder="Say it however it comes out. Messy is fine. The more honest, the more useful."></textarea>
+      <div class="invalid-msg" id="questionMsg" hidden>Please answer this one — it is the question that helps me most.</div>
     </div>
 
-    <div>
-      <div class="field-label">How much is this on your mind right now?</div>
+    <div class="block">
+      <div class="field-label">How much is this on your mind right now?<span class="required">*</span></div>
       <div class="weights" id="weightGroup">
         <button type="button" data-value="1">Barely</button>
         <button type="button" data-value="2">A bit</button>
@@ -229,10 +234,11 @@ input[type="text"]:last-child { margin-bottom: 0; }
         <button type="button" data-value="4">A lot</button>
         <button type="button" data-value="5">Constantly</button>
       </div>
+      <div class="invalid-msg" id="weightMsg" hidden>Please pick one.</div>
     </div>
 
-    <div>
-      <div class="field-label">Where is your eldest right now?</div>
+    <div class="block">
+      <div class="field-label">Where is your eldest right now?<span class="required">*</span></div>
       <div class="years" id="yearGroup">
         <button type="button" data-value="Not near this yet">Not near this yet</button>
         <button type="button" data-value="Year 4 or below">Year 4 or below</button>
@@ -241,12 +247,14 @@ input[type="text"]:last-child { margin-bottom: 0; }
         <button type="button" data-value="Year 7">Year 7</button>
         <button type="button" data-value="Year 8 or above">Year 8 or above</button>
       </div>
+      <div class="invalid-msg" id="yearMsg" hidden>Please pick one.</div>
     </div>
 
     <div class="block">
       <div class="wand-label">The magic wand</div>
-      <label class="q" for="wand">If you could wave a magic wand, regardless of cost or effort, what would the ideal picture look like for your family and your community?</label>
+      <label class="q" for="wand">If you could wave a magic wand, regardless of cost or effort, what would the ideal picture look like for your family and your community?<span class="required">*</span></label>
       <textarea id="wand" rows="5" placeholder="Dream freely. Forget what is realistic. Paint the version you actually want."></textarea>
+      <div class="invalid-msg" id="wandMsg" hidden>Please answer this question.</div>
     </div>
 
     <div class="block">
@@ -329,6 +337,25 @@ input[type="text"]:last-child { margin-bottom: 0; }
     }
   });
 
+  var questionEl = document.getElementById('question');
+  var wandEl = document.getElementById('wand');
+  var weightMsg = document.getElementById('weightMsg');
+  var yearMsg = document.getElementById('yearMsg');
+  var questionMsg = document.getElementById('questionMsg');
+  var wandMsg = document.getElementById('wandMsg');
+
+  function clearFieldInvalid(el, msgEl) {
+    el.classList.remove('invalid');
+    if (msgEl) msgEl.hidden = true;
+  }
+
+  questionEl.addEventListener('input', function () {
+    if (questionEl.value.trim()) clearFieldInvalid(questionEl, questionMsg);
+  });
+  wandEl.addEventListener('input', function () {
+    if (wandEl.value.trim()) clearFieldInvalid(wandEl, wandMsg);
+  });
+
   weightGroup.addEventListener('click', function (e) {
     var btn = e.target.closest('button');
     if (!btn) return;
@@ -337,6 +364,7 @@ input[type="text"]:last-child { margin-bottom: 0; }
     Array.from(weightGroup.children).forEach(function (b) {
       b.classList.toggle('on', Number(b.dataset.value) === weight);
     });
+    if (weight) clearFieldInvalid(weightGroup, weightMsg);
   });
 
   yearGroup.addEventListener('click', function (e) {
@@ -347,6 +375,7 @@ input[type="text"]:last-child { margin-bottom: 0; }
     Array.from(yearGroup.children).forEach(function (b) {
       b.classList.toggle('on', b.dataset.value === year);
     });
+    if (year) clearFieldInvalid(yearGroup, yearMsg);
   });
 
   var form = document.getElementById('surveyForm');
@@ -355,12 +384,30 @@ input[type="text"]:last-child { margin-bottom: 0; }
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
-    var question = document.getElementById('question').value.trim();
-    if (!question) {
-      errorEl.textContent = 'Just the first question, if nothing else. That is the one that helps me most.';
+    var question = questionEl.value.trim();
+    var wandVal = wandEl.value.trim();
+
+    var invalidFields = [];
+    if (!question) { questionEl.classList.add('invalid'); questionMsg.hidden = false; invalidFields.push(questionEl); }
+    else clearFieldInvalid(questionEl, questionMsg);
+
+    if (!weight) { weightGroup.classList.add('invalid'); weightMsg.hidden = false; invalidFields.push(weightGroup); }
+    else clearFieldInvalid(weightGroup, weightMsg);
+
+    if (!year) { yearGroup.classList.add('invalid'); yearMsg.hidden = false; invalidFields.push(yearGroup); }
+    else clearFieldInvalid(yearGroup, yearMsg);
+
+    if (!wandVal) { wandEl.classList.add('invalid'); wandMsg.hidden = false; invalidFields.push(wandEl); }
+    else clearFieldInvalid(wandEl, wandMsg);
+
+    if (invalidFields.length) {
+      errorEl.textContent = 'Please answer the questions marked with a *.';
       errorEl.hidden = false;
+      invalidFields[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (typeof invalidFields[0].focus === 'function') invalidFields[0].focus({ preventScroll: true });
       return;
     }
+
     errorEl.hidden = true;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
@@ -373,7 +420,7 @@ input[type="text"]:last-child { margin-bottom: 0; }
           question: question,
           weight: weight,
           year: year,
-          wand: document.getElementById('wand').value.trim(),
+          wand: wandVal,
           other_concerns: document.getElementById('otherConcerns').value.trim(),
           name: document.getElementById('name').value.trim(),
           contact: document.getElementById('contact').value.trim(),
