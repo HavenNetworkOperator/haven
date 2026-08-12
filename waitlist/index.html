@@ -362,7 +362,7 @@ main {
   font-weight: 500;
 }
 
-/* ───── GOAL TRACKER (community progress to 250) ───── */
+/* ───── GOAL TRACKER (community progress to 300) ───── */
 .goal-tracker {
   margin: 0 0 32px;
   padding: 0 4px;
@@ -750,7 +750,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <section class="signup-state" id="signupState">
       <span class="section-label fade-up">Founding waitlist</span>
       <h1 class="fade-up d1">Help us build the mobile network <em>we all want to exist.</em></h1>
-      <p class="lede fade-up d2">No commitment. No payment. Adding your name proves there's demand — and gets us to the 250 we need before Haven launches.</p>
+      <p class="lede fade-up d2">No commitment. No payment. Adding your name proves there's demand — and gets us to the 300 we need before Haven launches.</p>
 
       <form class="signup-form fade-up d3" id="form" novalidate>
         <input
@@ -772,7 +772,7 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
       <div class="form-error" id="formError" role="alert"></div>
 
       <ul class="benefits-list fade-up d4">
-        <li>First 250 signups <em>offered</em> lifetime founding pricing of £8/month at launch — your option then, NOT a commitment to a contract now.</li>
+        <li>First 300 signups <em>offered</em> lifetime founding pricing of £8/month at launch — your option then, NOT a commitment to a contract now.</li>
         <li>If you do choose to activate at launch, you get priority access in queue order.</li>
         <li>Tell us what you most want blocked — we build for the founding families first.</li>
         <li>A direct line to the founding team — replies go to a real inbox.</li>
@@ -785,34 +785,9 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     <section class="status-state" id="statusState">
       <span class="section-label">You're in</span>
 
-      <div class="status-stats">
-        <div class="position-card">
-          <div class="position-eyebrow">Your position</div>
-          <div class="position-number">#<em id="posNum">—</em></div>
-          <div class="position-of">of <span id="totalNum">—</span> founding members so far</div>
-        </div>
-        <div class="freemonths-card">
-          <div class="freemonths-eyebrow">Free months earned</div>
-          <div class="freemonths-number"><em id="freeMonthsNum">—</em></div>
-          <div class="freemonths-detail" id="freeMonthsDetail">1 for joining · <strong>+1 for every parent you invite</strong></div>
-        </div>
-      </div>
-
-      <!-- ─── GOAL TRACKER (community progress to 250) ─── -->
-      <div class="goal-tracker">
-        <div class="goal-tracker-bar">
-          <div class="goal-tracker-fill" id="goalFill"></div>
-        </div>
-        <div class="goal-tracker-text">
-          Haven launches at 250 names.<br>
-          <em id="goalCurrent">—</em> already signed up. <em id="goalRemaining">—</em> to go.
-        </div>
-      </div>
-
       <!-- ─── SHARE BLOCK (front-and-centre) ─── -->
       <div class="share-block">
         <span class="share-label"><span class="share-pointer" aria-hidden="true">👇</span>Your move: <em>who else needs to see this?</em><span class="share-pointer share-pointer--end" aria-hidden="true">👇</span></span>
-        <span class="share-sublabel">You both get a free month of Haven when they sign up - SHARE NOW!</span>
 
         <div class="share-buttons share-buttons--primary">
           <a class="share-btn share-btn-primary" id="whatsappDmBtn" target="_blank" rel="noopener" data-share-channel="whatsapp_dm">
@@ -820,8 +795,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
             Send to another parent
           </a>
         </div>
-
-        <p class="share-micro">30 seconds · NO COMMITMENT!! - Free to sign up · No payment · Each signup = +1 month free for you… if you choose to use Haven.</p>
 
         <figure class="share-testimonial">
           <span class="share-testimonial-avatar" aria-hidden="true">
@@ -841,10 +814,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
         <span class="share-footnote-text">Your share link is also in your welcome email.</span>
       </div>
 
-      <div class="refresh-row">
-        Your free months update when others sign up via your link.
-        <button class="refresh-btn" id="refreshBtn">Refresh</button>
-      </div>
     </section>
 
   </div>
@@ -866,21 +835,11 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     email:     document.getElementById('email'),
     submitBtn: document.getElementById('submitBtn'),
     formError: document.getElementById('formError'),
-    posNum:    document.getElementById('posNum'),
-    totalNum:  document.getElementById('totalNum'),
-    freeMonthsNum:    document.getElementById('freeMonthsNum'),
-    freeMonthsDetail: document.getElementById('freeMonthsDetail'),
     refNum:    document.getElementById('refNum'),
-    refreshBtn: document.getElementById('refreshBtn'),
     whatsappDm: document.getElementById('whatsappDmBtn'),
-    goalFill: document.getElementById('goalFill'),
-    goalCurrent: document.getElementById('goalCurrent'),
-    goalRemaining: document.getElementById('goalRemaining'),
     shareFootnoteStat: document.getElementById('shareFootnoteStat'),
     shareFootnoteSep: document.getElementById('shareFootnoteSep'),
   };
-
-  let goalAnimated = false;
 
   // 1:1 DM to a single parent. Personal, warm opener — single message,
   // single paragraph, the way someone actually pings a friend on WhatsApp.
@@ -946,46 +905,11 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
   }
 
   function renderStatus(data) {
-    els.posNum.textContent   = data.position;
-    els.totalNum.textContent = data.total;
-    els.refNum.textContent   = data.referrals;
-
-    // Free months: 1 for joining + 1 per successful referral.
-    // Derived server-side as data.free_months; fall back to 1 + referrals if absent.
-    const referrals = Number(data.referrals) || 0;
-    const freeMonths = Number(data.free_months ?? (1 + referrals));
-    if (els.freeMonthsNum) els.freeMonthsNum.textContent = freeMonths;
-    if (els.freeMonthsDetail) {
-      els.freeMonthsDetail.innerHTML = referrals === 0
-        ? `1 for joining · <strong>+1 for every parent you invite</strong>`
-        : `1 for joining · ${referrals} from invites · <strong>+1 more for every signup</strong>`;
-    }
+    els.refNum.textContent = data.referrals;
 
     const url = `${SITE}/?ref=${data.ref_code}`;
     const dmText = `${buildDmBlurb()} ${url}`;
     els.whatsappDm.href = `https://wa.me/?text=${encodeURIComponent(dmText)}`;
-
-    // Goal tracker — community progress to the 250-name launch threshold.
-    const GOAL = 250;
-    const total = Number(data.total) || 0;
-    const remaining = Math.max(0, GOAL - total);
-    const pct = Math.min(100, (total / GOAL) * 100);
-    els.goalCurrent.textContent = total.toLocaleString('en-GB');
-    els.goalRemaining.textContent = remaining.toLocaleString('en-GB');
-
-    // First render: pin to 0% then defer to next frame so the CSS transition
-    // catches the change and animates up. Subsequent renders just slide.
-    if (!goalAnimated) {
-      goalAnimated = true;
-      els.goalFill.style.width = '0%';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          els.goalFill.style.width = `${pct}%`;
-        });
-      });
-    } else {
-      els.goalFill.style.width = `${pct}%`;
-    }
 
     // Show the "X shared via your link" stat only once the user has actually
     // shared at least once — at zero it's demotivating.
@@ -1115,22 +1039,6 @@ posthog.init('phc_BAYfPMdbc36t7fuzSdmkbesQc5CUi56pivBkeXLZSLC7',{api_host:'https
     if (!node) return;
     const channel = node.getAttribute('data-share-channel') || id;
     node.addEventListener('click', () => trackShare(channel));
-  });
-
-  // Refresh standing
-  els.refreshBtn.addEventListener('click', async () => {
-    const code = localStorage.getItem(STORAGE_KEY);
-    if (!code) return;
-    els.refreshBtn.disabled = true;
-    els.refreshBtn.textContent = 'Refreshing...';
-    try {
-      const data = await fetchStatus(code);
-      renderStatus(data);
-    } catch {}
-    setTimeout(() => {
-      els.refreshBtn.disabled = false;
-      els.refreshBtn.textContent = 'Refresh';
-    }, 600);
   });
 })();
 </script>
