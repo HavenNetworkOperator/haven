@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Scaling roadmap checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#F3EBDD;
+    --parchment-deep:#E8DCC6;
+    --ink:#1B2A41;
+    --ink-soft:#4A566A;
+    --orange:#C4521F;
+    --orange-deep:#9E3F14;
+    --rule:rgba(27,42,65,.16);
+    --done:#2F6B4F;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--parchment);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;font-size:16px;line-height:1.5}
+  body{
+    background-image:
+      radial-gradient(rgba(27,42,65,.045) .6px, transparent .7px),
+      radial-gradient(rgba(196,82,31,.035) .5px, transparent .6px);
+    background-size:5px 5px, 9px 9px;
+    background-position:0 0, 3px 4px;
+    min-height:100vh;
+  }
+  button{font:inherit;color:inherit;cursor:pointer}
+  button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+  [hidden]{display:none!important}
+
+  /* gate */
+  .gate{max-width:420px;margin:0 auto;padding:18vh 24px 60px;text-align:center}
+  .gate .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:14px}
+  .gate h1{font-family:Fraunces,serif;font-weight:600;font-size:30px;margin:0 0 22px;letter-spacing:-.01em}
+  .gate form{display:flex;gap:8px;justify-content:center}
+  .gate input{flex:1;font:inherit;font-size:15px;padding:11px 14px;border:1px solid var(--ink);border-radius:6px;background:#fff;min-width:0}
+  .gate button{background:var(--ink);color:var(--parchment);border:0;border-radius:6px;padding:11px 18px;font-weight:500}
+  .gate button:hover{background:var(--orange)}
+  .gate .err{color:var(--orange-deep);font-size:14px;margin-top:14px;min-height:20px}
+
+  .shell{max-width:1180px;margin:0 auto;padding:36px 28px 80px}
+  header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+  h1{font-family:Fraunces,serif;font-weight:600;font-size:clamp(28px,4vw,40px);line-height:1.05;margin:0;letter-spacing:-.01em}
+  h1 small{display:block;font-family:"Inter Tight";font-weight:400;font-size:15px;color:var(--ink-soft);letter-spacing:0;margin-top:8px}
+  .overall{text-align:right;min-width:220px}
+  .overall .num{font-family:Fraunces,serif;font-size:34px;font-weight:600;line-height:1}
+  .overall .num span{font-size:16px;color:var(--ink-soft);font-weight:400;font-family:"Inter Tight"}
+  .overall .lbl{font-size:13px;color:var(--ink-soft)}
+  .overall .saving{font-size:12px;color:var(--ink-soft);margin-top:4px;min-height:16px}
+  .overall .saving.err{color:var(--orange-deep)}
+
+  .layout{display:grid;grid-template-columns:270px 1fr;gap:36px;align-items:start}
+
+  /* ladder */
+  nav.ladder{position:sticky;top:20px}
+  nav.ladder ol{list-style:none;margin:0;padding:0;border-left:2px solid var(--rule)}
+  nav.ladder li{position:relative}
+  nav.ladder button{display:block;width:100%;text-align:left;background:none;border:0;padding:10px 12px 10px 22px;border-radius:0 6px 6px 0;position:relative;transition:background .15s}
+  nav.ladder button:hover{background:rgba(27,42,65,.06)}
+  nav.ladder button.active{background:var(--ink);color:var(--parchment)}
+  nav.ladder button::before{content:"";position:absolute;left:-7px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--parchment);border:2px solid var(--ink-soft)}
+  nav.ladder button.active::before{background:var(--orange);border-color:var(--orange)}
+  nav.ladder button.complete::before{background:var(--done);border-color:var(--done)}
+  nav.ladder .n{font-family:Fraunces,serif;font-weight:600;font-size:15px;margin-right:8px;opacity:.8}
+  nav.ladder .name{font-weight:600}
+  nav.ladder .meta{font-size:12px;opacity:.72;display:flex;justify-content:space-between;margin-top:2px}
+  nav.ladder .bar{height:3px;background:rgba(27,42,65,.12);border-radius:2px;margin-top:6px;overflow:hidden}
+  nav.ladder button.active .bar{background:rgba(243,235,221,.25)}
+  nav.ladder .bar i{display:block;height:100%;background:var(--orange);width:0;transition:width .3s}
+  nav.ladder button.complete .bar i{background:var(--done)}
+  .here{display:inline-block;font-size:11px;font-weight:600;color:var(--orange);border:1px solid var(--orange);border-radius:3px;padding:0 5px;margin-left:8px;vertical-align:middle}
+  nav.ladder button.active .here{color:var(--parchment);border-color:var(--parchment)}
+
+  /* stage panel */
+  .stage-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+  .stage-head h2{font-family:Fraunces,serif;font-weight:700;font-size:clamp(34px,5vw,54px);line-height:.95;margin:0;letter-spacing:-.015em}
+  .stage-head h2 .num{color:var(--orange);font-weight:400;font-style:italic}
+  .stage-head .side{text-align:right}
+  .stage-head .side button{background:none;border:1px solid var(--ink);border-radius:6px;padding:7px 12px;font-size:13px;font-weight:500}
+  .stage-head .side button.is-here{background:var(--orange);border-color:var(--orange);color:#fff}
+  .stage-head .side .pct{font-family:Fraunces,serif;font-size:28px;font-weight:600;margin-top:8px}
+
+  dl.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 24px;margin:0 0 26px;padding:16px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  dl.facts div{min-width:0}
+  dl.facts dt{font-size:12px;color:var(--ink-soft);margin-bottom:2px}
+  dl.facts dd{margin:0;font-weight:500}
+
+  .bottom{font-family:Fraunces,serif;font-size:19px;line-height:1.35;margin:0 0 26px;padding-left:16px;border-left:3px solid var(--orange)}
+  .bottom b{font-weight:600}
+
+  .grid-head{display:grid;grid-template-columns:150px 1fr 1fr;gap:16px;padding:0 0 8px;font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--ink)}
+  .row{display:grid;grid-template-columns:150px 1fr 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);align-items:start}
+  .row .fn{font-weight:600;font-size:14px;padding-top:3px}
+  .row .con{color:var(--ink-soft);font-size:15px;padding-top:3px}
+  .check{display:flex;gap:12px;align-items:flex-start}
+  .check input{appearance:none;flex:0 0 auto;width:22px;height:22px;margin:1px 0 0;border:2px solid var(--ink);border-radius:4px;background:#fff;display:grid;place-items:center;cursor:pointer;transition:background .15s}
+  .check input:checked{background:var(--done);border-color:var(--done)}
+  .check input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+  .check label{cursor:pointer;font-size:15px}
+  .check input:checked + label{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:rgba(27,42,65,.4)}
+  .check .del{margin-left:auto;background:none;border:0;color:var(--ink-soft);font-size:18px;line-height:1;padding:0 4px;opacity:.5}
+  .check .del:hover{opacity:1;color:var(--orange-deep)}
+
+  .custom{margin-top:22px}
+  .custom h3{font-family:Fraunces,serif;font-weight:600;font-size:18px;margin:0 0 6px}
+  .custom p.hint{margin:0 0 12px;font-size:14px;color:var(--ink-soft)}
+  .custom .list{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+  .adder{display:flex;gap:8px}
+  .adder input{flex:1;font:inherit;padding:9px 12px;border:1px solid var(--ink);border-radius:6px;background:#fff;min-width:0}
+  .adder button{background:var(--ink);color:var(--parchment);border:0;border-radius:6px;padding:9px 16px;font-weight:500}
+  .adder button:hover{background:var(--orange)}
+
+  .notes{margin-top:26px}
+  .notes h3{font-family:Fraunces,serif;font-weight:600;font-size:18px;margin:0 0 8px}
+  .notes textarea{width:100%;min-height:96px;font:inherit;font-size:15px;padding:12px;border:1px solid var(--rule);border-radius:6px;background:rgba(255,255,255,.55);resize:vertical}
+
+  footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft)}
+  footer button{background:none;border:0;text-decoration:underline;color:var(--ink-soft);padding:0}
+  footer button:hover{color:var(--orange-deep)}
+
+  @media (max-width:820px){
+    .shell{padding:24px 16px 60px}
+    .layout{grid-template-columns:1fr;gap:20px}
+    nav.ladder{position:static;overflow-x:auto;margin:0 -16px;padding:0 16px 8px}
+    nav.ladder ol{display:flex;gap:6px;border-left:0}
+    nav.ladder li{flex:0 0 150px}
+    nav.ladder button{border:1px solid var(--rule);border-radius:8px;padding:10px 12px}
+    nav.ladder button::before{display:none}
+    .grid-head{display:none}
+    .row{grid-template-columns:1fr;gap:6px}
+    .row .con::before{content:"Constraint: ";font-weight:600;color:var(--ink)}
+    dl.facts{grid-template-columns:1fr 1fr}
+    .stage-head .side{text-align:left}
+    .overall{text-align:left;min-width:0}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gateView">
+  <div class="eyebrow">Haven · founder view</div>
+  <h1>Scaling roadmap</h1>
+  <form id="gateForm">
+    <input type="password" id="passInput" placeholder="Passcode" autocomplete="current-password" aria-label="Passcode">
+    <button type="submit" id="passBtn">Open</button>
+  </form>
+  <div class="err" id="gateErr" aria-live="polite"></div>
+</div>
+
+<div class="shell" id="appView" hidden>
+  <header class="top">
+    <h1>Scaling roadmap<small>Hormozi's ten stages, as a working checklist. Tick things as they get done; it saves automatically and syncs across your devices.</small></h1>
+    <div class="overall">
+      <div class="num" id="overallNum">0<span> / 0 done</span></div>
+      <div class="lbl">across all stages</div>
+      <div class="saving" id="saveState"></div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="ladder" aria-label="Stages"><ol id="ladder"></ol></nav>
+    <main id="panel"></main>
+  </div>
+
+  <footer>
+    <span>Stage 0 is transcribed from the roadmap card. Stages 1 to 9 are summarised from the same framework; edit or add items as you learn what each stage really asks of Haven.</span>
+    <span><button id="lockBtn">Lock</button> &nbsp;·&nbsp; <button id="resetBtn">Reset all progress</button></span>
+  </footer>
+</div>
+
+<script>
+const STAGES = [
+  {n:0,name:"Improvise",head:"No staff yet",role:"Researcher",lead:"Just you.",companies:"Not a company yet.",
+   constraint:"Nothing is happening.",graduate:"Get people to try your stuff for free.",
+   rows:[
+    ["Product","You have nothing to sell.","Make something free to give away."],
+    ["Marketing","No one knows about your stuff.","Tell people you have free stuff."],
+    ["Sales","You don't know how to sell.","Get people to try it for free."],
+    ["Customer service","No customers to service.","Service your free customers."],
+    ["IT","You have no tech.","Get a computer, internet, microphone, phone and email."],
+    ["Recruiting","You don't know how to work.","Recruit yourself to work."],
+    ["HR","You're unprotected.","Create an entity that separates your personal assets from the business's assets."],
+    ["Finance","Your personal money is the business's money.","Open a business bank account, put money in, and write off start-up expenses."]
+   ]},
+  {n:1,name:"Monetize",head:"0 to 1",role:"Salesperson",lead:"Still just you.",companies:"Most never leave this stage.",
+   constraint:"Nobody pays you.",graduate:"Make your first sales, one at a time, by hand.",
+   rows:[
+    ["Product","The free thing has no price.","Turn the free thing into a paid offer with a clear price."],
+    ["Marketing","Only your free users know you exist.","Ask everyone who tried it free, and the people around them, to buy."],
+    ["Sales","You have never closed anyone.","Sell one to one on calls or in person until you can close consistently."],
+    ["Customer service","Paying customers expect more.","Deliver properly for paying customers and collect testimonials."],
+    ["Finance","You don't know if you make money.","Record every sale and every cost; know your margin per customer."]
+   ]},
+  {n:2,name:"Advertise",head:"0 to 1",role:"Marketer",lead:"You, maybe a contractor.",companies:"The first real filter.",
+   constraint:"Sales only happen when you talk to someone you already know.",graduate:"Build a reliable flow of strangers who buy.",
+   rows:[
+    ["Product","Tinkering with the offer instead of selling it.","Freeze one offer and stop changing it."],
+    ["Marketing","Lead flow is random.","Do the rule of 100 every working day: 100 outreach messages, 100 minutes of content, or 100 in ad spend."],
+    ["Sales","Your pitch only works on friends.","Write a repeatable pitch or script that closes strangers."],
+    ["Customer service","Every onboarding is improvised.","Set an onboarding sequence that runs the same way each time."],
+    ["IT","Leads live in your head.","Track every lead from first contact to sale in a CRM or spreadsheet."],
+    ["Finance","You don't know what a customer costs.","Know your cost to acquire a customer and how fast they pay it back."]
+   ]},
+  {n:3,name:"Stabilize",head:"1 to 4",role:"Manager",lead:"You plus first hires.",companies:"Most small businesses live here.",
+   constraint:"You are the bottleneck for everything.",graduate:"Hand delivery to other people so you can keep selling and marketing.",
+   rows:[
+    ["Product","Fulfilment only works when you do it.","Write down how delivery happens, step by step, so someone else can follow it."],
+    ["Marketing","Tempted to delegate the one thing that works.","Keep doing the rule of 100 yourself; this is not handed over yet."],
+    ["Sales","Same as above.","Keep selling personally; document what you say and why it works."],
+    ["Customer service","You answer every message.","Hire your first person to deliver or support."],
+    ["IT","Work lives in your inbox.","Shared email, calendar and task tracking the team can see."],
+    ["Recruiting","Hiring is ad hoc.","A basic hiring loop: job ad, interview, paid trial."],
+    ["HR","Nothing is written down.","Contracts, pay and expectations in writing for everyone."],
+    ["Finance","No monthly view.","Monthly profit and loss; pay yourself a salary."]
+   ]},
+  {n:4,name:"Prioritize",head:"5 to 9",role:"Leader",lead:"You and a small team.",companies:"Where focus gets lost.",
+   constraint:"Too many offers, avatars and channels at once.",graduate:"One avatar, one offer, one channel, measured every week.",
+   rows:[
+    ["Product","Several offers dilute effort.","Cut back to the one offer that sells best and delivers best."],
+    ["Marketing","Spread across channels.","Commit to the one channel that works and go deeper in it."],
+    ["Sales","No visibility on the pipeline.","A weekly sales scorecard: leads, conversations, closes."],
+    ["Customer service","No visibility on retention.","A weekly delivery scorecard: churn, complaints, satisfaction."],
+    ["Recruiting","Hiring for comfort not constraint.","Hire only to relieve the single biggest constraint."],
+    ["HR","Team hears about problems late.","A weekly team meeting run on the numbers."],
+    ["Finance","Numbers arrive monthly, too slow.","A weekly metrics dashboard the whole team sees."]
+   ]},
+  {n:5,name:"Productize",head:"10 to 19",role:"Operator",lead:"You plus first managers.",companies:"Roughly the top five percent.",
+   constraint:"Delivery still depends on particular people.",graduate:"A standard product, an upsell, and falling churn.",
+   rows:[
+    ["Product","Quality varies by who delivers.","Package delivery so any trained person delivers it the same way."],
+    ["Marketing","All effort goes on new customers.","An upsell or continuity offer for people who already buy."],
+    ["Sales","You are still the main closer.","A dedicated salesperson or small team selling from your script."],
+    ["Customer service","Churn is nobody's job.","Onboarding and retention owned by a named person with a target."],
+    ["IT","Billing and support need you.","Billing, support and delivery systems that run without you."],
+    ["Recruiting","Everyone reports to you.","A manager layer between you and the front line."],
+    ["HR","Roles are fuzzy.","Written role descriptions and regular reviews."],
+    ["Finance","Growth without unit economics.","Track churn and lifetime value alongside acquisition cost."]
+   ]},
+  {n:6,name:"Optimize",head:"20 to 49",role:"Executive",lead:"Department heads.",companies:"Roughly the top two percent.",
+   constraint:"Growth exposes weak processes everywhere.",graduate:"Every function has a head, a budget and a number.",
+   rows:[
+    ["Product","Improvement is reactive.","A feedback loop from customers into product changes on a schedule."],
+    ["Marketing","One channel caps growth.","Additional channels running with named owners."],
+    ["Sales","No forecast.","Sales management with pipeline stages and a forecast."],
+    ["Customer service","Service quality is unmeasured.","Defined service levels, reported weekly."],
+    ["IT","Tools don't talk to each other.","An integrated stack with data in one place."],
+    ["Recruiting","Hiring slows growth.","An in-house recruiter or a repeatable hiring pipeline."],
+    ["HR","People leave for avoidable reasons.","Onboarding, training and performance systems."],
+    ["Finance","Spend is unplanned.","Budgets by department and a rolling cash forecast."]
+   ]},
+  {n:7,name:"Categorize",head:"50 to 99",role:"CEO",lead:"An executive team.",companies:"Under one percent.",
+   constraint:"Too many direct reports; you manage work, not leaders.",graduate:"Departments with directors who own outcomes.",
+   rows:[
+    ["Structure","Org chart is a spider web.","Organise by function with one accountable leader per department."],
+    ["Leadership","Decisions bottleneck on you.","An executive team meeting cadence that makes decisions without you."],
+    ["HR and finance","Handled on the side.","HR and finance become proper departments."],
+    ["Goals","Team goals drift.","Company goals cascaded down to each department."]
+   ]},
+  {n:8,name:"Specialize",head:"100 to 249",role:"Chair of the executive team",lead:"Senior leadership team plus board.",companies:"A few thousand in the UK.",
+   constraint:"Generalists cap the quality of every function.",graduate:"Specialists in every seat and a senior team running day to day.",
+   rows:[
+    ["People","Early generalists in senior roles.","Specialist hires replacing generalists in key seats."],
+    ["Leadership","You still run the week.","A senior leadership team runs the business day to day."],
+    ["Governance","Informal oversight.","A board and proper governance in place."],
+    ["Product","One product line.","Product line management with owners and P&Ls."]
+   ]},
+  {n:9,name:"Capitalize",head:"250 to 500",role:"Investor and capital allocator",lead:"Board, CEO, leadership team.",companies:"Very few.",
+   constraint:"Capital, not operations, is now the lever.",graduate:"Deploy capital deliberately: grow, acquire, or sell.",
+   rows:[
+    ["Strategy","No capital plan.","Decide the capital strategy: organic growth, acquisitions, or exit."],
+    ["Finance","Founder-grade finance.","A professional CFO and audited accounts."],
+    ["Growth","Only organic.","An acquisition or partnership pipeline."],
+    ["Succession","Key-person risk everywhere.","Succession plans for every senior role, including yours."]
+   ]}
+];
+
+// ---------- auth + storage ----------
+const API = "/api/scaling";
+const PASS_KEY = "haven-scaling-passcode";
+const CACHE_KEY = "haven-scaling-roadmap";
+let passcode = null;
+
+const gateView=document.getElementById("gateView");
+const appView=document.getElementById("appView");
+const gateErr=document.getElementById("gateErr");
+const passInput=document.getElementById("passInput");
+const saveEl=document.getElementById("saveState");
+
+function headers(){ return {"Authorization":"Bearer "+passcode,"Content-Type":"application/json"}; }
+
+async function fetchState(){
+  const res=await fetch(API,{headers:headers(),cache:"no-store"});
+  if(res.status===401) throw new Error("unauthorized");
+  if(!res.ok) throw new Error("server");
+  return (await res.json()).state;
+}
+
+function readCache(){ try{ const v=localStorage.getItem(CACHE_KEY); return v?JSON.parse(v):null; }catch(e){ return null; } }
+function writeCache(s){ try{ localStorage.setItem(CACHE_KEY,s); }catch(e){} }
+
+let saveTimer=null, inflight=null, dirty=false;
+function save(){
+  saveEl.textContent="Saving"; saveEl.classList.remove("err");
+  writeCache(JSON.stringify(state));
+  dirty=true;
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(flush,400);
+}
+async function flush(){
+  if(inflight) return inflight.then(flush);
+  if(!dirty) return;
+  dirty=false;
+  const body=JSON.stringify({state});
+  inflight=fetch(API,{method:"PUT",headers:headers(),body})
+    .then(res=>{
+      if(res.status===401){ lock(true); throw new Error("unauthorized"); }
+      if(!res.ok) throw new Error("server");
+      saveEl.textContent="Saved"; saveEl.classList.remove("err");
+      setTimeout(()=>{ if(saveEl.textContent==="Saved") saveEl.textContent=""; },1800);
+    })
+    .catch(()=>{ saveEl.textContent="Not saved. Check your connection and try again."; saveEl.classList.add("err"); dirty=true; })
+    .finally(()=>{ inflight=null; });
+  return inflight;
+}
+window.addEventListener("beforeunload",e=>{ if(dirty||inflight){ e.preventDefault(); e.returnValue=""; } });
+
+// ---------- state ----------
+let state = { checked:{}, custom:{}, notes:{}, current:0, view:0 };
+
+function itemsFor(stage){
+  const base = stage.rows.map((r,i)=>({id:`s${stage.n}-r${i}`, fn:r[0], con:r[1], text:r[2], custom:false}));
+  const extra = (state.custom[stage.n]||[]).map((t,i)=>({id:`s${stage.n}-c${i}`, fn:"", con:"", text:t, custom:true, idx:i}));
+  return base.concat(extra);
+}
+function progress(stage){
+  const items=itemsFor(stage); const done=items.filter(i=>state.checked[i.id]).length;
+  return {done,total:items.length,pct:items.length?Math.round(done/items.length*100):0};
+}
+
+// ---------- render ----------
+function renderLadder(){
+  const ol=document.getElementById("ladder"); ol.innerHTML="";
+  let allDone=0, allTotal=0;
+  STAGES.forEach(st=>{
+    const p=progress(st); allDone+=p.done; allTotal+=p.total;
+    const li=document.createElement("li");
+    const b=document.createElement("button");
+    b.className=(st.n===state.view?"active ":"")+(p.pct===100?"complete":"");
+    b.setAttribute("aria-current", st.n===state.view ? "page":"false");
+    b.innerHTML=`<span class="n">${st.n}</span><span class="name">${st.name}</span>${st.n===state.current?'<span class="here">You are here</span>':''}
+      <div class="meta"><span>${/\d/.test(st.head)?st.head+" staff":st.head}</span><span>${p.done}/${p.total}</span></div>
+      <div class="bar"><i style="width:${p.pct}%"></i></div>`;
+    b.onclick=()=>{state.view=st.n; render();};
+    li.appendChild(b); ol.appendChild(li);
+  });
+  document.getElementById("overallNum").innerHTML=`${allDone}<span> / ${allTotal} done</span>`;
+}
+
+function renderPanel(){
+  const st=STAGES[state.view]; const p=progress(st);
+  const panel=document.getElementById("panel");
+  const isHere=state.current===st.n;
+  panel.innerHTML=`
+    <div class="stage-head">
+      <h2><span class="num">Stage ${st.n}</span><br>${st.name}</h2>
+      <div class="side">
+        <button id="hereBtn" class="${isHere?'is-here':''}">${isHere?'Current stage':'Set as current stage'}</button>
+        <div class="pct">${p.pct}%</div>
+      </div>
+    </div>
+    <dl class="facts">
+      <div><dt>Headcount</dt><dd>${st.head}</dd></div>
+      <div><dt>Your role</dt><dd>${st.role}</dd></div>
+      <div><dt>Leadership structure</dt><dd>${st.lead}</dd></div>
+      <div><dt>Companies here</dt><dd>${st.companies}</dd></div>
+      <div><dt>Constraint</dt><dd>${st.constraint}</dd></div>
+      <div><dt>To graduate</dt><dd>${st.graduate}</dd></div>
+    </dl>
+    <p class="bottom"><b>Bottom line.</b> ${st.constraint} ${st.graduate}</p>
+    <div class="grid-head"><span>Function</span><span>Constraint</span><span>To graduate</span></div>
+    <div id="rows"></div>
+    <section class="custom">
+      <h3>Haven-specific items</h3>
+      <p class="hint">Add the concrete things this stage means for Haven.</p>
+      <div class="list" id="customList"></div>
+      <div class="adder"><input id="customInput" type="text" placeholder="e.g. Put the SFC parent guide live as the free thing" aria-label="New item"><button id="addBtn">Add item</button></div>
+    </section>
+    <section class="notes">
+      <h3>Notes</h3>
+      <textarea id="notes" placeholder="What is actually blocking graduation from this stage?">${escapeHtml(state.notes[st.n]||"")}</textarea>
+    </section>`;
+
+  const rows=panel.querySelector("#rows");
+  st.rows.forEach((r,i)=>{
+    const id=`s${st.n}-r${i}`;
+    const div=document.createElement("div"); div.className="row";
+    div.innerHTML=`<div class="fn">${r[0]}</div><div class="con">${r[1]}</div>
+      <div class="check"><input type="checkbox" id="${id}" ${state.checked[id]?'checked':''}><label for="${id}">${r[2]}</label></div>`;
+    div.querySelector("input").onchange=e=>{ toggle(id,e.target.checked); };
+    rows.appendChild(div);
+  });
+
+  const list=panel.querySelector("#customList");
+  (state.custom[st.n]||[]).forEach((t,i)=>{
+    const id=`s${st.n}-c${i}`;
+    const d=document.createElement("div"); d.className="check";
+    d.innerHTML=`<input type="checkbox" id="${id}" ${state.checked[id]?'checked':''}><label for="${id}">${escapeHtml(t)}</label><button class="del" aria-label="Remove item" title="Remove">&times;</button>`;
+    d.querySelector("input").onchange=e=>toggle(id,e.target.checked);
+    d.querySelector(".del").onclick=()=>{ removeCustom(st.n,i); };
+    list.appendChild(d);
+  });
+
+  const input=panel.querySelector("#customInput");
+  const add=()=>{ const v=input.value.trim(); if(!v) return; (state.custom[st.n]=state.custom[st.n]||[]).push(v); input.value=""; save(); render(); panel.querySelector("#customInput").focus(); };
+  panel.querySelector("#addBtn").onclick=add;
+  input.onkeydown=e=>{ if(e.key==="Enter") add(); };
+
+  panel.querySelector("#notes").oninput=e=>{ state.notes[st.n]=e.target.value; save(); };
+  panel.querySelector("#hereBtn").onclick=()=>{ state.current=st.n; save(); render(); };
+}
+
+function toggle(id,val){ if(val) state.checked[id]=true; else delete state.checked[id]; save(); renderLadder(); updatePct(); }
+function updatePct(){ const st=STAGES[state.view]; const p=progress(st); const el=document.querySelector(".stage-head .pct"); if(el) el.textContent=p.pct+"%"; }
+function removeCustom(n,i){
+  const arr=state.custom[n]||[];
+  // reindex checked flags for items after the removed one
+  const newChecked={...state.checked};
+  for(let k=i;k<arr.length;k++){ delete newChecked[`s${n}-c${k}`]; if(k>i && state.checked[`s${n}-c${k}`]) newChecked[`s${n}-c${k-1}`]=true; }
+  arr.splice(i,1); state.checked=newChecked; save(); render();
+}
+function escapeHtml(s){ return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function render(){ renderLadder(); renderPanel(); }
+
+document.getElementById("resetBtn").onclick=()=>{
+  if(confirm("Clear every tick, custom item and note on all stages?")){ state={checked:{},custom:{},notes:{},current:0,view:state.view}; save(); render(); }
+};
+document.getElementById("lockBtn").onclick=()=>lock(false);
+
+// ---------- gate ----------
+function applyState(saved){
+  if(saved && typeof saved==="object"){ state={...state,...saved}; if(typeof state.view!=="number") state.view=state.current||0; }
+  if(!STAGES[state.view]) state.view=0;
+}
+function lock(expired){
+  passcode=null;
+  try{ localStorage.removeItem(PASS_KEY); }catch(e){}
+  appView.hidden=true; gateView.hidden=false;
+  gateErr.textContent= expired ? "The passcode has changed. Enter the new one." : "";
+  passInput.value=""; passInput.focus();
+}
+async function unlock(code){
+  passcode=code;
+  gateErr.textContent="";
+  let saved;
+  try{ saved=await fetchState(); }
+  catch(err){
+    passcode=null;
+    gateErr.textContent = err.message==="unauthorized" ? "Not that one." : "Couldn't reach the server. Try again in a moment.";
+    return;
+  }
+  try{ localStorage.setItem(PASS_KEY,code); }catch(e){}
+  applyState(saved || readCache());
+  gateView.hidden=true; appView.hidden=false;
+  render();
+}
+document.getElementById("gateForm").addEventListener("submit",e=>{ e.preventDefault(); const v=passInput.value.trim(); if(v) unlock(v); });
+
+(()=>{
+  let stored=null; try{ stored=localStorage.getItem(PASS_KEY); }catch(e){}
+  if(stored) unlock(stored); else passInput.focus();
+})();
+</script>
+</body>
+</html>
